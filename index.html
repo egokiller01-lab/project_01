@@ -18,8 +18,13 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo" style="margin-right: 4rem;">PLACHEM VINA</a>
-            <ul class="nav-links">
+            <a href="#" class="logo">PLACHEM VINA</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#overview">개요</a></li>
                 <li><a href="#synergy">시너지</a></li>
                 <li><a href="#products">제품</a></li>
@@ -36,7 +41,7 @@
         <div class="container hero-content">
             <p class="hero-tag">Global Precision Surface Treatment</p>
             <h1>글로벌 정밀 표면처리 <br><span style="color: var(--accent);">화학 솔루션의 리더</span></h1>
-            <p style="font-size: 1.2rem; max-width: 600px; margin-bottom: 2.5rem;">
+            <p class="hero-description">
                 PLACHEM VINA는 고도화된 한국의 기술력과 베트남 현지 생산 인프라를 결합하여 
                 글로벌 시장을 선도하는 정밀 화학 솔루션을 제공합니다.
             </p>
@@ -48,8 +53,8 @@
     <section id="overview" class="section reveal">
         <div class="container">
             <h2>기업 개요 및 전략적 포지셔닝</h2>
-            <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: start;">
-                <div>
+            <div class="grid overview-grid">
+                <div class="overview-text">
                     <p>
                         PLACHEM VINA는 베트남 박닌성(Bac Ninh)을 전략적 거점으로 삼아, 글로벌 정밀 산업 공급망의 핵심인 표면처리 화학 솔루션을 설계·제조하는 B2B 전문 기업입니다.
                     </p>
@@ -57,7 +62,7 @@
                         2016년 설립 이래, 당사는 전자, 모바일, 정밀 금속 부품 산업의 기술적 난제를 해결해 왔으며, 삼성전자 공급망(Tier-1) 등 글로벌 주요 파트너사들에게 정밀 화학 솔루션을 공급하며 그 위상을 공고히 하고 있습니다.
                     </p>
                 </div>
-                <div style="background: var(--bg-light); padding: 2rem; border-radius: 8px;">
+                <div class="partner-card">
                     <h4 style="color: var(--accent); margin-bottom: 1rem;">주요 파트너사</h4>
                     <ul class="product-list">
                         <li>SEOJINSYSTEM VINA</li>

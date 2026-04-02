@@ -83,12 +83,11 @@ nav.scrolled {
     color: var(--accent);
     text-decoration: none;
     letter-spacing: 1px;
-    margin-right: 2rem; /* 최소 여백 확보 */
 }
 
 .nav-links {
     display: flex;
-    gap: 2.5rem; /* 간격을 2rem에서 2.5rem으로 확대 */
+    gap: 2.5rem;
     list-style: none;
 }
 
@@ -102,6 +101,39 @@ nav.scrolled {
 
 .nav-links a:hover {
     color: var(--accent);
+}
+
+/* Menu Toggle (Hamburger) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent);
+    transition: var(--transition);
+    transform-origin: left;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg);
 }
 
 /* Hero Section */
@@ -142,6 +174,12 @@ nav.scrolled {
     margin-bottom: 1.5rem;
 }
 
+.hero-description {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+}
+
 .hero-btn {
     display: inline-block;
     padding: 1.2rem 2.5rem;
@@ -155,6 +193,18 @@ nav.scrolled {
 
 .hero-btn:hover {
     background: rgba(100, 255, 218, 0.1);
+}
+
+/* Overview Grid */
+.overview-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+}
+
+.partner-card {
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: 8px;
 }
 
 /* Synergy Section */
@@ -211,23 +261,6 @@ nav.scrolled {
     color: var(--accent);
 }
 
-.product-list {
-    list-style: none;
-}
-
-.product-list li {
-    margin-bottom: 0.5rem;
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.product-list li::before {
-    content: '▹';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-}
-
 /* Tech Cases */
 .tech-case {
     background: linear-gradient(135deg, var(--bg-light) 0%, #1a2a47 100%);
@@ -270,7 +303,7 @@ nav.scrolled {
 
 /* Contact Table */
 .contact-grid {
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .contact-card {
@@ -337,11 +370,157 @@ nav.scrolled {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
+@media (max-width: 992px) {
+    .container {
+        padding: 0 1rem;
     }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-padding: 40px;
+    }
+
+    .section {
+        padding: var(--section-padding) 0;
+    }
+
+    h1 { font-size: 2rem !important; }
+    h2 { font-size: 1.5rem !important; margin-bottom: 1rem !important; }
+    h3 { font-size: 1.2rem !important; margin-bottom: 0.8rem !important; }
+    p { font-size: 0.9rem !important; line-height: 1.5 !important; margin-bottom: 0.8rem !important; }
+
+    nav {
+        height: 55px;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+        width: 24px;
+        height: 16px;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 65%;
+        height: 100vh;
+        background: var(--bg-light);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: var(--transition);
+        box-shadow: -10px 0 30px rgba(2, 12, 27, 0.7);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        margin: 1rem 0;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+    }
+
+    .hero-content {
+        padding: 0 1rem;
+    }
+
+    .hero-tag {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.9rem;
+    }
+
+    .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .partner-card {
+        padding: 1.2rem;
+    }
+
+    .synergy-card {
+        padding: 1.5rem;
+    }
+
+    .synergy-img {
+        height: 150px;
+    }
+
+    .product-grid {
+        gap: 1rem;
+    }
+
+    .product-card {
+        padding: 1.2rem;
+    }
+
+    .tech-case {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .info-grid {
+        gap: 0.5rem;
+    }
+
+    .info-item {
+        padding: 1rem;
+    }
+
+    .contact-card {
+        padding: 1.5rem;
+    }
+
+    .contact-details div {
+        margin-bottom: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .contact-label {
+        min-width: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .synergy-card {
+        padding: 1.2rem;
+    }
+
+    .contact-details div {
+        flex-direction: column;
+        gap: 0.2rem;
     }
 }

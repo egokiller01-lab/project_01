@@ -1,40 +1,69 @@
-// Navbar scroll effect
-const navbar = document.getElementById('navbar');
-const scrollTopBtn = document.getElementById('scrollTopBtn');
+document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.getElementById('navbar');
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    const reveals = document.querySelectorAll('.reveal');
 
-window.addEventListener('scroll', () => {
-    // Navbar scroll effect
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-
-    // Scroll to top button visibility
-    if (scrollTopBtn) {
-        if (window.scrollY > 300) {
-            scrollTopBtn.classList.add('visible');
+    // Navigation scroll effect
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+            if (scrollTopBtn) scrollTopBtn.classList.add('visible');
         } else {
-            scrollTopBtn.classList.remove('visible');
+            navbar.classList.remove('scrolled');
+            if (scrollTopBtn) scrollTopBtn.classList.remove('visible');
         }
-    }
-});
 
-// Scroll Reveal Animation
-const revealElements = document.querySelectorAll('.reveal');
-const revealOnScroll = () => {
-    const triggerBottom = window.innerHeight * 0.85;
-    
-    revealElements.forEach(el => {
-        const elTop = el.getBoundingClientRect().top;
-        if (elTop < triggerBottom) {
-            el.classList.add('active');
+        // Reveal on scroll
+        reveals.forEach(reveal => {
+            const windowHeight = window.innerHeight;
+            const revealTop = reveal.getBoundingClientRect().top;
+            const revealPoint = 150;
+
+            if (revealTop < windowHeight - revealPoint) {
+                reveal.classList.add('active');
+            }
+        });
+    });
+
+    // Mobile menu toggle
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    }
+
+    // Scroll to top
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Initial check for reveal items
+    reveals.forEach(reveal => {
+        const windowHeight = window.innerHeight;
+        const revealTop = reveal.getBoundingClientRect().top;
+        if (revealTop < windowHeight) {
+            reveal.classList.add('active');
         }
     });
-};
-
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll); // Initial check
+});
 
 // Smooth anchor scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
