@@ -103,6 +103,35 @@ nav.scrolled {
     color: var(--accent);
 }
 
+/* Language Switcher */
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.lang-switcher a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.lang-switcher a:hover {
+    color: var(--accent);
+}
+
+.lang-switcher a.active {
+    color: var(--accent);
+    pointer-events: none;
+}
+
+.lang-separator {
+    color: rgba(255, 255, 255, 0.2);
+}
+
 /* Menu Toggle (Hamburger) */
 .menu-toggle {
     display: none;
@@ -400,6 +429,12 @@ nav.scrolled {
 
     .logo {
         font-size: 1.1rem;
+    }
+
+    .lang-switcher {
+        margin-left: auto;
+        margin-right: 1.5rem;
+        font-size: 0.75rem;
     }
 
     .menu-toggle {
