@@ -1,0 +1,26 @@
+# Global Security Headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: same-origin
+  X-XSS-Protection: 1; mode=block
+  Content-Security-Policy: default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self';
+
+# Cache Static Assets for 6 Months
+/*.css
+  Cache-Control: public, max-age=15552000
+
+/*.js
+  Cache-Control: public, max-age=15552000
+
+/*.png
+  Cache-Control: public, max-age=15552000
+
+/*.jpg
+  Cache-Control: public, max-age=15552000
+
+/*.svg
+  Cache-Control: public, max-age=15552000
+
+/*.ico
+  Cache-Control: public, max-age=15552000

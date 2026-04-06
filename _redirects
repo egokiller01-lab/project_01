@@ -1,0 +1,3 @@
+# Cloudflare Pages Redirects
+# 존재하지 않는 주소로 접속 시 404.html로 연결
+/* /404 404
