@@ -259,7 +259,7 @@ export const staticPages: Record<
       description:
         "표면처리 공정관리, 불량 원인과 개선, 약품 안전·관리 자료를 기술 블로그와 연결합니다.",
       eyebrow: "Knowledge Hub",
-      lead: "기술 블로그의 확인된 글만 연결하며 WordPress 콘텐츠는 이번 작업에서 수정하지 않습니다.",
+      lead: "표면처리 공정관리, 불량 원인과 개선 방향, 약품 안전·관리 자료를 공정 상담과 연결합니다.",
       ctaLabel: "관련 공정 문의",
       ctaHref: "/ko/contact/",
       sections: [
@@ -272,7 +272,7 @@ export const staticPages: Record<
         {
           title: "블로그 연결 기준",
           summary:
-            "실제 존재가 확인된 글만 연결하고, 제품 상세 페이지와 공정 문의 CTA로 이어지게 합니다.",
+            "실제 접속이 확인된 글을 중심으로 제품 상세 페이지와 공정 문의 CTA를 연결합니다.",
           items: verifiedBlogLinks.ko.map((item) => item.title),
         },
       ],
@@ -282,7 +282,7 @@ export const staticPages: Record<
       title: "기술문의와 연락처",
       seoTitle: "기술문의 | PLACHEM VINA",
       description:
-        "PLACHEM VINA의 확인된 연락처와 기술문의 준비 항목을 안내합니다. 실제 문의 전송 기능은 이번 Phase에 포함하지 않습니다.",
+        "PLACHEM VINA의 확인된 연락처와 기술문의 준비 항목을 안내합니다.",
       eyebrow: "Technical Inquiry",
       lead: "공정, 소재, 증상, 요청 자료를 정리해 연락하면 기술 검토와 자료 요청 흐름으로 연결할 수 있습니다.",
       ctaLabel: "제품·솔루션 보기",
@@ -301,7 +301,7 @@ export const staticPages: Record<
         {
           title: "문의 전 준비 항목",
           summary:
-            "실제 전송 폼은 후속 Phase에서 구현합니다. 이번 화면은 확인된 연락수단과 상담 준비 항목만 제공합니다.",
+            "공정과 소재, 증상 또는 요청 문서를 미리 정리하면 기술 검토와 자료 확인이 더 명확해집니다.",
           items: ["회사명", "담당자명", "공정", "소재", "증상 또는 요청 문서"],
         },
       ],
@@ -474,7 +474,7 @@ export const staticPages: Record<
       description:
         "Technical resources for surface treatment process control, defect causes, improvement checks, and chemical handling.",
       eyebrow: "Knowledge Hub",
-      lead: "Only verified technical blog articles are linked. WordPress content is not modified in this phase.",
+      lead: "Technical resources are organized around process control, defect causes, improvement direction, and chemical handling.",
       ctaLabel: "Ask about a related process",
       ctaHref: "/en/contact/",
       sections: [
@@ -491,7 +491,7 @@ export const staticPages: Record<
         {
           title: "Blog connection",
           summary:
-            "Verified Korean technical posts are linked as reference material for engineers.",
+            "Verified technical posts are linked as practical reference material for engineers.",
           items: verifiedBlogLinks.en.map((item) => item.title),
         },
       ],
@@ -501,7 +501,7 @@ export const staticPages: Record<
       title: "Technical inquiry and contact",
       seoTitle: "Technical Inquiry | PLACHEM VINA",
       description:
-        "Verified contact channels and inquiry preparation items for PLACHEM VINA. Online form submission is not included in this phase.",
+        "Verified contact channels and inquiry preparation items for PLACHEM VINA.",
       eyebrow: "Technical Inquiry",
       lead: "Prepare process, substrate, symptom, and requested documents before contacting PLACHEM for technical review.",
       ctaLabel: "View products",
@@ -528,7 +528,7 @@ export const staticPages: Record<
         {
           title: "Before inquiry",
           summary:
-            "A live submission form is planned for a later phase. This page shows verified contact channels and preparation items only.",
+            "Prepare process, substrate, symptom, and requested document information before contacting PLACHEM for technical review.",
           items: [
             "Company name",
             "Contact person",
@@ -712,7 +712,7 @@ export const staticPages: Record<
       description:
         "Tài liệu về quản lý quy trình xử lý bề mặt, nguyên nhân lỗi, cải thiện và quản lý an toàn hóa chất.",
       eyebrow: "Knowledge Hub",
-      lead: "Chỉ liên kết các bài kỹ thuật đã xác nhận. Nội dung WordPress không được chỉnh sửa trong giai đoạn này.",
+      lead: "Tài liệu kỹ thuật được sắp xếp theo quản lý quy trình, nguyên nhân lỗi, hướng cải thiện và quản lý hóa chất.",
       ctaLabel: "Hỏi về quy trình liên quan",
       ctaHref: "/vi/contact/",
       sections: [
@@ -729,7 +729,7 @@ export const staticPages: Record<
         {
           title: "Liên kết blog",
           summary:
-            "Các bài kỹ thuật tiếng Hàn đã xác nhận được liên kết làm tài liệu tham khảo cho kỹ sư.",
+            "Các bài kỹ thuật đã xác nhận được liên kết làm tài liệu tham khảo thực tế cho kỹ sư.",
           items: verifiedBlogLinks.vi.map((item) => item.title),
         },
       ],
@@ -739,7 +739,7 @@ export const staticPages: Record<
       title: "Liên hệ kỹ thuật",
       seoTitle: "Liên hệ kỹ thuật | PLACHEM VINA",
       description:
-        "Kênh liên hệ đã xác nhận và thông tin cần chuẩn bị khi liên hệ PLACHEM VINA. Chức năng gửi biểu mẫu trực tuyến chưa nằm trong giai đoạn này.",
+        "Kênh liên hệ đã xác nhận và thông tin cần chuẩn bị khi liên hệ PLACHEM VINA.",
       eyebrow: "Technical Inquiry",
       lead: "Chuẩn bị quy trình, vật liệu, triệu chứng và tài liệu cần yêu cầu trước khi liên hệ để được xem xét kỹ thuật.",
       ctaLabel: "Xem sản phẩm",
@@ -766,7 +766,7 @@ export const staticPages: Record<
         {
           title: "Trước khi liên hệ",
           summary:
-            "Biểu mẫu gửi trực tuyến sẽ được triển khai ở giai đoạn sau. Trang này chỉ hiển thị kênh liên hệ đã xác nhận và thông tin cần chuẩn bị.",
+            "Chuẩn bị trước thông tin quy trình, vật liệu, triệu chứng hoặc tài liệu cần yêu cầu để việc xem xét kỹ thuật rõ ràng hơn.",
           items: [
             "Tên công ty",
             "Người phụ trách",
