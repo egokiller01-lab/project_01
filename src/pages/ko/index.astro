@@ -1,0 +1,74 @@
+---
+import BlogCard from '../../components/BlogCard.astro';
+import CTAPanel from '../../components/CTAPanel.astro';
+import Hero from '../../components/Hero.astro';
+import ProcessDiagram from '../../components/ProcessDiagram.astro';
+import ProductFamilyCard from '../../components/ProductFamilyCard.astro';
+import QualityPanel from '../../components/QualityPanel.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import SolutionCard from '../../components/SolutionCard.astro';
+import TechnologyPanel from '../../components/TechnologyPanel.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { homeContent } from '../../data/home';
+
+const locale = 'ko';
+const content = homeContent[locale];
+---
+
+<BaseLayout locale={locale} title={content.seoTitle} description={content.description}>
+  <Hero eyebrow={content.heroEyebrow} title={content.heroTitle} summary={content.heroSummary} ctas={content.primaryCtas} strengths={content.strengths} />
+
+  <section class="section" id="company">
+    <div class="container grid grid--2">
+      <SectionHeading title={content.sectionLabels.company} summary="제품 판매와 기술지원을 함께 제공하는 표면처리 화학 파트너 구조를 기준으로 개발 검증용 화면을 구성합니다." />
+      <TechnologyPanel title="Phase 1 기준" items={['승인 색상 5개만 사용', 'Inter + Pretendard font stack', '문의 API와 파일 업로드 제외', 'Production 공개 전 별도 검수']} />
+    </div>
+  </section>
+
+  <section class="section section--white" id="solutions">
+    <div class="container">
+      <SectionHeading title={content.sectionLabels.solutions} summary="8개 제품군을 공정, 소재, 문의 CTA 기준으로 탐색할 수 있는 카드 구조입니다." />
+      <div class="grid grid--4">
+        {content.products.map((product) => <ProductFamilyCard {...product} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="technology">
+    <div class="container">
+      <SectionHeading title={content.sectionLabels.technology} summary="Phase 1에서는 재사용 컴포넌트와 반응형 구조를 검증합니다." />
+      <ProcessDiagram steps={['공정 선택', '소재 확인', '불량 유형 정리', '기술문의 연결']} />
+      <div class="grid grid--3 support-grid">
+        {content.solutions.map((solution) => <SolutionCard {...solution} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white" id="quality">
+    <div class="container grid grid--2">
+      <SectionHeading title={content.sectionLabels.quality} summary="샘플 평가, 공정 조건 검토, 주요 공급품 LOT 추적 관리를 신뢰 요소로 보여줍니다." />
+      <QualityPanel items={content.strengths} />
+    </div>
+  </section>
+
+  <section class="section" id="knowledge">
+    <div class="container">
+      <SectionHeading title={content.sectionLabels.knowledge} summary="기존 WordPress 기술 블로그는 수정하지 않고 실제 확인된 KO 글만 연결합니다." />
+      <div class="grid grid--3">
+        {content.blogs.map((blog) => <BlogCard {...blog} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <CTAPanel title={content.sectionLabels.contact} summary="실제 문의 폼, 파일 업로드, 서버 API는 후속 Phase 범위입니다." ctas={content.primaryCtas} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .support-grid {
+    margin-top: var(--space-5);
+  }
+</style>

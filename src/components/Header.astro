@@ -1,0 +1,150 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import MobileNav from './MobileNav.astro';
+import { navigation } from '../data/navigation';
+import type { Locale } from '../types';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const items = navigation[locale];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={`/${locale}/`} aria-label="PLACHEM VINA home">PLACHEM VINA</a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {items.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <div class="header-actions">
+      <LanguageSwitcher locale={locale} />
+      <a class="button button--primary header-cta" href={`/${locale}/#contact`}>Contact</a>
+      <button class="menu-button" type="button" aria-controls="mobile-nav" aria-expanded="false" data-menu-button>
+        <span class="menu-button__line"></span>
+        <span class="menu-button__line"></span>
+        <span class="menu-button__line"></span>
+        <span class="sr-only">Open menu</span>
+      </button>
+    </div>
+  </div>
+  <MobileNav locale={locale} />
+</header>
+
+<script>
+  const menuButton = document.querySelector('[data-menu-button]');
+  const mobileNav = document.querySelector('[data-mobile-nav]');
+
+  function closeMenu() {
+    menuButton?.setAttribute('aria-expanded', 'false');
+    mobileNav?.setAttribute('data-open', 'false');
+    document.body.classList.remove('menu-open');
+  }
+
+  menuButton?.addEventListener('click', () => {
+    const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', String(!isOpen));
+    mobileNav?.setAttribute('data-open', String(!isOpen));
+    document.body.classList.toggle('menu-open', !isOpen);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+
+  mobileNav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>
+
+<style>
+  .site-header {
+    background: rgba(248, 250, 252, 0.96);
+    border-bottom: var(--border);
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+  }
+
+  .header-inner {
+    align-items: center;
+    display: flex;
+    gap: var(--space-4);
+    min-height: 72px;
+  }
+
+  .brand {
+    color: var(--color-navy);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .desktop-nav {
+    display: none;
+    gap: var(--space-5);
+    margin-left: auto;
+  }
+
+  .desktop-nav a {
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .header-actions {
+    align-items: center;
+    display: flex;
+    gap: var(--space-3);
+    margin-left: auto;
+  }
+
+  .header-cta {
+    display: none;
+  }
+
+  .menu-button {
+    align-items: center;
+    background: white;
+    border: var(--border);
+    border-radius: var(--radius-md);
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    height: 44px;
+    justify-content: center;
+    width: 44px;
+  }
+
+  .menu-button__line {
+    background: var(--color-navy);
+    display: block;
+    height: 2px;
+    width: 18px;
+  }
+
+  .sr-only {
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  @media (min-width: 64rem) {
+    .desktop-nav {
+      display: flex;
+    }
+
+    .header-cta {
+      display: inline-flex;
+    }
+
+    .menu-button {
+      display: none;
+    }
+  }
+</style>

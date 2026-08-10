@@ -1,0 +1,66 @@
+---
+import BlogCard from '../../components/BlogCard.astro';
+import CTAPanel from '../../components/CTAPanel.astro';
+import Hero from '../../components/Hero.astro';
+import ProcessDiagram from '../../components/ProcessDiagram.astro';
+import ProductFamilyCard from '../../components/ProductFamilyCard.astro';
+import QualityPanel from '../../components/QualityPanel.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import SolutionCard from '../../components/SolutionCard.astro';
+import TechnologyPanel from '../../components/TechnologyPanel.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { homeContent } from '../../data/home';
+
+const locale = 'vi';
+const content = homeContent[locale];
+---
+
+<BaseLayout locale={locale} title={content.seoTitle} description={content.description}>
+  <Hero eyebrow={content.heroEyebrow} title={content.heroTitle} summary={content.heroSummary} ctas={content.primaryCtas} strengths={content.strengths} />
+  <section class="section" id="company">
+    <div class="container grid grid--2">
+      <SectionHeading title={content.sectionLabels.company} summary="Màn hình tĩnh Phase 1 dùng để kiểm tra layout, design system và cấu trúc dữ liệu đa ngôn ngữ." />
+      <TechnologyPanel title="Phạm vi Phase 1" items={['Chỉ dùng màu đã duyệt', 'Font stack Inter + Pretendard', 'Không có API liên hệ hoặc upload file', 'Cần nhân viên Việt Nam kiểm tra trước khi công khai']} />
+    </div>
+  </section>
+  <section class="section section--white" id="solutions">
+    <div class="container">
+      <SectionHeading title={content.sectionLabels.solutions} summary="Thẻ nhóm sản phẩm dùng để kiểm tra cấu trúc quy trình, vật liệu và CTA." />
+      <div class="grid grid--4">
+        {content.products.map((product) => <ProductFamilyCard {...product} />)}
+      </div>
+    </div>
+  </section>
+  <section class="section" id="technology">
+    <div class="container">
+      <SectionHeading title={content.sectionLabels.technology} summary="Phase này kiểm tra component tái sử dụng và responsive." />
+      <ProcessDiagram steps={['Chọn quy trình', 'Kiểm tra vật liệu', 'Xác định loại lỗi', 'Kết nối liên hệ']} />
+      <div class="grid grid--3 support-grid">
+        {content.solutions.map((solution) => <SolutionCard {...solution} />)}
+      </div>
+    </div>
+  </section>
+  <section class="section section--white" id="quality">
+    <div class="container grid grid--2">
+      <SectionHeading title={content.sectionLabels.quality} summary="Phần chất lượng hiển thị đánh giá mẫu, kiểm tra quy trình và quản lý truy xuất LOT cho hạng mục cung ứng chính." />
+      <QualityPanel items={content.strengths} />
+    </div>
+  </section>
+  <section class="section" id="knowledge">
+    <div class="container">
+      <SectionHeading title={content.sectionLabels.knowledge} summary="Liên kết bài viết tiếng Việt cần được xác minh riêng trước khi công khai." />
+      <BlogCard title="Bài viết kỹ thuật tiếng Việt" href="#contact" meta="VERIFY_REQUIRED" />
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <CTAPanel title={content.sectionLabels.contact} summary="Form thật, upload file và server API thuộc phase sau." ctas={content.primaryCtas} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .support-grid {
+    margin-top: var(--space-5);
+  }
+</style>

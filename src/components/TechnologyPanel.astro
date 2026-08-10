@@ -1,0 +1,35 @@
+---
+type Props = {
+  title: string;
+  items: string[];
+};
+
+const { title, items } = Astro.props;
+---
+
+<aside class="technology-panel">
+  <h3>{title}</h3>
+  <ul>
+    {items.map((item) => <li>{item}</li>)}
+  </ul>
+</aside>
+
+<style>
+  .technology-panel {
+    background: var(--color-navy);
+    border-radius: var(--radius-md);
+    color: white;
+    padding: var(--space-5);
+  }
+
+  h3 {
+    margin: 0 0 var(--space-4);
+  }
+
+  ul {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+</style>

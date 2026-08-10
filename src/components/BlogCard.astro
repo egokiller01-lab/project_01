@@ -1,0 +1,32 @@
+---
+import type { BlogLink } from '../types';
+
+type Props = BlogLink;
+const { title, href, meta } = Astro.props;
+---
+
+<article class="blog-card">
+  <p>{meta}</p>
+  <h3><a href={href} target="_blank" rel="noopener noreferrer">{title}</a></h3>
+</article>
+
+<style>
+  .blog-card {
+    background: white;
+    border: var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+  }
+
+  p {
+    color: var(--color-blue);
+    font-weight: 800;
+    margin: 0 0 var(--space-2);
+  }
+
+  h3 {
+    color: var(--color-navy);
+    font-size: 1.05rem;
+    margin: 0;
+  }
+</style>

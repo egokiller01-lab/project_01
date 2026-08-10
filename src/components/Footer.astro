@@ -1,0 +1,62 @@
+---
+import { navigation } from '../data/navigation';
+import { homeContent } from '../data/home';
+import type { Locale } from '../types';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <strong>PLACHEM VINA</strong>
+      <p>{homeContent[locale].footerNote}</p>
+    </div>
+    <nav aria-label="Footer navigation">
+      {navigation[locale].map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: white;
+    border-top: var(--border);
+    padding-block: var(--space-6);
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  strong {
+    color: var(--color-navy);
+  }
+
+  p {
+    margin: var(--space-2) 0 0;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  nav a {
+    min-height: 44px;
+    text-decoration: none;
+  }
+
+  @media (min-width: 48rem) {
+    .footer-grid {
+      align-items: start;
+      grid-template-columns: 1fr auto;
+    }
+  }
+</style>

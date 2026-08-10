@@ -1,0 +1,65 @@
+---
+import type { ProductFamily } from '../types';
+
+type Props = ProductFamily;
+const { title, summary, href, materials, process, cta } = Astro.props;
+---
+
+<article class="product-card">
+  <div>
+    <h3><a href={href}>{title}</a></h3>
+    <p>{summary}</p>
+  </div>
+  <dl>
+    <div>
+      <dt>Material</dt>
+      <dd>{materials}</dd>
+    </div>
+    <div>
+      <dt>Process</dt>
+      <dd>{process}</dd>
+    </div>
+  </dl>
+  <a class="button button--ghost" href={href}>{cta}</a>
+</article>
+
+<style>
+  .product-card {
+    background: white;
+    border: var(--border);
+    border-radius: var(--radius-md);
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+
+  h3 {
+    margin: 0 0 var(--space-2);
+  }
+
+  h3 a {
+    color: var(--color-navy);
+    text-decoration: none;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  dl {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  dt {
+    color: var(--color-blue);
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+  }
+</style>

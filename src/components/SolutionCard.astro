@@ -1,0 +1,48 @@
+---
+import type { SolutionItem } from '../types';
+
+type Props = SolutionItem;
+const { title, summary, checks } = Astro.props;
+---
+
+<article class="solution-card">
+  <h3>{title}</h3>
+  <p>{summary}</p>
+  <ul>
+    {checks.map((check) => <li>{check}</li>)}
+  </ul>
+</article>
+
+<style>
+  .solution-card {
+    background: white;
+    border: var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+  }
+
+  h3 {
+    color: var(--color-navy);
+    margin: 0 0 var(--space-2);
+  }
+
+  p {
+    margin: 0 0 var(--space-4);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    padding: var(--space-2);
+  }
+</style>

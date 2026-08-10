@@ -1,0 +1,94 @@
+---
+import type { CTA } from '../types';
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  summary: string;
+  ctas: CTA[];
+  strengths: string[];
+};
+
+const { eyebrow, title, summary, ctas, strengths } = Astro.props;
+---
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="summary">{summary}</p>
+      <div class="hero-actions">
+        {ctas.map((cta) => <a class={`button button--${cta.variant ?? 'secondary'}`} href={cta.href}>{cta.label}</a>)}
+      </div>
+    </div>
+    <div class="hero-panel" aria-label="PLACHEM VINA key strengths">
+      {strengths.map((strength) => <span>{strength}</span>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: white;
+    border-bottom: var(--border);
+    padding-block: var(--space-8);
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .eyebrow {
+    color: var(--color-blue);
+    font-weight: 800;
+    margin: 0 0 var(--space-3);
+  }
+
+  h1 {
+    color: var(--color-navy);
+    font-size: clamp(2.25rem, 6vw, 4.75rem);
+    letter-spacing: 0;
+    line-height: 1.05;
+    margin: 0;
+    max-width: 13ch;
+  }
+
+  .summary {
+    font-size: 1.08rem;
+    margin-block: var(--space-5);
+    max-width: 64ch;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .hero-panel {
+    background: var(--color-light);
+    border: var(--border);
+    border-radius: var(--radius-md);
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-5);
+  }
+
+  .hero-panel span {
+    background: white;
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--color-navy);
+    font-weight: 800;
+    padding: var(--space-3);
+  }
+
+  @media (min-width: 64rem) {
+    .hero-grid {
+      align-items: center;
+      grid-template-columns: minmax(0, 1.3fr) minmax(20rem, 0.7fr);
+    }
+  }
+</style>

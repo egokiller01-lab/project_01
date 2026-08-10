@@ -1,0 +1,47 @@
+---
+import { localeLabels } from '../data/navigation';
+import type { Locale } from '../types';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const locales: Locale[] = ['ko', 'en', 'vi'];
+---
+
+<div class="language-switcher" aria-label="Language selector">
+  {locales.map((targetLocale) => (
+    <a
+      href={`/${targetLocale}/`}
+      aria-current={targetLocale === locale ? 'page' : undefined}
+      class={targetLocale === locale ? 'is-active' : ''}
+    >
+      {localeLabels[targetLocale]}
+    </a>
+  ))}
+</div>
+
+<style>
+  .language-switcher {
+    align-items: center;
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .language-switcher a {
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.6rem 0.45rem;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .language-switcher a.is-active {
+    color: var(--color-blue);
+    font-weight: 800;
+  }
+</style>
