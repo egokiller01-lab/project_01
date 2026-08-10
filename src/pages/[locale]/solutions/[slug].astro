@@ -67,17 +67,25 @@ const alternateProducts = Object.fromEntries(
     products[targetLocale].find((item) => item.slug === slug),
   ]),
 );
+const alternatePaths = Object.fromEntries(
+  pageLocales.map((targetLocale) => [
+    targetLocale,
+    `/${targetLocale}/solutions/${slug}/`,
+  ]),
+) as Record<Locale, string>;
 ---
 
 <BaseLayout
   locale={locale}
   title={`${product.title} | PLACHEM VINA ${labels.seoSuffix}`}
   description={product.summary}
+  pageKey="solutions"
+  alternatePaths={alternatePaths}
 >
   <section class="product-hero">
     <div class="container product-hero__grid">
       <div>
-        <a class="back-link" href={`/${locale}/#solutions`}>{labels.back}</a>
+        <a class="back-link" href={`/${locale}/solutions/`}>{labels.back}</a>
         <p class="eyebrow">{labels.seoSuffix}</p>
         <h1>{product.title}</h1>
         <p class="lead">{product.summary}</p>
@@ -144,7 +152,7 @@ const alternateProducts = Object.fromEntries(
           <h2>{labels.inquiry}</h2>
           <p>{labels.inquirySummary}</p>
         </div>
-        <a class="button button--primary" href={`/${locale}/#contact`}>{product.cta}</a>
+        <a class="button button--primary" href={`/${locale}/contact/`}>{product.cta}</a>
       </div>
     </div>
   </section>

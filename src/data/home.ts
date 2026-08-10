@@ -52,9 +52,13 @@ export const homeContent: Record<Locale, HomeContent> = {
     heroSummary:
       "PLACHEM VINA는 제품 판매와 현장 기술지원을 함께 제공하며 전처리, 도금, 아노다이징, 화성피막 공정의 안정화를 돕습니다.",
     primaryCtas: [
-      { label: "기술문의", href: "#contact", variant: "primary" },
-      { label: "공정 불량 상담", href: "#contact", variant: "secondary" },
-      { label: "TDS·SDS·COA 자료 요청", href: "#contact", variant: "ghost" },
+      { label: "기술문의", href: "/ko/contact/", variant: "primary" },
+      { label: "공정 불량 상담", href: "/ko/contact/", variant: "secondary" },
+      {
+        label: "TDS·SDS·COA 자료 요청",
+        href: "/ko/contact/",
+        variant: "ghost",
+      },
     ],
     strengths: [
       "한국 포뮬레이션 기술",
@@ -139,9 +143,13 @@ export const homeContent: Record<Locale, HomeContent> = {
     heroSummary:
       "PLACHEM VINA combines product supply with field technical support for pretreatment, plating, anodizing, and conversion coating processes.",
     primaryCtas: [
-      { label: "Technical inquiry", href: "#contact", variant: "primary" },
-      { label: "Defect consultation", href: "#contact", variant: "secondary" },
-      { label: "Request TDS/SDS/COA", href: "#contact", variant: "ghost" },
+      { label: "Technical inquiry", href: "/en/contact/", variant: "primary" },
+      {
+        label: "Defect consultation",
+        href: "/en/contact/",
+        variant: "secondary",
+      },
+      { label: "Request TDS/SDS/COA", href: "/en/contact/", variant: "ghost" },
     ],
     strengths: [
       "Korean formulation technology",
@@ -220,9 +228,13 @@ export const homeContent: Record<Locale, HomeContent> = {
     heroSummary:
       "PLACHEM VINA kết hợp cung ứng sản phẩm và hỗ trợ kỹ thuật hiện trường cho tiền xử lý, mạ, anodizing và xử lý chuyển hóa.",
     primaryCtas: [
-      { label: "Liên hệ kỹ thuật", href: "#contact", variant: "primary" },
-      { label: "Tư vấn lỗi quy trình", href: "#contact", variant: "secondary" },
-      { label: "Yêu cầu TDS/SDS/COA", href: "#contact", variant: "ghost" },
+      { label: "Liên hệ kỹ thuật", href: "/vi/contact/", variant: "primary" },
+      {
+        label: "Tư vấn lỗi quy trình",
+        href: "/vi/contact/",
+        variant: "secondary",
+      },
+      { label: "Yêu cầu TDS/SDS/COA", href: "/vi/contact/", variant: "ghost" },
     ],
     strengths: [
       "Công nghệ formulation Hàn Quốc",

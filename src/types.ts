@@ -1,5 +1,14 @@
 export type Locale = "ko" | "en" | "vi";
 
+export type PageKey =
+  | "home"
+  | "about"
+  | "solutions"
+  | "technology"
+  | "quality"
+  | "knowledge"
+  | "contact";
+
 export type NavItem = {
   label: string;
   href: string;
@@ -43,4 +52,23 @@ export type BlogLink = {
   title: string;
   href: string;
   meta: string;
+};
+
+export type PageSection = {
+  eyebrow?: string;
+  title: string;
+  summary: string;
+  items?: string[];
+};
+
+export type StaticPageContent = {
+  key: Exclude<PageKey, "home">;
+  title: string;
+  seoTitle: string;
+  description: string;
+  eyebrow: string;
+  lead: string;
+  ctaLabel: string;
+  ctaHref: string;
+  sections: PageSection[];
 };

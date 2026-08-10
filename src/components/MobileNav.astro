@@ -4,19 +4,24 @@ import type { Locale } from '../types';
 
 type Props = {
   locale: Locale;
+  currentPath: string;
 };
 
-const { locale } = Astro.props;
+const { locale, currentPath } = Astro.props;
 const contactLabels = {
   ko: "문의",
   en: "Contact",
   vi: "Liên hệ",
 }[locale];
+
+function isActive(href: string) {
+  return currentPath === href || (href.includes('/solutions/') && currentPath.startsWith(`/${locale}/solutions/`));
+}
 ---
 
 <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" data-mobile-nav data-open="false" inert>
-  {navigation[locale].map((item) => <a href={item.href}>{item.label}</a>)}
-  <a class="button button--primary" href={`/${locale}/#contact`}>{contactLabels}</a>
+  {navigation[locale].map((item) => <a href={item.href} class={isActive(item.href) ? 'is-active' : ''}>{item.label}</a>)}
+  <a class="button button--primary" href={`/${locale}/contact/`}>{contactLabels}</a>
 </nav>
 
 <style>
@@ -44,6 +49,11 @@ const contactLabels = {
     min-height: 44px;
     padding: var(--space-3);
     text-decoration: none;
+  }
+
+  .mobile-nav a.is-active {
+    color: var(--color-blue);
+    font-weight: 800;
   }
 
   @media (min-width: 64rem) {
