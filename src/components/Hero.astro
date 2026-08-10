@@ -1,5 +1,5 @@
 ---
-import type { CTA } from '../types';
+import type { CTA } from "../types";
 
 type Props = {
   eyebrow: string;
@@ -7,9 +7,14 @@ type Props = {
   summary: string;
   ctas: CTA[];
   strengths: string[];
+  image: {
+    src: string;
+    alt: string;
+    caption: string;
+  };
 };
 
-const { eyebrow, title, summary, ctas, strengths } = Astro.props;
+const { eyebrow, title, summary, ctas, strengths, image } = Astro.props;
 ---
 
 <section class="hero">
@@ -19,15 +24,30 @@ const { eyebrow, title, summary, ctas, strengths } = Astro.props;
       <h1>{title}</h1>
       <p class="summary">{summary}</p>
       <div class="hero-actions">
-        {ctas.map((cta) => <a class={`button button--${cta.variant ?? 'secondary'}`} href={cta.href}>{cta.label}</a>)}
+        {
+          ctas.map((cta) => (
+            <a
+              class={`button button--${cta.variant ?? "secondary"}`}
+              href={cta.href}
+            >
+              {cta.label}
+            </a>
+          ))
+        }
       </div>
     </div>
     <div class="hero-panel" aria-label="PLACHEM VINA process support strengths">
-      <div class="process-visual" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <figure class="hero-media">
+        <img
+          src={image.src}
+          alt={image.alt}
+          width="1024"
+          height="1024"
+          loading="eager"
+          decoding="async"
+        />
+        <figcaption>{image.caption}</figcaption>
+      </figure>
       <div class="strength-list">
         {strengths.map((strength) => <span>{strength}</span>)}
       </div>
@@ -38,9 +58,14 @@ const { eyebrow, title, summary, ctas, strengths } = Astro.props;
 <style>
   .hero {
     background:
+      radial-gradient(
+        circle at 15% 0%,
+        rgba(29, 78, 216, 0.12),
+        transparent 28rem
+      ),
       linear-gradient(180deg, white 0%, var(--color-light) 100%);
     border-bottom: var(--border);
-    padding-block: calc(var(--space-8) + var(--space-4));
+    padding-block: var(--space-7);
   }
 
   .hero-grid {
@@ -50,23 +75,26 @@ const { eyebrow, title, summary, ctas, strengths } = Astro.props;
 
   .eyebrow {
     color: var(--color-blue);
-    font-weight: 800;
+    font-size: 0.86rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
     margin: 0 0 var(--space-3);
+    text-transform: uppercase;
   }
 
   h1 {
     color: var(--color-navy);
-    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-size: clamp(2.35rem, 5vw, 4.6rem);
     letter-spacing: 0;
     line-height: 1.05;
     margin: 0;
-    max-width: 13ch;
+    max-width: 14ch;
   }
 
   .summary {
-    font-size: 1.18rem;
+    font-size: clamp(1.05rem, 1.6vw, 1.22rem);
     margin-block: var(--space-5);
-    max-width: 64ch;
+    max-width: 56ch;
   }
 
   .hero-actions {
@@ -76,52 +104,59 @@ const { eyebrow, title, summary, ctas, strengths } = Astro.props;
   }
 
   .hero-panel {
-    background: white;
-    border: var(--border);
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(192, 199, 209, 0.8);
     border-radius: var(--radius-md);
     display: grid;
-    gap: var(--space-5);
-    padding: var(--space-6);
+    gap: var(--space-4);
+    overflow: hidden;
+    padding: var(--space-3);
     box-shadow: var(--shadow);
   }
 
-  .process-visual {
-    background: var(--color-light);
-    border: var(--border);
-    border-radius: var(--radius-md);
-    display: grid;
-    gap: var(--space-3);
-    padding: var(--space-5);
-  }
-
-  .process-visual span {
-    background: var(--color-navy);
-    border-radius: var(--radius-sm);
-    display: block;
-    height: 1rem;
+  .hero-media {
+    margin: 0;
     position: relative;
   }
 
-  .process-visual span:nth-child(2) {
-    background: var(--color-blue);
-    margin-left: var(--space-5);
+  .hero-media img {
+    aspect-ratio: 4 / 3;
+    border-radius: calc(var(--radius-md) - 2px);
+    display: block;
+    height: auto;
+    object-fit: cover;
+    object-position: 48% 50%;
+    width: 100%;
   }
 
-  .process-visual span:nth-child(3) {
-    margin-left: var(--space-7);
+  .hero-media figcaption {
+    background: rgba(11, 31, 58, 0.9);
+    border-radius: var(--radius-sm);
+    bottom: var(--space-3);
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 700;
+    left: var(--space-3);
+    max-width: calc(100% - var(--space-6));
+    padding: 0.45rem 0.65rem;
+    position: absolute;
   }
 
   .strength-list {
-    display: grid;
-    gap: var(--space-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0 var(--space-2) var(--space-2);
   }
 
   .strength-list span {
-    border: var(--border);
+    background: var(--color-light);
+    border: 1px solid rgba(192, 199, 209, 0.75);
     border-radius: var(--radius-sm);
     color: var(--color-navy);
+    font-size: 0.86rem;
     font-weight: 800;
-    padding: var(--space-3);
+    padding: 0.55rem 0.7rem;
   }
 
   @media (min-width: 64rem) {

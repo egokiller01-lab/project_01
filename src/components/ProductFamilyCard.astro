@@ -1,9 +1,10 @@
 ---
-import type { ProductFamily } from '../types';
+import type { ProductFamily } from "../types";
 
 type Props = ProductFamily & {
   materialLabel?: string;
   processLabel?: string;
+  index?: number;
 };
 const {
   title,
@@ -12,12 +13,16 @@ const {
   materials,
   process,
   cta,
-  materialLabel = 'Material',
-  processLabel = 'Process',
+  materialLabel = "Material",
+  processLabel = "Process",
+  index = 0,
 } = Astro.props;
 ---
 
-<article class="product-card">
+<article class="product-card" style={`--card-accent-index: ${index % 4};`}>
+  <span class="product-mark" aria-hidden="true"
+    >{String(index + 1).padStart(2, "0")}</span
+  >
   <div>
     <h3><a href={href}>{title}</a></h3>
     <p>{summary}</p>
@@ -38,11 +43,39 @@ const {
 <style>
   .product-card {
     background: white;
-    border: var(--border);
+    border: 1px solid rgba(192, 199, 209, 0.82);
     border-radius: var(--radius-md);
     display: grid;
     gap: var(--space-4);
+    min-height: 100%;
     padding: var(--space-5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card::before {
+    background: linear-gradient(180deg, var(--color-blue), var(--color-navy));
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: calc(0.5 + (var(--card-accent-index) * 0.08));
+    position: absolute;
+    top: 0;
+    width: 0.32rem;
+  }
+
+  .product-mark {
+    align-items: center;
+    background: var(--color-light);
+    border: 1px solid rgba(192, 199, 209, 0.82);
+    border-radius: var(--radius-sm);
+    color: var(--color-blue);
+    display: inline-flex;
+    font-size: 0.74rem;
+    font-weight: 900;
+    height: 2rem;
+    justify-content: center;
+    width: 2.4rem;
   }
 
   h3 {
@@ -55,6 +88,8 @@ const {
   }
 
   p {
+    color: rgba(17, 24, 39, 0.82);
+    font-size: 0.94rem;
     margin: 0;
   }
 
@@ -72,6 +107,28 @@ const {
   }
 
   dd {
+    font-size: 0.92rem;
     margin: 0;
+  }
+
+  .button {
+    align-self: end;
+    justify-self: start;
+  }
+
+  @media (max-width: 47.99rem) {
+    .product-card {
+      gap: var(--space-3);
+      padding: var(--space-4);
+    }
+
+    dl {
+      display: none;
+    }
+
+    .button {
+      min-height: 40px;
+      padding-inline: 0.75rem;
+    }
   }
 </style>

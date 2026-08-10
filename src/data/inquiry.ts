@@ -69,7 +69,7 @@ export const inquiryCopy: Record<
     summary:
       "공정 조건, 제품군, 요청 자료를 정리해 기술 검토에 필요한 정보를 준비할 수 있습니다.",
     statusTitle: "접수 상태",
-    statusSummary: "온라인 접수 연결 전에는 접수 완료로 표시하지 않습니다.",
+    statusSummary: "입력 내용을 확인한 뒤 현재 접수 가능 상태를 안내합니다.",
     requiredNote: "필수 항목",
     optionalLabel: "선택",
     requiredLabel: "필수",
@@ -77,9 +77,9 @@ export const inquiryCopy: Record<
     submitting: "확인 중",
     reset: "입력 초기화",
     uploadNote:
-      "첨부는 PDF, JPG/JPEG, PNG, XLSX, DOCX만 고려합니다. 파일당 최대 10MB, 최대 3개입니다. 온라인 저장 연결 전에는 첨부가 접수 완료 처리되지 않습니다.",
+      "첨부는 PDF, JPG/JPEG, PNG, XLSX, DOCX만 선택할 수 있습니다. 파일당 최대 10MB, 최대 3개입니다.",
     infrastructureNotice:
-      "현재 온라인 접수 연결 전이므로 입력 내용은 접수 완료 처리되지 않습니다.",
+      "현재 화면에서는 입력 내용을 확인할 수 있으며, 실제 접수는 회사 확인 후 활성화됩니다.",
     fields: {
       companyName: "회사명",
       contactName: "담당자명",
@@ -114,13 +114,13 @@ export const inquiryCopy: Record<
       fileType: "지원하지 않는 파일 형식입니다.",
       consent: "개인정보 수집·이용 동의가 필요합니다.",
       network: "전송 상태를 확인할 수 없습니다. 잠시 후 다시 시도해 주세요.",
-      notConfigured: "온라인 접수 인프라가 아직 연결되지 않았습니다.",
+      notConfigured: "현재 온라인 접수 준비 상태입니다.",
     },
     states: {
       ready: "입력 내용을 확인한 뒤 전송 상태를 점검합니다.",
       validationFailed: "입력값을 확인해 주세요.",
       notConfigured:
-        "온라인 접수 연결 전이므로 실제 접수는 진행되지 않았습니다.",
+        "현재 온라인 접수 준비 상태라 실제 접수는 진행되지 않았습니다.",
       failed: "문의 내용을 접수하지 못했습니다.",
       success: "문의가 접수되었습니다. 참조번호를 확인해 주세요.",
     },
@@ -131,7 +131,7 @@ export const inquiryCopy: Record<
       "Share process conditions, product family, and document needs to prepare information for technical review.",
     statusTitle: "Submission status",
     statusSummary:
-      "A completion message is not shown before the online intake is connected.",
+      "The form checks the entered information and shows the current intake status.",
     requiredNote: "Required fields",
     optionalLabel: "Optional",
     requiredLabel: "Required",
@@ -139,9 +139,9 @@ export const inquiryCopy: Record<
     submitting: "Checking",
     reset: "Reset form",
     uploadNote:
-      "Attachments are designed for PDF, JPG/JPEG, PNG, XLSX, and DOCX only. Maximum 10MB per file and 3 files. Attachments are not completed as submissions before online storage is connected.",
+      "Attachments can be PDF, JPG/JPEG, PNG, XLSX, or DOCX. Maximum 10MB per file and 3 files.",
     infrastructureNotice:
-      "The online intake is not connected yet, so the entered information is not completed as a submission.",
+      "This page can check the entered information. Actual online intake will be activated after company confirmation.",
     fields: {
       companyName: "Company name",
       contactName: "Contact person",
@@ -177,13 +177,13 @@ export const inquiryCopy: Record<
       consent: "Personal data collection consent is required.",
       network:
         "Submission status could not be checked. Please try again later.",
-      notConfigured: "Online inquiry infrastructure is not connected yet.",
+      notConfigured: "Online inquiry intake is being prepared.",
     },
     states: {
       ready: "Check the information before sending.",
       validationFailed: "Please check the highlighted fields.",
       notConfigured:
-        "No real inquiry was completed because the online intake is not connected yet.",
+        "Online inquiry intake is being prepared, so no real inquiry was completed.",
       failed: "The inquiry could not be submitted.",
       success:
         "The inquiry has been received. Please keep the reference number.",
@@ -195,7 +195,7 @@ export const inquiryCopy: Record<
       "Gửi điều kiện quy trình, nhóm sản phẩm và nhu cầu tài liệu để chuẩn bị thông tin xem xét kỹ thuật.",
     statusTitle: "Trạng thái gửi",
     statusSummary:
-      "Không hiển thị hoàn tất tiếp nhận trước khi kênh tiếp nhận trực tuyến được kết nối.",
+      "Biểu mẫu kiểm tra thông tin đã nhập và hiển thị trạng thái tiếp nhận hiện tại.",
     requiredNote: "Thông tin bắt buộc",
     optionalLabel: "Tùy chọn",
     requiredLabel: "Bắt buộc",
@@ -203,9 +203,9 @@ export const inquiryCopy: Record<
     submitting: "Đang kiểm tra",
     reset: "Xóa nội dung",
     uploadNote:
-      "Tệp đính kèm chỉ thiết kế cho PDF, JPG/JPEG, PNG, XLSX và DOCX. Tối đa 10MB mỗi tệp và 3 tệp. Tệp chưa được hoàn tất tiếp nhận trước khi lưu trữ trực tuyến được kết nối.",
+      "Tệp đính kèm có thể là PDF, JPG/JPEG, PNG, XLSX hoặc DOCX. Tối đa 10MB mỗi tệp và 3 tệp.",
     infrastructureNotice:
-      "Kênh tiếp nhận trực tuyến chưa được kết nối nên nội dung nhập chưa được hoàn tất tiếp nhận.",
+      "Trang này có thể kiểm tra thông tin đã nhập. Tiếp nhận trực tuyến thực tế sẽ được kích hoạt sau khi công ty xác nhận.",
     fields: {
       companyName: "Tên công ty",
       contactName: "Người phụ trách",
@@ -240,13 +240,13 @@ export const inquiryCopy: Record<
       fileType: "Định dạng tệp không được hỗ trợ.",
       consent: "Cần đồng ý thu thập và sử dụng dữ liệu cá nhân.",
       network: "Không kiểm tra được trạng thái gửi. Vui lòng thử lại sau.",
-      notConfigured: "Hạ tầng tiếp nhận trực tuyến chưa được kết nối.",
+      notConfigured: "Kênh tiếp nhận trực tuyến đang được chuẩn bị.",
     },
     states: {
       ready: "Kiểm tra thông tin trước khi gửi.",
       validationFailed: "Vui lòng kiểm tra các mục được đánh dấu.",
       notConfigured:
-        "Chưa hoàn tất tiếp nhận thực tế vì kênh tiếp nhận trực tuyến chưa được kết nối.",
+        "Kênh tiếp nhận trực tuyến đang được chuẩn bị nên chưa hoàn tất tiếp nhận thực tế.",
       failed: "Không thể tiếp nhận nội dung liên hệ.",
       success:
         "Nội dung liên hệ đã được tiếp nhận. Vui lòng lưu mã tham chiếu.",

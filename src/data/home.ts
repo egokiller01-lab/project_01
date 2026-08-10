@@ -40,6 +40,20 @@ type HomeContent = {
   solutions: SolutionItem[];
   blogs: BlogLink[];
   footerNote: string;
+  visuals: {
+    hero: VisualContent;
+    company: VisualContent;
+    solutions: VisualContent;
+    technology: VisualContent;
+    quality: VisualContent;
+    knowledge: VisualContent;
+  };
+};
+
+type VisualContent = {
+  src: string;
+  alt: string;
+  caption: string;
 };
 
 export const homeContent: Record<Locale, HomeContent> = {
@@ -133,6 +147,38 @@ export const homeContent: Record<Locale, HomeContent> = {
       },
     ],
     footerNote: "표면처리 공정 안정화를 위한 제품과 기술지원을 제공합니다.",
+    visuals: {
+      hero: {
+        src: "/assets/home/chemical-mixing-process.webp",
+        alt: "산업용 교반 탱크에서 화학 용액을 점검하는 기술자 이미지",
+        caption: "제조·교반 공정을 표현한 산업기술 시각자료",
+      },
+      company: {
+        src: "/assets/home/manufacturing-vessels.webp",
+        alt: "제조 설비와 용기류가 배치된 화학 생산 환경 이미지",
+        caption: "현지 제조와 공급 대응 역량을 표현한 시각자료",
+      },
+      solutions: {
+        src: "/assets/home/surface-treatment-principle.webp",
+        alt: "전기도금 원리를 설명하는 표면처리 공정 도식",
+        caption: "표면처리 공정 이해를 돕는 기술 도식",
+      },
+      technology: {
+        src: "/assets/home/rd-lab-analysis.webp",
+        alt: "연구실에서 시료를 분석하는 연구원 이미지",
+        caption: "약품 선정과 공정 조건 검토를 표현한 시각자료",
+      },
+      quality: {
+        src: "/assets/home/quality-lab-testing.webp",
+        alt: "실험실에서 피펫과 분석 장비로 품질을 확인하는 이미지",
+        caption: "분석과 품질 확인 흐름을 표현한 시각자료",
+      },
+      knowledge: {
+        src: "/assets/home/electroless-nickel-process.webp",
+        alt: "무전해 니켈 공정 관리 항목을 정리한 기술 도식",
+        caption: "무전해 니켈 공정 관리를 설명하는 기술자료용 도식",
+      },
+    },
   },
   en: {
     seoTitle: "PLACHEM VINA | Surface Treatment Chemical Solutions",
@@ -218,6 +264,42 @@ export const homeContent: Record<Locale, HomeContent> = {
     blogs: [],
     footerNote:
       "Products and technical support for stable surface treatment processes.",
+    visuals: {
+      hero: {
+        src: "/assets/home/chemical-mixing-process.webp",
+        alt: "Technician checking an industrial mixing vessel for chemical processing",
+        caption:
+          "Industrial technology visual for manufacturing and mixing processes",
+      },
+      company: {
+        src: "/assets/home/manufacturing-vessels.webp",
+        alt: "Chemical manufacturing equipment with storage containers",
+        caption:
+          "Visual material representing local manufacturing and supply response",
+      },
+      solutions: {
+        src: "/assets/home/surface-treatment-principle.webp",
+        alt: "Technical diagram explaining the electroplating process",
+        caption: "Technical process visual for surface treatment understanding",
+      },
+      technology: {
+        src: "/assets/home/rd-lab-analysis.webp",
+        alt: "Laboratory technicians preparing and analyzing chemical samples",
+        caption:
+          "Visual material representing product selection and process review",
+      },
+      quality: {
+        src: "/assets/home/quality-lab-testing.webp",
+        alt: "Laboratory testing scene with pipette and analytical equipment",
+        caption: "Visual material representing analysis and quality checks",
+      },
+      knowledge: {
+        src: "/assets/home/electroless-nickel-process.webp",
+        alt: "Technical diagram for electroless nickel process control",
+        caption:
+          "Technical library visual for electroless nickel process control",
+      },
+    },
   },
   vi: {
     seoTitle: "PLACHEM VINA | Giải pháp hóa chất xử lý bề mặt",
@@ -301,5 +383,41 @@ export const homeContent: Record<Locale, HomeContent> = {
     blogs: [],
     footerNote:
       "Sản phẩm và hỗ trợ kỹ thuật cho quy trình xử lý bề mặt ổn định.",
+    visuals: {
+      hero: {
+        src: "/assets/home/chemical-mixing-process.webp",
+        alt: "Kỹ thuật viên kiểm tra bồn khuấy trong môi trường xử lý hóa chất công nghiệp",
+        caption:
+          "Hình ảnh minh họa công nghệ công nghiệp cho công đoạn sản xuất và khuấy trộn",
+      },
+      company: {
+        src: "/assets/home/manufacturing-vessels.webp",
+        alt: "Thiết bị sản xuất hóa chất và các can chứa trong khu vực sản xuất",
+        caption:
+          "Hình ảnh minh họa năng lực sản xuất và đáp ứng cung ứng tại địa phương",
+      },
+      solutions: {
+        src: "/assets/home/surface-treatment-principle.webp",
+        alt: "Sơ đồ kỹ thuật giải thích nguyên lý mạ điện",
+        caption: "Sơ đồ hỗ trợ hiểu quy trình xử lý bề mặt",
+      },
+      technology: {
+        src: "/assets/home/rd-lab-analysis.webp",
+        alt: "Nhân viên phòng thí nghiệm chuẩn bị và phân tích mẫu hóa chất",
+        caption:
+          "Hình ảnh minh họa việc lựa chọn hóa chất và xem xét điều kiện quy trình",
+      },
+      quality: {
+        src: "/assets/home/quality-lab-testing.webp",
+        alt: "Cảnh kiểm tra trong phòng thí nghiệm với pipet và thiết bị phân tích",
+        caption: "Hình ảnh minh họa hoạt động phân tích và kiểm tra chất lượng",
+      },
+      knowledge: {
+        src: "/assets/home/electroless-nickel-process.webp",
+        alt: "Sơ đồ kỹ thuật về quản lý quy trình mạ niken hóa học",
+        caption:
+          "Sơ đồ kỹ thuật cho tài liệu quản lý quy trình mạ niken hóa học",
+      },
+    },
   },
 };

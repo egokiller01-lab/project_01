@@ -7,7 +7,6 @@ import ProductFamilyCard from "./ProductFamilyCard.astro";
 import QualityPanel from "./QualityPanel.astro";
 import SectionHeading from "./SectionHeading.astro";
 import SolutionCard from "./SolutionCard.astro";
-import TechnologyPanel from "./TechnologyPanel.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { homeContent } from "../data/home";
 import type { Locale } from "../types";
@@ -25,36 +24,106 @@ const cardLabels = {
 }[locale];
 ---
 
-<BaseLayout locale={locale} title={content.seoTitle} description={content.description} pageKey="home">
+<BaseLayout
+  locale={locale}
+  title={content.seoTitle}
+  description={content.description}
+  pageKey="home"
+>
   <Hero
     eyebrow={content.heroEyebrow}
     title={content.heroTitle}
     summary={content.heroSummary}
     ctas={content.primaryCtas}
     strengths={content.strengths}
+    image={content.visuals.hero}
   />
 
   <section class="section" id="company">
-    <div class="container grid grid--2">
-      <SectionHeading title={content.sectionLabels.company} summary={content.sectionSummaries.company} />
-      <TechnologyPanel title={content.technologyPanel.title} items={content.technologyPanel.items} />
+    <div class="container">
+      <div class="feature-row">
+        <SectionHeading
+          title={content.sectionLabels.company}
+          summary={content.sectionSummaries.company}
+        />
+        <figure class="media-card">
+          <img
+            src={content.visuals.company.src}
+            alt={content.visuals.company.alt}
+            width="1024"
+            height="1024"
+            loading="eager"
+            decoding="async"
+          />
+          <figcaption>{content.visuals.company.caption}</figcaption>
+        </figure>
+      </div>
+      <div class="flow-strip" aria-label={content.technologyPanel.title}>
+        {
+          content.strengths.slice(0, 3).map((strength, index) => (
+            <div class="flow-step">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{strength}</strong>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </section>
 
   <section class="section section--white" id="solutions">
     <div class="container">
-      <SectionHeading title={content.sectionLabels.solutions} summary={content.sectionSummaries.solutions} />
-      <div class="grid grid--4 product-grid">
-        {content.products.map((product) => (
-          <ProductFamilyCard {...product} materialLabel={cardLabels.material} processLabel={cardLabels.process} />
-        ))}
+      <div class="section-intro">
+        <SectionHeading
+          title={content.sectionLabels.solutions}
+          summary={content.sectionSummaries.solutions}
+        />
+        <figure class="wide-visual">
+          <img
+            src={content.visuals.solutions.src}
+            alt={content.visuals.solutions.alt}
+            width="1200"
+            height="900"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>{content.visuals.solutions.caption}</figcaption>
+        </figure>
+      </div>
+      <div class="product-rail">
+        {
+          content.products.map((product, index) => (
+            <ProductFamilyCard
+              {...product}
+              materialLabel={cardLabels.material}
+              processLabel={cardLabels.process}
+              index={index}
+            />
+          ))
+        }
       </div>
     </div>
   </section>
 
   <section class="section" id="technology">
     <div class="container">
-      <SectionHeading title={content.sectionLabels.technology} summary={content.sectionSummaries.technology} />
+      <div class="feature-row feature-row--reverse">
+        <SectionHeading
+          title={content.sectionLabels.technology}
+          summary={content.sectionSummaries.technology}
+        />
+        <figure class="media-card media-card--tall">
+          <img
+            src={content.visuals.technology.src}
+            alt={content.visuals.technology.alt}
+            width="1024"
+            height="1024"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>{content.visuals.technology.caption}</figcaption>
+        </figure>
+      </div>
       <ProcessDiagram steps={content.processSteps} />
       <div class="grid grid--3 support-grid">
         {content.solutions.map((solution) => <SolutionCard {...solution} />)}
@@ -63,33 +132,206 @@ const cardLabels = {
   </section>
 
   <section class="section section--white" id="quality">
-    <div class="container grid grid--2">
-      <SectionHeading title={content.sectionLabels.quality} summary={content.sectionSummaries.quality} />
-      <QualityPanel items={content.strengths} />
+    <div class="container quality-layout">
+      <div>
+        <SectionHeading
+          title={content.sectionLabels.quality}
+          summary={content.sectionSummaries.quality}
+        />
+        <QualityPanel items={content.strengths} />
+      </div>
+      <figure class="media-card">
+        <img
+          src={content.visuals.quality.src}
+          alt={content.visuals.quality.alt}
+          width="1024"
+          height="1024"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>{content.visuals.quality.caption}</figcaption>
+      </figure>
     </div>
   </section>
 
   <section class="section" id="knowledge">
     <div class="container">
-      <SectionHeading title={content.sectionLabels.knowledge} summary={content.sectionSummaries.knowledge} />
-      {content.blogs.length > 0 && (
-        <div class="grid grid--3">
-          {content.blogs.map((blog) => <BlogCard {...blog} />)}
+      <div class="knowledge-layout">
+        <div>
+          <SectionHeading
+            title={content.sectionLabels.knowledge}
+            summary={content.sectionSummaries.knowledge}
+          />
+          {
+            content.blogs.length > 0 && (
+              <div class="grid grid--3 blog-grid">
+                {content.blogs.map((blog) => (
+                  <BlogCard {...blog} />
+                ))}
+              </div>
+            )
+          }
         </div>
-      )}
+        <figure class="wide-visual wide-visual--compact">
+          <img
+            src={content.visuals.knowledge.src}
+            alt={content.visuals.knowledge.alt}
+            width="1200"
+            height="900"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>{content.visuals.knowledge.caption}</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <CTAPanel title={content.sectionLabels.contact} summary={content.sectionSummaries.contact} ctas={content.primaryCtas} />
+      <CTAPanel
+        title={content.sectionLabels.contact}
+        summary={content.sectionSummaries.contact}
+        ctas={content.primaryCtas}
+      />
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .product-grid,
   .support-grid {
     margin-top: var(--space-5);
+  }
+
+  .feature-row,
+  .quality-layout,
+  .knowledge-layout,
+  .section-intro {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .media-card,
+  .wide-visual {
+    background: white;
+    border: 1px solid rgba(192, 199, 209, 0.78);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .media-card img,
+  .wide-visual img {
+    display: block;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+  }
+
+  .media-card img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .media-card--tall img {
+    aspect-ratio: 1 / 1;
+    object-position: 55% 50%;
+  }
+
+  .wide-visual img {
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+  }
+
+  .wide-visual--compact img {
+    aspect-ratio: 4 / 3;
+  }
+
+  figcaption {
+    color: var(--color-navy);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .flow-strip {
+    display: grid;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .flow-step {
+    align-items: center;
+    background: white;
+    border: var(--border);
+    border-radius: var(--radius-md);
+    display: flex;
+    gap: var(--space-3);
+    min-height: 4.5rem;
+    padding: var(--space-4);
+  }
+
+  .flow-step span {
+    color: var(--color-blue);
+    font-size: 0.8rem;
+    font-weight: 900;
+  }
+
+  .flow-step strong {
+    color: var(--color-navy);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+
+  .product-rail {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+
+  .blog-grid {
+    margin-top: var(--space-5);
+  }
+
+  @media (min-width: 48rem) {
+    .flow-strip {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .product-rail {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .feature-row,
+    .quality-layout,
+    .knowledge-layout,
+    .section-intro {
+      align-items: center;
+      grid-template-columns: minmax(0, 0.95fr) minmax(26rem, 1.05fr);
+    }
+
+    .feature-row--reverse {
+      grid-template-columns: minmax(26rem, 1.05fr) minmax(0, 0.95fr);
+    }
+
+    .feature-row--reverse > :first-child {
+      order: 2;
+    }
+
+    .product-rail {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    .section {
+      padding-block: var(--space-7);
+    }
+
+    .product-rail {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 </style>
