@@ -22,17 +22,25 @@ const { eyebrow, title, summary, ctas, strengths } = Astro.props;
         {ctas.map((cta) => <a class={`button button--${cta.variant ?? 'secondary'}`} href={cta.href}>{cta.label}</a>)}
       </div>
     </div>
-    <div class="hero-panel" aria-label="PLACHEM VINA key strengths">
-      {strengths.map((strength) => <span>{strength}</span>)}
+    <div class="hero-panel" aria-label="PLACHEM VINA process support strengths">
+      <div class="process-visual" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="strength-list">
+        {strengths.map((strength) => <span>{strength}</span>)}
+      </div>
     </div>
   </div>
 </section>
 
 <style>
   .hero {
-    background: white;
+    background:
+      linear-gradient(180deg, white 0%, var(--color-light) 100%);
     border-bottom: var(--border);
-    padding-block: var(--space-8);
+    padding-block: calc(var(--space-8) + var(--space-4));
   }
 
   .hero-grid {
@@ -48,7 +56,7 @@ const { eyebrow, title, summary, ctas, strengths } = Astro.props;
 
   h1 {
     color: var(--color-navy);
-    font-size: clamp(2.25rem, 6vw, 4.75rem);
+    font-size: clamp(2.5rem, 6vw, 5rem);
     letter-spacing: 0;
     line-height: 1.05;
     margin: 0;
@@ -56,7 +64,7 @@ const { eyebrow, title, summary, ctas, strengths } = Astro.props;
   }
 
   .summary {
-    font-size: 1.08rem;
+    font-size: 1.18rem;
     margin-block: var(--space-5);
     max-width: 64ch;
   }
@@ -68,6 +76,16 @@ const { eyebrow, title, summary, ctas, strengths } = Astro.props;
   }
 
   .hero-panel {
+    background: white;
+    border: var(--border);
+    border-radius: var(--radius-md);
+    display: grid;
+    gap: var(--space-5);
+    padding: var(--space-6);
+    box-shadow: var(--shadow);
+  }
+
+  .process-visual {
     background: var(--color-light);
     border: var(--border);
     border-radius: var(--radius-md);
@@ -76,8 +94,29 @@ const { eyebrow, title, summary, ctas, strengths } = Astro.props;
     padding: var(--space-5);
   }
 
-  .hero-panel span {
-    background: white;
+  .process-visual span {
+    background: var(--color-navy);
+    border-radius: var(--radius-sm);
+    display: block;
+    height: 1rem;
+    position: relative;
+  }
+
+  .process-visual span:nth-child(2) {
+    background: var(--color-blue);
+    margin-left: var(--space-5);
+  }
+
+  .process-visual span:nth-child(3) {
+    margin-left: var(--space-7);
+  }
+
+  .strength-list {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .strength-list span {
     border: var(--border);
     border-radius: var(--radius-sm);
     color: var(--color-navy);

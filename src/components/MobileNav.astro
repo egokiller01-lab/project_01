@@ -7,11 +7,16 @@ type Props = {
 };
 
 const { locale } = Astro.props;
+const contactLabels = {
+  ko: "문의",
+  en: "Contact",
+  vi: "Liên hệ",
+}[locale];
 ---
 
-<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" data-mobile-nav data-open="false">
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" data-mobile-nav data-open="false" inert>
   {navigation[locale].map((item) => <a href={item.href}>{item.label}</a>)}
-  <a class="button button--primary" href={`/${locale}/#contact`}>Contact</a>
+  <a class="button button--primary" href={`/${locale}/#contact`}>{contactLabels}</a>
 </nav>
 
 <style>

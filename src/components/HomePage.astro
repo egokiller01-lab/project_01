@@ -1,0 +1,95 @@
+---
+import BlogCard from "./BlogCard.astro";
+import CTAPanel from "./CTAPanel.astro";
+import Hero from "./Hero.astro";
+import ProcessDiagram from "./ProcessDiagram.astro";
+import ProductFamilyCard from "./ProductFamilyCard.astro";
+import QualityPanel from "./QualityPanel.astro";
+import SectionHeading from "./SectionHeading.astro";
+import SolutionCard from "./SolutionCard.astro";
+import TechnologyPanel from "./TechnologyPanel.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { homeContent } from "../data/home";
+import type { Locale } from "../types";
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const cardLabels = {
+  ko: { material: "소재", process: "공정" },
+  en: { material: "Material", process: "Process" },
+  vi: { material: "Vật liệu", process: "Quy trình" },
+}[locale];
+---
+
+<BaseLayout locale={locale} title={content.seoTitle} description={content.description}>
+  <Hero
+    eyebrow={content.heroEyebrow}
+    title={content.heroTitle}
+    summary={content.heroSummary}
+    ctas={content.primaryCtas}
+    strengths={content.strengths}
+  />
+
+  <section class="section" id="company">
+    <div class="container grid grid--2">
+      <SectionHeading title={content.sectionLabels.company} summary={content.sectionSummaries.company} />
+      <TechnologyPanel title={content.technologyPanel.title} items={content.technologyPanel.items} />
+    </div>
+  </section>
+
+  <section class="section section--white" id="solutions">
+    <div class="container">
+      <SectionHeading title={content.sectionLabels.solutions} summary={content.sectionSummaries.solutions} />
+      <div class="grid grid--4 product-grid">
+        {content.products.map((product) => (
+          <ProductFamilyCard {...product} materialLabel={cardLabels.material} processLabel={cardLabels.process} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="technology">
+    <div class="container">
+      <SectionHeading title={content.sectionLabels.technology} summary={content.sectionSummaries.technology} />
+      <ProcessDiagram steps={content.processSteps} />
+      <div class="grid grid--3 support-grid">
+        {content.solutions.map((solution) => <SolutionCard {...solution} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white" id="quality">
+    <div class="container grid grid--2">
+      <SectionHeading title={content.sectionLabels.quality} summary={content.sectionSummaries.quality} />
+      <QualityPanel items={content.strengths} />
+    </div>
+  </section>
+
+  <section class="section" id="knowledge">
+    <div class="container">
+      <SectionHeading title={content.sectionLabels.knowledge} summary={content.sectionSummaries.knowledge} />
+      {content.blogs.length > 0 && (
+        <div class="grid grid--3">
+          {content.blogs.map((blog) => <BlogCard {...blog} />)}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <CTAPanel title={content.sectionLabels.contact} summary={content.sectionSummaries.contact} ctas={content.primaryCtas} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .product-grid,
+  .support-grid {
+    margin-top: var(--space-5);
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  locale="ko"
+  title="페이지를 찾을 수 없습니다 | PLACHEM VINA"
+  description="요청한 페이지를 찾을 수 없습니다."
+>
+  <section class="not-found">
+    <div class="container not-found__inner">
+      <p>404</p>
+      <h1>페이지를 찾을 수 없습니다</h1>
+      <span>주소를 다시 확인하거나 제품·솔루션 페이지에서 필요한 정보를 찾아보세요.</span>
+      <div class="not-found__actions">
+        <a class="button button--primary" href="/ko/">한국어 홈</a>
+        <a class="button button--secondary" href="/en/">English Home</a>
+        <a class="button button--ghost" href="/vi/">Tiếng Việt</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    align-items: center;
+    display: flex;
+    min-height: 68vh;
+    padding-block: var(--space-8);
+  }
+
+  .not-found__inner {
+    max-width: 720px;
+  }
+
+  p {
+    color: var(--color-blue);
+    font-size: 1rem;
+    font-weight: 900;
+    margin: 0 0 var(--space-3);
+  }
+
+  h1 {
+    color: var(--color-navy);
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  span {
+    display: block;
+    font-size: 1.12rem;
+    margin-top: var(--space-4);
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+</style>

@@ -12,11 +12,24 @@ export type CTA = {
 };
 
 export type ProductFamily = {
+  slug: string;
   title: string;
   summary: string;
   href: string;
   materials: string;
   process: string;
+  cta: string;
+};
+
+export type ProductDetail = {
+  slug: string;
+  title: string;
+  summary: string;
+  overview: string;
+  materials: string[];
+  processes: string[];
+  checks: string[];
+  support: string[];
   cta: string;
 };
 

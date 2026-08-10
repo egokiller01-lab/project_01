@@ -10,6 +10,11 @@ type Props = {
 
 const { locale } = Astro.props;
 const items = navigation[locale];
+const contactLabels = {
+  ko: "문의",
+  en: "Contact",
+  vi: "Liên hệ",
+}[locale];
 ---
 
 <header class="site-header">
@@ -20,7 +25,7 @@ const items = navigation[locale];
     </nav>
     <div class="header-actions">
       <LanguageSwitcher locale={locale} />
-      <a class="button button--primary header-cta" href={`/${locale}/#contact`}>Contact</a>
+      <a class="button button--primary header-cta" href={`/${locale}/#contact`}>{contactLabels}</a>
       <button class="menu-button" type="button" aria-controls="mobile-nav" aria-expanded="false" data-menu-button>
         <span class="menu-button__line"></span>
         <span class="menu-button__line"></span>
@@ -39,6 +44,7 @@ const items = navigation[locale];
   function closeMenu() {
     menuButton?.setAttribute('aria-expanded', 'false');
     mobileNav?.setAttribute('data-open', 'false');
+    mobileNav?.setAttribute('inert', '');
     document.body.classList.remove('menu-open');
   }
 
@@ -46,6 +52,11 @@ const items = navigation[locale];
     const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
     menuButton.setAttribute('aria-expanded', String(!isOpen));
     mobileNav?.setAttribute('data-open', String(!isOpen));
+    if (isOpen) {
+      mobileNav?.setAttribute('inert', '');
+    } else {
+      mobileNav?.removeAttribute('inert');
+    }
     document.body.classList.toggle('menu-open', !isOpen);
   });
 

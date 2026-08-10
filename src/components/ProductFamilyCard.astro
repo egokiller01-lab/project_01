@@ -1,8 +1,20 @@
 ---
 import type { ProductFamily } from '../types';
 
-type Props = ProductFamily;
-const { title, summary, href, materials, process, cta } = Astro.props;
+type Props = ProductFamily & {
+  materialLabel?: string;
+  processLabel?: string;
+};
+const {
+  title,
+  summary,
+  href,
+  materials,
+  process,
+  cta,
+  materialLabel = 'Material',
+  processLabel = 'Process',
+} = Astro.props;
 ---
 
 <article class="product-card">
@@ -12,11 +24,11 @@ const { title, summary, href, materials, process, cta } = Astro.props;
   </div>
   <dl>
     <div>
-      <dt>Material</dt>
+      <dt>{materialLabel}</dt>
       <dd>{materials}</dd>
     </div>
     <div>
-      <dt>Process</dt>
+      <dt>{processLabel}</dt>
       <dd>{process}</dd>
     </div>
   </dl>
