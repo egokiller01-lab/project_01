@@ -270,8 +270,7 @@ export const onRequestPost = async ({ request, env }: PagesContext) => {
       {
         ok: false,
         code: "not_configured",
-        message:
-          "Preview inquiry storage and security bindings are not configured.",
+        message: "Online inquiry intake is not connected yet.",
       },
       503,
     );
