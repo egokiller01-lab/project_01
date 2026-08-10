@@ -152,7 +152,7 @@ const alternatePaths = Object.fromEntries(
           <h2>{labels.inquiry}</h2>
           <p>{labels.inquirySummary}</p>
         </div>
-        <a class="button button--primary" href={`/${locale}/contact/`}>{product.cta}</a>
+        <a class="button button--primary" href={`/${locale}/contact/?product=${product.slug}`}>{product.cta}</a>
       </div>
     </div>
   </section>

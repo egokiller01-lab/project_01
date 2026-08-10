@@ -1,6 +1,7 @@
 ---
 import BlogCard from "./BlogCard.astro";
 import CTAPanel from "./CTAPanel.astro";
+import InquiryForm from "./InquiryForm.astro";
 import ProductFamilyCard from "./ProductFamilyCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { localizedPath } from "../data/navigation";
@@ -130,36 +131,39 @@ const contactLabels = {
   )}
 
   {pageKey === "contact" && (
-    <section class="section section--white">
-      <div class="container contact-grid">
-        <article class="contact-card">
-          <h2>{contactLabels.vietnam}</h2>
-          <dl>
-            <div>
-              <dt>{contactLabels.address}</dt>
-              <dd>{companyFacts.site}</dd>
-            </div>
-            <div>
-              <dt>{contactLabels.phone}</dt>
-              <dd><a href={`tel:${companyFacts.vietnamPhone}`}>{companyFacts.vietnamPhone}</a></dd>
-            </div>
-          </dl>
-        </article>
-        <article class="contact-card">
-          <h2>{contactLabels.korea}</h2>
-          <dl>
-            <div>
-              <dt>{contactLabels.address}</dt>
-              <dd>{locale === "ko" ? companyFacts.koreaAddressKo : companyFacts.koreaAddressEn}</dd>
-            </div>
-            <div>
-              <dt>{contactLabels.phone}</dt>
-              <dd><a href={`tel:${companyFacts.koreaPhone}`}>{companyFacts.koreaPhone}</a></dd>
-            </div>
-          </dl>
-        </article>
-      </div>
-    </section>
+    <>
+      <InquiryForm locale={locale} />
+      <section class="section section--white">
+        <div class="container contact-grid">
+          <article class="contact-card">
+            <h2>{contactLabels.vietnam}</h2>
+            <dl>
+              <div>
+                <dt>{contactLabels.address}</dt>
+                <dd>{companyFacts.site}</dd>
+              </div>
+              <div>
+                <dt>{contactLabels.phone}</dt>
+                <dd><a href={`tel:${companyFacts.vietnamPhone}`}>{companyFacts.vietnamPhone}</a></dd>
+              </div>
+            </dl>
+          </article>
+          <article class="contact-card">
+            <h2>{contactLabels.korea}</h2>
+            <dl>
+              <div>
+                <dt>{contactLabels.address}</dt>
+                <dd>{locale === "ko" ? companyFacts.koreaAddressKo : companyFacts.koreaAddressEn}</dd>
+              </div>
+              <div>
+                <dt>{contactLabels.phone}</dt>
+                <dd><a href={`tel:${companyFacts.koreaPhone}`}>{companyFacts.koreaPhone}</a></dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+      </section>
+    </>
   )}
 
   <section class="section">
