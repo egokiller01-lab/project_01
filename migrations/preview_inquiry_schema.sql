@@ -4,6 +4,7 @@
 CREATE TABLE IF NOT EXISTS inquiries (
   id TEXT PRIMARY KEY,
   reference_no TEXT NOT NULL UNIQUE,
+  dedupe_key TEXT NOT NULL UNIQUE,
   company_name TEXT NOT NULL,
   contact_name TEXT NOT NULL,
   email TEXT NOT NULL,
@@ -40,6 +41,9 @@ CREATE INDEX IF NOT EXISTS idx_inquiries_status_created_at
 CREATE INDEX IF NOT EXISTS idx_inquiries_locale_created_at
   ON inquiries (locale, created_at);
 
+CREATE INDEX IF NOT EXISTS idx_inquiries_dedupe_key
+  ON inquiries (dedupe_key);
+
 CREATE TABLE IF NOT EXISTS inquiry_files (
   id TEXT PRIMARY KEY,
   inquiry_id TEXT NOT NULL,
@@ -53,3 +57,12 @@ CREATE TABLE IF NOT EXISTS inquiry_files (
 
 CREATE INDEX IF NOT EXISTS idx_inquiry_files_inquiry_id
   ON inquiry_files (inquiry_id);
+
+-- A durable rate-limit binding is still representative-approval required.
+-- If D1 is selected for rate limiting, use hashed keys only and never store raw IPs.
+CREATE TABLE IF NOT EXISTS inquiry_rate_limits (
+  key_hash TEXT PRIMARY KEY,
+  count INTEGER NOT NULL,
+  reset_at INTEGER NOT NULL,
+  updated_at TEXT NOT NULL
+);

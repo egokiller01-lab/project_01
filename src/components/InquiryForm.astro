@@ -218,6 +218,9 @@ const payload = {
     const submit = form.querySelector("button[type='submit']");
     const productSelect = form.querySelector("[data-product-process]");
     const submittedAt = form.querySelector("[data-submitted-at]");
+    const referencePattern = /^PLCH-\d{8}-[A-Z0-9]{8}$/;
+    let submissionInFlight = false;
+    let completedReference = "";
     const allowedProductValues = new Set(
       (config.products ?? []).map((item) => item.value),
     );
@@ -372,6 +375,7 @@ const payload = {
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+      if (submissionInFlight || completedReference) return;
       const firstInvalid = validate();
 
       if (firstInvalid) {
@@ -380,6 +384,7 @@ const payload = {
         return;
       }
 
+      submissionInFlight = true;
       if (submittedAt) submittedAt.value = new Date().toISOString();
       if (submit) {
         submit.disabled = true;
@@ -404,12 +409,26 @@ const payload = {
           return;
         }
 
-        if (status) status.textContent = config.copy.states.notConfigured;
+        if (
+          response.status === 200 &&
+          data.ok === true &&
+          typeof data.referenceNo === "string" &&
+          referencePattern.test(data.referenceNo)
+        ) {
+          completedReference = data.referenceNo;
+          if (status) {
+            status.textContent = `${config.copy.states.success} ${data.referenceNo}`;
+          }
+          return;
+        }
+
+        if (status) status.textContent = config.copy.states.failed;
       } catch {
         if (status) status.textContent = config.copy.errors.network;
       } finally {
+        submissionInFlight = false;
         if (submit) {
-          submit.disabled = false;
+          submit.disabled = Boolean(completedReference);
           submit.textContent =
             submit.getAttribute("data-submit-label") ?? config.copy.submit;
         }

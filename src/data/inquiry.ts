@@ -1,4 +1,8 @@
 import type { Locale } from "../types";
+import {
+  INQUIRY_CONSENT_VERSION,
+  INQUIRY_LIMITS,
+} from "../lib/inquiryConstants";
 import { products } from "./products";
 
 export const inquiryTypes = [
@@ -29,20 +33,9 @@ export const allowedFileMimeTypes = [
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ] as const;
 
-export const inquiryLimits = {
-  companyNameMax: 120,
-  contactNameMax: 80,
-  emailMax: 160,
-  phoneMax: 40,
-  countryMax: 80,
-  websiteMax: 180,
-  messageMin: 20,
-  messageMax: 3000,
-  fileMaxBytes: 10 * 1024 * 1024,
-  fileMaxCount: 3,
-};
+export const inquiryLimits = INQUIRY_LIMITS;
 
-export const consentVersion = "inquiry-consent-v1";
+export const consentVersion = INQUIRY_CONSENT_VERSION;
 
 export const productProcessOptions = (locale: Locale) =>
   products[locale].map((product) => ({
@@ -129,6 +122,7 @@ export const inquiryCopy: Record<
       notConfigured:
         "온라인 접수 연결 전이므로 실제 접수는 진행되지 않았습니다.",
       failed: "문의 내용을 접수하지 못했습니다.",
+      success: "문의가 접수되었습니다. 참조번호를 확인해 주세요.",
     },
   },
   en: {
@@ -191,6 +185,8 @@ export const inquiryCopy: Record<
       notConfigured:
         "No real inquiry was completed because the online intake is not connected yet.",
       failed: "The inquiry could not be submitted.",
+      success:
+        "The inquiry has been received. Please keep the reference number.",
     },
   },
   vi: {
@@ -252,6 +248,8 @@ export const inquiryCopy: Record<
       notConfigured:
         "Chưa hoàn tất tiếp nhận thực tế vì kênh tiếp nhận trực tuyến chưa được kết nối.",
       failed: "Không thể tiếp nhận nội dung liên hệ.",
+      success:
+        "Nội dung liên hệ đã được tiếp nhận. Vui lòng lưu mã tham chiếu.",
     },
   },
 };

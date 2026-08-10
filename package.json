@@ -10,7 +10,8 @@
     "check": "astro check",
     "lint": "npm run check",
     "format:check": "prettier --check src astro.config.mjs package.json tsconfig.json",
-    "test": "npm run check"
+    "test": "npm run check && npm run test:security",
+    "test:security": "tsx scripts/inquiry-security-tests.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "prettier": "^3.6.2",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "tsx": "^4.20.5"
   }
 }
