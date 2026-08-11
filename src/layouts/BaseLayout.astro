@@ -1,0 +1,107 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import { localizedPath } from "../data/navigation";
+import type { Locale, PageKey } from "../types";
+
+type Props = {
+  locale: Locale;
+  title: string;
+  description: string;
+  pageKey?: PageKey;
+  alternatePaths?: Record<Locale, string>;
+  noindex?: boolean;
+};
+
+const {
+  locale,
+  title,
+  description,
+  pageKey = "home",
+  alternatePaths,
+  noindex = true,
+} = Astro.props;
+const locales: Locale[] = ["ko", "en", "vi"];
+const currentPath = Astro.url.pathname;
+const pageAlternates =
+  alternatePaths ??
+  (Object.fromEntries(
+    locales.map((targetLocale) => [
+      targetLocale,
+      localizedPath(targetLocale, pageKey),
+    ]),
+  ) as Record<Locale, string>);
+const absoluteUrl = new URL(
+  currentPath,
+  Astro.site ?? "https://plachem.biz",
+).toString();
+const organizationJson = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "PLACHEM VINA CO., LTD",
+  url: "https://plachem.biz/",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Bac Ninh",
+    addressCountry: "VN",
+  },
+};
+const skipLabel = {
+  ko: "본문으로 건너뛰기",
+  en: "Skip to content",
+  vi: "Bỏ qua đến nội dung",
+}[locale];
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={absoluteUrl} />
+    {
+      locales.map((targetLocale) => (
+        <link
+          rel="alternate"
+          hreflang={targetLocale}
+          href={new URL(
+            pageAlternates[targetLocale],
+            Astro.site ?? "https://plachem.biz",
+          ).toString()}
+        />
+      ))
+    }
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL(
+        pageAlternates.ko,
+        Astro.site ?? "https://plachem.biz",
+      ).toString()}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(organizationJson)}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{skipLabel}</a>
+    <Header
+      locale={locale}
+      currentPath={currentPath}
+      alternatePaths={pageAlternates}
+    />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+  </body>
+</html>

@@ -1,0 +1,23 @@
+---
+import StaticPage from "../../components/StaticPage.astro";
+import { staticPageKeys } from "../../data/pages";
+import type { Locale } from "../../types";
+
+export function getStaticPaths() {
+  const locales: Locale[] = ["ko", "en", "vi"];
+
+  return locales.flatMap((locale) =>
+    staticPageKeys.map((page) => ({
+      params: { locale, page },
+      props: { locale, page },
+    })),
+  );
+}
+
+const { locale, page } = Astro.props as {
+  locale: Locale;
+  page: (typeof staticPageKeys)[number];
+};
+---
+
+<StaticPage locale={locale} pageKey={page} />

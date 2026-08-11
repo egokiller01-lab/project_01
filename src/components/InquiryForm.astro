@@ -1,0 +1,609 @@
+---
+import {
+  allowedFileExtensions,
+  allowedFileMimeTypes,
+  consentVersion,
+  inquiryCopy,
+  inquiryLimits,
+  inquiryTypes,
+  productProcessOptions,
+} from "../data/inquiry";
+import type { Locale } from "../types";
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const copy = inquiryCopy[locale];
+const products = productProcessOptions(locale);
+const payload = {
+  locale,
+  copy,
+  inquiryTypes,
+  products,
+  limits: inquiryLimits,
+  allowedFileExtensions,
+  allowedFileMimeTypes,
+  consentVersion,
+};
+---
+
+<section class="inquiry-section" aria-labelledby="inquiry-form-title">
+  <div class="container inquiry-layout">
+    <div class="inquiry-intro">
+      <p class="panel-eyebrow">Technical Inquiry</p>
+      <h2 id="inquiry-form-title">{copy.title}</h2>
+      <p>{copy.summary}</p>
+      <div class="inquiry-notice" role="note">
+        <strong>{copy.statusTitle}</strong>
+        <span>{copy.infrastructureNotice}</span>
+      </div>
+    </div>
+
+    <form
+      class="inquiry-form"
+      data-inquiry-form
+      data-inquiry-config={JSON.stringify(payload)}
+      novalidate
+      enctype="multipart/form-data"
+    >
+      <input type="hidden" name="locale" value={locale} />
+      <input type="hidden" name="consentVersion" value={consentVersion} />
+      <input type="hidden" name="submittedAt" value="" data-submitted-at />
+
+      <p class="form-required-note">{copy.requiredNote}</p>
+
+      <div class="form-grid">
+        <label class="field">
+          <span>{copy.fields.companyName} <em>{copy.requiredLabel}</em></span>
+          <input
+            name="companyName"
+            type="text"
+            autocomplete="organization"
+            maxlength={inquiryLimits.companyNameMax}
+            required
+          />
+          <small data-error-for="companyName"></small>
+        </label>
+
+        <label class="field">
+          <span>{copy.fields.contactName} <em>{copy.requiredLabel}</em></span>
+          <input
+            name="contactName"
+            type="text"
+            autocomplete="name"
+            maxlength={inquiryLimits.contactNameMax}
+            required
+          />
+          <small data-error-for="contactName"></small>
+        </label>
+
+        <label class="field">
+          <span>{copy.fields.email} <em>{copy.requiredLabel}</em></span>
+          <input
+            name="email"
+            type="email"
+            autocomplete="email"
+            maxlength={inquiryLimits.emailMax}
+            required
+          />
+          <small data-error-for="email"></small>
+        </label>
+
+        <label class="field">
+          <span>{copy.fields.phone} <em>{copy.optionalLabel}</em></span>
+          <input
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            maxlength={inquiryLimits.phoneMax}
+          />
+          <small data-error-for="phone"></small>
+        </label>
+
+        <label class="field">
+          <span>{copy.fields.country} <em>{copy.requiredLabel}</em></span>
+          <input
+            name="country"
+            type="text"
+            autocomplete="country-name"
+            maxlength={inquiryLimits.countryMax}
+            required
+          />
+          <small data-error-for="country"></small>
+        </label>
+
+        <label class="field">
+          <span>{copy.fields.website} <em>{copy.optionalLabel}</em></span>
+          <input
+            name="website"
+            type="url"
+            autocomplete="url"
+            maxlength={inquiryLimits.websiteMax}
+          />
+          <small data-error-for="website"></small>
+        </label>
+      </div>
+
+      <div class="form-grid">
+        <label class="field">
+          <span>{copy.fields.inquiryType} <em>{copy.requiredLabel}</em></span>
+          <select name="inquiryType" required>
+            <option value=""></option>
+            {
+              inquiryTypes.map((type) => (
+                <option value={type}>{copy.types[type]}</option>
+              ))
+            }
+          </select>
+          <small data-error-for="inquiryType"></small>
+        </label>
+
+        <label class="field">
+          <span>{copy.fields.productProcess} <em>{copy.optionalLabel}</em></span
+          >
+          <select name="productProcess" data-product-process>
+            <option value=""></option>
+            {
+              products.map((product) => (
+                <option value={product.value}>{product.label}</option>
+              ))
+            }
+          </select>
+          <small data-error-for="productProcess"></small>
+        </label>
+      </div>
+
+      <label class="field field--wide">
+        <span>{copy.fields.message} <em>{copy.requiredLabel}</em></span>
+        <textarea
+          name="message"
+          minlength={inquiryLimits.messageMin}
+          maxlength={inquiryLimits.messageMax}
+          rows="7"
+          required></textarea>
+        <small data-error-for="message"></small>
+      </label>
+
+      <label class="field field--wide">
+        <span>{copy.fields.attachments} <em>{copy.optionalLabel}</em></span>
+        <input
+          name="attachments"
+          type="file"
+          multiple
+          accept=".pdf,.jpg,.jpeg,.png,.xlsx,.docx,application/pdf,image/jpeg,image/png,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        />
+        <small class="field-help">{copy.uploadNote}</small>
+        <small data-error-for="attachments"></small>
+      </label>
+
+      <label class="consent-field">
+        <input name="consent" type="checkbox" value="accepted" required />
+        <span>{copy.fields.consent} <em>{copy.requiredLabel}</em></span>
+      </label>
+      <small class="consent-error" data-error-for="consent"></small>
+
+      <div class="form-actions">
+        <button
+          class="button button--primary"
+          type="submit"
+          data-submit-label={copy.submit}
+        >
+          {copy.submit}
+        </button>
+        <button class="button button--ghost" type="reset">{copy.reset}</button>
+      </div>
+
+      <div
+        class="form-status"
+        role="status"
+        aria-live="polite"
+        data-form-status
+      >
+        {copy.states.ready}
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  // @ts-nocheck
+  const forms = document.querySelectorAll("[data-inquiry-form]");
+
+  forms.forEach((formElement) => {
+    const form = formElement;
+    const config = JSON.parse(form.getAttribute("data-inquiry-config") ?? "{}");
+    const status = form.querySelector("[data-form-status]");
+    const submit = form.querySelector("button[type='submit']");
+    const productSelect = form.querySelector("[data-product-process]");
+    const submittedAt = form.querySelector("[data-submitted-at]");
+    const referencePattern = /^PLCH-\d{8}-[A-Z0-9]{8}$/;
+    let submissionInFlight = false;
+    let completedReference = "";
+    const allowedProductValues = new Set(
+      (config.products ?? []).map((item) => item.value),
+    );
+    const params = new URLSearchParams(window.location.search);
+    const requestedProduct = params.get("product") ?? params.get("process");
+
+    if (
+      requestedProduct &&
+      allowedProductValues.has(requestedProduct) &&
+      productSelect
+    ) {
+      productSelect.value = requestedProduct;
+    }
+
+    function setError(name, message) {
+      const target = form.querySelector(`[data-error-for="${name}"]`);
+      const field = form.elements.namedItem(name);
+      if (target) target.textContent = message ?? "";
+      if (field && "setAttribute" in field) {
+        if (message) field.setAttribute("aria-invalid", "true");
+        else field.removeAttribute("aria-invalid");
+      }
+    }
+
+    function clearErrors() {
+      form.querySelectorAll("[data-error-for]").forEach((node) => {
+        node.textContent = "";
+      });
+      form.querySelectorAll("[aria-invalid='true']").forEach((node) => {
+        node.removeAttribute("aria-invalid");
+      });
+    }
+
+    function value(name) {
+      const field = form.elements.namedItem(name);
+      return typeof field?.value === "string" ? field.value.trim() : "";
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function isValidPhone(phone) {
+      return /^[0-9+\-()\s]{0,40}$/.test(phone);
+    }
+
+    function isValidWebsite(website) {
+      if (!website) return true;
+      try {
+        const parsed = new URL(website);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+      } catch {
+        return false;
+      }
+    }
+
+    function validateFiles() {
+      const input = form.elements.namedItem("attachments");
+      const files = input?.files ? Array.from(input.files) : [];
+      const errors = config.copy.errors;
+      const limits = config.limits;
+      const allowedExt = new Set(config.allowedFileExtensions ?? []);
+      const allowedMime = new Set(config.allowedFileMimeTypes ?? []);
+
+      if (files.length > limits.fileMaxCount) return errors.fileCount;
+
+      for (const file of files) {
+        const ext = file.name.includes(".")
+          ? file.name.split(".").pop().toLowerCase()
+          : "";
+        if (!allowedExt.has(ext) || !allowedMime.has(file.type))
+          return errors.fileType;
+        if (file.size > limits.fileMaxBytes) return errors.fileSize;
+      }
+
+      return "";
+    }
+
+    function validate() {
+      clearErrors();
+      const errors = config.copy.errors;
+      const limits = config.limits;
+      const allowedTypes = new Set(config.inquiryTypes ?? []);
+      let firstInvalid = null;
+
+      const requiredFields = ["companyName", "contactName", "email", "country"];
+      requiredFields.forEach((name) => {
+        if (!value(name)) {
+          setError(name, errors.required);
+          firstInvalid ??= form.elements.namedItem(name);
+        }
+      });
+
+      if (value("email") && !isValidEmail(value("email"))) {
+        setError("email", errors.email);
+        firstInvalid ??= form.elements.namedItem("email");
+      }
+
+      if (!isValidPhone(value("phone"))) {
+        setError("phone", errors.phone);
+        firstInvalid ??= form.elements.namedItem("phone");
+      }
+
+      if (!isValidWebsite(value("website"))) {
+        setError("website", errors.website);
+        firstInvalid ??= form.elements.namedItem("website");
+      }
+
+      if (!allowedTypes.has(value("inquiryType"))) {
+        setError("inquiryType", errors.type);
+        firstInvalid ??= form.elements.namedItem("inquiryType");
+      }
+
+      if (
+        value("productProcess") &&
+        !allowedProductValues.has(value("productProcess"))
+      ) {
+        setError("productProcess", errors.required);
+        firstInvalid ??= form.elements.namedItem("productProcess");
+      }
+
+      const message = value("message");
+      if (
+        message.length < limits.messageMin ||
+        message.length > limits.messageMax
+      ) {
+        setError("message", errors.messageLength);
+        firstInvalid ??= form.elements.namedItem("message");
+      }
+
+      const fileError = validateFiles();
+      if (fileError) {
+        setError("attachments", fileError);
+        firstInvalid ??= form.elements.namedItem("attachments");
+      }
+
+      const consent = form.elements.namedItem("consent");
+      if (!consent?.checked) {
+        setError("consent", errors.consent);
+        firstInvalid ??= consent;
+      }
+
+      return firstInvalid;
+    }
+
+    form.addEventListener("reset", () => {
+      window.setTimeout(() => {
+        clearErrors();
+        if (status) status.textContent = config.copy.states.ready;
+      }, 0);
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (submissionInFlight || completedReference) return;
+      const firstInvalid = validate();
+
+      if (firstInvalid) {
+        if (status) status.textContent = config.copy.states.validationFailed;
+        firstInvalid.focus();
+        return;
+      }
+
+      submissionInFlight = true;
+      if (submittedAt) submittedAt.value = new Date().toISOString();
+      if (submit) {
+        submit.disabled = true;
+        submit.textContent = config.copy.submitting;
+      }
+      if (status) status.textContent = config.copy.states.ready;
+
+      try {
+        const response = await fetch("/api/inquiry", {
+          method: "POST",
+          body: new FormData(form),
+        });
+        const data = await response.json().catch(() => ({}));
+
+        if (data?.code === "not_configured" || response.status === 503) {
+          if (status) status.textContent = config.copy.states.notConfigured;
+          return;
+        }
+
+        if (!response.ok || !data?.ok) {
+          if (status) status.textContent = config.copy.states.failed;
+          return;
+        }
+
+        if (
+          response.status === 200 &&
+          data.ok === true &&
+          typeof data.referenceNo === "string" &&
+          referencePattern.test(data.referenceNo)
+        ) {
+          completedReference = data.referenceNo;
+          if (status) {
+            status.textContent = `${config.copy.states.success} ${data.referenceNo}`;
+          }
+          return;
+        }
+
+        if (status) status.textContent = config.copy.states.failed;
+      } catch {
+        if (status) status.textContent = config.copy.errors.network;
+      } finally {
+        submissionInFlight = false;
+        if (submit) {
+          submit.disabled = Boolean(completedReference);
+          submit.textContent =
+            submit.getAttribute("data-submit-label") ?? config.copy.submit;
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .inquiry-section {
+    background: var(--color-light);
+    padding-block: var(--space-8);
+  }
+
+  .inquiry-layout {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .inquiry-intro,
+  .inquiry-form {
+    background: white;
+    border: var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+  }
+
+  .inquiry-intro {
+    border-left: 6px solid var(--color-blue);
+  }
+
+  .panel-eyebrow {
+    color: var(--color-blue);
+    font-weight: 900;
+    margin: 0 0 var(--space-2);
+  }
+
+  h2 {
+    color: var(--color-navy);
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    line-height: 1.08;
+    margin: 0 0 var(--space-4);
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .inquiry-notice,
+  .form-status {
+    background: var(--color-light);
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--color-navy);
+    margin-top: var(--space-5);
+    padding: var(--space-4);
+  }
+
+  .inquiry-notice {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .form-required-note {
+    color: var(--color-blue);
+    font-weight: 900;
+    margin-bottom: var(--space-4);
+  }
+
+  .form-grid {
+    display: grid;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
+  .field {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .field--wide {
+    margin-bottom: var(--space-4);
+  }
+
+  .field span,
+  .consent-field span {
+    color: var(--color-navy);
+    font-weight: 900;
+  }
+
+  em {
+    color: var(--color-blue);
+    font-style: normal;
+    font-weight: 900;
+    margin-left: var(--space-1);
+  }
+
+  input,
+  select,
+  textarea {
+    background: white;
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font: inherit;
+    min-height: 48px;
+    padding: 0.8rem 0.9rem;
+    width: 100%;
+  }
+
+  textarea {
+    min-height: 170px;
+    resize: vertical;
+  }
+
+  input[aria-invalid="true"],
+  select[aria-invalid="true"],
+  textarea[aria-invalid="true"] {
+    border-color: var(--color-blue);
+    box-shadow: var(--focus-ring);
+  }
+
+  small {
+    color: var(--color-blue);
+    font-weight: 800;
+    min-height: 1.25rem;
+  }
+
+  .field-help {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .consent-field {
+    align-items: start;
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: auto 1fr;
+    margin-top: var(--space-2);
+  }
+
+  .consent-field input {
+    height: 22px;
+    margin-top: 0.2rem;
+    min-height: 22px;
+    width: 22px;
+  }
+
+  .consent-error {
+    display: block;
+    margin-top: var(--space-2);
+  }
+
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  button[disabled] {
+    cursor: progress;
+    opacity: 0.72;
+  }
+
+  @media (min-width: 48rem) {
+    .form-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .inquiry-layout {
+      align-items: start;
+      grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+    }
+  }
+</style>

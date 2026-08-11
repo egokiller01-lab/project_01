@@ -1,0 +1,76 @@
+---
+import { navigation } from "../data/navigation";
+import { homeContent } from "../data/home";
+import type { Locale } from "../types";
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const footerNavLabel = {
+  ko: "하단 메뉴",
+  en: "Footer navigation",
+  vi: "Điều hướng cuối trang",
+}[locale];
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <strong>PLACHEM VINA</strong>
+      <p>{homeContent[locale].footerNote}</p>
+    </div>
+    <nav aria-label={footerNavLabel}>
+      {navigation[locale].map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href={`/${locale}/contact/`}
+        >{
+          locale === "ko"
+            ? "기술문의"
+            : locale === "en"
+              ? "Technical Inquiry"
+              : "Liên hệ kỹ thuật"
+        }</a
+      >
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: white;
+    border-top: var(--border);
+    padding-block: var(--space-6);
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  strong {
+    color: var(--color-navy);
+  }
+
+  p {
+    margin: var(--space-2) 0 0;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  nav a {
+    min-height: 44px;
+    text-decoration: none;
+  }
+
+  @media (min-width: 48rem) {
+    .footer-grid {
+      align-items: start;
+      grid-template-columns: 1fr auto;
+    }
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+type Props = {
+  items: string[];
+};
+
+const { items } = Astro.props;
+---
+
+<div class="quality-panel">
+  {
+    items.map((item) => (
+      <div class="quality-item">
+        <span aria-hidden="true" />
+        <p>{item}</p>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .quality-panel {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .quality-item {
+    align-items: start;
+    background: white;
+    border: var(--border);
+    border-radius: var(--radius-md);
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-4);
+  }
+
+  span {
+    background: var(--color-blue);
+    border-radius: 999px;
+    display: block;
+    height: 0.75rem;
+    margin-top: 0.45rem;
+    width: 0.75rem;
+  }
+
+  p {
+    margin: 0;
+  }
+</style>

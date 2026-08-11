@@ -1,0 +1,997 @@
+---
+import BlogCard from "./BlogCard.astro";
+import CTAPanel from "./CTAPanel.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { localizedPath } from "../data/navigation";
+import {
+  companyFacts,
+  getStaticPage,
+  pageLabels,
+  verifiedBlogLinks,
+  type StaticPageKey,
+} from "../data/pages";
+import { processLabels, productSlugs, products } from "../data/products";
+import type { Locale } from "../types";
+
+type Props = {
+  locale: Locale;
+  pageKey: StaticPageKey;
+};
+
+const { locale, pageKey } = Astro.props;
+const page = getStaticPage(locale, pageKey);
+const productDetails = products[locale];
+const blogs = verifiedBlogLinks[locale];
+const locales: Locale[] = ["ko", "en", "vi"];
+const alternatePaths = Object.fromEntries(
+  locales.map((targetLocale) => [
+    targetLocale,
+    localizedPath(targetLocale, pageKey),
+  ]),
+) as Record<Locale, string>;
+const processMap = Object.fromEntries(
+  productSlugs.map((slug) => [slug, processLabels[locale][slug]]),
+);
+const ui = {
+  ko: {
+    established: "설립",
+    base: "Bắc Ninh 제조 기반",
+    founded: "PLACHEM VINA 설립",
+    processLabel: "적용 공정",
+    scopeLabel: "취급 품목·공정",
+    diagnosticTitle: "진단 프로세스",
+    diagnosticLead:
+      "문의 내용은 공정 정보부터 재확인 단계까지 순서대로 정리해 원인축을 좁힙니다.",
+    analysisTitle: "분석 항목",
+    analysisItems: "pH · 금속농도 · 온도 · 교반 · 여과",
+    qualityNoteTitle: "기록과 추적",
+    qualityNote:
+      "원료 입고와 제조, 검사, 출하 확인 정보를 LOT 흐름으로 연결하고 요청 문서 제공 절차를 분리해 관리합니다.",
+    docIndexTitle: "공정별 자료 분류",
+    docItems: [
+      "전처리",
+      "도금",
+      "무전해도금",
+      "아노다이징",
+      "화성피막",
+      "품질문서",
+    ],
+    magazineTop: "TECHNICAL",
+    magazineTitle: "DOCUMENTS",
+    magazineNote: "공정관리 · 불량 원인 · 품질문서",
+    contactAsideTitle: "기술지원 상담",
+    contactAsideText: "제품군과 공정 조건을 기준으로 안내합니다.",
+    processPrefix: "문의 분야: ",
+    selectedText:
+      "제품군, 현재 공정, 사용 중인 약품, 증상 또는 요청 자료를 기준으로 상담 범위를 확인할 수 있습니다.",
+    supportSteps: [
+      "공정 정보 확인",
+      "도금욕 분석",
+      "불량 원인 분류",
+      "조건 조정",
+      "재확인 및 안정화",
+    ],
+    qualitySteps: [
+      "원료 입고 확인",
+      "제조관리",
+      "공정검사",
+      "완제품검사",
+      "출하 확인",
+      "LOT 추적",
+      "TDS·SDS·COA 제공",
+    ],
+    heroQualitySteps: ["원료", "제조", "검사", "출하", "LOT"],
+  },
+  en: {
+    established: "Established",
+    base: "Bắc Ninh manufacturing base",
+    founded: "PLACHEM VINA established",
+    processLabel: "Applied process",
+    scopeLabel: "Handled items & processes",
+    diagnosticTitle: "Diagnostic process",
+    diagnosticLead:
+      "Inquiry details are organized from process information through follow-up checks to narrow down possible cause groups.",
+    analysisTitle: "Analysis items",
+    analysisItems:
+      "pH · Metal concentration · Temperature · Agitation · Filtration",
+    qualityNoteTitle: "Records and traceability",
+    qualityNote:
+      "Raw material receiving, manufacturing, inspection, and shipment check records are connected with LOT flow, while document procedures are managed separately.",
+    docIndexTitle: "Resources by process",
+    docItems: [
+      "Pretreatment",
+      "Plating",
+      "Electroless plating",
+      "Anodizing",
+      "Conversion coating",
+      "Quality documents",
+    ],
+    magazineTop: "TECHNICAL",
+    magazineTitle: "DOCUMENTS",
+    magazineNote: "Process control · Defect causes · Quality documents",
+    contactAsideTitle: "Technical consultation",
+    contactAsideText:
+      "Guidance is based on product group and process conditions.",
+    processPrefix: "Inquiry area: ",
+    selectedText:
+      "Product group, current process, chemical in use, symptoms, or requested documents help define the consultation scope.",
+    supportSteps: [
+      "Process information check",
+      "Plating bath analysis",
+      "Defect cause classification",
+      "Condition adjustment",
+      "Follow-up and stabilization",
+    ],
+    qualitySteps: [
+      "Raw material receiving check",
+      "Manufacturing control",
+      "In-process inspection",
+      "Final inspection",
+      "Shipment check",
+      "LOT tracking",
+      "TDS/SDS/COA provision",
+    ],
+    heroQualitySteps: [
+      "Raw material",
+      "Manufacturing",
+      "Inspection",
+      "Shipment",
+      "LOT",
+    ],
+  },
+  vi: {
+    established: "Thành lập",
+    base: "Cơ sở sản xuất Bắc Ninh",
+    founded: "PLACHEM VINA thành lập",
+    processLabel: "Công đoạn áp dụng",
+    scopeLabel: "Hạng mục & công đoạn",
+    diagnosticTitle: "Quy trình chẩn đoán",
+    diagnosticLead:
+      "Thông tin tư vấn được sắp xếp từ dữ liệu công đoạn đến bước kiểm tra lại để thu hẹp nhóm nguyên nhân.",
+    analysisTitle: "Hạng mục phân tích",
+    analysisItems: "pH · Nồng độ kim loại · Nhiệt độ · Khuấy · Lọc",
+    qualityNoteTitle: "Hồ sơ và truy xuất",
+    qualityNote:
+      "Thông tin tiếp nhận nguyên liệu, sản xuất, kiểm tra và xuất hàng được kết nối theo dòng LOT, còn quy trình tài liệu được quản lý riêng.",
+    docIndexTitle: "Tài liệu theo công đoạn",
+    docItems: [
+      "Tiền xử lý",
+      "Mạ",
+      "Mạ không điện",
+      "Anod nhôm",
+      "Lớp phủ chuyển hóa",
+      "Tài liệu chất lượng",
+    ],
+    magazineTop: "TÀI LIỆU",
+    magazineTitle: "KỸ THUẬT",
+    magazineNote: "Quản lý công đoạn · Nguyên nhân lỗi · Tài liệu chất lượng",
+    contactAsideTitle: "Tư vấn kỹ thuật",
+    contactAsideText:
+      "Hướng dẫn dựa trên nhóm sản phẩm và điều kiện công đoạn.",
+    processPrefix: "Lĩnh vực tư vấn: ",
+    selectedText:
+      "Nhóm sản phẩm, công đoạn hiện tại, hóa chất đang sử dụng, triệu chứng hoặc tài liệu yêu cầu giúp xác định phạm vi tư vấn.",
+    supportSteps: [
+      "Kiểm tra thông tin công đoạn",
+      "Phân tích bể mạ",
+      "Phân loại nguyên nhân lỗi",
+      "Điều chỉnh điều kiện",
+      "Kiểm tra lại và ổn định",
+    ],
+    qualitySteps: [
+      "Kiểm tra nhập nguyên liệu",
+      "Quản lý sản xuất",
+      "Kiểm tra trong công đoạn",
+      "Kiểm tra thành phẩm",
+      "Kiểm tra xuất hàng",
+      "Truy xuất LOT",
+      "Cung cấp TDS/SDS/COA",
+    ],
+    heroQualitySteps: [
+      "Nguyên liệu",
+      "Sản xuất",
+      "Kiểm tra",
+      "Xuất hàng",
+      "LOT",
+    ],
+  },
+}[locale];
+const heroProductIndexes = productDetails.map((product, index) => ({
+  number: String(index + 1).padStart(2, "0"),
+  title: product.title,
+}));
+const contactLabels = {
+  ko: {
+    vietnam: "베트남 법인",
+    korea: "한국 연락처",
+    phone: "전화",
+    manufacturingBase: "제조 기반",
+    address: "주소",
+  },
+  en: {
+    vietnam: "Vietnam office",
+    korea: "Korea contact",
+    phone: "Phone",
+    manufacturingBase: "Manufacturing base",
+    address: "Address",
+  },
+  vi: {
+    vietnam: "Văn phòng Việt Nam",
+    korea: "Liên hệ Hàn Quốc",
+    phone: "Điện thoại",
+    manufacturingBase: "Cơ sở sản xuất",
+    address: "Địa chỉ",
+  },
+}[locale];
+const manufacturingBaseValue =
+  locale === "vi" ? companyFacts.regionVi : companyFacts.site;
+---
+
+<BaseLayout
+  locale={locale}
+  title={page.seoTitle}
+  description={page.description}
+  pageKey={page.key}
+  alternatePaths={alternatePaths}
+>
+  <section class={`sub-hero sub-hero--${pageKey}`}>
+    <div class="container sub-hero__inner">
+      <div>
+        <p class="eyebrow">{page.eyebrow}</p>
+        <h1>{page.title}</h1>
+        <p class="lead">{page.lead}</p>
+      </div>
+      {
+        pageKey === "about" && (
+          <div class="hero-aside hero-aside--year" aria-label={ui.established}>
+            <span>2016</span>
+            <strong>{ui.established}</strong>
+            <p>{ui.base}</p>
+          </div>
+        )
+      }
+      {
+        pageKey === "solutions" && (
+          <div class="hero-aside hero-aside--index" aria-label={page.title}>
+            {heroProductIndexes.map((item) => (
+              <span>
+                <b>{item.number}</b>
+                {item.title}
+              </span>
+            ))}
+          </div>
+        )
+      }
+      {
+        pageKey === "technology" && (
+          <ol
+            class="hero-aside hero-aside--steps"
+            aria-label={ui.diagnosticTitle}
+          >
+            {ui.supportSteps.map((step, index) => (
+              <li>
+                <b>{String(index + 1).padStart(2, "0")}</b>
+                {step}
+              </li>
+            ))}
+          </ol>
+        )
+      }
+      {
+        pageKey === "quality" && (
+          <ol class="hero-aside hero-aside--quality" aria-label={page.title}>
+            {ui.heroQualitySteps.map((step) => (
+              <li>{step}</li>
+            ))}
+          </ol>
+        )
+      }
+      {
+        pageKey === "knowledge" && (
+          <div class="hero-aside hero-aside--magazine" aria-label={page.title}>
+            <span>{ui.magazineTop}</span>
+            <strong>{ui.magazineTitle}</strong>
+            <p>{ui.magazineNote}</p>
+          </div>
+        )
+      }
+      {
+        pageKey === "contact" && (
+          <div
+            class="hero-aside hero-aside--contact"
+            aria-label={contactLabels.phone}
+          >
+            <span>+84 222 395 2060</span>
+            <strong>{ui.contactAsideTitle}</strong>
+            <p>{ui.contactAsideText}</p>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  {
+    pageKey === "about" && (
+      <section class="section about-layout">
+        <div class="container about-grid">
+          <div class="timeline">
+            <span>2016</span>
+            <strong>
+              {locale === "ko"
+                ? companyFacts.establishedKo
+                : locale === "en"
+                  ? companyFacts.establishedEn
+                  : companyFacts.establishedVi}
+            </strong>
+            <p>{ui.founded}</p>
+          </div>
+          <div class="about-copy">
+            {page.sections.map((section) => (
+              <article>
+                <h2>{section.title}</h2>
+                <p>{section.summary}</p>
+                {section.items && (
+                  <ul>
+                    {section.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    pageKey === "solutions" && (
+      <section class="section section--white">
+        <div class="container product-process">
+          {productDetails.map((product, index) => (
+            <article class="product-row" id={product.slug}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h2>{product.title}</h2>
+                <p>{product.summary}</p>
+              </div>
+              <dl>
+                <div>
+                  <dt>{ui.processLabel}</dt>
+                  <dd>{product.processes.join(" · ")}</dd>
+                </div>
+                <div>
+                  <dt>{ui.scopeLabel}</dt>
+                  <dd>{product.materials.join(" · ")}</dd>
+                </div>
+              </dl>
+              <a href={`/${locale}/contact/?process=${product.slug}`}>
+                {product.cta}
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    pageKey === "technology" && (
+      <section class="section diagnostic-section">
+        <div class="container diagnostic-grid">
+          <div>
+            <h2>{ui.diagnosticTitle}</h2>
+            <p>{ui.diagnosticLead}</p>
+          </div>
+          <ol class="diagnostic-flow">
+            {ui.supportSteps.map((step, index) => (
+              <li>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{step}</strong>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="container analysis-band">
+          <h2>{ui.analysisTitle}</h2>
+          <p>{ui.analysisItems}</p>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    pageKey === "quality" && (
+      <section class="section section--white">
+        <div class="container quality-map">
+          <ol>
+            {ui.qualitySteps.map((step, index) => (
+              <li>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{step}</strong>
+              </li>
+            ))}
+          </ol>
+          <div class="quality-note">
+            <h2>{ui.qualityNoteTitle}</h2>
+            <p>{ui.qualityNote}</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    pageKey === "knowledge" && (
+      <section class="section knowledge-page">
+        <div class="container knowledge-grid">
+          <div class="doc-index">
+            <h2>{ui.docIndexTitle}</h2>
+            <ul>
+              {ui.docItems.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="magazine-list">
+            {blogs.map((blog) => (
+              <BlogCard {...blog} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    pageKey === "contact" && (
+      <section class="section section--white contact-page">
+        <div class="container contact-layout">
+          <article
+            class="selected-process"
+            data-process-map={JSON.stringify(processMap)}
+            data-process-prefix={ui.processPrefix}
+            hidden
+          >
+            <span data-selected-process />
+            <p>{ui.selectedText}</p>
+          </article>
+          <article class="contact-card">
+            <h2>{contactLabels.vietnam}</h2>
+            <dl>
+              <div>
+                <dt>{contactLabels.manufacturingBase}</dt>
+                <dd>{manufacturingBaseValue}</dd>
+              </div>
+              <div>
+                <dt>{contactLabels.phone}</dt>
+                <dd>
+                  <a
+                    href={`tel:${companyFacts.vietnamPhone.replaceAll(" ", "")}`}
+                  >
+                    {companyFacts.vietnamPhone}
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </article>
+          <article class="contact-card">
+            <h2>{contactLabels.korea}</h2>
+            <dl>
+              <div>
+                <dt>{contactLabels.address}</dt>
+                <dd>
+                  {locale === "ko"
+                    ? companyFacts.koreaAddressKo
+                    : locale === "en"
+                      ? companyFacts.koreaAddressEn
+                      : companyFacts.koreaAddressVi}
+                </dd>
+              </div>
+              <div>
+                <dt>{contactLabels.phone}</dt>
+                <dd>
+                  <a href={`tel:${companyFacts.koreaPhone}`}>
+                    {companyFacts.koreaPhone}
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section final-cta">
+    <div class="container">
+      <CTAPanel
+        title={pageLabels[locale].contact.title}
+        summary={page.description}
+        ctas={[
+          { label: page.ctaLabel, href: page.ctaHref, variant: "primary" },
+          {
+            label:
+              locale === "ko"
+                ? "제품·솔루션"
+                : locale === "en"
+                  ? "Products & Solutions"
+                  : "Sản phẩm & giải pháp",
+            href: localizedPath(locale, "solutions"),
+            variant: "secondary",
+          },
+        ]}
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const selected = document.querySelector("[data-selected-process]");
+  const source = document.querySelector("[data-process-map]");
+
+  if (selected && source) {
+    const params = new URLSearchParams(window.location.search);
+    const process = params.get("process") || "";
+    const map = JSON.parse(source.getAttribute("data-process-map") || "{}");
+    const prefix = source.getAttribute("data-process-prefix") || "";
+
+    if (map[process]) {
+      selected.textContent = prefix + map[process];
+      source.removeAttribute("hidden");
+    }
+  }
+</script>
+
+<style>
+  .sub-hero {
+    background:
+      linear-gradient(rgba(192, 199, 209, 0.13) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(192, 199, 209, 0.13) 1px, transparent 1px),
+      #ffffff;
+    background-size: 36px 36px;
+    border-bottom: var(--border);
+    min-height: clamp(260px, 28vw, 340px);
+    padding-block: var(--space-7);
+  }
+
+  .sub-hero--about {
+    background: linear-gradient(
+      90deg,
+      #ffffff 0 64%,
+      var(--color-light) 64% 100%
+    );
+  }
+
+  .sub-hero--solutions,
+  .sub-hero--quality {
+    background-color: var(--color-light);
+  }
+
+  .sub-hero--technology {
+    background:
+      linear-gradient(rgba(11, 31, 58, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11, 31, 58, 0.035) 1px, transparent 1px),
+      #ffffff;
+    background-size: 28px 28px;
+  }
+
+  .sub-hero--knowledge {
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 52%, #eef2f7 52%);
+  }
+
+  .sub-hero--contact {
+    min-height: clamp(190px, 22vw, 255px);
+    padding-block: clamp(2rem, 4vw, 3.2rem);
+  }
+
+  .sub-hero__inner {
+    align-items: center;
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .eyebrow {
+    color: var(--color-blue);
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin: 0 0 var(--space-3);
+  }
+
+  h1 {
+    color: var(--color-navy);
+    font-size: clamp(2.1rem, 4.2vw, 3.5rem);
+    line-height: 1.08;
+    margin: 0;
+    max-width: 18ch;
+  }
+
+  .sub-hero--contact h1 {
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    max-width: 22ch;
+  }
+
+  .lead {
+    font-size: clamp(1.02rem, 1.8vw, 1.22rem);
+    margin: var(--space-4) 0 0;
+    max-width: 58ch;
+  }
+
+  .sub-hero__mark {
+    border-left: 4px solid var(--color-blue);
+    color: var(--color-navy);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 900;
+    padding: var(--space-4);
+  }
+
+  .hero-aside {
+    color: var(--color-navy);
+  }
+
+  .hero-aside--year {
+    border-left: 6px solid var(--color-blue);
+    padding-left: var(--space-5);
+  }
+
+  .hero-aside--year span {
+    color: var(--color-navy);
+    display: block;
+    font-size: clamp(4rem, 9vw, 7rem);
+    font-weight: 900;
+    line-height: 0.9;
+  }
+
+  .hero-aside--year strong,
+  .hero-aside--magazine strong,
+  .hero-aside--contact strong {
+    display: block;
+    font-size: clamp(1.25rem, 2.4vw, 1.9rem);
+    margin-top: var(--space-2);
+  }
+
+  .hero-aside--year p,
+  .hero-aside--magazine p,
+  .hero-aside--contact p {
+    margin-top: var(--space-2);
+  }
+
+  .hero-aside--index {
+    display: grid;
+    gap: var(--space-2);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-aside--index span {
+    align-items: center;
+    background: white;
+    border: var(--border);
+    display: grid;
+    gap: var(--space-2);
+    grid-template-columns: 2.3rem 1fr;
+    min-height: 48px;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .hero-aside b {
+    color: var(--color-blue);
+    font-size: 0.82rem;
+    font-weight: 900;
+  }
+
+  .hero-aside--steps,
+  .hero-aside--quality {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-aside--steps {
+    background: white;
+    border: var(--border);
+  }
+
+  .hero-aside--steps li {
+    align-items: center;
+    border: 0;
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 2.6rem 1fr;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .hero-aside--steps li + li {
+    border-top: var(--border);
+  }
+
+  .hero-aside--quality {
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .hero-aside--quality li {
+    align-items: center;
+    aspect-ratio: 1;
+    background: white;
+    border: var(--border);
+    display: flex;
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+    justify-content: center;
+    padding: var(--space-2);
+    text-align: center;
+  }
+
+  .hero-aside--quality li + li {
+    border-left: 0;
+  }
+
+  .hero-aside--magazine {
+    background: var(--color-navy);
+    color: white;
+    padding: var(--space-5);
+  }
+
+  .hero-aside--magazine span {
+    color: var(--color-steel);
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-aside--contact {
+    background: white;
+    border: var(--border);
+    padding: var(--space-4);
+  }
+
+  .hero-aside--contact span {
+    color: var(--color-blue);
+    display: block;
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    font-weight: 900;
+  }
+
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    color: var(--color-navy);
+    font-size: clamp(1.55rem, 3vw, 2.45rem);
+    line-height: 1.15;
+  }
+
+  .about-grid,
+  .diagnostic-grid,
+  .knowledge-grid,
+  .contact-layout {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .timeline {
+    background: var(--color-navy);
+    color: white;
+    min-height: 260px;
+    padding: var(--space-6);
+  }
+
+  .timeline span {
+    color: var(--color-steel);
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .timeline strong {
+    display: block;
+    font-size: 1.3rem;
+    margin-top: var(--space-4);
+  }
+
+  .about-copy {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .about-copy article,
+  .selected-process,
+  .contact-card,
+  .quality-note,
+  .doc-index {
+    background: white;
+    border: var(--border);
+    padding: var(--space-5);
+  }
+
+  .about-copy h2,
+  .contact-card h2,
+  .quality-note h2,
+  .doc-index h2 {
+    font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+    margin-bottom: var(--space-3);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+  }
+
+  li {
+    border: var(--border);
+    font-weight: 800;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .product-process {
+    display: grid;
+  }
+
+  .product-row {
+    align-items: start;
+    border-top: var(--border);
+    display: grid;
+    gap: var(--space-4);
+    padding-block: var(--space-5);
+  }
+
+  .product-row:last-child {
+    border-bottom: var(--border);
+  }
+
+  .product-row > span,
+  .diagnostic-flow span,
+  .quality-map span {
+    color: var(--color-blue);
+    font-weight: 900;
+  }
+
+  .product-row p {
+    margin-top: var(--space-2);
+  }
+
+  dl {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  dt {
+    color: var(--color-blue);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+  }
+
+  dd {
+    margin: var(--space-1) 0 0;
+  }
+
+  .product-row a {
+    background: var(--color-navy);
+    color: white;
+    font-weight: 900;
+    justify-self: start;
+    min-height: 44px;
+    padding: var(--space-3) var(--space-4);
+    text-decoration: none;
+  }
+
+  .diagnostic-flow,
+  .quality-map ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .diagnostic-flow {
+    background: white;
+    border: var(--border);
+  }
+
+  .diagnostic-flow li {
+    border: 0;
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 3rem 1fr;
+    padding: var(--space-4);
+  }
+
+  .diagnostic-flow li + li {
+    border-top: var(--border);
+  }
+
+  .analysis-band {
+    background: var(--color-navy);
+    color: white;
+    margin-top: var(--space-6);
+    padding-block: var(--space-5);
+  }
+
+  .analysis-band h2 {
+    color: white;
+  }
+
+  .analysis-band p {
+    color: var(--color-steel);
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    font-weight: 900;
+    margin-top: var(--space-2);
+  }
+
+  .quality-map ol {
+    display: grid;
+  }
+
+  .quality-map li {
+    background: white;
+    border: var(--border);
+    display: grid;
+    gap: var(--space-2);
+    min-height: 100px;
+  }
+
+  .quality-note {
+    margin-top: var(--space-5);
+  }
+
+  .magazine-list {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .selected-process span {
+    color: var(--color-blue);
+    display: block;
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-weight: 900;
+    margin-bottom: var(--space-3);
+  }
+
+  .contact-card a {
+    color: var(--color-blue);
+    font-weight: 900;
+  }
+
+  .contact-page {
+    padding-block: clamp(2.2rem, 4vw, 3.2rem);
+  }
+
+  @media (min-width: 48rem) {
+    .sub-hero__inner,
+    .about-grid,
+    .diagnostic-grid,
+    .knowledge-grid {
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr);
+    }
+
+    .product-row {
+      grid-template-columns: 4rem 1.1fr 1fr auto;
+    }
+
+    .quality-map ol {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+
+    .quality-map li + li {
+      border-left: 0;
+    }
+
+    .contact-layout {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .selected-process {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

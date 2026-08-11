@@ -1,0 +1,414 @@
+---
+import BlogCard from "./BlogCard.astro";
+import CTAPanel from "./CTAPanel.astro";
+import Hero from "./Hero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { homeContent } from "../data/home";
+import type { Locale } from "../types";
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const ctaCopy = {
+  ko: {
+    title: "공정 조건을 기준으로 상담하세요",
+    summary:
+      "제품군, 공정, 현재 증상, 요청 자료를 기준으로 기술지원 상담 범위를 확인할 수 있습니다.",
+  },
+  en: {
+    title: "Consult by process condition",
+    summary:
+      "Product group, current process, symptoms, and requested documents help define the technical support scope.",
+  },
+  vi: {
+    title: "Tư vấn theo điều kiện công đoạn",
+    summary:
+      "Nhóm sản phẩm, công đoạn hiện tại, triệu chứng và tài liệu yêu cầu giúp xác định phạm vi hỗ trợ kỹ thuật.",
+  },
+}[locale];
+const heroVisualLabel = {
+  ko: "정밀 금속 표면을 표현한 비주얼",
+  en: "Visual representation of a precision metallic surface",
+  vi: "Hình ảnh mô phỏng bề mặt kim loại chính xác",
+}[locale];
+const heroMetricsLabel = {
+  ko: "PLACHEM VINA 요약",
+  en: "PLACHEM VINA summary",
+  vi: "Tóm tắt PLACHEM VINA",
+}[locale];
+const sectionKickers = {
+  ko: {
+    value: "PROCESS VALUE",
+    support: "FIELD SUPPORT",
+    knowledge: "TECHNICAL NOTE",
+  },
+  en: {
+    value: "PROCESS VALUE",
+    support: "FIELD SUPPORT",
+    knowledge: "TECHNICAL NOTE",
+  },
+  vi: {
+    value: "GIÁ TRỊ CÔNG ĐOẠN",
+    support: "HỖ TRỢ HIỆN TRƯỜNG",
+    knowledge: "GHI CHÚ KỸ THUẬT",
+  },
+}[locale];
+---
+
+<BaseLayout
+  locale={locale}
+  title={content.seoTitle}
+  description={content.description}
+  pageKey="home"
+>
+  <Hero
+    eyebrow={content.heroEyebrow}
+    titleLines={content.heroTitleLines}
+    accent={content.heroAccent}
+    summary={content.heroSummary}
+    ctas={content.primaryCtas}
+    strengths={content.strengths}
+    visualLabel={heroVisualLabel}
+    metricsLabel={heroMetricsLabel}
+  />
+
+  <section class="section value-section">
+    <div class="container">
+      <div class="section-kicker">{sectionKickers.value}</div>
+      <div class="split-heading">
+        <h2>{content.sectionLabels.value}</h2>
+        <p>{content.sectionSummaries.value}</p>
+      </div>
+      <ol class="value-flow">
+        {
+          content.valueFlow.map((step, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{step}</strong>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--white compact-solutions">
+    <div class="container">
+      <div class="split-heading">
+        <h2>{content.sectionLabels.solutions}</h2>
+        <p>{content.sectionSummaries.solutions}</p>
+      </div>
+      <div class="solution-lines">
+        {
+          content.featuredProducts.map((product, index) => (
+            <a href={product.href} class="solution-line">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{product.title}</h3>
+                <p>{product.summary}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section support-section">
+    <div class="container support-layout">
+      <div>
+        <div class="section-kicker">{sectionKickers.support}</div>
+        <h2>{content.sectionLabels.technology}</h2>
+        <p>{content.sectionSummaries.technology}</p>
+      </div>
+      <ol class="support-process">
+        {
+          content.supportFlow.map((item, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.summary}</p>
+                <small>{item.checks.join(" · ")}</small>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--white quality-section">
+    <div class="container">
+      <div class="split-heading">
+        <h2>{content.sectionLabels.quality}</h2>
+        <p>{content.sectionSummaries.quality}</p>
+      </div>
+      <ol class="quality-flow">
+        {
+          content.qualitySteps.map((step, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{step}</strong>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section knowledge-section">
+    <div class="container knowledge-layout">
+      <div>
+        <div class="section-kicker">{sectionKickers.knowledge}</div>
+        <h2>{content.sectionLabels.knowledge}</h2>
+        <p>{content.sectionSummaries.knowledge}</p>
+      </div>
+      {
+        content.blogs.length > 0 && (
+          <div class="blog-list">
+            {content.blogs.map((blog) => (
+              <BlogCard {...blog} />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container">
+      <CTAPanel
+        title={ctaCopy.title}
+        summary={ctaCopy.summary}
+        ctas={content.primaryCtas}
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section {
+    padding-block: clamp(3.4rem, 6vw, 4.9rem);
+  }
+
+  :global(html[lang="en"]) .section,
+  :global(html[lang="vi"]) .section {
+    padding-block: clamp(2.45rem, 4.4vw, 3.55rem);
+  }
+
+  .section-kicker {
+    color: var(--color-blue);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-3);
+  }
+
+  .split-heading {
+    display: grid;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  :global(html[lang="en"]) .split-heading,
+  :global(html[lang="vi"]) .split-heading {
+    margin-bottom: var(--space-5);
+  }
+
+  h2 {
+    color: var(--color-navy);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.12;
+    margin: 0;
+  }
+
+  :global(html[lang="en"]) h2,
+  :global(html[lang="vi"]) h2 {
+    font-size: clamp(1.85rem, 3.4vw, 2.85rem);
+  }
+
+  h3,
+  p {
+    margin: 0;
+  }
+
+  .split-heading p,
+  .support-layout > div > p,
+  .knowledge-layout > div > p {
+    font-size: 1.04rem;
+    max-width: 45rem;
+  }
+
+  .value-flow,
+  .quality-flow,
+  .support-process {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .value-flow {
+    border-block: var(--border);
+    display: grid;
+  }
+
+  .value-flow li {
+    align-items: center;
+    border-bottom: var(--border);
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 4rem 1fr;
+    min-height: 92px;
+  }
+
+  .value-flow li:last-child {
+    border-bottom: 0;
+  }
+
+  .value-flow span,
+  .quality-flow span,
+  .support-process span,
+  .solution-line > span {
+    color: var(--color-blue);
+    font-size: 0.82rem;
+    font-weight: 900;
+  }
+
+  .value-flow strong,
+  .quality-flow strong {
+    color: var(--color-navy);
+    font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  }
+
+  .solution-lines {
+    border-top: var(--border);
+    display: grid;
+  }
+
+  .solution-line {
+    align-items: start;
+    border-bottom: var(--border);
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: 3.5rem 1fr;
+    padding-block: var(--space-5);
+    text-decoration: none;
+  }
+
+  .solution-line h3 {
+    color: var(--color-navy);
+    font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+    margin-bottom: var(--space-2);
+  }
+
+  .support-layout,
+  .knowledge-layout {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .support-process {
+    background: white;
+    border: var(--border);
+  }
+
+  .support-process li {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: 3rem 1fr;
+    padding: var(--space-5);
+  }
+
+  .support-process li + li {
+    border-top: var(--border);
+  }
+
+  .support-process h3 {
+    color: var(--color-navy);
+    font-size: 1.18rem;
+    margin-bottom: var(--space-2);
+  }
+
+  .support-process small {
+    color: var(--color-blue);
+    display: block;
+    font-weight: 900;
+    margin-top: var(--space-3);
+  }
+
+  .quality-flow {
+    align-items: stretch;
+    display: grid;
+    gap: 0;
+  }
+
+  .quality-flow li {
+    background: white;
+    border: var(--border);
+    display: grid;
+    gap: var(--space-2);
+    min-height: 110px;
+    padding: var(--space-4);
+  }
+
+  :global(html[lang="en"]) .quality-flow li,
+  :global(html[lang="vi"]) .quality-flow li {
+    min-height: 96px;
+    padding: var(--space-3);
+  }
+
+  .blog-list {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 48rem) {
+    .split-heading,
+    .support-layout,
+    .knowledge-layout {
+      grid-template-columns: 0.78fr 1fr;
+    }
+
+    .value-flow {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .value-flow li {
+      border-bottom: 0;
+      border-right: var(--border);
+      grid-template-columns: 1fr;
+      padding: var(--space-5);
+    }
+
+    .value-flow li:last-child {
+      border-right: 0;
+    }
+
+    .quality-flow {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .quality-flow li + li {
+      border-left: 0;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .solution-lines {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .solution-line:nth-child(odd) {
+      border-right: var(--border);
+      padding-right: var(--space-5);
+    }
+
+    .solution-line:nth-child(even) {
+      padding-left: var(--space-5);
+    }
+  }
+</style>
