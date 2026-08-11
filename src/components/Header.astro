@@ -124,14 +124,15 @@ function isActive(href: string) {
 
 <style>
   .site-header {
-    background: white;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 0.45rem 1.6rem rgba(11, 31, 58, 0.05);
     position: sticky;
     top: 0;
     z-index: var(--z-header);
   }
 
   .top-strip {
-    background: var(--color-navy);
+    background: linear-gradient(90deg, #07172d, #102f55);
     color: white;
     font-size: 0.72rem;
     font-weight: 800;
@@ -146,7 +147,8 @@ function isActive(href: string) {
   }
 
   .main-header {
-    background: white;
+    backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.94);
     border-bottom: var(--border);
   }
 
@@ -170,6 +172,19 @@ function isActive(href: string) {
     text-decoration: none;
   }
 
+  .brand::before {
+    background: linear-gradient(
+      90deg,
+      #1c72d6 0 42%,
+      #91bce8 42% 64%,
+      #d9e4ef 64%
+    );
+    content: "";
+    height: 3px;
+    margin-bottom: 0.48rem;
+    width: 2.8rem;
+  }
+
   .brand span {
     font-size: 1.18rem;
     letter-spacing: 0.02em;
@@ -191,7 +206,27 @@ function isActive(href: string) {
   .desktop-nav a {
     font-size: 0.96rem;
     font-weight: 800;
+    padding-block: 1.85rem;
+    position: relative;
     text-decoration: none;
+  }
+
+  .desktop-nav a::after {
+    background: #1c72d6;
+    bottom: 0;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+    width: 100%;
+  }
+
+  .desktop-nav a:hover::after,
+  .desktop-nav a.is-active::after {
+    transform: scaleX(1);
   }
 
   .desktop-nav a.is-active {
@@ -208,8 +243,8 @@ function isActive(href: string) {
   .header-cta {
     display: none;
     align-items: center;
-    background: var(--color-navy);
-    border: 1px solid var(--color-navy);
+    background: #0b2342;
+    border: 1px solid #0b2342;
     border-radius: var(--radius-sm);
     color: white;
     gap: var(--space-2);
@@ -217,6 +252,14 @@ function isActive(href: string) {
     min-height: 44px;
     padding: 0.7rem 1rem;
     text-decoration: none;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .header-cta:hover {
+    background: #1c72d6;
+    transform: translateY(-1px);
   }
 
   .menu-button {

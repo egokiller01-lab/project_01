@@ -22,10 +22,10 @@ const ui = {
     decadeLead:
       "2016년 박닌에서 시작한 PLACHEM VINA는 한국의 처방 기술을 베트남 현장 조건에 맞게 연결해 왔습니다. 약품 공급에서 끝나지 않고 공정 확인, 품질 문제 진단, 관리 조건 검토까지 함께합니다.",
     decadeFacts: [
-      "2016년 설립",
-      "박닌 현지 제조·공급",
-      "한국 포뮬레이션 기술",
-      "현장 중심 기술지원",
+      { value: "2016.04.13", label: "베트남 법인 설립" },
+      { value: "BẮC NINH", label: "박닌 생산·공급 기반" },
+      { value: "MANUFACTURING", label: "표면처리약품 제조·유통" },
+      { value: "FIELD SUPPORT", label: "공정 조건 중심 기술지원" },
     ],
     decadeImageAlt: "표면처리 약품 제조 공정을 설명하는 콘셉트 이미지",
     conceptNote: "공정 이해를 위한 콘셉트 이미지",
@@ -70,6 +70,32 @@ const ui = {
       ["두께편차", "전류·교반·치구"],
     ],
     supportCta: "불량 상담 준비사항 보기",
+    supportModelKicker: "TECHNICAL SUPPORT MODEL",
+    supportModelTitle: "문의 접수부터 적용결과 확인까지 연결합니다",
+    supportModelLead:
+      "현장 문제는 한 가지 수치만으로 판단하기 어렵습니다. 소재와 공정 이력부터 확인하고, 영향 가능성이 큰 원인축을 우선순위로 정리합니다.",
+    supportModelSteps: [
+      {
+        title: "공정정보 접수",
+        body: "소재, 공정 순서, 사용 약품, 불량 사진, 발생 시점과 최근 변경사항을 확인합니다.",
+        meta: "INPUT · 사진 / 조건 / 이력",
+      },
+      {
+        title: "원인축 구분",
+        body: "전처리, 도금욕, 설비, 수세, 후처리 중 품질에 영향을 줄 가능성이 큰 항목을 구분합니다.",
+        meta: "CHECK · 공정별 우선순위",
+      },
+      {
+        title: "개선조건 검토",
+        body: "필요한 분석 항목과 약품 보충, 조건 조정, 소규모 시험 적용 순서를 검토합니다.",
+        meta: "ACTION · 보충 / 조정 / 시험",
+      },
+      {
+        title: "적용결과 확인",
+        body: "시험 적용 결과와 재발 여부를 확인해 다음 관리항목과 점검 주기를 정리합니다.",
+        meta: "FOLLOW-UP · 결과 재확인",
+      },
+    ],
     capabilityKicker: "MANUFACTURING · R&D · QUALITY",
     capabilityTitle: "현지 제조와 분석·품질관리를 한 체계로",
     capabilityLead:
@@ -89,12 +115,38 @@ const ui = {
       },
       {
         title: "품질관리",
-        body: "원료부터 출하까지 검사와 기록을 연결해 제품 LOT의 추적성을 관리합니다.",
+        body: "원료부터 출하까지 검사 결과와 제조 LOT별 기록을 연결해 관리합니다.",
         image: "/assets/plachem-quality.webp",
         alt: "금속 시편을 분석하는 품질관리 콘셉트 이미지",
       },
     ],
     qualityKicker: "QUALITY FLOW",
+    applicationKicker: "APPLICATION SCOPE",
+    applicationTitle: "소재와 공정에 맞춰 적용 범위를 검토합니다",
+    applicationLead:
+      "제품명을 먼저 정하기보다 소재, 요구 피막, 외관, 내식성과 후속 공정을 기준으로 필요한 처리 단계를 함께 살펴봅니다.",
+    applications: [
+      {
+        title: "정밀 금속부품",
+        body: "철강, 동합금, 스테인리스 소재의 세정·활성화와 전기도금 공정을 검토합니다.",
+        tags: ["철강", "동합금", "스테인리스"],
+      },
+      {
+        title: "알루미늄 부품",
+        body: "합금별 에칭·디스머트부터 아노다이징, 염색, 봉공까지 공정 흐름을 확인합니다.",
+        tags: ["에칭", "아노다이징", "봉공"],
+      },
+      {
+        title: "전자·기능성 도금",
+        body: "니켈, 구리, 주석, 은, 금 등 요구 기능에 따른 도금욕과 후처리 조건을 검토합니다.",
+        tags: ["Ni", "Cu", "Sn · Ag · Au"],
+      },
+      {
+        title: "표면처리 라인 운영",
+        body: "기초화학약품, 여과장비, 도금욕 관리 항목을 생산라인 조건과 함께 확인합니다.",
+        tags: ["기초약품", "여과", "욕 관리"],
+      },
+    ],
     knowledgeKicker: "KNOWLEDGE BASE",
     knowledgeTitle: "현장에서 바로 쓰는 표면처리 기술지식",
     knowledgeLead:
@@ -120,10 +172,10 @@ const ui = {
     decadeLead:
       "Since starting in Bac Ninh in 2016, PLACHEM VINA has connected Korean formulation expertise with operating conditions in Vietnam. Our support extends from chemical supply to process review, defect diagnosis, and control-condition checks.",
     decadeFacts: [
-      "Established in 2016",
-      "Bac Ninh manufacturing & supply",
-      "Korean formulation expertise",
-      "Field-focused technical support",
+      { value: "2016.04.13", label: "Vietnam entity established" },
+      { value: "BẮC NINH", label: "Local production & supply base" },
+      { value: "MANUFACTURING", label: "Surface-treatment chemicals" },
+      { value: "FIELD SUPPORT", label: "Process-condition support" },
     ],
     decadeImageAlt:
       "Concept image explaining surface treatment chemical manufacturing",
@@ -169,6 +221,32 @@ const ui = {
       ["Thickness variation", "Current · agitation · fixtures"],
     ],
     supportCta: "Prepare for defect consultation",
+    supportModelKicker: "TECHNICAL SUPPORT MODEL",
+    supportModelTitle: "Connected support from first inquiry to result review",
+    supportModelLead:
+      "A field issue is rarely explained by one number. We begin with the substrate and process history, then prioritize the factors most likely to influence quality.",
+    supportModelSteps: [
+      {
+        title: "Process intake",
+        body: "We collect the substrate, process sequence, chemicals in use, defect photos, timing, and recent changes.",
+        meta: "INPUT · Photos / conditions / history",
+      },
+      {
+        title: "Cause grouping",
+        body: "Pretreatment, bath chemistry, equipment, rinsing, and post-treatment are separated into priority cause groups.",
+        meta: "CHECK · Process priorities",
+      },
+      {
+        title: "Condition review",
+        body: "We review the analysis items, chemical additions, condition adjustments, and sequence for a controlled trial.",
+        meta: "ACTION · Add / adjust / test",
+      },
+      {
+        title: "Result follow-up",
+        body: "Trial results and recurrence are reviewed to organize the next control items and inspection interval.",
+        meta: "FOLLOW-UP · Verify results",
+      },
+    ],
     capabilityKicker: "MANUFACTURING · R&D · QUALITY",
     capabilityTitle: "Local manufacturing, analysis, and quality in one system",
     capabilityLead:
@@ -188,12 +266,38 @@ const ui = {
       },
       {
         title: "Quality management",
-        body: "Inspection and records from raw materials to shipment support product LOT traceability.",
+        body: "Inspection results and manufacturing records are managed by LOT from raw materials through shipment.",
         image: "/assets/plachem-quality.webp",
         alt: "Concept image of quality analysis using metal samples",
       },
     ],
     qualityKicker: "QUALITY FLOW",
+    applicationKicker: "APPLICATION SCOPE",
+    applicationTitle: "Application scope reviewed by material and process",
+    applicationLead:
+      "Instead of selecting a product name first, we consider the substrate, required finish, appearance, corrosion resistance, and downstream process.",
+    applications: [
+      {
+        title: "Precision metal parts",
+        body: "Cleaning, activation, and electroplating are reviewed for steel, copper alloys, and stainless steel.",
+        tags: ["Steel", "Copper alloy", "Stainless steel"],
+      },
+      {
+        title: "Aluminum components",
+        body: "The process flow is reviewed from alloy-specific etching and desmut through anodizing, dyeing, and sealing.",
+        tags: ["Etching", "Anodizing", "Sealing"],
+      },
+      {
+        title: "Electronic & functional plating",
+        body: "Plating-bath and post-treatment conditions are reviewed for nickel, copper, tin, silver, gold, and other functions.",
+        tags: ["Ni", "Cu", "Sn · Ag · Au"],
+      },
+      {
+        title: "Surface-treatment line operation",
+        body: "Basic chemicals, filtration equipment, and bath-control items are considered together with line conditions.",
+        tags: ["Basic chemicals", "Filtration", "Bath control"],
+      },
+    ],
     knowledgeKicker: "KNOWLEDGE BASE",
     knowledgeTitle: "Practical surface treatment knowledge for the field",
     knowledgeLead:
@@ -219,10 +323,10 @@ const ui = {
     decadeLead:
       "Từ khi bắt đầu tại Bắc Ninh năm 2016, PLACHEM VINA đã kết nối chuyên môn công thức của Hàn Quốc với điều kiện vận hành tại Việt Nam. Chúng tôi hỗ trợ từ cung ứng hóa chất đến xem xét công đoạn, chẩn đoán lỗi và kiểm tra điều kiện quản lý.",
     decadeFacts: [
-      "Thành lập năm 2016",
-      "Sản xuất & cung ứng tại Bắc Ninh",
-      "Chuyên môn công thức Hàn Quốc",
-      "Hỗ trợ kỹ thuật tại hiện trường",
+      { value: "2016.04.13", label: "Thành lập pháp nhân tại Việt Nam" },
+      { value: "BẮC NINH", label: "Cơ sở sản xuất & cung ứng" },
+      { value: "MANUFACTURING", label: "Hóa chất xử lý bề mặt" },
+      { value: "FIELD SUPPORT", label: "Hỗ trợ theo điều kiện công đoạn" },
     ],
     decadeImageAlt: "Hình ảnh minh họa sản xuất hóa chất xử lý bề mặt",
     conceptNote: "Hình ảnh minh họa quy trình",
@@ -267,6 +371,32 @@ const ui = {
       ["Lệch chiều dày", "Dòng điện · khuấy · gá"],
     ],
     supportCta: "Chuẩn bị thông tin tư vấn lỗi",
+    supportModelKicker: "MÔ HÌNH HỖ TRỢ KỸ THUẬT",
+    supportModelTitle: "Kết nối từ tiếp nhận yêu cầu đến xác nhận kết quả",
+    supportModelLead:
+      "Vấn đề tại hiện trường hiếm khi được giải thích chỉ bằng một chỉ số. Chúng tôi bắt đầu từ vật liệu và lịch sử công đoạn, sau đó ưu tiên các yếu tố có khả năng ảnh hưởng lớn đến chất lượng.",
+    supportModelSteps: [
+      {
+        title: "Tiếp nhận thông tin",
+        body: "Thu thập vật liệu, trình tự công đoạn, hóa chất đang dùng, hình ảnh lỗi, thời điểm và các thay đổi gần đây.",
+        meta: "INPUT · Hình ảnh / điều kiện / lịch sử",
+      },
+      {
+        title: "Phân nhóm nguyên nhân",
+        body: "Phân tách tiền xử lý, bể mạ, thiết bị, rửa và hậu xử lý theo mức độ ưu tiên cần kiểm tra.",
+        meta: "CHECK · Ưu tiên theo công đoạn",
+      },
+      {
+        title: "Xem xét điều kiện",
+        body: "Xem xét hạng mục phân tích, bổ sung hóa chất, điều chỉnh điều kiện và thứ tự thử nghiệm có kiểm soát.",
+        meta: "ACTION · Bổ sung / điều chỉnh / thử",
+      },
+      {
+        title: "Theo dõi kết quả",
+        body: "Xác nhận kết quả thử nghiệm và khả năng tái phát để sắp xếp hạng mục quản lý và chu kỳ kiểm tra tiếp theo.",
+        meta: "FOLLOW-UP · Xác nhận kết quả",
+      },
+    ],
     capabilityKicker: "SẢN XUẤT · R&D · CHẤT LƯỢNG",
     capabilityTitle:
       "Kết nối sản xuất tại chỗ, phân tích và quản lý chất lượng",
@@ -287,12 +417,38 @@ const ui = {
       },
       {
         title: "Quản lý chất lượng",
-        body: "Kiểm tra và hồ sơ từ nguyên liệu đến xuất hàng hỗ trợ truy xuất LOT sản phẩm.",
+        body: "Kết quả kiểm tra và hồ sơ sản xuất được quản lý theo từng LOT từ nguyên liệu đến xuất hàng.",
         image: "/assets/plachem-quality.webp",
         alt: "Hình ảnh minh họa phân tích chất lượng bằng mẫu kim loại",
       },
     ],
     qualityKicker: "DÒNG QUẢN LÝ CHẤT LƯỢNG",
+    applicationKicker: "PHẠM VI ỨNG DỤNG",
+    applicationTitle: "Xem xét phạm vi áp dụng theo vật liệu và công đoạn",
+    applicationLead:
+      "Thay vì chọn tên sản phẩm trước, chúng tôi xem xét vật liệu, lớp phủ yêu cầu, ngoại quan, độ bền ăn mòn và công đoạn tiếp theo.",
+    applications: [
+      {
+        title: "Chi tiết kim loại chính xác",
+        body: "Xem xét làm sạch, hoạt hóa và mạ điện cho thép, hợp kim đồng và thép không gỉ.",
+        tags: ["Thép", "Hợp kim đồng", "Thép không gỉ"],
+      },
+      {
+        title: "Chi tiết nhôm",
+        body: "Xem xét dòng công đoạn từ etching và desmut theo hợp kim đến anod, nhuộm màu và bịt lỗ.",
+        tags: ["Etching", "Anod", "Bịt lỗ"],
+      },
+      {
+        title: "Mạ điện tử & chức năng",
+        body: "Xem xét điều kiện bể mạ và hậu xử lý cho niken, đồng, thiếc, bạc, vàng và các chức năng khác.",
+        tags: ["Ni", "Cu", "Sn · Ag · Au"],
+      },
+      {
+        title: "Vận hành dây chuyền xử lý bề mặt",
+        body: "Xem xét hóa chất cơ bản, thiết bị lọc và hạng mục quản lý bể cùng điều kiện dây chuyền.",
+        tags: ["Hóa chất cơ bản", "Lọc", "Quản lý bể"],
+      },
+    ],
     knowledgeKicker: "CƠ SỞ TRI THỨC",
     knowledgeTitle: "Kiến thức xử lý bề mặt thực tế cho hiện trường",
     knowledgeLead:
@@ -352,7 +508,10 @@ const ui = {
               <li>
                 <>
                   <span>{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{item}</strong>
+                  <div>
+                    <strong>{item.value}</strong>
+                    <small>{item.label}</small>
+                  </div>
                 </>
               </li>
             ))
@@ -442,7 +601,8 @@ const ui = {
         <p class="kicker">{ui.supportKicker}</p><h2>{ui.supportTitle}</h2><p>
           {ui.supportLead}
         </p><a class="text-link" href={`/${locale}/technology/`}
-          >{ui.supportCta}<span aria-hidden="true">→</span></a>
+          >{ui.supportCta}<span aria-hidden="true">→</span></a
+        >
       </div>
       <div class="defect-grid">
         {
@@ -457,6 +617,33 @@ const ui = {
           ))
         }
       </div>
+    </div>
+  </section>
+
+  <section class="section support-model-section">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="kicker">{ui.supportModelKicker}</p>
+          <h2>{ui.supportModelTitle}</h2>
+        </div>
+        <p>{ui.supportModelLead}</p>
+      </header>
+      <ol class="support-model-grid">
+        {
+          ui.supportModelSteps.map((step, index) => (
+            <li>
+              <div class="step-heading">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true">→</span>
+              </div>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+              <small>{step.meta}</small>
+            </li>
+          ))
+        }
+      </ol>
     </div>
   </section>
 
@@ -514,6 +701,34 @@ const ui = {
     </div>
   </section>
 
+  <section class="section application-section">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="kicker">{ui.applicationKicker}</p>
+          <h2>{ui.applicationTitle}</h2>
+        </div>
+        <p>{ui.applicationLead}</p>
+      </header>
+      <div class="application-grid">
+        {
+          ui.applications.map((item, index) => (
+            <article>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+              <ul>
+                {item.tags.map((tag) => (
+                  <li>{tag}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <section class="section knowledge-section">
     <div class="container knowledge-layout">
       <div class="knowledge-intro">
@@ -523,7 +738,8 @@ const ui = {
         </p><ul>{ui.knowledgeTopics.map((topic) => <li>{topic}</li>)}</ul><a
           class="text-link"
           href={`/${locale}/knowledge/`}
-          >{ui.moreKnowledge}<span aria-hidden="true">→</span></a>
+          >{ui.moreKnowledge}<span aria-hidden="true">→</span></a
+        >
       </div>
       <div class="blog-list">
         {content.blogs.map((blog) => <BlogCard {...blog} />)}
@@ -626,6 +842,19 @@ const ui = {
   }
   .fact-grid li:last-child {
     border-bottom: var(--border);
+  }
+  .fact-grid li > div {
+    display: grid;
+    gap: 0.15rem;
+  }
+  .fact-grid strong {
+    color: var(--color-navy);
+    font-size: 0.9rem;
+    letter-spacing: 0.035em;
+  }
+  .fact-grid small {
+    color: #6a7686;
+    font-size: 0.76rem;
   }
   .fact-grid span,
   .solution-card > span,
@@ -788,6 +1017,70 @@ const ui = {
     font-size: 0.88rem;
   }
 
+  .support-model-section {
+    background:
+      radial-gradient(
+        circle at 90% 0%,
+        rgba(62, 145, 239, 0.17),
+        transparent 32%
+      ),
+      var(--color-navy);
+    color: white;
+  }
+  .support-model-section h2 {
+    color: white;
+  }
+  .support-model-section .section-head > p {
+    color: #bdc9d7;
+  }
+  .support-model-grid {
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    display: grid;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .support-model-grid > li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+    padding: clamp(1.35rem, 2.4vw, 2rem);
+  }
+  .step-heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+  .step-heading span:first-child {
+    color: #6db0ff;
+    font-size: 0.74rem;
+    font-weight: 900;
+  }
+  .step-heading span:last-child {
+    color: rgba(255, 255, 255, 0.44);
+    font-size: 1.3rem;
+  }
+  .support-model-grid h3 {
+    color: white;
+    font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+    margin: 2.6rem 0 1rem;
+  }
+  .support-model-grid p {
+    color: #bdc9d7;
+    line-height: 1.75;
+  }
+  .support-model-grid small {
+    color: #7cbcff;
+    font-size: 0.69rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    margin-top: auto;
+    padding-top: 2rem;
+  }
+
   .capability-section {
     background: white;
   }
@@ -835,6 +1128,64 @@ const ui = {
     border-bottom: var(--border);
   }
 
+  .application-section {
+    background: #edf3f9;
+  }
+  .application-grid {
+    display: grid;
+    gap: var(--space-3);
+  }
+  .application-grid article {
+    background: white;
+    border: 1px solid #d8e1eb;
+    box-shadow: 0 0.7rem 1.6rem rgba(11, 31, 58, 0.05);
+    min-height: 290px;
+    padding: var(--space-5);
+    position: relative;
+  }
+  .application-grid article::after {
+    background: #1c72d6;
+    bottom: -1px;
+    content: "";
+    height: 3px;
+    left: -1px;
+    position: absolute;
+    transition: width 0.25s ease;
+    width: 3.25rem;
+  }
+  .application-grid article:hover::after {
+    width: calc(100% + 2px);
+  }
+  .application-grid article > span {
+    color: #1c72d6;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+  .application-grid h3 {
+    color: var(--color-navy);
+    font-size: 1.35rem;
+    margin: 2.1rem 0 0.8rem;
+  }
+  .application-grid p {
+    color: #5d6979;
+    line-height: 1.72;
+  }
+  .application-grid ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    list-style: none;
+    margin: 1.4rem 0 0;
+    padding: 0;
+  }
+  .application-grid li {
+    background: #edf3f9;
+    color: #31506f;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.35rem 0.55rem;
+  }
+
   .knowledge-section {
     background: linear-gradient(135deg, #f7f9fc 0 55%, #edf3f8 55%);
   }
@@ -879,6 +1230,10 @@ const ui = {
     .solution-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+    .support-model-grid,
+    .application-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     .defect-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -907,6 +1262,10 @@ const ui = {
     .solution-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
+    .support-model-grid,
+    .application-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
     .focus-layout {
       grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
     }
@@ -929,8 +1288,30 @@ const ui = {
     .focus-layout figure {
       min-height: 320px;
     }
+    .solution-grid {
+      border: 0;
+      display: flex;
+      margin-inline: -20px;
+      overflow-x: auto;
+      padding: 0 20px 1rem;
+      scroll-padding-inline: 20px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+    }
     .solution-card {
-      min-height: 220px;
+      border: var(--border);
+      flex: 0 0 min(82vw, 330px);
+      min-height: 250px;
+      scroll-snap-align: start;
+    }
+    .solution-card + .solution-card {
+      border-left: 0;
+    }
+    .support-model-grid {
+      grid-template-columns: 1fr;
+    }
+    .support-model-grid > li {
+      min-height: 280px;
     }
     .capability-grid article {
       display: grid;

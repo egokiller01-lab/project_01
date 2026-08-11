@@ -59,6 +59,7 @@ const {
         height="945"
         fetchpriority="high"
       />
+      <span class="visual-location">BAC NINH · VIETNAM</span>
       <figcaption>
         <span>PRECISION SURFACE</span>
         <strong>CHEMISTRY</strong>
@@ -92,6 +93,18 @@ const {
     border-bottom: var(--border);
     overflow: hidden;
     padding-block: clamp(3.5rem, 7vw, 6.5rem) var(--space-6);
+    position: relative;
+  }
+
+  .hero::after {
+    border: 1px solid rgba(28, 114, 214, 0.1);
+    border-radius: 50%;
+    content: "";
+    height: 34rem;
+    left: -18rem;
+    position: absolute;
+    top: -15rem;
+    width: 34rem;
   }
 
   .hero-grid {
@@ -99,6 +112,8 @@ const {
     display: grid;
     gap: clamp(2.5rem, 5vw, 5rem);
     min-height: 560px;
+    position: relative;
+    z-index: 1;
   }
 
   .eyebrow {
@@ -170,6 +185,16 @@ const {
     position: relative;
   }
 
+  .hero-visual::before {
+    border-left: 3px solid #4b9cf1;
+    content: "";
+    height: 34%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+  }
+
   .hero-visual::after {
     background: linear-gradient(
       180deg,
@@ -187,6 +212,19 @@ const {
     object-fit: cover;
     position: absolute;
     width: 100%;
+  }
+
+  .visual-location {
+    background: rgba(7, 23, 45, 0.78);
+    color: white;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    padding: 0.7rem 0.8rem;
+    position: absolute;
+    right: var(--space-4);
+    top: var(--space-4);
+    z-index: 2;
   }
 
   figcaption {
@@ -214,6 +252,8 @@ const {
     gap: var(--space-3);
     margin-top: var(--space-6);
     padding-top: var(--space-5);
+    position: relative;
+    z-index: 1;
   }
 
   .hero-metrics div {
