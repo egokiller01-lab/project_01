@@ -13,6 +13,11 @@ const contactLabels = {
   en: "Contact",
   vi: "Liên hệ",
 }[locale];
+const navLabel = {
+  ko: "모바일 메뉴",
+  en: "Mobile navigation",
+  vi: "Điều hướng di động",
+}[locale];
 
 function isActive(href: string) {
   return (
@@ -26,7 +31,7 @@ function isActive(href: string) {
 <nav
   class="mobile-nav"
   id="mobile-nav"
-  aria-label="Mobile navigation"
+  aria-label={navLabel}
   data-mobile-nav
   data-open="false"
   inert

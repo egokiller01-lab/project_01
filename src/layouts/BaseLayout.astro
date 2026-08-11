@@ -47,6 +47,11 @@ const organizationJson = {
     addressCountry: "VN",
   },
 };
+const skipLabel = {
+  ko: "본문으로 건너뛰기",
+  en: "Skip to content",
+  vi: "Bỏ qua đến nội dung",
+}[locale];
 ---
 
 <!doctype html>
@@ -88,7 +93,7 @@ const organizationJson = {
     />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">{skipLabel}</a>
     <Header
       locale={locale}
       currentPath={currentPath}

@@ -9,9 +9,14 @@ type Props = {
 
 const { locale, alternatePaths } = Astro.props;
 const locales: Locale[] = ["ko", "en", "vi"];
+const label = {
+  ko: "언어 선택",
+  en: "Language selector",
+  vi: "Chọn ngôn ngữ",
+}[locale];
 ---
 
-<div class="language-switcher" aria-label="Language selector">
+<div class="language-switcher" aria-label={label}>
   {
     locales.map((targetLocale) => (
       <a

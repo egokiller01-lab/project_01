@@ -8,9 +8,20 @@ type Props = {
   summary: string;
   ctas: CTA[];
   strengths: string[];
+  visualLabel: string;
+  metricsLabel: string;
 };
 
-const { eyebrow, titleLines, accent, summary, ctas, strengths } = Astro.props;
+const {
+  eyebrow,
+  titleLines,
+  accent,
+  summary,
+  ctas,
+  strengths,
+  visualLabel,
+  metricsLabel,
+} = Astro.props;
 ---
 
 <section class="hero">
@@ -35,7 +46,7 @@ const { eyebrow, titleLines, accent, summary, ctas, strengths } = Astro.props;
         }
       </div>
     </div>
-    <div class="metal-visual" aria-label="정밀 금속 표면을 표현한 비주얼">
+    <div class="metal-visual" aria-label={visualLabel}>
       <div class="metal-plate">
         <span></span>
         <span></span>
@@ -47,7 +58,7 @@ const { eyebrow, titleLines, accent, summary, ctas, strengths } = Astro.props;
       </div>
     </div>
   </div>
-  <div class="container hero-metrics" aria-label="PLACHEM VINA summary">
+  <div class="container hero-metrics" aria-label={metricsLabel}>
     {strengths.map((item) => <span>{item}</span>)}
   </div>
 </section>
@@ -71,6 +82,17 @@ const { eyebrow, titleLines, accent, summary, ctas, strengths } = Astro.props;
     display: grid;
     gap: var(--space-7);
     min-height: 560px;
+  }
+
+  :global(html[lang="en"]) .hero,
+  :global(html[lang="vi"]) .hero {
+    padding-block: clamp(3rem, 6vw, 4.6rem) var(--space-5);
+  }
+
+  :global(html[lang="en"]) .hero-grid,
+  :global(html[lang="vi"]) .hero-grid {
+    gap: var(--space-6);
+    min-height: 480px;
   }
 
   .eyebrow {

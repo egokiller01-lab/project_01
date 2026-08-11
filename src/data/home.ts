@@ -55,6 +55,43 @@ const koBlogs: BlogLink[] = [
   },
 ];
 
+const enBlogs: BlogLink[] = [
+  {
+    title:
+      "Why plating difficulty differs for iron, copper, aluminum, and stainless steel",
+    href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
+    meta: "Materials & plating",
+  },
+  {
+    title: "Why a change in plating bath agitation can change defect behavior",
+    href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
+    meta: "Electroplating",
+  },
+  {
+    title: "Why activated carbon is not always the first answer to pitting",
+    href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
+    meta: "Defect analysis",
+  },
+];
+
+const viBlogs: BlogLink[] = [
+  {
+    title: "Vì sao độ khó khi mạ khác nhau giữa sắt, đồng, nhôm và inox",
+    href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
+    meta: "Vật liệu & mạ",
+  },
+  {
+    title: "Vì sao thay đổi khuấy bể mạ có thể làm thay đổi lỗi chất lượng",
+    href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
+    meta: "Mạ điện",
+  },
+  {
+    title: "Vì sao không nên xử lý rỗ mạ bằng than hoạt tính ngay từ đầu",
+    href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
+    meta: "Phân tích lỗi",
+  },
+];
+
 const koHome: HomeContent = {
   seoTitle: "PLACHEM VINA | 표면처리 공정 안정화를 위한 화학 솔루션",
   description:
@@ -159,46 +196,247 @@ const koHome: HomeContent = {
   footerNote: "표면처리약품 제조와 현장 기술지원을 제공합니다.",
 };
 
-function fallbackHome(locale: Exclude<Locale, "ko">): HomeContent {
-  const isEn = locale === "en";
+const enHome: HomeContent = {
+  seoTitle: "PLACHEM VINA | Precision Surface Treatment Chemical Solutions",
+  description:
+    "PLACHEM VINA provides surface treatment chemical solutions through Korean formulation expertise combined with Vietnam-based manufacturing and technical support.",
+  heroEyebrow: "KOREAN FORMULATION · VIETNAM MANUFACTURING",
+  heroTitleLines: ["Stability for", "surface treatment"],
+  heroAccent: "chemical solutions",
+  heroSummary:
+    "Korean formulation expertise combined with Vietnam-based manufacturing and technical support helps improve quality at customer production sites.",
+  primaryCtas: [
+    {
+      label: "View products & solutions",
+      href: "/en/solutions/",
+      variant: "primary",
+    },
+    { label: "Technical inquiry", href: "/en/contact/", variant: "secondary" },
+  ],
+  strengths: [
+    "2016 / Established",
+    "BẮC NINH / Local manufacturing & supply",
+    "FIELD SUPPORT / Technical support",
+  ],
+  valueFlow: [
+    "Process analysis",
+    "Suitable chemical supply",
+    "On-site stabilization support",
+  ],
+  sectionLabels: {
+    value: "The value PLACHEM provides",
+    solutions: "Four core solution areas",
+    technology: "Field technical support",
+    quality: "Manufacturing and quality flow",
+    knowledge: "Technical resources and inquiry",
+  },
+  sectionSummaries: {
+    value:
+      "Before supplying chemicals, we review product group, process, defect symptoms, and management records to connect supply with process stabilization.",
+    solutions:
+      "Core solution areas are organized around the main process axes of surface treatment. The full product groups are available on the Products & Solutions page.",
+    technology:
+      "From plating bath analysis to condition adjustment and follow-up checks, issues are narrowed down step by step.",
+    quality:
+      "Supply reliability is managed through a manufacturing and inspection flow from raw material check to LOT management.",
+    knowledge:
+      "Technical resources for process control, defect causes, chemical safety, and quality management are organized by process.",
+  },
+  featuredProducts: [
+    {
+      slug: "pretreatment",
+      title: "Pretreatment",
+      summary:
+        "Degreasing, cleaning, pickling, etching, and desmut prepare the starting condition for surface treatment.",
+      href: "/en/solutions/",
+      materials: "Pretreatment",
+      process: "Degreasing · Cleaning · Pickling",
+      cta: "Products & Solutions",
+    },
+    {
+      slug: "plating",
+      title: "Plating & electroless plating",
+      summary:
+        "Electroplating and electroless plating are reviewed together with plating bath management and defect causes.",
+      href: "/en/solutions/",
+      materials: "Electroplating · Electroless plating",
+      process: "Nickel · Copper · Tin · Electroless nickel",
+      cta: "Products & Solutions",
+    },
+    {
+      slug: "anodizing-conversion",
+      title: "Anodizing & conversion coating",
+      summary:
+        "Aluminum pretreatment, dyeing, sealing, phosphate, zincate, and chromate processes are connected as one process flow.",
+      href: "/en/solutions/",
+      materials: "Anodizing · Conversion coating",
+      process: "Anodizing · Sealing · Conversion coating",
+      cta: "Products & Solutions",
+    },
+    {
+      slug: "post-treatment",
+      title: "Post-treatment & specialty chemicals",
+      summary:
+        "Anti-tarnish, coating, specialty cleaning, and removers support downstream process stability.",
+      href: "/en/solutions/",
+      materials: "Post-treatment",
+      process: "Anti-tarnish · Coating · Specialty cleaning",
+      cta: "Products & Solutions",
+    },
+  ],
+  supportFlow: [
+    {
+      title: "Plating bath analysis",
+      summary:
+        "pH, metal concentration, temperature, agitation, and filtration are checked as analysis items.",
+      checks: ["pH", "Metal concentration", "Temperature"],
+    },
+    {
+      title: "Defect cause review",
+      summary:
+        "Pitting, adhesion issues, color deviation, white rust, and stains are separated by process stage.",
+      checks: ["Photos", "Timing", "Operating conditions"],
+    },
+    {
+      title: "Condition adjustment and stabilization",
+      summary:
+        "Chemical replenishment, plating bath management, and new process application are connected with follow-up checks.",
+      checks: ["Replenishment", "Plating bath management", "Follow-up"],
+    },
+  ],
+  qualitySteps: [
+    "Raw material check",
+    "Manufacturing",
+    "In-process inspection",
+    "Final inspection",
+    "LOT management",
+  ],
+  blogs: enBlogs,
+  footerNote:
+    "Surface treatment chemicals manufacturing and field technical support.",
+};
 
-  return {
-    ...koHome,
-    seoTitle: isEn
-      ? "PLACHEM VINA | Korean content under review"
-      : "PLACHEM VINA | Nội dung tiếng Hàn đang được duyệt",
-    description: isEn
-      ? "The Korean homepage is being renewed first. This route is preserved until final translation."
-      : "Trang tiếng Hàn đang được làm mới trước. Đường dẫn này được giữ cho đến khi dịch cuối cùng.",
-    heroEyebrow: "KOREAN CONTENT FIRST",
-    heroTitleLines: isEn
-      ? ["Korean renewal", "in progress"]
-      : ["Đang làm mới", "nội dung tiếng Hàn"],
-    heroAccent: isEn ? "Translation pending" : "Chờ dịch",
-    heroSummary: isEn
-      ? "Final EN/VI copy will be prepared after Korean approval."
-      : "Bản dịch EN/VI sẽ thực hiện sau khi tiếng Hàn được duyệt.",
-    primaryCtas: [
-      {
-        label: isEn ? "View Korean page" : "Xem trang tiếng Hàn",
-        href: "/ko/",
-        variant: "primary",
-      },
-      {
-        label: isEn ? "Contact" : "Liên hệ",
-        href: `/${locale}/contact/`,
-        variant: "secondary",
-      },
-    ],
-    blogs: [],
-    footerNote: isEn
-      ? "Multilingual pages are preserved until final translation."
-      : "Trang đa ngôn ngữ được giữ cho đến khi dịch cuối cùng.",
-  };
-}
+const viHome: HomeContent = {
+  seoTitle: "PLACHEM VINA | Giải pháp hóa chất xử lý bề mặt chính xác",
+  description:
+    "PLACHEM VINA cung cấp giải pháp hóa chất xử lý bề mặt dựa trên công nghệ formulation Hàn Quốc, sản xuất tại Việt Nam và hỗ trợ kỹ thuật hiện trường.",
+  heroEyebrow: "KOREAN FORMULATION · VIETNAM MANUFACTURING",
+  heroTitleLines: ["Tạo sự ổn định", "cho công đoạn"],
+  heroAccent: "xử lý bề mặt",
+  heroSummary:
+    "Công nghệ formulation Hàn Quốc kết hợp với sản xuất tại Việt Nam và hỗ trợ kỹ thuật hiện trường giúp nâng cao chất lượng tại dây chuyền sản xuất của khách hàng.",
+  primaryCtas: [
+    {
+      label: "Xem sản phẩm & giải pháp",
+      href: "/vi/solutions/",
+      variant: "primary",
+    },
+    { label: "Tư vấn kỹ thuật", href: "/vi/contact/", variant: "secondary" },
+  ],
+  strengths: [
+    "2016 / Thành lập",
+    "BẮC NINH / Sản xuất & cung ứng tại Việt Nam",
+    "HỖ TRỢ HIỆN TRƯỜNG / Hỗ trợ kỹ thuật",
+  ],
+  valueFlow: [
+    "Phân tích công đoạn",
+    "Cung cấp hóa chất phù hợp",
+    "Hỗ trợ ổn định tại hiện trường",
+  ],
+  sectionLabels: {
+    value: "Giá trị PLACHEM cung cấp",
+    solutions: "Bốn nhóm giải pháp chính",
+    technology: "Hỗ trợ kỹ thuật hiện trường",
+    quality: "Quy trình sản xuất & chất lượng",
+    knowledge: "Tài liệu kỹ thuật và tư vấn",
+  },
+  sectionSummaries: {
+    value:
+      "Trước khi cung cấp hóa chất, chúng tôi xem xét nhóm sản phẩm, công đoạn, triệu chứng lỗi và hồ sơ quản lý để kết nối cung ứng với ổn định công đoạn.",
+    solutions:
+      "Các giải pháp chính được sắp xếp theo trục công đoạn của xử lý bề mặt. Toàn bộ nhóm sản phẩm được trình bày tại trang Sản phẩm & giải pháp.",
+    technology:
+      "Từ phân tích bể mạ đến điều chỉnh điều kiện và kiểm tra lại, nguyên nhân vấn đề được thu hẹp theo từng bước.",
+    quality:
+      "Độ tin cậy cung ứng được quản lý qua quy trình sản xuất và kiểm tra từ nguyên liệu đến quản lý LOT.",
+    knowledge:
+      "Tài liệu về quản lý công đoạn, nguyên nhân lỗi, an toàn hóa chất và quản lý chất lượng được hướng dẫn theo từng công đoạn.",
+  },
+  featuredProducts: [
+    {
+      slug: "pretreatment",
+      title: "Tiền xử lý",
+      summary:
+        "Tẩy dầu, làm sạch, tẩy axit, ăn mòn và khử smut giúp chuẩn bị điều kiện ban đầu cho xử lý bề mặt.",
+      href: "/vi/solutions/",
+      materials: "Tiền xử lý",
+      process: "Tẩy dầu · Làm sạch · Tẩy axit",
+      cta: "Sản phẩm & giải pháp",
+    },
+    {
+      slug: "plating",
+      title: "Mạ điện & mạ không điện",
+      summary:
+        "Mạ điện và mạ không điện được xem xét cùng với quản lý bể mạ và nguyên nhân lỗi.",
+      href: "/vi/solutions/",
+      materials: "Mạ điện · Mạ không điện",
+      process: "Niken · Đồng · Thiếc · Niken hóa học",
+      cta: "Sản phẩm & giải pháp",
+    },
+    {
+      slug: "anodizing-conversion",
+      title: "Anod nhôm & lớp phủ chuyển hóa",
+      summary:
+        "Tiền xử lý nhôm, nhuộm màu, bịt kín, phốt phát, zincate và cromat được kết nối theo dòng công đoạn.",
+      href: "/vi/solutions/",
+      materials: "Anod nhôm · Lớp phủ chuyển hóa",
+      process: "Anod hóa · Bịt kín · Lớp phủ chuyển hóa",
+      cta: "Sản phẩm & giải pháp",
+    },
+    {
+      slug: "post-treatment",
+      title: "Hậu xử lý & hóa chất chuyên dụng",
+      summary:
+        "Chống biến màu, phủ bảo vệ, làm sạch chuyên dụng và chất tẩy loại bỏ hỗ trợ ổn định công đoạn sau.",
+      href: "/vi/solutions/",
+      materials: "Hậu xử lý",
+      process: "Chống biến màu · Phủ bảo vệ · Làm sạch chuyên dụng",
+      cta: "Sản phẩm & giải pháp",
+    },
+  ],
+  supportFlow: [
+    {
+      title: "Phân tích bể mạ",
+      summary:
+        "pH, nồng độ kim loại, nhiệt độ, khuấy và lọc được kiểm tra như các hạng mục phân tích.",
+      checks: ["pH", "Nồng độ kim loại", "Nhiệt độ"],
+    },
+    {
+      title: "Rà soát nguyên nhân lỗi",
+      summary:
+        "Lỗi rỗ, bám dính, sai lệch màu, gỉ trắng và vết bẩn được phân loại theo từng giai đoạn công đoạn.",
+      checks: ["Ảnh", "Thời điểm phát sinh", "Điều kiện vận hành"],
+    },
+    {
+      title: "Điều chỉnh điều kiện và ổn định",
+      summary:
+        "Bổ sung hóa chất, quản lý bể mạ và áp dụng công đoạn mới được kết nối với bước kiểm tra lại.",
+      checks: ["Bổ sung", "Quản lý bể mạ", "Kiểm tra lại"],
+    },
+  ],
+  qualitySteps: [
+    "Kiểm tra nguyên liệu",
+    "Sản xuất",
+    "Kiểm tra trong công đoạn",
+    "Kiểm tra thành phẩm",
+    "Quản lý LOT",
+  ],
+  blogs: viBlogs,
+  footerNote: "Sản xuất hóa chất xử lý bề mặt và hỗ trợ kỹ thuật hiện trường.",
+};
 
 export const homeContent: Record<Locale, HomeContent> = {
   ko: koHome,
-  en: fallbackHome("en"),
-  vi: fallbackHome("vi"),
+  en: enHome,
+  vi: viHome,
 };

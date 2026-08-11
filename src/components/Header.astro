@@ -17,6 +17,23 @@ const contactLabels = {
   en: "Contact",
   vi: "Liên hệ",
 }[locale];
+const a11yLabels = {
+  ko: {
+    home: "PLACHEM VINA 홈",
+    nav: "주요 메뉴",
+    menu: "메뉴 열기",
+  },
+  en: {
+    home: "PLACHEM VINA home",
+    nav: "Primary navigation",
+    menu: "Open menu",
+  },
+  vi: {
+    home: "Trang chủ PLACHEM VINA",
+    nav: "Điều hướng chính",
+    menu: "Mở menu",
+  },
+}[locale];
 
 function isActive(href: string) {
   return (
@@ -36,11 +53,11 @@ function isActive(href: string) {
   </div>
   <div class="main-header">
     <div class="container header-inner">
-      <a class="brand" href={`/${locale}/`} aria-label="PLACHEM VINA home">
+      <a class="brand" href={`/${locale}/`} aria-label={a11yLabels.home}>
         <span>PLACHEM</span>
         <small>VINA CO., LTD.</small>
       </a>
-      <nav class="desktop-nav" aria-label="Primary navigation">
+      <nav class="desktop-nav" aria-label={a11yLabels.nav}>
         {
           items.map((item) => (
             <a href={item.href} class={isActive(item.href) ? "is-active" : ""}>
@@ -65,7 +82,7 @@ function isActive(href: string) {
           <span class="menu-button__line"></span>
           <span class="menu-button__line"></span>
           <span class="menu-button__line"></span>
-          <span class="sr-only">Open menu</span>
+          <span class="sr-only">{a11yLabels.menu}</span>
         </button>
       </div>
     </div>

@@ -30,29 +30,176 @@ const alternatePaths = Object.fromEntries(
   ]),
 ) as Record<Locale, string>;
 const processMap = Object.fromEntries(
-  productSlugs.map((slug) => [slug, processLabels[slug]]),
+  productSlugs.map((slug) => [slug, processLabels[locale][slug]]),
 );
-const supportSteps = [
-  "공정 정보 확인",
-  "도금욕 분석",
-  "불량 원인 분류",
-  "조건 조정",
-  "재확인 및 안정화",
-];
-const qualitySteps = [
-  "원료 입고 확인",
-  "제조관리",
-  "공정검사",
-  "완제품검사",
-  "출하 확인",
-  "LOT 추적",
-  "TDS·SDS·COA 제공",
-];
+const ui = {
+  ko: {
+    established: "설립",
+    base: "Bắc Ninh 제조 기반",
+    founded: "PLACHEM VINA 설립",
+    processLabel: "적용 공정",
+    scopeLabel: "취급 품목·공정",
+    diagnosticTitle: "진단 프로세스",
+    diagnosticLead:
+      "문의 내용은 공정 정보부터 재확인 단계까지 순서대로 정리해 원인축을 좁힙니다.",
+    analysisTitle: "분석 항목",
+    analysisItems: "pH · 금속농도 · 온도 · 교반 · 여과",
+    qualityNoteTitle: "기록과 추적",
+    qualityNote:
+      "원료 입고와 제조, 검사, 출하 확인 정보를 LOT 흐름으로 연결하고 요청 문서 제공 절차를 분리해 관리합니다.",
+    docIndexTitle: "공정별 자료 분류",
+    docItems: [
+      "전처리",
+      "도금",
+      "무전해도금",
+      "아노다이징",
+      "화성피막",
+      "품질문서",
+    ],
+    magazineTop: "TECHNICAL",
+    magazineTitle: "DOCUMENTS",
+    magazineNote: "공정관리 · 불량 원인 · 품질문서",
+    contactAsideTitle: "기술지원 상담",
+    contactAsideText: "제품군과 공정 조건을 기준으로 안내합니다.",
+    processPrefix: "문의 분야: ",
+    selectedText:
+      "제품군, 현재 공정, 사용 중인 약품, 증상 또는 요청 자료를 기준으로 상담 범위를 확인할 수 있습니다.",
+    supportSteps: [
+      "공정 정보 확인",
+      "도금욕 분석",
+      "불량 원인 분류",
+      "조건 조정",
+      "재확인 및 안정화",
+    ],
+    qualitySteps: [
+      "원료 입고 확인",
+      "제조관리",
+      "공정검사",
+      "완제품검사",
+      "출하 확인",
+      "LOT 추적",
+      "TDS·SDS·COA 제공",
+    ],
+    heroQualitySteps: ["원료", "제조", "검사", "출하", "LOT"],
+  },
+  en: {
+    established: "Established",
+    base: "Bắc Ninh manufacturing base",
+    founded: "PLACHEM VINA established",
+    processLabel: "Applied process",
+    scopeLabel: "Handled items & processes",
+    diagnosticTitle: "Diagnostic process",
+    diagnosticLead:
+      "Inquiry details are organized from process information through follow-up checks to narrow down possible cause groups.",
+    analysisTitle: "Analysis items",
+    analysisItems:
+      "pH · Metal concentration · Temperature · Agitation · Filtration",
+    qualityNoteTitle: "Records and traceability",
+    qualityNote:
+      "Raw material receiving, manufacturing, inspection, and shipment check records are connected with LOT flow, while document procedures are managed separately.",
+    docIndexTitle: "Resources by process",
+    docItems: [
+      "Pretreatment",
+      "Plating",
+      "Electroless plating",
+      "Anodizing",
+      "Conversion coating",
+      "Quality documents",
+    ],
+    magazineTop: "TECHNICAL",
+    magazineTitle: "DOCUMENTS",
+    magazineNote: "Process control · Defect causes · Quality documents",
+    contactAsideTitle: "Technical consultation",
+    contactAsideText:
+      "Guidance is based on product group and process conditions.",
+    processPrefix: "Inquiry area: ",
+    selectedText:
+      "Product group, current process, chemical in use, symptoms, or requested documents help define the consultation scope.",
+    supportSteps: [
+      "Process information check",
+      "Plating bath analysis",
+      "Defect cause classification",
+      "Condition adjustment",
+      "Follow-up and stabilization",
+    ],
+    qualitySteps: [
+      "Raw material receiving check",
+      "Manufacturing control",
+      "In-process inspection",
+      "Final inspection",
+      "Shipment check",
+      "LOT tracking",
+      "TDS/SDS/COA provision",
+    ],
+    heroQualitySteps: [
+      "Raw material",
+      "Manufacturing",
+      "Inspection",
+      "Shipment",
+      "LOT",
+    ],
+  },
+  vi: {
+    established: "Thành lập",
+    base: "Cơ sở sản xuất Bắc Ninh",
+    founded: "PLACHEM VINA thành lập",
+    processLabel: "Công đoạn áp dụng",
+    scopeLabel: "Hạng mục & công đoạn",
+    diagnosticTitle: "Quy trình chẩn đoán",
+    diagnosticLead:
+      "Thông tin tư vấn được sắp xếp từ dữ liệu công đoạn đến bước kiểm tra lại để thu hẹp nhóm nguyên nhân.",
+    analysisTitle: "Hạng mục phân tích",
+    analysisItems: "pH · Nồng độ kim loại · Nhiệt độ · Khuấy · Lọc",
+    qualityNoteTitle: "Hồ sơ và truy xuất",
+    qualityNote:
+      "Thông tin tiếp nhận nguyên liệu, sản xuất, kiểm tra và xuất hàng được kết nối theo dòng LOT, còn quy trình tài liệu được quản lý riêng.",
+    docIndexTitle: "Tài liệu theo công đoạn",
+    docItems: [
+      "Tiền xử lý",
+      "Mạ",
+      "Mạ không điện",
+      "Anod nhôm",
+      "Lớp phủ chuyển hóa",
+      "Tài liệu chất lượng",
+    ],
+    magazineTop: "TÀI LIỆU",
+    magazineTitle: "KỸ THUẬT",
+    magazineNote: "Quản lý công đoạn · Nguyên nhân lỗi · Tài liệu chất lượng",
+    contactAsideTitle: "Tư vấn kỹ thuật",
+    contactAsideText:
+      "Hướng dẫn dựa trên nhóm sản phẩm và điều kiện công đoạn.",
+    processPrefix: "Lĩnh vực tư vấn: ",
+    selectedText:
+      "Nhóm sản phẩm, công đoạn hiện tại, hóa chất đang sử dụng, triệu chứng hoặc tài liệu yêu cầu giúp xác định phạm vi tư vấn.",
+    supportSteps: [
+      "Kiểm tra thông tin công đoạn",
+      "Phân tích bể mạ",
+      "Phân loại nguyên nhân lỗi",
+      "Điều chỉnh điều kiện",
+      "Kiểm tra lại và ổn định",
+    ],
+    qualitySteps: [
+      "Kiểm tra nhập nguyên liệu",
+      "Quản lý sản xuất",
+      "Kiểm tra trong công đoạn",
+      "Kiểm tra thành phẩm",
+      "Kiểm tra xuất hàng",
+      "Truy xuất LOT",
+      "Cung cấp TDS/SDS/COA",
+    ],
+    heroQualitySteps: [
+      "Nguyên liệu",
+      "Sản xuất",
+      "Kiểm tra",
+      "Xuất hàng",
+      "LOT",
+    ],
+  },
+}[locale];
 const heroProductIndexes = productDetails.map((product, index) => ({
   number: String(index + 1).padStart(2, "0"),
   title: product.title,
 }));
-const heroQualitySteps = ["원료", "제조", "검사", "출하", "LOT"];
 const contactLabels = {
   ko: {
     vietnam: "베트남 법인",
@@ -76,6 +223,8 @@ const contactLabels = {
     address: "Địa chỉ",
   },
 }[locale];
+const manufacturingBaseValue =
+  locale === "vi" ? companyFacts.regionVi : companyFacts.site;
 ---
 
 <BaseLayout
@@ -93,17 +242,17 @@ const contactLabels = {
         <p class="lead">{page.lead}</p>
       </div>
       {
-        locale === "ko" && pageKey === "about" && (
-          <div class="hero-aside hero-aside--year" aria-label="설립 정보">
+        pageKey === "about" && (
+          <div class="hero-aside hero-aside--year" aria-label={ui.established}>
             <span>2016</span>
-            <strong>설립</strong>
-            <p>Bắc Ninh 제조 기반</p>
+            <strong>{ui.established}</strong>
+            <p>{ui.base}</p>
           </div>
         )
       }
       {
-        locale === "ko" && pageKey === "solutions" && (
-          <div class="hero-aside hero-aside--index" aria-label="8개 제품군">
+        pageKey === "solutions" && (
+          <div class="hero-aside hero-aside--index" aria-label={page.title}>
             {heroProductIndexes.map((item) => (
               <span>
                 <b>{item.number}</b>
@@ -114,9 +263,12 @@ const contactLabels = {
         )
       }
       {
-        locale === "ko" && pageKey === "technology" && (
-          <ol class="hero-aside hero-aside--steps" aria-label="진단 흐름">
-            {supportSteps.map((step, index) => (
+        pageKey === "technology" && (
+          <ol
+            class="hero-aside hero-aside--steps"
+            aria-label={ui.diagnosticTitle}
+          >
+            {ui.supportSteps.map((step, index) => (
               <li>
                 <b>{String(index + 1).padStart(2, "0")}</b>
                 {step}
@@ -126,36 +278,32 @@ const contactLabels = {
         )
       }
       {
-        locale === "ko" && pageKey === "quality" && (
-          <ol class="hero-aside hero-aside--quality" aria-label="품질관리 흐름">
-            {heroQualitySteps.map((step) => (
+        pageKey === "quality" && (
+          <ol class="hero-aside hero-aside--quality" aria-label={page.title}>
+            {ui.heroQualitySteps.map((step) => (
               <li>{step}</li>
             ))}
           </ol>
         )
       }
       {
-        locale === "ko" && pageKey === "knowledge" && (
-          <div class="hero-aside hero-aside--magazine" aria-label="기술문서">
-            <span>TECHNICAL</span>
-            <strong>DOCUMENTS</strong>
-            <p>공정관리 · 불량 원인 · 품질문서</p>
+        pageKey === "knowledge" && (
+          <div class="hero-aside hero-aside--magazine" aria-label={page.title}>
+            <span>{ui.magazineTop}</span>
+            <strong>{ui.magazineTitle}</strong>
+            <p>{ui.magazineNote}</p>
           </div>
         )
       }
       {
-        locale === "ko" && pageKey === "contact" && (
-          <div class="hero-aside hero-aside--contact" aria-label="연락처">
+        pageKey === "contact" && (
+          <div
+            class="hero-aside hero-aside--contact"
+            aria-label={contactLabels.phone}
+          >
             <span>+84 222 395 2060</span>
-            <strong>기술지원 상담</strong>
-            <p>제품군과 공정 조건을 기준으로 안내합니다.</p>
-          </div>
-        )
-      }
-      {
-        locale !== "ko" && (
-          <div class="sub-hero__mark" aria-hidden="true">
-            <span>{pageLabels[locale][pageKey].short}</span>
+            <strong>{ui.contactAsideTitle}</strong>
+            <p>{ui.contactAsideText}</p>
           </div>
         )
       }
@@ -168,8 +316,14 @@ const contactLabels = {
         <div class="container about-grid">
           <div class="timeline">
             <span>2016</span>
-            <strong>{companyFacts.establishedKo}</strong>
-            <p>PLACHEM VINA 설립</p>
+            <strong>
+              {locale === "ko"
+                ? companyFacts.establishedKo
+                : locale === "en"
+                  ? companyFacts.establishedEn
+                  : companyFacts.establishedVi}
+            </strong>
+            <p>{ui.founded}</p>
           </div>
           <div class="about-copy">
             {page.sections.map((section) => (
@@ -204,11 +358,11 @@ const contactLabels = {
               </div>
               <dl>
                 <div>
-                  <dt>적용 공정</dt>
+                  <dt>{ui.processLabel}</dt>
                   <dd>{product.processes.join(" · ")}</dd>
                 </div>
                 <div>
-                  <dt>취급 품목·공정</dt>
+                  <dt>{ui.scopeLabel}</dt>
                   <dd>{product.materials.join(" · ")}</dd>
                 </div>
               </dl>
@@ -227,14 +381,11 @@ const contactLabels = {
       <section class="section diagnostic-section">
         <div class="container diagnostic-grid">
           <div>
-            <h2>진단 프로세스</h2>
-            <p>
-              문의 내용은 공정 정보부터 재확인 단계까지 순서대로 정리해 원인축을
-              좁힙니다.
-            </p>
+            <h2>{ui.diagnosticTitle}</h2>
+            <p>{ui.diagnosticLead}</p>
           </div>
           <ol class="diagnostic-flow">
-            {supportSteps.map((step, index) => (
+            {ui.supportSteps.map((step, index) => (
               <li>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <strong>{step}</strong>
@@ -243,8 +394,8 @@ const contactLabels = {
           </ol>
         </div>
         <div class="container analysis-band">
-          <h2>분석 항목</h2>
-          <p>pH · 금속농도 · 온도 · 교반 · 여과</p>
+          <h2>{ui.analysisTitle}</h2>
+          <p>{ui.analysisItems}</p>
         </div>
       </section>
     )
@@ -255,7 +406,7 @@ const contactLabels = {
       <section class="section section--white">
         <div class="container quality-map">
           <ol>
-            {qualitySteps.map((step, index) => (
+            {ui.qualitySteps.map((step, index) => (
               <li>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <strong>{step}</strong>
@@ -263,11 +414,8 @@ const contactLabels = {
             ))}
           </ol>
           <div class="quality-note">
-            <h2>기록과 추적</h2>
-            <p>
-              원료 입고와 제조, 검사, 출하 확인 정보를 LOT 흐름으로 연결하고
-              요청 문서 제공 절차를 분리해 관리합니다.
-            </p>
+            <h2>{ui.qualityNoteTitle}</h2>
+            <p>{ui.qualityNote}</p>
           </div>
         </div>
       </section>
@@ -279,14 +427,11 @@ const contactLabels = {
       <section class="section knowledge-page">
         <div class="container knowledge-grid">
           <div class="doc-index">
-            <h2>공정별 자료 분류</h2>
+            <h2>{ui.docIndexTitle}</h2>
             <ul>
-              <li>전처리</li>
-              <li>도금</li>
-              <li>무전해도금</li>
-              <li>아노다이징</li>
-              <li>화성피막</li>
-              <li>품질문서</li>
+              {ui.docItems.map((item) => (
+                <li>{item}</li>
+              ))}
             </ul>
           </div>
           <div class="magazine-list">
@@ -306,19 +451,18 @@ const contactLabels = {
           <article
             class="selected-process"
             data-process-map={JSON.stringify(processMap)}
+            data-process-prefix={ui.processPrefix}
+            hidden
           >
-            <span data-selected-process>문의 분야: 제품·솔루션</span>
-            <p>
-              제품군, 현재 공정, 사용 중인 약품, 증상 또는 요청 자료를 기준으로
-              상담 범위를 확인할 수 있습니다.
-            </p>
+            <span data-selected-process />
+            <p>{ui.selectedText}</p>
           </article>
           <article class="contact-card">
             <h2>{contactLabels.vietnam}</h2>
             <dl>
               <div>
                 <dt>{contactLabels.manufacturingBase}</dt>
-                <dd>{companyFacts.site}</dd>
+                <dd>{manufacturingBaseValue}</dd>
               </div>
               <div>
                 <dt>{contactLabels.phone}</dt>
@@ -340,7 +484,9 @@ const contactLabels = {
                 <dd>
                   {locale === "ko"
                     ? companyFacts.koreaAddressKo
-                    : companyFacts.koreaAddressEn}
+                    : locale === "en"
+                      ? companyFacts.koreaAddressEn
+                      : companyFacts.koreaAddressVi}
                 </dd>
               </div>
               <div>
@@ -389,9 +535,11 @@ const contactLabels = {
     const params = new URLSearchParams(window.location.search);
     const process = params.get("process") || "";
     const map = JSON.parse(source.getAttribute("data-process-map") || "{}");
+    const prefix = source.getAttribute("data-process-prefix") || "";
 
     if (map[process]) {
-      selected.textContent = "문의 분야: " + map[process];
+      selected.textContent = prefix + map[process];
+      source.removeAttribute("hidden");
     }
   }
 </script>

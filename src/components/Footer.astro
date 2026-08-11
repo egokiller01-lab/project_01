@@ -8,6 +8,11 @@ type Props = {
 };
 
 const { locale } = Astro.props;
+const footerNavLabel = {
+  ko: "하단 메뉴",
+  en: "Footer navigation",
+  vi: "Điều hướng cuối trang",
+}[locale];
 ---
 
 <footer class="site-footer">
@@ -16,7 +21,7 @@ const { locale } = Astro.props;
       <strong>PLACHEM VINA</strong>
       <p>{homeContent[locale].footerNote}</p>
     </div>
-    <nav aria-label="Footer navigation">
+    <nav aria-label={footerNavLabel}>
       {navigation[locale].map((item) => <a href={item.href}>{item.label}</a>)}
       <a href={`/${locale}/contact/`}
         >{

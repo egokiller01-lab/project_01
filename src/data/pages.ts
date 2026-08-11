@@ -24,6 +24,7 @@ export const companyFacts = {
   vietnamPhone: "+84 222 395 2060",
   koreaAddressKo: "경기도 안산시 단원구 산단로 341",
   koreaAddressEn: "341 Sandan-ro, Danwon-gu, Ansan-si, Gyeonggi-do, Korea",
+  koreaAddressVi: "341 Sandan-ro, Danwon-gu, Ansan-si, Gyeonggi-do, Hàn Quốc",
   koreaPhone: "031-495-6688",
 };
 
@@ -45,8 +46,42 @@ export const verifiedBlogLinks: Record<Locale, BlogLink[]> = {
       meta: "불량 분석",
     },
   ],
-  en: [],
-  vi: [],
+  en: [
+    {
+      title:
+        "Why plating difficulty differs for iron, copper, aluminum, and stainless steel",
+      href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
+      meta: "Materials & plating",
+    },
+    {
+      title:
+        "Why a change in plating bath agitation can change defect behavior",
+      href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
+      meta: "Electroplating",
+    },
+    {
+      title: "Why activated carbon is not always the first answer to pitting",
+      href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
+      meta: "Defect analysis",
+    },
+  ],
+  vi: [
+    {
+      title: "Vì sao độ khó khi mạ khác nhau giữa sắt, đồng, nhôm và inox",
+      href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
+      meta: "Vật liệu & mạ",
+    },
+    {
+      title: "Vì sao thay đổi khuấy bể mạ có thể làm thay đổi lỗi chất lượng",
+      href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
+      meta: "Mạ điện",
+    },
+    {
+      title: "Vì sao không nên xử lý rỗ mạ bằng than hoạt tính ngay từ đầu",
+      href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
+      meta: "Phân tích lỗi",
+    },
+  ],
 };
 
 export const pageLabels: Record<
@@ -282,50 +317,552 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
   },
 };
 
-function fallbackPages(locale: Exclude<Locale, "ko">) {
-  const isEn = locale === "en";
-
-  return Object.fromEntries(
-    staticPageKeys.map((key) => [
-      key,
+const enPages: Record<StaticPageKey, StaticPageContent> = {
+  about: {
+    key: "about",
+    title:
+      "A surface treatment chemical manufacturer connecting Korean technology with Vietnam-based operations",
+    seoTitle: "About | PLACHEM VINA",
+    description:
+      "PLACHEM VINA is a surface treatment chemical manufacturer and technical support company based in Bắc Ninh, Vietnam since 2016.",
+    eyebrow: "About",
+    lead: "PLACHEM VINA connects Korean formulation expertise with Vietnam-based manufacturing to support chemical supply and process stabilization for surface treatment operations.",
+    ctaLabel: "Technical inquiry",
+    ctaHref: "/en/contact/",
+    sections: [
       {
-        ...koPages[key],
-        title: isEn
-          ? "Korean content under review"
-          : "Nội dung tiếng Hàn đang được duyệt",
-        seoTitle: `${pageLabels[locale][key].title} | PLACHEM VINA`,
-        description: isEn
-          ? "This multilingual route is preserved. Final translation will be prepared after Korean approval."
-          : "Đường dẫn đa ngôn ngữ được giữ. Bản dịch cuối sẽ thực hiện sau khi tiếng Hàn được duyệt.",
-        eyebrow: "Korean Preview",
-        lead: isEn
-          ? "The Korean homepage renewal is being completed first. EN/VI final copy is intentionally pending."
-          : "Trang tiếng Hàn được hoàn thiện trước. Nội dung EN/VI cuối cùng đang được giữ lại.",
-        ctaLabel: isEn ? "View Korean page" : "Xem trang tiếng Hàn",
-        ctaHref: "/ko/",
-        sections: [
-          {
-            title: isEn ? "Translation pending" : "Đang chờ dịch",
-            summary: isEn
-              ? "The page remains available so navigation and deployment structure are not broken."
-              : "Trang vẫn khả dụng để không làm hỏng cấu trúc điều hướng và triển khai.",
-            items: isEn
-              ? ["Korean approval first", "No final translation yet"]
-              : ["Duyệt tiếng Hàn trước", "Chưa dịch cuối cùng"],
-          },
+        title: "Company identity",
+        summary:
+          "PLACHEM VINA CO., LTD manufactures and supplies surface treatment chemicals and reviews process conditions with customer lines as a B2B technical partner.",
+        items: [
+          "Surface treatment chemicals",
+          "Process condition review",
+          "Field technical support",
         ],
       },
-    ]),
-  ) as Record<StaticPageKey, StaticPageContent>;
-}
+      {
+        title: "Established manufacturing base",
+        summary:
+          "Since its establishment in 2016, PLACHEM VINA has operated with a manufacturing base in Bắc Ninh, Vietnam to support local process response.",
+        items: [
+          "Established in 2016",
+          "Bắc Ninh manufacturing base",
+          "Local supply response",
+        ],
+      },
+      {
+        title: "Business areas",
+        summary:
+          "Pretreatment, plating, electroless plating, anodizing, conversion coating, post-treatment, basic chemicals, and filtration equipment are organized as one process flow.",
+        items: [
+          "Product group supply",
+          "Process review",
+          "Document request support",
+        ],
+      },
+      {
+        title: "Korean technology and Vietnam response",
+        summary:
+          "Based on Korean formulation expertise, PLACHEM VINA reviews operating conditions, defect symptoms, and replenishment management issues at manufacturing sites in Vietnam.",
+        items: [
+          "Formulation review",
+          "Field condition check",
+          "Plating bath management support",
+        ],
+      },
+    ],
+  },
+  solutions: {
+    key: "solutions",
+    title: "Surface treatment solutions across eight product groups",
+    seoTitle: "Products & Solutions | PLACHEM VINA",
+    description:
+      "Eight product groups are organized for pretreatment, electroplating, electroless plating, anodizing, conversion coating, post-treatment, basic chemicals, and filtration equipment.",
+    eyebrow: "Products & Solutions",
+    lead: "Product groups are organized so process and control items can be reviewed before individual product names.",
+    ctaLabel: "Process-based inquiry",
+    ctaHref: "/en/contact/",
+    sections: [
+      {
+        title: "Process-based product classification",
+        summary:
+          "Explore the process flow from initial surface condition to plating, coating, post-treatment, and supporting equipment.",
+        items: getProductFamilies("en").map((item) => item.title),
+      },
+      {
+        title: "Inquiry connection",
+        summary:
+          "No unconfirmed individual product detail pages are provided. Product group inquiries connect the process and requested documents.",
+        items: [
+          "Product group",
+          "Current process",
+          "Main defect",
+          "Requested document",
+        ],
+      },
+    ],
+  },
+  technology: {
+    key: "technology",
+    title: "Technical support based on field conditions",
+    seoTitle: "Technology Support | PLACHEM VINA",
+    description:
+      "Process diagnosis, analysis support, defect response, plating bath management, and new line or product application support are described.",
+    eyebrow: "Technology Support",
+    lead: "Surface treatment issues cannot be judged by chemical name alone. Pretreatment, plating bath management, filtration, rinsing, and post-treatment are reviewed together.",
+    ctaLabel: "Consult process conditions",
+    ctaHref: "/en/contact/",
+    sections: [
+      {
+        title: "Process diagnosis",
+        summary:
+          "Current line conditions, defect timing, and recent changes are used to organize the check sequence.",
+        items: [
+          "Process check",
+          "Pretreatment and plating bath conditions",
+          "Rinsing and post-treatment",
+          "Recent changes",
+        ],
+      },
+      {
+        title: "Analysis support",
+        summary:
+          "Plating bath and process control items are checked and connected to document requests or evaluation conditions when needed.",
+        items: [
+          "pH",
+          "Metal concentration",
+          "Temperature",
+          "Agitation and filtration",
+          "Replenishment history",
+        ],
+      },
+      {
+        title: "Defect response",
+        summary:
+          "Pitting, adhesion issues, color deviation, white rust, and stains are separated by process-stage cause groups.",
+        items: [
+          "Defect photos",
+          "Location",
+          "Frequency",
+          "Operating conditions",
+        ],
+      },
+      {
+        title: "New application support",
+        summary:
+          "For a new line or product application, application purpose, required quality, and evaluation criteria are checked first.",
+        items: [
+          "Application purpose",
+          "Process conditions",
+          "Evaluation criteria",
+          "Requested documents",
+        ],
+      },
+    ],
+  },
+  quality: {
+    key: "quality",
+    title: "Quality management from raw material to shipment",
+    seoTitle: "Quality Management | PLACHEM VINA",
+    description:
+      "Raw material receiving, manufacturing control, in-process inspection, shipment inspection, LOT traceability, and TDS/SDS/COA procedures are described.",
+    eyebrow: "Quality Management",
+    lead: "Quality management is organized as a flow from raw material check through manufacturing, inspection, shipment, and LOT management.",
+    ctaLabel: "Request documents",
+    ctaHref: "/en/contact/",
+    sections: [
+      {
+        title: "Raw material receiving",
+        summary:
+          "Raw material specification, storage condition, and LOT information are checked before manufacturing.",
+        items: [
+          "Raw material specification",
+          "Receiving check",
+          "Storage condition",
+          "LOT information",
+        ],
+      },
+      {
+        title: "Manufacturing control",
+        summary:
+          "During manufacturing, product condition is controlled using formulation conditions and in-process check items.",
+        items: [
+          "Formulation and manufacturing",
+          "In-process check",
+          "Work record",
+        ],
+      },
+      {
+        title: "Shipment inspection and LOT tracking",
+        summary:
+          "Final inspection and pre-shipment checks maintain LOT tracking for supplied products.",
+        items: [
+          "Final inspection",
+          "Pre-shipment check",
+          "LOT tracking",
+          "Record management",
+        ],
+      },
+      {
+        title: "TDS/SDS/COA procedure",
+        summary:
+          "Documents are guided individually after product name, purpose of use, and requested document type are confirmed.",
+        items: ["TDS", "SDS", "COA", "Purpose confirmation"],
+      },
+    ],
+  },
+  knowledge: {
+    key: "knowledge",
+    title: "Technical resources by process",
+    seoTitle: "Knowledge | PLACHEM VINA",
+    description:
+      "Technical resources for process control, defect causes, chemical safety, and quality management are connected to blog articles and document requests.",
+    eyebrow: "Knowledge",
+    lead: "Resources needed for process control, defect causes, chemical safety, and quality management are organized by process.",
+    ctaLabel: "Request documents",
+    ctaHref: "/en/contact/",
+    sections: [
+      {
+        title: "Technical blog articles",
+        summary:
+          "Blog articles on surface treatment processes and defect causes are linked as process-based reference resources.",
+        items: ["Materials & plating", "Electroplating", "Defect analysis"],
+      },
+      {
+        title: "Process-based categories",
+        summary:
+          "Resources are organized by pretreatment, plating, electroless plating, anodizing, conversion coating, post-treatment, and quality management.",
+        items: [
+          "Process control",
+          "Defect causes",
+          "Safety documents",
+          "Quality documents",
+        ],
+      },
+      {
+        title: "Document requests",
+        summary:
+          "TDS, SDS, and COA requests are guided after product name and purpose of use are checked.",
+        items: [
+          "Product name",
+          "Document type",
+          "Purpose of use",
+          "Reply contact",
+        ],
+      },
+    ],
+  },
+  contact: {
+    key: "contact",
+    title: "Consult technical support for your process conditions",
+    seoTitle: "Contact | PLACHEM VINA",
+    description:
+      "Consultation scope, helpful process information, Vietnam office contact, and Korea contact information are provided.",
+    eyebrow: "Contact",
+    lead: "Product group, current process, symptoms, and requested documents help define the technical support scope.",
+    ctaLabel: "View products & solutions",
+    ctaHref: "/en/solutions/",
+    sections: [
+      {
+        title: "Consultation scope",
+        summary:
+          "Product group application, process conditions, defect causes, plating bath management, new line application, and TDS/SDS/COA requests can be discussed.",
+        items: [
+          "Product group review",
+          "Process issue",
+          "Document request",
+          "New application",
+        ],
+      },
+      {
+        title: "Helpful information",
+        summary:
+          "Company name, contact person, product group, current process, chemical in use, defect photos, or symptom descriptions are helpful for consultation.",
+        items: ["Product group", "Process", "Symptoms", "Requested documents"],
+      },
+    ],
+  },
+};
+
+const viPages: Record<StaticPageKey, StaticPageContent> = {
+  about: {
+    key: "about",
+    title:
+      "Nhà sản xuất hóa chất xử lý bề mặt kết nối công nghệ Hàn Quốc với vận hành tại Việt Nam",
+    seoTitle: "Giới thiệu | PLACHEM VINA",
+    description:
+      "PLACHEM VINA là doanh nghiệp sản xuất hóa chất xử lý bề mặt và hỗ trợ kỹ thuật tại Bắc Ninh, Việt Nam từ năm 2016.",
+    eyebrow: "Giới thiệu",
+    lead: "PLACHEM VINA kết nối công nghệ formulation Hàn Quốc với nền tảng sản xuất tại Việt Nam để hỗ trợ cung ứng hóa chất và ổn định công đoạn xử lý bề mặt.",
+    ctaLabel: "Tư vấn kỹ thuật",
+    ctaHref: "/vi/contact/",
+    sections: [
+      {
+        title: "Định vị công ty",
+        summary:
+          "PLACHEM VINA CO., LTD sản xuất và cung cấp hóa chất xử lý bề mặt, đồng thời rà soát điều kiện công đoạn cùng dây chuyền của khách hàng như một đối tác kỹ thuật B2B.",
+        items: [
+          "Hóa chất xử lý bề mặt",
+          "Rà soát điều kiện công đoạn",
+          "Hỗ trợ kỹ thuật hiện trường",
+        ],
+      },
+      {
+        title: "Thành lập và cơ sở sản xuất",
+        summary:
+          "Từ khi thành lập năm 2016, PLACHEM VINA vận hành với cơ sở sản xuất tại Bắc Ninh để hỗ trợ phản hồi công đoạn tại Việt Nam.",
+        items: [
+          "Thành lập năm 2016",
+          "Cơ sở sản xuất Bắc Ninh",
+          "Cung ứng tại Việt Nam",
+        ],
+      },
+      {
+        title: "Lĩnh vực kinh doanh",
+        summary:
+          "Tiền xử lý, mạ, mạ không điện, anod nhôm, lớp phủ chuyển hóa, hậu xử lý, hóa chất cơ bản và thiết bị lọc được sắp xếp theo dòng công đoạn.",
+        items: [
+          "Cung cấp theo nhóm sản phẩm",
+          "Rà soát công đoạn",
+          "Hỗ trợ yêu cầu tài liệu",
+        ],
+      },
+      {
+        title: "Công nghệ Hàn Quốc và đáp ứng tại Việt Nam",
+        summary:
+          "Dựa trên công nghệ formulation Hàn Quốc, PLACHEM VINA xem xét điều kiện vận hành, triệu chứng lỗi và vấn đề quản lý bổ sung tại hiện trường sản xuất ở Việt Nam.",
+        items: [
+          "Rà soát formulation",
+          "Kiểm tra điều kiện hiện trường",
+          "Hỗ trợ quản lý bể mạ",
+        ],
+      },
+    ],
+  },
+  solutions: {
+    key: "solutions",
+    title: "Giải pháp xử lý bề mặt theo tám nhóm sản phẩm",
+    seoTitle: "Sản phẩm & giải pháp | PLACHEM VINA",
+    description:
+      "Tám nhóm sản phẩm gồm tiền xử lý, mạ điện, mạ không điện, anod nhôm, lớp phủ chuyển hóa, hậu xử lý, hóa chất cơ bản và thiết bị lọc.",
+    eyebrow: "Sản phẩm & giải pháp",
+    lead: "Các nhóm sản phẩm được sắp xếp để có thể xem xét công đoạn và hạng mục quản lý trước tên sản phẩm riêng lẻ.",
+    ctaLabel: "Tư vấn theo công đoạn",
+    ctaHref: "/vi/contact/",
+    sections: [
+      {
+        title: "Phân loại sản phẩm theo công đoạn",
+        summary:
+          "Khám phá dòng công đoạn từ điều kiện bề mặt ban đầu đến mạ, tạo lớp phủ, hậu xử lý và thiết bị hỗ trợ.",
+        items: getProductFamilies("vi").map((item) => item.title),
+      },
+      {
+        title: "Kết nối tư vấn",
+        summary:
+          "Không cung cấp trang chi tiết sản phẩm riêng lẻ khi chưa có tài liệu xác nhận. Tư vấn theo nhóm sản phẩm kết nối công đoạn và tài liệu cần yêu cầu.",
+        items: [
+          "Nhóm sản phẩm",
+          "Công đoạn hiện tại",
+          "Lỗi chính",
+          "Tài liệu yêu cầu",
+        ],
+      },
+    ],
+  },
+  technology: {
+    key: "technology",
+    title: "Hỗ trợ kỹ thuật dựa trên điều kiện hiện trường",
+    seoTitle: "Hỗ trợ kỹ thuật | PLACHEM VINA",
+    description:
+      "Chẩn đoán công đoạn, hỗ trợ phân tích, xử lý lỗi, quản lý bể mạ và hỗ trợ áp dụng dây chuyền hoặc sản phẩm mới.",
+    eyebrow: "Hỗ trợ kỹ thuật",
+    lead: "Vấn đề xử lý bề mặt không thể đánh giá chỉ bằng tên hóa chất. Tiền xử lý, quản lý bể mạ, lọc, rửa và hậu xử lý cần được xem xét cùng nhau.",
+    ctaLabel: "Tư vấn điều kiện công đoạn",
+    ctaHref: "/vi/contact/",
+    sections: [
+      {
+        title: "Chẩn đoán công đoạn",
+        summary:
+          "Điều kiện dây chuyền hiện tại, thời điểm phát sinh lỗi và thay đổi gần đây được dùng để sắp xếp trình tự kiểm tra.",
+        items: [
+          "Kiểm tra công đoạn",
+          "Điều kiện tiền xử lý và bể mạ",
+          "Rửa và hậu xử lý",
+          "Thay đổi gần đây",
+        ],
+      },
+      {
+        title: "Hỗ trợ phân tích",
+        summary:
+          "Dung dịch bể mạ và hạng mục quản lý công đoạn được kiểm tra, sau đó kết nối với yêu cầu tài liệu hoặc điều kiện đánh giá khi cần.",
+        items: [
+          "pH",
+          "Nồng độ kim loại",
+          "Nhiệt độ",
+          "Khuấy và lọc",
+          "Lịch sử bổ sung",
+        ],
+      },
+      {
+        title: "Xử lý lỗi",
+        summary:
+          "Lỗi rỗ, bám dính, sai lệch màu, gỉ trắng và vết bẩn được phân tách theo nhóm nguyên nhân của từng giai đoạn công đoạn.",
+        items: [
+          "Ảnh lỗi",
+          "Vị trí phát sinh",
+          "Tần suất",
+          "Điều kiện vận hành",
+        ],
+      },
+      {
+        title: "Hỗ trợ áp dụng mới",
+        summary:
+          "Với dây chuyền hoặc sản phẩm áp dụng mới, mục đích áp dụng, chất lượng yêu cầu và tiêu chí đánh giá được kiểm tra trước.",
+        items: [
+          "Mục đích áp dụng",
+          "Điều kiện công đoạn",
+          "Tiêu chí đánh giá",
+          "Tài liệu yêu cầu",
+        ],
+      },
+    ],
+  },
+  quality: {
+    key: "quality",
+    title: "Quản lý chất lượng từ nguyên liệu đến xuất hàng",
+    seoTitle: "Quản lý chất lượng | PLACHEM VINA",
+    description:
+      "Tiếp nhận nguyên liệu, quản lý sản xuất, kiểm tra trong công đoạn, kiểm tra xuất hàng, truy xuất LOT và quy trình TDS/SDS/COA.",
+    eyebrow: "Quản lý chất lượng",
+    lead: "Quản lý chất lượng được tổ chức như một dòng quy trình từ kiểm tra nguyên liệu đến sản xuất, kiểm tra, xuất hàng và quản lý LOT.",
+    ctaLabel: "Yêu cầu tài liệu",
+    ctaHref: "/vi/contact/",
+    sections: [
+      {
+        title: "Tiếp nhận nguyên liệu",
+        summary:
+          "Thông số nguyên liệu, điều kiện bảo quản và thông tin LOT được kiểm tra trước khi sản xuất.",
+        items: [
+          "Thông số nguyên liệu",
+          "Kiểm tra nhập hàng",
+          "Điều kiện bảo quản",
+          "Thông tin LOT",
+        ],
+      },
+      {
+        title: "Quản lý sản xuất",
+        summary:
+          "Trong sản xuất, tình trạng sản phẩm được quản lý theo điều kiện formulation và các hạng mục kiểm tra trong công đoạn.",
+        items: [
+          "Formulation và sản xuất",
+          "Kiểm tra trong công đoạn",
+          "Hồ sơ công việc",
+        ],
+      },
+      {
+        title: "Kiểm tra xuất hàng và truy xuất LOT",
+        summary:
+          "Kiểm tra thành phẩm và kiểm tra trước xuất hàng duy trì truy xuất LOT cho sản phẩm cung cấp.",
+        items: [
+          "Kiểm tra thành phẩm",
+          "Kiểm tra trước xuất hàng",
+          "Truy xuất LOT",
+          "Quản lý hồ sơ",
+        ],
+      },
+      {
+        title: "Quy trình TDS/SDS/COA",
+        summary:
+          "Tài liệu được hướng dẫn riêng sau khi xác nhận tên sản phẩm, mục đích sử dụng và loại tài liệu yêu cầu.",
+        items: ["TDS", "SDS", "COA", "Xác nhận mục đích"],
+      },
+    ],
+  },
+  knowledge: {
+    key: "knowledge",
+    title: "Tài liệu kỹ thuật theo công đoạn",
+    seoTitle: "Tài liệu | PLACHEM VINA",
+    description:
+      "Tài liệu về quản lý công đoạn, nguyên nhân lỗi, an toàn hóa chất và quản lý chất lượng được kết nối với bài viết kỹ thuật và yêu cầu tài liệu.",
+    eyebrow: "Tài liệu",
+    lead: "Các tài liệu cần cho quản lý công đoạn, nguyên nhân lỗi, an toàn hóa chất và quản lý chất lượng được sắp xếp theo công đoạn.",
+    ctaLabel: "Yêu cầu tài liệu",
+    ctaHref: "/vi/contact/",
+    sections: [
+      {
+        title: "Bài viết kỹ thuật",
+        summary:
+          "Các bài viết về công đoạn xử lý bề mặt và nguyên nhân lỗi được liên kết như tài liệu tham khảo theo công đoạn.",
+        items: ["Vật liệu & mạ", "Mạ điện", "Phân tích lỗi"],
+      },
+      {
+        title: "Phân loại theo công đoạn",
+        summary:
+          "Tài liệu được sắp xếp theo tiền xử lý, mạ, mạ không điện, anod nhôm, lớp phủ chuyển hóa, hậu xử lý và quản lý chất lượng.",
+        items: [
+          "Quản lý công đoạn",
+          "Nguyên nhân lỗi",
+          "Tài liệu an toàn",
+          "Tài liệu chất lượng",
+        ],
+      },
+      {
+        title: "Yêu cầu tài liệu",
+        summary:
+          "Yêu cầu TDS, SDS và COA được hướng dẫn sau khi kiểm tra tên sản phẩm và mục đích sử dụng.",
+        items: [
+          "Tên sản phẩm",
+          "Loại tài liệu",
+          "Mục đích sử dụng",
+          "Liên hệ phản hồi",
+        ],
+      },
+    ],
+  },
+  contact: {
+    key: "contact",
+    title: "Tư vấn hỗ trợ kỹ thuật theo điều kiện công đoạn",
+    seoTitle: "Liên hệ | PLACHEM VINA",
+    description:
+      "Phạm vi tư vấn, thông tin công đoạn hữu ích, liên hệ pháp nhân Việt Nam và liên hệ Hàn Quốc được cung cấp.",
+    eyebrow: "Liên hệ",
+    lead: "Nhóm sản phẩm, công đoạn hiện tại, triệu chứng và tài liệu yêu cầu giúp xác định phạm vi hỗ trợ kỹ thuật.",
+    ctaLabel: "Xem sản phẩm & giải pháp",
+    ctaHref: "/vi/solutions/",
+    sections: [
+      {
+        title: "Phạm vi tư vấn",
+        summary:
+          "Có thể trao đổi về áp dụng nhóm sản phẩm, điều kiện công đoạn, nguyên nhân lỗi, quản lý bể mạ, áp dụng dây chuyền mới và yêu cầu TDS/SDS/COA.",
+        items: [
+          "Rà soát nhóm sản phẩm",
+          "Vấn đề công đoạn",
+          "Yêu cầu tài liệu",
+          "Áp dụng mới",
+        ],
+      },
+      {
+        title: "Thông tin hữu ích",
+        summary:
+          "Tên công ty, người liên hệ, nhóm sản phẩm, công đoạn hiện tại, hóa chất đang sử dụng, ảnh lỗi hoặc mô tả triệu chứng sẽ hữu ích cho tư vấn.",
+        items: [
+          "Nhóm sản phẩm",
+          "Công đoạn",
+          "Triệu chứng",
+          "Tài liệu yêu cầu",
+        ],
+      },
+    ],
+  },
+};
 
 export const staticPages: Record<
   Locale,
   Record<StaticPageKey, StaticPageContent>
 > = {
   ko: koPages,
-  en: fallbackPages("en"),
-  vi: fallbackPages("vi"),
+  en: enPages,
+  vi: viPages,
 };
 
 export function getStaticPage(locale: Locale, key: StaticPageKey) {
