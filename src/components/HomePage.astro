@@ -147,17 +147,23 @@ const ui = {
         tags: ["기초약품", "여과", "욕 관리"],
       },
     ],
-    knowledgeKicker: "KNOWLEDGE BASE",
-    knowledgeTitle: "현장에서 바로 쓰는 표면처리 기술지식",
+    knowledgeKicker: "PLACHEM TECHNICAL BLOG",
+    knowledgeTitle: "표면처리 기술을 축적하고 현장과 공유합니다",
     knowledgeLead:
-      "축적된 표면처리 자료를 공정관리, 불량 원인, 품질문서 중심의 공개 콘텐츠로 선별해 제공합니다.",
+      "PLACHEM 기술팀이 공정관리 경험과 불량 진단 기준을 실무형 콘텐츠로 정리합니다. 소재·도금욕·설비·품질관리 관점에서 필요한 글을 바로 찾아보세요.",
     knowledgeTopics: [
       "공정 관리",
       "불량 원인 분석",
       "약품·욕 관리",
       "품질·안전 문서",
     ],
-    moreKnowledge: "기술자료 더 보기",
+    moreKnowledge: "홈페이지 기술자료 안내",
+    blogBrand: "PLACHEM 기술 블로그",
+    blogAddress: "blog.plachem.biz",
+    blogNote: "표면처리 실무 · 공정관리 · 불량분석",
+    featuredArticle: "추천 기술글",
+    latestArticles: "최근 기술글",
+    visitBlog: "기술 블로그 전체 보기",
     ctaTitle: "공정 문제를 약품명 하나로 판단하지 않습니다",
     ctaSummary:
       "소재, 공정 순서, 작업조건, 불량 증상과 관리 이력을 알려주시면 확인해야 할 항목부터 정리해 드립니다.",
@@ -298,17 +304,23 @@ const ui = {
         tags: ["Basic chemicals", "Filtration", "Bath control"],
       },
     ],
-    knowledgeKicker: "KNOWLEDGE BASE",
-    knowledgeTitle: "Practical surface treatment knowledge for the field",
+    knowledgeKicker: "PLACHEM TECHNICAL BLOG",
+    knowledgeTitle: "Surface treatment knowledge built for field use",
     knowledgeLead:
-      "Accumulated technical resources are selected for public use around process control, defect causes, and quality documents.",
+      "The PLACHEM technical team organizes field experience and diagnostic criteria into practical articles covering materials, bath control, equipment, and quality management.",
     knowledgeTopics: [
       "Process control",
       "Defect analysis",
       "Chemical & bath control",
       "Quality & safety documents",
     ],
-    moreKnowledge: "View more knowledge",
+    moreKnowledge: "Homepage knowledge guide",
+    blogBrand: "PLACHEM Technical Blog",
+    blogAddress: "blog.plachem.biz",
+    blogNote: "Articles are currently available in Korean and Vietnamese.",
+    featuredArticle: "Featured article",
+    latestArticles: "Latest articles",
+    visitBlog: "Visit the technical blog",
     ctaTitle: "A process issue cannot be judged by a chemical name alone",
     ctaSummary:
       "Share the substrate, process sequence, operating conditions, defect symptoms, and control history. We will organize what should be checked first.",
@@ -449,21 +461,49 @@ const ui = {
         tags: ["Hóa chất cơ bản", "Lọc", "Quản lý bể"],
       },
     ],
-    knowledgeKicker: "CƠ SỞ TRI THỨC",
-    knowledgeTitle: "Kiến thức xử lý bề mặt thực tế cho hiện trường",
+    knowledgeKicker: "BLOG KỸ THUẬT PLACHEM",
+    knowledgeTitle: "Tích lũy kiến thức xử lý bề mặt cho hiện trường",
     knowledgeLead:
-      "Nguồn tài liệu kỹ thuật tích lũy được chọn lọc để công khai theo quản lý công đoạn, nguyên nhân lỗi và tài liệu chất lượng.",
+      "Đội ngũ kỹ thuật PLACHEM chuyển kinh nghiệm quản lý công đoạn và tiêu chuẩn chẩn đoán lỗi thành nội dung thực tế về vật liệu, bể mạ, thiết bị và chất lượng.",
     knowledgeTopics: [
       "Quản lý công đoạn",
       "Phân tích lỗi",
       "Quản lý hóa chất & bể",
       "Tài liệu chất lượng & an toàn",
     ],
-    moreKnowledge: "Xem thêm tài liệu",
+    moreKnowledge: "Hướng dẫn tài liệu trên website",
+    blogBrand: "Blog kỹ thuật PLACHEM",
+    blogAddress: "blog.plachem.biz/vi",
+    blogNote: "Thực hành xử lý bề mặt · Quản lý công đoạn · Phân tích lỗi",
+    featuredArticle: "Bài viết nổi bật",
+    latestArticles: "Bài viết mới",
+    visitBlog: "Xem toàn bộ blog kỹ thuật",
     ctaTitle: "Không thể đánh giá vấn đề công đoạn chỉ bằng tên hóa chất",
     ctaSummary:
       "Hãy chia sẻ vật liệu, trình tự công đoạn, điều kiện vận hành, triệu chứng lỗi và lịch sử quản lý. Chúng tôi sẽ sắp xếp các hạng mục cần kiểm tra trước.",
   },
+}[locale];
+
+const blogHome = locale === "vi" ? "https://blog.plachem.biz/vi/" : "https://blog.plachem.biz/";
+const blogTopics = {
+  ko: [
+    ["표면처리 전체", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/"],
+    ["전기도금", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%A0%84%EA%B8%B0%EB%8F%84%EA%B8%88/"],
+    ["화학도금", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/chemical-plating-ko/"],
+    ["아노다이징", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%95%84%EB%85%B8%EB%8B%A4%EC%9D%B4%EC%A7%95/"],
+  ],
+  en: [
+    ["All resources", "https://blog.plachem.biz/"],
+    ["Electroplating", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%A0%84%EA%B8%B0%EB%8F%84%EA%B8%88/"],
+    ["Chemical plating", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/chemical-plating-ko/"],
+    ["Anodizing", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%95%84%EB%85%B8%EB%8B%A4%EC%9D%B4%EC%A7%95/"],
+  ],
+  vi: [
+    ["Tất cả tài liệu", "https://blog.plachem.biz/vi/category/surface-treatment-vi/"],
+    ["Mạ điện", "https://blog.plachem.biz/vi/category/surface-treatment-vi/electroplating-vi/"],
+    ["Mạ hóa học", "https://blog.plachem.biz/vi/category/surface-treatment-vi/chemical-plating-vi/"],
+    ["Anodizing nhôm", "https://blog.plachem.biz/vi/category/surface-treatment-vi/anodizing-vi/"],
+  ],
 }[locale];
 ---
 
@@ -729,20 +769,48 @@ const ui = {
     </div>
   </section>
 
-  <section class="section knowledge-section">
-    <div class="container knowledge-layout">
-      <div class="knowledge-intro">
-        <p class="kicker">{ui.knowledgeKicker}</p><h2>{ui.knowledgeTitle}</h2><p
-        >
-          {ui.knowledgeLead}
-        </p><ul>{ui.knowledgeTopics.map((topic) => <li>{topic}</li>)}</ul><a
-          class="text-link"
-          href={`/${locale}/knowledge/`}
-          >{ui.moreKnowledge}<span aria-hidden="true">→</span></a
-        >
+  <section class="section knowledge-section" id="technical-blog">
+    <div class="container">
+      <div class="knowledge-heading">
+        <div class="knowledge-intro">
+          <p class="kicker">{ui.knowledgeKicker}</p>
+          <h2>{ui.knowledgeTitle}</h2>
+          <p>{ui.knowledgeLead}</p>
+        </div>
+        <aside class="blog-brand" aria-label={ui.blogBrand}>
+          <span>{ui.blogNote}</span>
+          <strong>{ui.blogBrand}</strong>
+          <small>{ui.blogAddress}</small>
+          <a href={blogHome} target="_blank" rel="noopener noreferrer">
+            {ui.visitBlog}<span aria-hidden="true">↗</span>
+          </a>
+        </aside>
       </div>
-      <div class="blog-list">
-        {content.blogs.map((blog) => <BlogCard {...blog} />)}
+
+      <nav class="blog-topics" aria-label={ui.blogBrand}>
+        {blogTopics.map(([label, href]) => (
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            {label}<span aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </nav>
+
+      <div class="blog-editorial-grid">
+        <div class="featured-blog">
+          <p class="blog-list-label">{ui.featuredArticle}</p>
+          <BlogCard {...content.blogs[0]} featured />
+        </div>
+        <div class="blog-list">
+          <p class="blog-list-label">{ui.latestArticles}</p>
+          {content.blogs.slice(1).map((blog) => <BlogCard {...blog} />)}
+        </div>
+      </div>
+
+      <div class="knowledge-footer">
+        <p>{ui.knowledgeTopics.join(" · ")}</p>
+        <a class="text-link" href={`/${locale}/knowledge/`}>
+          {ui.moreKnowledge}<span aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </section>
@@ -790,7 +858,8 @@ const ui = {
   .section-head,
   .focus-layout,
   .defect-layout,
-  .knowledge-layout {
+  .knowledge-heading,
+  .blog-editorial-grid {
     display: grid;
     gap: clamp(2rem, 5vw, 5rem);
   }
@@ -1187,7 +1256,10 @@ const ui = {
   }
 
   .knowledge-section {
-    background: linear-gradient(135deg, #f7f9fc 0 55%, #edf3f8 55%);
+    background:
+      radial-gradient(circle at 92% 8%, rgba(28, 114, 214, 0.11), transparent 24rem),
+      linear-gradient(180deg, #f7f9fc, #edf3f8);
+    overflow: hidden;
   }
   .knowledge-intro > p:not(.kicker) {
     color: #5d6979;
@@ -1195,22 +1267,101 @@ const ui = {
     line-height: 1.8;
     margin-top: var(--space-5);
   }
-  .knowledge-intro ul {
-    display: grid;
-    gap: 0.55rem;
-    list-style: none;
-    margin: var(--space-5) 0 0;
-    padding: 0;
+  .blog-brand {
+    align-self: stretch;
+    background: #0b1f3a;
+    border-left: 4px solid #4d9eff;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 210px;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
   }
-  .knowledge-intro li {
-    border-left: 3px solid #1c72d6;
-    color: var(--color-navy);
+  .blog-brand > span {
+    color: #8fb7df;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+  .blog-brand strong {
+    font-size: clamp(1.45rem, 2.6vw, 2.2rem);
+    margin-top: 0.7rem;
+  }
+  .blog-brand small {
+    color: #8fb7df;
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
+  }
+  .blog-brand a {
+    align-items: center;
+    color: white;
+    display: inline-flex;
+    font-size: 0.88rem;
     font-weight: 900;
-    padding-left: 0.8rem;
+    gap: 0.55rem;
+    margin-top: 1.5rem;
+    text-decoration: none;
+    width: fit-content;
+  }
+  .blog-brand a span {
+    color: #69adff;
+  }
+  .blog-topics {
+    display: flex;
+    gap: 0.65rem;
+    margin-block: clamp(2rem, 4vw, 3rem);
+    overflow-x: auto;
+    padding-bottom: 0.45rem;
+    scrollbar-width: thin;
+  }
+  .blog-topics a {
+    align-items: center;
+    background: white;
+    border: 1px solid #cbd9e7;
+    color: var(--color-navy);
+    display: inline-flex;
+    flex: 0 0 auto;
+    font-size: 0.8rem;
+    font-weight: 900;
+    gap: 0.45rem;
+    padding: 0.7rem 0.9rem;
+    text-decoration: none;
+  }
+  .blog-topics a:hover {
+    border-color: #1c72d6;
+    color: #1c72d6;
+  }
+  .blog-list-label {
+    color: #59718b;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    margin: 0 0 0.8rem;
+    text-transform: uppercase;
+  }
+  .featured-blog,
+  .blog-list {
+    min-width: 0;
   }
   .blog-list {
     display: grid;
     gap: var(--space-3);
+  }
+  .knowledge-footer {
+    align-items: center;
+    border-top: 1px solid #cad7e5;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    justify-content: space-between;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding-top: 1.3rem;
+  }
+  .knowledge-footer p {
+    color: #65768a;
+    font-size: 0.78rem;
+    font-weight: 800;
   }
   .final-section {
     background: white;
@@ -1239,6 +1390,12 @@ const ui = {
     }
     .capability-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .knowledge-heading {
+      grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+    }
+    .blog-editorial-grid {
+      grid-template-columns: minmax(0, 1.12fr) minmax(20rem, 0.88fr);
     }
     .quality-flow ol {
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1274,9 +1431,6 @@ const ui = {
     }
     .defect-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .knowledge-layout {
-      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     }
   }
 

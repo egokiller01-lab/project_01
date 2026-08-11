@@ -52,6 +52,9 @@ export type BlogLink = {
   title: string;
   href: string;
   meta: string;
+  summary: string;
+  date: string;
+  cta: string;
 };
 
 export type PageSection = {

@@ -1,13 +1,21 @@
 ---
 import type { BlogLink } from "../types";
 
-type Props = BlogLink;
-const { title, href, meta } = Astro.props;
+type Props = BlogLink & { featured?: boolean };
+const { title, href, meta, summary, date, cta, featured = false } =
+  Astro.props;
 ---
 
-<article class="blog-card">
-  <p>{meta}</p>
+<article class:list={["blog-card", { "blog-card--featured": featured }]}>
+  <div class="blog-card__meta">
+    <span>{meta}</span>
+    <time>{date}</time>
+  </div>
   <h3><a href={href} target="_blank" rel="noopener noreferrer">{title}</a></h3>
+  <p>{summary}</p>
+  <a class="blog-card__cta" href={href} target="_blank" rel="noopener noreferrer">
+    {cta}<span aria-hidden="true">↗</span>
+  </a>
 </article>
 
 <style>
@@ -15,18 +23,123 @@ const { title, href, meta } = Astro.props;
     background: white;
     border: var(--border);
     border-radius: var(--radius-md);
+    display: grid;
+    gap: 0.8rem;
     padding: var(--space-5);
+    position: relative;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
   }
 
-  p {
+  .blog-card::before {
+    background: #1c72d6;
+    content: "";
+    height: 3px;
+    left: -1px;
+    position: absolute;
+    top: -1px;
+    width: 3.8rem;
+  }
+
+  .blog-card:hover {
+    border-color: #a9c6e5;
+    box-shadow: 0 1.1rem 2.4rem rgba(11, 31, 58, 0.09);
+    transform: translateY(-2px);
+  }
+
+  .blog-card__meta {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    justify-content: space-between;
+  }
+
+  .blog-card__meta span {
     color: var(--color-blue);
+    font-size: 0.78rem;
     font-weight: 800;
-    margin: 0 0 var(--space-2);
+  }
+
+  time {
+    color: #8290a0;
+    font-size: 0.72rem;
+    font-weight: 700;
   }
 
   h3 {
     color: var(--color-navy);
-    font-size: 1.05rem;
+    font-size: 1.08rem;
+    line-height: 1.45;
     margin: 0;
+  }
+
+  h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  p {
+    color: #637184;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .blog-card__cta {
+    align-items: center;
+    color: var(--color-navy);
+    display: inline-flex;
+    font-size: 0.82rem;
+    font-weight: 900;
+    gap: 0.45rem;
+    margin-top: 0.25rem;
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  .blog-card__cta span {
+    color: #1c72d6;
+  }
+
+  .blog-card--featured {
+    background:
+      linear-gradient(145deg, rgba(28, 114, 214, 0.18), transparent 48%),
+      #0b1f3a;
+    border-color: #244467;
+    color: white;
+    min-height: 100%;
+    padding: clamp(1.8rem, 4vw, 3.2rem);
+  }
+
+  .blog-card--featured::before {
+    background: #69adff;
+    height: 4px;
+    width: 6rem;
+  }
+
+  .blog-card--featured h3 {
+    color: white;
+    font-size: clamp(1.7rem, 3vw, 2.55rem);
+    line-height: 1.23;
+    max-width: 18ch;
+  }
+
+  .blog-card--featured p {
+    color: #c2d1e2;
+    font-size: 1rem;
+    max-width: 42rem;
+  }
+
+  .blog-card--featured time {
+    color: #92a8bf;
+  }
+
+  .blog-card--featured .blog-card__cta {
+    color: white;
+    margin-top: auto;
+    padding-top: 1rem;
   }
 </style>

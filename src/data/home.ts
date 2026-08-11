@@ -42,16 +42,37 @@ const koBlogs: BlogLink[] = [
     title: "철·동·알루미늄·스테인리스의 도금 난이도가 다른 이유",
     href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
     meta: "소재·도금",
+    summary:
+      "소재마다 다른 산화막과 표면 반응성을 비교하고, 밀착 불량을 줄이기 위한 전처리 점검 항목을 정리합니다.",
+    date: "2026.07.17",
+    cta: "기술글 읽기",
   },
   {
     title: "도금액 교반 방식 하나 바꿨는데 결함이 달라지는 이유",
     href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
     meta: "전기도금",
+    summary:
+      "공기교반·기계교반·순환여과가 피트, 얼룩, 버닝과 도금 두께에 미치는 영향을 현장 관점에서 설명합니다.",
+    date: "2026.07.09",
+    cta: "기술글 읽기",
   },
   {
     title: "피트가 났다고 바로 활성탄부터 돌리면 안 됩니다",
     href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
     meta: "불량 분석",
+    summary:
+      "피트와 흐림 발생 시 여과로 해결할 문제와 활성탄 처리가 필요한 문제를 구분하는 진단 순서를 안내합니다.",
+    date: "2026.07.07",
+    cta: "기술글 읽기",
+  },
+  {
+    title: "도금 불량은 랙에서 먼저 시작됩니다",
+    href: "https://blog.plachem.biz/plating-rack-design-defects/",
+    meta: "공정 설계",
+    summary:
+      "랙의 접촉저항, 전류분포, 액 흐름과 기포 배출이 접점 자국과 두께 편차에 미치는 영향을 정리합니다.",
+    date: "2026.07.06",
+    cta: "기술글 읽기",
   },
 ];
 
@@ -61,34 +82,76 @@ const enBlogs: BlogLink[] = [
       "Why plating difficulty differs for iron, copper, aluminum, and stainless steel",
     href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
     meta: "Materials & plating",
+    summary:
+      "A field guide to substrate-specific oxide films, surface reactivity, pretreatment, and adhesion checks.",
+    date: "17 Jul 2026",
+    cta: "Read article",
   },
   {
     title: "Why a change in plating bath agitation can change defect behavior",
     href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
     meta: "Electroplating",
+    summary:
+      "How air agitation, mechanical mixing, and circulation influence pits, stains, burning, and deposit thickness.",
+    date: "9 Jul 2026",
+    cta: "Read article",
   },
   {
     title: "Why activated carbon is not always the first answer to pitting",
     href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
     meta: "Defect analysis",
+    summary:
+      "A diagnostic sequence for separating filtration problems from cases that may require activated-carbon treatment.",
+    date: "7 Jul 2026",
+    cta: "Read article",
+  },
+  {
+    title: "Why plating defects often begin at the rack",
+    href: "https://blog.plachem.biz/plating-rack-design-defects/",
+    meta: "Process design",
+    summary:
+      "How contact resistance, current distribution, solution flow, and gas release affect contact marks and thickness variation.",
+    date: "6 Jul 2026",
+    cta: "Read article",
   },
 ];
 
 const viBlogs: BlogLink[] = [
   {
     title: "Vì sao độ khó khi mạ khác nhau giữa sắt, đồng, nhôm và inox",
-    href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
+    href: "https://blog.plachem.biz/vi/do-kho-ma-thep-dong-nhom-inox/",
     meta: "Vật liệu & mạ",
+    summary:
+      "So sánh màng oxide, tính phản ứng bề mặt và các hạng mục tiền xử lý cần kiểm tra để giảm lỗi bám dính.",
+    date: "17.07.2026",
+    cta: "Đọc bài kỹ thuật",
   },
   {
     title: "Vì sao thay đổi khuấy bể mạ có thể làm thay đổi lỗi chất lượng",
-    href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
+    href: "https://blog.plachem.biz/vi/khuay-dung-dich-ma-loi-be-mat/",
     meta: "Mạ điện",
+    summary:
+      "Phân tích ảnh hưởng của khuấy khí, khuấy cơ học và lọc tuần hoàn đến rỗ, vết ố, cháy mạ và chiều dày.",
+    date: "09.07.2026",
+    cta: "Đọc bài kỹ thuật",
   },
   {
     title: "Vì sao không nên xử lý rỗ mạ bằng than hoạt tính ngay từ đầu",
-    href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
+    href: "https://blog.plachem.biz/vi/dung-voi-chay-than-hoat-tinh-khi-thay-ro-ma/",
     meta: "Phân tích lỗi",
+    summary:
+      "Trình tự chẩn đoán giúp phân biệt vấn đề cần lọc với trường hợp cần cân nhắc xử lý bằng than hoạt tính.",
+    date: "07.07.2026",
+    cta: "Đọc bài kỹ thuật",
+  },
+  {
+    title: "Lỗi mạ thường bắt đầu từ rack",
+    href: "https://blog.plachem.biz/vi/loi-ma-bat-dau-tu-rack-vet-tiep-xuc-lech-do-day/",
+    meta: "Thiết kế công đoạn",
+    summary:
+      "Giải thích ảnh hưởng của điện trở tiếp xúc, phân bố dòng điện, dòng dung dịch và thoát khí đến vết tiếp xúc và lệch chiều dày.",
+    date: "06.07.2026",
+    cta: "Đọc bài kỹ thuật",
   },
 ];
 

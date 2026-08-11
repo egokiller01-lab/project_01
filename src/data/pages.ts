@@ -1,4 +1,5 @@
 import type { BlogLink, Locale, PageKey, StaticPageContent } from "../types";
+import { homeContent } from "./home";
 import { getProductFamilies } from "./products";
 
 export const staticPageKeys = [
@@ -29,59 +30,9 @@ export const companyFacts = {
 };
 
 export const verifiedBlogLinks: Record<Locale, BlogLink[]> = {
-  ko: [
-    {
-      title: "철·동·알루미늄·스테인리스의 도금 난이도가 다른 이유",
-      href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
-      meta: "소재·도금",
-    },
-    {
-      title: "도금액 교반 방식 하나 바꿨는데 결함이 달라지는 이유",
-      href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
-      meta: "전기도금",
-    },
-    {
-      title: "피트가 났다고 바로 활성탄부터 돌리면 안 됩니다",
-      href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
-      meta: "불량 분석",
-    },
-  ],
-  en: [
-    {
-      title:
-        "Why plating difficulty differs for iron, copper, aluminum, and stainless steel",
-      href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
-      meta: "Materials & plating",
-    },
-    {
-      title:
-        "Why a change in plating bath agitation can change defect behavior",
-      href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
-      meta: "Electroplating",
-    },
-    {
-      title: "Why activated carbon is not always the first answer to pitting",
-      href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
-      meta: "Defect analysis",
-    },
-  ],
-  vi: [
-    {
-      title: "Vì sao độ khó khi mạ khác nhau giữa sắt, đồng, nhôm và inox",
-      href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
-      meta: "Vật liệu & mạ",
-    },
-    {
-      title: "Vì sao thay đổi khuấy bể mạ có thể làm thay đổi lỗi chất lượng",
-      href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
-      meta: "Mạ điện",
-    },
-    {
-      title: "Vì sao không nên xử lý rỗ mạ bằng than hoạt tính ngay từ đầu",
-      href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
-      meta: "Phân tích lỗi",
-    },
-  ],
+  ko: homeContent.ko.blogs,
+  en: homeContent.en.blogs,
+  vi: homeContent.vi.blogs,
 };
 
 export const pageLabels: Record<
