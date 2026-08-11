@@ -1455,6 +1455,10 @@ const blogVisuals = [
     font-size: clamp(1.45rem, 2.6vw, 2.2rem);
     margin-top: 0.7rem;
   }
+  :global(html[lang="ko"]) .blog-brand strong {
+    font-size: clamp(1.3rem, 1.9vw, 1.55rem);
+    white-space: nowrap;
+  }
   .blog-brand small {
     color: #8fb7df;
     font-size: 0.85rem;
@@ -1510,6 +1514,9 @@ const blogVisuals = [
   .featured-blog,
   .blog-list {
     min-width: 0;
+  }
+  .blog-editorial-grid {
+    align-items: start;
   }
   .blog-list {
     display: grid;
