@@ -1,7 +1,7 @@
 ---
-import { navigation } from '../data/navigation';
-import { homeContent } from '../data/home';
-import type { Locale } from '../types';
+import { navigation } from "../data/navigation";
+import { homeContent } from "../data/home";
+import type { Locale } from "../types";
 
 type Props = {
   locale: Locale;
@@ -18,7 +18,15 @@ const { locale } = Astro.props;
     </div>
     <nav aria-label="Footer navigation">
       {navigation[locale].map((item) => <a href={item.href}>{item.label}</a>)}
-      <a href={`/${locale}/contact/`}>{locale === 'ko' ? '기술문의' : locale === 'en' ? 'Technical Inquiry' : 'Liên hệ kỹ thuật'}</a>
+      <a href={`/${locale}/contact/`}
+        >{
+          locale === "ko"
+            ? "기술문의"
+            : locale === "en"
+              ? "Technical Inquiry"
+              : "Liên hệ kỹ thuật"
+        }</a
+      >
     </nav>
   </div>
 </footer>

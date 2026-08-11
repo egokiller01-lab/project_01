@@ -58,13 +58,10 @@ const { eyebrow, title, summary, ctas, strengths, image } = Astro.props;
 <style>
   .hero {
     background:
-      radial-gradient(
-        circle at 15% 0%,
-        rgba(29, 78, 216, 0.12),
-        transparent 28rem
-      ),
-      linear-gradient(180deg, white 0%, var(--color-light) 100%);
+      linear-gradient(90deg, rgba(11, 31, 58, 0.96), rgba(39, 50, 62, 0.88)),
+      var(--color-navy);
     border-bottom: var(--border);
+    color: white;
     padding-block: var(--space-7);
   }
 
@@ -74,7 +71,7 @@ const { eyebrow, title, summary, ctas, strengths, image } = Astro.props;
   }
 
   .eyebrow {
-    color: var(--color-blue);
+    color: var(--color-steel);
     font-size: 0.86rem;
     font-weight: 900;
     letter-spacing: 0.08em;
@@ -83,18 +80,21 @@ const { eyebrow, title, summary, ctas, strengths, image } = Astro.props;
   }
 
   h1 {
-    color: var(--color-navy);
-    font-size: clamp(2.35rem, 5vw, 4.6rem);
+    color: white;
+    font-size: clamp(2.35rem, 5vw, 4.35rem);
     letter-spacing: 0;
     line-height: 1.05;
     margin: 0;
-    max-width: 14ch;
+    max-width: 13ch;
+    overflow-wrap: keep-all;
+    word-break: keep-all;
   }
 
   .summary {
     font-size: clamp(1.05rem, 1.6vw, 1.22rem);
     margin-block: var(--space-5);
     max-width: 56ch;
+    color: rgba(248, 250, 252, 0.86);
   }
 
   .hero-actions {
@@ -104,14 +104,13 @@ const { eyebrow, title, summary, ctas, strengths, image } = Astro.props;
   }
 
   .hero-panel {
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(192, 199, 209, 0.8);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(228, 233, 239, 0.32);
     border-radius: var(--radius-md);
     display: grid;
     gap: var(--space-4);
     overflow: hidden;
     padding: var(--space-3);
-    box-shadow: var(--shadow);
   }
 
   .hero-media {
@@ -120,17 +119,17 @@ const { eyebrow, title, summary, ctas, strengths, image } = Astro.props;
   }
 
   .hero-media img {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 11;
     border-radius: calc(var(--radius-md) - 2px);
     display: block;
     height: auto;
     object-fit: cover;
-    object-position: 48% 50%;
+    object-position: 50% 50%;
     width: 100%;
   }
 
   .hero-media figcaption {
-    background: rgba(11, 31, 58, 0.9);
+    background: rgba(11, 31, 58, 0.88);
     border-radius: var(--radius-sm);
     bottom: var(--space-3);
     color: white;
@@ -150,10 +149,10 @@ const { eyebrow, title, summary, ctas, strengths, image } = Astro.props;
   }
 
   .strength-list span {
-    background: var(--color-light);
-    border: 1px solid rgba(192, 199, 209, 0.75);
+    background: rgba(248, 250, 252, 0.08);
+    border: 1px solid rgba(228, 233, 239, 0.28);
     border-radius: var(--radius-sm);
-    color: var(--color-navy);
+    color: white;
     font-size: 0.86rem;
     font-weight: 800;
     padding: 0.55rem 0.7rem;
@@ -162,7 +161,23 @@ const { eyebrow, title, summary, ctas, strengths, image } = Astro.props;
   @media (min-width: 64rem) {
     .hero-grid {
       align-items: center;
-      grid-template-columns: minmax(0, 1.3fr) minmax(20rem, 0.7fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(24rem, 0.9fr);
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    .hero {
+      padding-block: var(--space-6);
+    }
+
+    h1 {
+      max-width: 11ch;
+    }
+
+    .hero-media figcaption {
+      position: static;
+      max-width: none;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
     }
   }
 </style>

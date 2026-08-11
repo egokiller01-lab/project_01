@@ -58,9 +58,9 @@ const cardLabels = {
           <figcaption>{content.visuals.company.caption}</figcaption>
         </figure>
       </div>
-      <div class="flow-strip" aria-label={content.technologyPanel.title}>
+      <div class="flow-strip" aria-label={content.sectionLabels.company}>
         {
-          content.strengths.slice(0, 3).map((strength, index) => (
+          content.processSteps.map((strength, index) => (
             <div class="flow-step">
               <span>{String(index + 1).padStart(2, "0")}</span>
               <strong>{strength}</strong>
@@ -124,7 +124,14 @@ const cardLabels = {
           <figcaption>{content.visuals.technology.caption}</figcaption>
         </figure>
       </div>
-      <ProcessDiagram steps={content.processSteps} />
+      <ProcessDiagram
+        steps={[
+          "도금욕 분석",
+          "불량 원인 점검",
+          "작업조건 조정",
+          "신규 공정 적용",
+        ]}
+      />
       <div class="grid grid--3 support-grid">
         {content.solutions.map((solution) => <SolutionCard {...solution} />)}
       </div>
@@ -138,7 +145,7 @@ const cardLabels = {
           title={content.sectionLabels.quality}
           summary={content.sectionSummaries.quality}
         />
-        <QualityPanel items={content.strengths} />
+        <QualityPanel items={content.qualitySteps} />
       </div>
       <figure class="media-card">
         <img
@@ -330,8 +337,8 @@ const cardLabels = {
       padding-block: var(--space-7);
     }
 
-    .product-rail {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .wide-visual img {
+      aspect-ratio: 4 / 3;
     }
   }
 </style>

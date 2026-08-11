@@ -1,5 +1,5 @@
 ---
-import type { CTA } from '../types';
+import type { CTA } from "../types";
 
 type Props = {
   title: string;
@@ -16,7 +16,16 @@ const { title, summary, ctas } = Astro.props;
     <p>{summary}</p>
   </div>
   <div class="cta-actions">
-    {ctas.map((cta) => <a class={`button button--${cta.variant ?? 'secondary'}`} href={cta.href}>{cta.label}</a>)}
+    {
+      ctas.map((cta) => (
+        <a
+          class={`button button--${cta.variant ?? "secondary"}`}
+          href={cta.href}
+        >
+          {cta.label}
+        </a>
+      ))
+    }
   </div>
 </section>
 

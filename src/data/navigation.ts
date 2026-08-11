@@ -24,7 +24,7 @@ export function localizedPath(locale: Locale, pageKey: PageKey): string {
 export const navigation: Record<Locale, NavItem[]> = {
   ko: [
     { label: "회사소개", href: "/ko/about/" },
-    { label: "솔루션", href: "/ko/solutions/" },
+    { label: "제품·솔루션", href: "/ko/solutions/" },
     { label: "기술지원", href: "/ko/technology/" },
     { label: "품질관리", href: "/ko/quality/" },
     { label: "기술자료", href: "/ko/knowledge/" },

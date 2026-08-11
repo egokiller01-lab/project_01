@@ -1,7 +1,6 @@
 ---
 import BlogCard from "./BlogCard.astro";
 import CTAPanel from "./CTAPanel.astro";
-import InquiryForm from "./InquiryForm.astro";
 import ProductFamilyCard from "./ProductFamilyCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { localizedPath } from "../data/navigation";
@@ -26,7 +25,10 @@ const products = getProductFamilies(locale);
 const blogs = verifiedBlogLinks[locale];
 const locales: Locale[] = ["ko", "en", "vi"];
 const alternatePaths = Object.fromEntries(
-  locales.map((targetLocale) => [targetLocale, localizedPath(targetLocale, pageKey)]),
+  locales.map((targetLocale) => [
+    targetLocale,
+    localizedPath(targetLocale, pageKey),
+  ]),
 ) as Record<Locale, string>;
 const cardLabels = {
   ko: { material: "소재", process: "공정" },
@@ -68,7 +70,8 @@ const contactLabels = {
         <p class="eyebrow">{page.eyebrow}</p>
         <h1>{page.title}</h1>
         <p class="lead">{page.lead}</p>
-        <a class="button button--primary" href={page.ctaHref}>{page.ctaLabel}</a>
+        <a class="button button--primary" href={page.ctaHref}>{page.ctaLabel}</a
+        >
       </div>
       <div class="process-visual" aria-hidden="true">
         <span></span>
@@ -81,58 +84,68 @@ const contactLabels = {
 
   <section class="section">
     <div class="container content-grid">
-      {page.sections.map((section) => (
-        <article class="info-panel">
-          {section.eyebrow && <p class="panel-eyebrow">{section.eyebrow}</p>}
-          <h2>{section.title}</h2>
-          <p>{section.summary}</p>
-          {section.items && (
-            <ul>
-              {section.items.map((item) => <li>{item}</li>)}
-            </ul>
-          )}
-        </article>
-      ))}
+      {
+        page.sections.map((section) => (
+          <article class="info-panel">
+            {section.eyebrow && <p class="panel-eyebrow">{section.eyebrow}</p>}
+            <h2>{section.title}</h2>
+            <p>{section.summary}</p>
+            {section.items && (
+              <ul>
+                {section.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
+          </article>
+        ))
+      }
     </div>
   </section>
 
-  {pageKey === "solutions" && (
-    <section class="section section--white">
-      <div class="container">
-        <div class="section-intro">
-          <p>{page.eyebrow}</p>
-          <h2>{pageLabels[locale].solutions.title}</h2>
+  {
+    pageKey === "solutions" && (
+      <section class="section section--white">
+        <div class="container">
+          <div class="section-intro">
+            <p>{page.eyebrow}</p>
+            <h2>{pageLabels[locale].solutions.title}</h2>
+          </div>
+          <div class="grid grid--4 product-grid">
+            {products.map((product, index) => (
+              <ProductFamilyCard
+                {...product}
+                materialLabel={cardLabels.material}
+                processLabel={cardLabels.process}
+                index={index}
+              />
+            ))}
+          </div>
         </div>
-        <div class="grid grid--4 product-grid">
-          {products.map((product) => (
-            <ProductFamilyCard
-              {...product}
-              materialLabel={cardLabels.material}
-              processLabel={cardLabels.process}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
+      </section>
+    )
+  }
 
-  {pageKey === "knowledge" && (
-    <section class="section section--white">
-      <div class="container">
-        <div class="section-intro">
-          <p>blog.plachem.biz</p>
-          <h2>{pageLabels[locale].knowledge.title}</h2>
+  {
+    pageKey === "knowledge" && blogs.length > 0 && (
+      <section class="section section--white">
+        <div class="container">
+          <div class="section-intro">
+            <p>blog.plachem.biz</p>
+            <h2>{pageLabels[locale].knowledge.title}</h2>
+          </div>
+          <div class="grid grid--3">
+            {blogs.map((blog) => (
+              <BlogCard {...blog} />
+            ))}
+          </div>
         </div>
-        <div class="grid grid--3">
-          {blogs.map((blog) => <BlogCard {...blog} />)}
-        </div>
-      </div>
-    </section>
-  )}
+      </section>
+    )
+  }
 
-  {pageKey === "contact" && (
-    <>
-      <InquiryForm locale={locale} />
+  {
+    pageKey === "contact" && (
       <section class="section section--white">
         <div class="container contact-grid">
           <article class="contact-card">
@@ -144,7 +157,11 @@ const contactLabels = {
               </div>
               <div>
                 <dt>{contactLabels.phone}</dt>
-                <dd><a href={`tel:${companyFacts.vietnamPhone}`}>{companyFacts.vietnamPhone}</a></dd>
+                <dd>
+                  <a href={`tel:${companyFacts.vietnamPhone}`}>
+                    {companyFacts.vietnamPhone}
+                  </a>
+                </dd>
               </div>
             </dl>
           </article>
@@ -153,29 +170,46 @@ const contactLabels = {
             <dl>
               <div>
                 <dt>{contactLabels.address}</dt>
-                <dd>{locale === "ko" ? companyFacts.koreaAddressKo : companyFacts.koreaAddressEn}</dd>
+                <dd>
+                  {locale === "ko"
+                    ? companyFacts.koreaAddressKo
+                    : companyFacts.koreaAddressEn}
+                </dd>
               </div>
               <div>
                 <dt>{contactLabels.phone}</dt>
-                <dd><a href={`tel:${companyFacts.koreaPhone}`}>{companyFacts.koreaPhone}</a></dd>
+                <dd>
+                  <a href={`tel:${companyFacts.koreaPhone}`}>
+                    {companyFacts.koreaPhone}
+                  </a>
+                </dd>
               </div>
             </dl>
           </article>
         </div>
       </section>
-    </>
-  )}
+    )
+  }
 
   <section class="section">
     <div class="container">
-      <CTAPanel title={pageLabels[locale].contact.title} summary={page.description} ctas={[
-        { label: page.ctaLabel, href: page.ctaHref, variant: "primary" },
-        {
-          label: locale === "ko" ? "제품·솔루션" : locale === "en" ? "Products & Solutions" : "Sản phẩm & giải pháp",
-          href: localizedPath(locale, "solutions"),
-          variant: "secondary",
-        },
-      ]} />
+      <CTAPanel
+        title={pageLabels[locale].contact.title}
+        summary={page.description}
+        ctas={[
+          { label: page.ctaLabel, href: page.ctaHref, variant: "primary" },
+          {
+            label:
+              locale === "ko"
+                ? "제품·솔루션"
+                : locale === "en"
+                  ? "Products & Solutions"
+                  : "Sản phẩm & giải pháp",
+            href: localizedPath(locale, "solutions"),
+            variant: "secondary",
+          },
+        ]}
+      />
     </div>
   </section>
 </BaseLayout>
@@ -183,7 +217,7 @@ const contactLabels = {
 <style>
   .page-hero {
     background:
-      linear-gradient(135deg, rgba(11, 31, 58, 0.96), rgba(11, 31, 58, 0.88)),
+      linear-gradient(135deg, rgba(11, 31, 58, 0.96), rgba(48, 57, 70, 0.9)),
       var(--color-navy);
     color: white;
     overflow: hidden;
@@ -199,7 +233,7 @@ const contactLabels = {
   .eyebrow,
   .panel-eyebrow,
   .section-intro p {
-    color: var(--color-blue);
+    color: var(--color-steel);
     font-weight: 900;
     letter-spacing: 0;
     margin: 0 0 var(--space-2);
@@ -210,10 +244,12 @@ const contactLabels = {
   }
 
   h1 {
-    font-size: clamp(2.5rem, 8vw, 5.25rem);
-    line-height: 1.02;
+    font-size: clamp(2.25rem, 6vw, 4.35rem);
+    line-height: 1.08;
     margin: 0;
-    max-width: 11ch;
+    max-width: 15ch;
+    overflow-wrap: keep-all;
+    word-break: keep-all;
   }
 
   .lead {
@@ -230,7 +266,6 @@ const contactLabels = {
     gap: var(--space-3);
     min-height: 260px;
     padding: var(--space-6);
-    position: relative;
   }
 
   .process-visual span {
@@ -242,7 +277,7 @@ const contactLabels = {
   }
 
   .process-visual span:nth-child(2) {
-    background: var(--color-blue);
+    background: var(--color-steel);
     margin-left: 14%;
   }
 
@@ -252,7 +287,7 @@ const contactLabels = {
 
   .process-visual strong {
     align-self: end;
-    font-size: clamp(1.4rem, 4vw, 2.25rem);
+    font-size: clamp(1.35rem, 4vw, 2.2rem);
   }
 
   .content-grid {
@@ -269,7 +304,7 @@ const contactLabels = {
   }
 
   .info-panel:nth-child(1) {
-    border-left: 6px solid var(--color-blue);
+    border-left: 6px solid var(--color-steel);
   }
 
   h2 {
@@ -277,6 +312,8 @@ const contactLabels = {
     font-size: clamp(1.45rem, 3vw, 2.25rem);
     line-height: 1.15;
     margin: 0 0 var(--space-3);
+    overflow-wrap: keep-all;
+    word-break: keep-all;
   }
 
   p {
@@ -321,7 +358,7 @@ const contactLabels = {
   }
 
   dt {
-    color: var(--color-blue);
+    color: var(--color-steel);
     font-weight: 900;
   }
 
@@ -343,6 +380,16 @@ const contactLabels = {
 
     .content-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    .page-hero {
+      padding-block: var(--space-6);
+    }
+
+    .process-visual {
+      min-height: 180px;
     }
   }
 </style>
