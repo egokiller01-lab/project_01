@@ -116,7 +116,7 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
         title: "한국 기술과 베트남 대응",
         summary:
           "한국 포뮬레이션 기술을 기반으로 베트남 제조 현장의 작업조건, 불량 증상, 보충 관리 이슈를 함께 확인합니다.",
-        items: ["포뮬레이션 검토", "현장 조건 확인", "욕관리 지원"],
+        items: ["포뮬레이션 검토", "현장 조건 확인", "도금욕 관리 지원"],
       },
     ],
   },
@@ -127,7 +127,7 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
     description:
       "전처리, 전기도금, 무전해도금, 아노다이징, 화성피막, 후처리, 기초화학약품, 여과장비 제품군을 안내합니다.",
     eyebrow: "제품·솔루션",
-    lead: "개별 제품명보다 공정, 소재, 관리 항목을 먼저 확인할 수 있도록 제품군을 정리했습니다.",
+    lead: "개별 제품명보다 공정과 관리 항목을 먼저 확인할 수 있도록 제품군을 정리했습니다.",
     ctaLabel: "공정별 기술문의",
     ctaHref: "/ko/contact/",
     sections: [
@@ -141,7 +141,7 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
         title: "기술문의 연결 방식",
         summary:
           "제품 자료가 확인되지 않은 상세페이지는 만들지 않고, 제품군별 문의를 통해 적용 공정과 요청 자료를 확인합니다.",
-        items: ["대상 소재", "현재 공정", "주요 불량", "요청 자료"],
+        items: ["제품군", "현재 공정", "주요 불량", "요청 자료"],
       },
     ],
   },
@@ -150,18 +150,18 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
     title: "현장 조건을 함께 보는 기술지원",
     seoTitle: "기술지원 | PLACHEM VINA",
     description:
-      "공정 진단, 분석 지원, 불량 대응, 욕관리, 신규 라인 및 제품 적용 지원 범위를 안내합니다.",
+      "공정 진단, 분석 지원, 불량 대응, 도금욕 관리, 신규 라인 및 제품 적용 지원 범위를 안내합니다.",
     eyebrow: "기술지원",
-    lead: "표면처리 문제는 약품명 하나로 판단하기 어렵습니다. 소재, 전처리, bath 관리, 여과, 수세, 후처리를 함께 봅니다.",
+    lead: "표면처리 문제는 약품명 하나로 판단하기 어렵습니다. 전처리, 도금욕 관리, 여과, 수세, 후처리를 함께 봅니다.",
     ctaLabel: "공정 조건 상담",
     ctaHref: "/ko/contact/",
     sections: [
       {
         title: "공정 진단",
         summary:
-          "소재와 현재 라인 조건, 불량 발생 시점, 최근 변경 사항을 기준으로 확인 순서를 정리합니다.",
+          "현재 라인 조건, 불량 발생 시점, 최근 변경 사항을 기준으로 확인 순서를 정리합니다.",
         items: [
-          "소재 확인",
+          "공정 확인",
           "전처리·도금욕 조건",
           "수세·후처리",
           "최근 변경 사항",
@@ -182,8 +182,8 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
       {
         title: "신규 적용 지원",
         summary:
-          "신규 라인이나 제품 적용 전에는 대상 소재, 요구 품질, 평가 조건을 먼저 확인합니다.",
-        items: ["적용 목적", "대상 소재", "평가 기준", "요청 문서"],
+          "신규 라인이나 제품 적용 전에는 적용 목적, 요구 품질, 평가 기준을 먼저 확인합니다.",
+        items: ["적용 목적", "공정 조건", "평가 기준", "요청 문서"],
       },
     ],
   },
@@ -194,7 +194,7 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
     description:
       "원료 입고, 제조관리, 공정검사, 출하검사, LOT 추적, TDS·SDS·COA 제공 절차를 안내합니다.",
     eyebrow: "품질관리",
-    lead: "품질관리는 검사 항목을 나열하는 일이 아니라, 원료 확인부터 고객 적용 후 피드백까지 추적 가능한 흐름을 만드는 일입니다.",
+    lead: "품질관리는 검사 항목을 나열하는 일이 아니라, 원료 확인부터 제조·검사·출하·LOT 관리까지 흐름을 정리하는 일입니다.",
     ctaLabel: "자료 요청",
     ctaHref: "/ko/contact/",
     sections: [
@@ -214,7 +214,7 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
         title: "출하검사와 LOT 추적",
         summary:
           "완제품검사와 출하 전 확인을 통해 주요 공급품의 LOT 추적 관리를 유지합니다.",
-        items: ["완제품검사", "출하 전 확인", "LOT 추적", "고객 피드백"],
+        items: ["완제품검사", "출하 전 확인", "LOT 추적", "기록 관리"],
       },
       {
         title: "TDS·SDS·COA 제공 절차",
@@ -226,19 +226,19 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
   },
   knowledge: {
     key: "knowledge",
-    title: "검증된 기술자료만 연결합니다",
+    title: "공정별로 찾아보는 기술자료",
     seoTitle: "기술자료 | PLACHEM VINA",
     description:
       "표면처리 공정관리, 불량 원인, 약품 안전·관리 자료를 기술 블로그와 요청 절차로 연결합니다.",
     eyebrow: "기술자료",
-    lead: "준비되지 않은 자료를 다운로드처럼 보이게 만들지 않습니다. 공개 가능한 글과 요청 가능한 자료 범위를 분리합니다.",
+    lead: "공정관리, 불량 원인, 약품 안전과 품질관리에 필요한 기술자료를 공정별로 안내합니다.",
     ctaLabel: "자료 요청",
     ctaHref: "/ko/contact/",
     sections: [
       {
         title: "기술 블로그 연결",
         summary:
-          "검증된 기술 블로그 글만 외부 링크로 연결해 공정별 참고 자료를 확인할 수 있게 합니다.",
+          "표면처리 공정과 불량 원인을 다룬 기술 블로그 글을 공정별 참고 자료로 연결합니다.",
         items: ["소재·도금", "전기도금", "불량 분석"],
       },
       {
@@ -257,26 +257,26 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
   },
   contact: {
     key: "contact",
-    title: "공정 정보를 정리해 기술문의를 보내주세요",
+    title: "공정 조건에 맞는 기술지원을 상담하세요",
     seoTitle: "기술문의 | PLACHEM VINA",
     description:
-      "문의 가능한 내용, 접수 전 준비 정보, 베트남 법인과 한국 연락처를 안내합니다.",
+      "상담 가능한 내용, 준비하면 좋은 정보, 베트남 법인과 한국 연락처를 안내합니다.",
     eyebrow: "기술문의",
-    lead: "문의 전에 소재, 공정, 현재 증상, 요청 자료를 정리하면 제품군 검토와 기술 회신이 빨라집니다.",
+    lead: "제품군, 현재 공정, 증상, 요청 자료를 기준으로 기술지원 상담 범위를 확인할 수 있습니다.",
     ctaLabel: "제품·솔루션 보기",
     ctaHref: "/ko/solutions/",
     sections: [
       {
-        title: "문의 가능한 내용",
+        title: "상담 가능한 내용",
         summary:
-          "제품군 적용, 공정 조건, 불량 원인, 욕관리, 신규 라인 적용, TDS·SDS·COA 자료 요청을 상담할 수 있습니다.",
+          "제품군 적용, 공정 조건, 불량 원인, 도금욕 관리, 신규 라인 적용, TDS·SDS·COA 자료 요청을 상담할 수 있습니다.",
         items: ["제품군 검토", "공정 문제", "자료 요청", "신규 적용"],
       },
       {
-        title: "접수 전 준비 정보",
+        title: "준비하면 좋은 정보",
         summary:
-          "회사명, 담당자 연락처, 대상 소재, 현재 공정, 사용 중인 약품, 불량 사진 또는 증상 설명을 준비해 주세요.",
-        items: ["소재", "공정", "증상", "요청 자료"],
+          "회사명, 담당자 연락처, 제품군, 현재 공정, 사용 중인 약품, 불량 사진 또는 증상 설명이 있으면 상담에 도움이 됩니다.",
+        items: ["제품군", "공정", "증상", "요청 자료"],
       },
     ],
   },

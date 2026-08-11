@@ -4,6 +4,7 @@ import CTAPanel from "./CTAPanel.astro";
 import Hero from "./Hero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { homeContent } from "../data/home";
+import { companyFacts } from "../data/pages";
 import type { Locale } from "../types";
 
 type Props = {
@@ -12,6 +13,25 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
+const isKorean = locale === "ko";
+const pendingCopy = {
+  en: {
+    title: "Korean homepage renewal is under review",
+    body: "English content will remain as a simple notice until Korean approval is complete.",
+    korean: "View Korean page",
+    contact: "Basic contact",
+    vietnam: "Vietnam",
+    korea: "Korea",
+  },
+  vi: {
+    title: "Trang tiếng Hàn đang được duyệt",
+    body: "Nội dung tiếng Việt được giữ ở dạng thông báo ngắn cho đến khi bản tiếng Hàn được phê duyệt.",
+    korean: "Xem trang tiếng Hàn",
+    contact: "Liên hệ cơ bản",
+    vietnam: "Việt Nam",
+    korea: "Hàn Quốc",
+  },
+};
 ---
 
 <BaseLayout
@@ -20,128 +40,162 @@ const content = homeContent[locale];
   description={content.description}
   pageKey="home"
 >
-  <Hero
-    eyebrow={content.heroEyebrow}
-    titleLines={content.heroTitleLines}
-    accent={content.heroAccent}
-    summary={content.heroSummary}
-    ctas={content.primaryCtas}
-    strengths={content.strengths}
-  />
+  {
+    isKorean ? (
+      <>
+        <Hero
+          eyebrow={content.heroEyebrow}
+          titleLines={content.heroTitleLines}
+          accent={content.heroAccent}
+          summary={content.heroSummary}
+          ctas={content.primaryCtas}
+          strengths={content.strengths}
+        />
 
-  <section class="section value-section">
-    <div class="container">
-      <div class="section-kicker">PROCESS VALUE</div>
-      <div class="split-heading">
-        <h2>{content.sectionLabels.value}</h2>
-        <p>{content.sectionSummaries.value}</p>
-      </div>
-      <ol class="value-flow">
-        {
-          content.valueFlow.map((step, index) => (
-            <li>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{step}</strong>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <section class="section section--white compact-solutions">
-    <div class="container">
-      <div class="split-heading">
-        <h2>{content.sectionLabels.solutions}</h2>
-        <p>{content.sectionSummaries.solutions}</p>
-      </div>
-      <div class="solution-lines">
-        {
-          content.featuredProducts.map((product, index) => (
-            <a href={product.href} class="solution-line">
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <h3>{product.title}</h3>
-                <p>{product.summary}</p>
-              </div>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section support-section">
-    <div class="container support-layout">
-      <div>
-        <div class="section-kicker">FIELD SUPPORT</div>
-        <h2>{content.sectionLabels.technology}</h2>
-        <p>{content.sectionSummaries.technology}</p>
-      </div>
-      <ol class="support-process">
-        {
-          content.supportFlow.map((item, index) => (
-            <li>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.summary}</p>
-                <small>{item.checks.join(" · ")}</small>
-              </div>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <section class="section section--white quality-section">
-    <div class="container">
-      <div class="split-heading">
-        <h2>{content.sectionLabels.quality}</h2>
-        <p>{content.sectionSummaries.quality}</p>
-      </div>
-      <ol class="quality-flow">
-        {
-          content.qualitySteps.map((step, index) => (
-            <li>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{step}</strong>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <section class="section knowledge-section">
-    <div class="container knowledge-layout">
-      <div>
-        <div class="section-kicker">TECHNICAL NOTE</div>
-        <h2>{content.sectionLabels.knowledge}</h2>
-        <p>{content.sectionSummaries.knowledge}</p>
-      </div>
-      {
-        content.blogs.length > 0 && (
-          <div class="blog-list">
-            {content.blogs.map((blog) => (
-              <BlogCard {...blog} />
-            ))}
+        <section class="section value-section">
+          <div class="container">
+            <div class="section-kicker">PROCESS VALUE</div>
+            <div class="split-heading">
+              <h2>{content.sectionLabels.value}</h2>
+              <p>{content.sectionSummaries.value}</p>
+            </div>
+            <ol class="value-flow">
+              {content.valueFlow.map((step, index) => (
+                <li>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{step}</strong>
+                </li>
+              ))}
+            </ol>
           </div>
-        )
-      }
-    </div>
-  </section>
+        </section>
 
-  <section class="section section--white">
-    <div class="container">
-      <CTAPanel
-        title="공정 조건을 정리해 문의하세요"
-        summary="소재, 공정, 현재 증상, 요청 자료를 함께 알려주시면 기술 검토에 필요한 정보를 빠르게 정리할 수 있습니다."
-        ctas={content.primaryCtas}
-      />
-    </div>
-  </section>
+        <section class="section section--white compact-solutions">
+          <div class="container">
+            <div class="split-heading">
+              <h2>{content.sectionLabels.solutions}</h2>
+              <p>{content.sectionSummaries.solutions}</p>
+            </div>
+            <div class="solution-lines">
+              {content.featuredProducts.map((product, index) => (
+                <a href={product.href} class="solution-line">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3>{product.title}</h3>
+                    <p>{product.summary}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="section support-section">
+          <div class="container support-layout">
+            <div>
+              <div class="section-kicker">FIELD SUPPORT</div>
+              <h2>{content.sectionLabels.technology}</h2>
+              <p>{content.sectionSummaries.technology}</p>
+            </div>
+            <ol class="support-process">
+              {content.supportFlow.map((item, index) => (
+                <li>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.summary}</p>
+                    <small>{item.checks.join(" · ")}</small>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section class="section section--white quality-section">
+          <div class="container">
+            <div class="split-heading">
+              <h2>{content.sectionLabels.quality}</h2>
+              <p>{content.sectionSummaries.quality}</p>
+            </div>
+            <ol class="quality-flow">
+              {content.qualitySteps.map((step, index) => (
+                <li>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{step}</strong>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section class="section knowledge-section">
+          <div class="container knowledge-layout">
+            <div>
+              <div class="section-kicker">TECHNICAL NOTE</div>
+              <h2>{content.sectionLabels.knowledge}</h2>
+              <p>{content.sectionSummaries.knowledge}</p>
+            </div>
+            {content.blogs.length > 0 && (
+              <div class="blog-list">
+                {content.blogs.map((blog) => (
+                  <BlogCard {...blog} />
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section class="section section--white">
+          <div class="container">
+            <CTAPanel
+              title="공정 조건을 기준으로 상담하세요"
+              summary="제품군, 공정, 현재 증상, 요청 자료를 기준으로 기술지원 상담 범위를 확인할 수 있습니다."
+              ctas={content.primaryCtas}
+            />
+          </div>
+        </section>
+      </>
+    ) : (
+      <section class="section pending-home">
+        <div class="container pending-home__grid">
+          <div>
+            <p class="section-kicker">PLACHEM VINA</p>
+            <h1>{pendingCopy[locale].title}</h1>
+            <p>{pendingCopy[locale].body}</p>
+            <a class="button button--primary" href="/ko/">
+              {pendingCopy[locale].korean}
+            </a>
+          </div>
+          <div class="pending-contact">
+            <h2>{pendingCopy[locale].contact}</h2>
+            <dl>
+              <div>
+                <dt>{pendingCopy[locale].vietnam}</dt>
+                <dd>{companyFacts.site}</dd>
+                <dd>
+                  <a
+                    href={`tel:${companyFacts.vietnamPhone.replaceAll(" ", "")}`}
+                  >
+                    {companyFacts.vietnamPhone}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt>{pendingCopy[locale].korea}</dt>
+                <dd>{companyFacts.koreaAddressEn}</dd>
+                <dd>
+                  <a href={`tel:${companyFacts.koreaPhone}`}>
+                    {companyFacts.koreaPhone}
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+    )
+  }
 </BaseLayout>
 
 <style>
@@ -299,10 +353,70 @@ const content = homeContent[locale];
     gap: var(--space-3);
   }
 
+  .pending-home {
+    background:
+      linear-gradient(rgba(192, 199, 209, 0.14) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(192, 199, 209, 0.14) 1px, transparent 1px),
+      var(--color-light);
+    background-size: 36px 36px;
+    min-height: 62vh;
+  }
+
+  .pending-home__grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .pending-home h1 {
+    color: var(--color-navy);
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
+    line-height: 1.08;
+    margin: 0;
+    max-width: 12ch;
+  }
+
+  .pending-home p {
+    font-size: 1.08rem;
+    margin: var(--space-4) 0;
+    max-width: 42rem;
+  }
+
+  .pending-contact {
+    background: white;
+    border: var(--border);
+    padding: var(--space-5);
+  }
+
+  .pending-contact h2 {
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    margin-bottom: var(--space-4);
+  }
+
+  .pending-contact dl {
+    display: grid;
+    gap: var(--space-4);
+    margin: 0;
+  }
+
+  .pending-contact dt {
+    color: var(--color-blue);
+    font-weight: 900;
+  }
+
+  .pending-contact dd {
+    margin: var(--space-1) 0 0;
+  }
+
+  .pending-contact a {
+    color: var(--color-blue);
+    font-weight: 900;
+  }
+
   @media (min-width: 48rem) {
     .split-heading,
     .support-layout,
-    .knowledge-layout {
+    .knowledge-layout,
+    .pending-home__grid {
       grid-template-columns: 0.78fr 1fr;
     }
 

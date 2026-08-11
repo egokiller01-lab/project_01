@@ -33,7 +33,7 @@ const processMap = Object.fromEntries(
   productSlugs.map((slug) => [slug, processLabels[slug]]),
 );
 const supportSteps = [
-  "공정 정보 접수",
+  "공정 정보 확인",
   "도금욕 분석",
   "불량 원인 분류",
   "조건 조정",
@@ -48,6 +48,11 @@ const qualitySteps = [
   "LOT 추적",
   "TDS·SDS·COA 제공",
 ];
+const heroProductIndexes = productDetails.map((product, index) => ({
+  number: String(index + 1).padStart(2, "0"),
+  title: product.title,
+}));
+const heroQualitySteps = ["원료", "제조", "검사", "출하", "LOT"];
 const contactLabels = {
   ko: {
     vietnam: "베트남 법인",
@@ -87,9 +92,73 @@ const contactLabels = {
         <h1>{page.title}</h1>
         <p class="lead">{page.lead}</p>
       </div>
-      <div class="sub-hero__mark" aria-hidden="true">
-        <span>{pageLabels[locale][pageKey].short}</span>
-      </div>
+      {
+        locale === "ko" && pageKey === "about" && (
+          <div class="hero-aside hero-aside--year" aria-label="설립 정보">
+            <span>2016</span>
+            <strong>설립</strong>
+            <p>Bắc Ninh 제조 기반</p>
+          </div>
+        )
+      }
+      {
+        locale === "ko" && pageKey === "solutions" && (
+          <div class="hero-aside hero-aside--index" aria-label="8개 제품군">
+            {heroProductIndexes.map((item) => (
+              <span>
+                <b>{item.number}</b>
+                {item.title}
+              </span>
+            ))}
+          </div>
+        )
+      }
+      {
+        locale === "ko" && pageKey === "technology" && (
+          <ol class="hero-aside hero-aside--steps" aria-label="진단 흐름">
+            {supportSteps.map((step, index) => (
+              <li>
+                <b>{String(index + 1).padStart(2, "0")}</b>
+                {step}
+              </li>
+            ))}
+          </ol>
+        )
+      }
+      {
+        locale === "ko" && pageKey === "quality" && (
+          <ol class="hero-aside hero-aside--quality" aria-label="품질관리 흐름">
+            {heroQualitySteps.map((step) => (
+              <li>{step}</li>
+            ))}
+          </ol>
+        )
+      }
+      {
+        locale === "ko" && pageKey === "knowledge" && (
+          <div class="hero-aside hero-aside--magazine" aria-label="기술문서">
+            <span>TECHNICAL</span>
+            <strong>DOCUMENTS</strong>
+            <p>공정관리 · 불량 원인 · 품질문서</p>
+          </div>
+        )
+      }
+      {
+        locale === "ko" && pageKey === "contact" && (
+          <div class="hero-aside hero-aside--contact" aria-label="연락처">
+            <span>+84 222 395 2060</span>
+            <strong>기술지원 상담</strong>
+            <p>제품군과 공정 조건을 기준으로 안내합니다.</p>
+          </div>
+        )
+      }
+      {
+        locale !== "ko" && (
+          <div class="sub-hero__mark" aria-hidden="true">
+            <span>{pageLabels[locale][pageKey].short}</span>
+          </div>
+        )
+      }
     </div>
   </section>
 
@@ -139,7 +208,7 @@ const contactLabels = {
                   <dd>{product.processes.join(" · ")}</dd>
                 </div>
                 <div>
-                  <dt>취급 범위</dt>
+                  <dt>취급 품목·공정</dt>
                   <dd>{product.materials.join(" · ")}</dd>
                 </div>
               </dl>
@@ -240,8 +309,8 @@ const contactLabels = {
           >
             <span data-selected-process>문의 분야: 제품·솔루션</span>
             <p>
-              문의 전 대상 소재, 현재 공정, 사용 중인 약품, 증상 또는 요청
-              자료를 정리해 주세요.
+              제품군, 현재 공정, 사용 중인 약품, 증상 또는 요청 자료를 기준으로
+              상담 범위를 확인할 수 있습니다.
             </p>
           </article>
           <article class="contact-card">
@@ -339,13 +408,38 @@ const contactLabels = {
     padding-block: var(--space-7);
   }
 
+  .sub-hero--about {
+    background: linear-gradient(
+      90deg,
+      #ffffff 0 64%,
+      var(--color-light) 64% 100%
+    );
+  }
+
   .sub-hero--solutions,
   .sub-hero--quality {
     background-color: var(--color-light);
   }
 
+  .sub-hero--technology {
+    background:
+      linear-gradient(rgba(11, 31, 58, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11, 31, 58, 0.035) 1px, transparent 1px),
+      #ffffff;
+    background-size: 28px 28px;
+  }
+
+  .sub-hero--knowledge {
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 52%, #eef2f7 52%);
+  }
+
+  .sub-hero--contact {
+    min-height: clamp(190px, 22vw, 255px);
+    padding-block: clamp(2rem, 4vw, 3.2rem);
+  }
+
   .sub-hero__inner {
-    align-items: end;
+    align-items: center;
     display: grid;
     gap: var(--space-5);
   }
@@ -360,10 +454,15 @@ const contactLabels = {
 
   h1 {
     color: var(--color-navy);
-    font-size: clamp(2.2rem, 5vw, 4.5rem);
+    font-size: clamp(2.1rem, 4.2vw, 3.5rem);
     line-height: 1.08;
     margin: 0;
-    max-width: 16ch;
+    max-width: 18ch;
+  }
+
+  .sub-hero--contact h1 {
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    max-width: 22ch;
   }
 
   .lead {
@@ -378,6 +477,133 @@ const contactLabels = {
     font-size: clamp(1.1rem, 2vw, 1.5rem);
     font-weight: 900;
     padding: var(--space-4);
+  }
+
+  .hero-aside {
+    color: var(--color-navy);
+  }
+
+  .hero-aside--year {
+    border-left: 6px solid var(--color-blue);
+    padding-left: var(--space-5);
+  }
+
+  .hero-aside--year span {
+    color: var(--color-navy);
+    display: block;
+    font-size: clamp(4rem, 9vw, 7rem);
+    font-weight: 900;
+    line-height: 0.9;
+  }
+
+  .hero-aside--year strong,
+  .hero-aside--magazine strong,
+  .hero-aside--contact strong {
+    display: block;
+    font-size: clamp(1.25rem, 2.4vw, 1.9rem);
+    margin-top: var(--space-2);
+  }
+
+  .hero-aside--year p,
+  .hero-aside--magazine p,
+  .hero-aside--contact p {
+    margin-top: var(--space-2);
+  }
+
+  .hero-aside--index {
+    display: grid;
+    gap: var(--space-2);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-aside--index span {
+    align-items: center;
+    background: white;
+    border: var(--border);
+    display: grid;
+    gap: var(--space-2);
+    grid-template-columns: 2.3rem 1fr;
+    min-height: 48px;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .hero-aside b {
+    color: var(--color-blue);
+    font-size: 0.82rem;
+    font-weight: 900;
+  }
+
+  .hero-aside--steps,
+  .hero-aside--quality {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-aside--steps {
+    background: white;
+    border: var(--border);
+  }
+
+  .hero-aside--steps li {
+    align-items: center;
+    border: 0;
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 2.6rem 1fr;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .hero-aside--steps li + li {
+    border-top: var(--border);
+  }
+
+  .hero-aside--quality {
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .hero-aside--quality li {
+    align-items: center;
+    aspect-ratio: 1;
+    background: white;
+    border: var(--border);
+    display: flex;
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+    justify-content: center;
+    padding: var(--space-2);
+    text-align: center;
+  }
+
+  .hero-aside--quality li + li {
+    border-left: 0;
+  }
+
+  .hero-aside--magazine {
+    background: var(--color-navy);
+    color: white;
+    padding: var(--space-5);
+  }
+
+  .hero-aside--magazine span {
+    color: var(--color-steel);
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-aside--contact {
+    background: white;
+    border: var(--border);
+    padding: var(--space-4);
+  }
+
+  .hero-aside--contact span {
+    color: var(--color-blue);
+    display: block;
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    font-weight: 900;
   }
 
   h2,
@@ -586,6 +812,10 @@ const contactLabels = {
   .contact-card a {
     color: var(--color-blue);
     font-weight: 900;
+  }
+
+  .contact-page {
+    padding-block: clamp(2.2rem, 4vw, 3.2rem);
   }
 
   @media (min-width: 48rem) {
