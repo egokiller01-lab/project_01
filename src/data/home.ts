@@ -201,8 +201,8 @@ const enHome: HomeContent = {
   description:
     "PLACHEM VINA provides surface treatment chemical solutions through Korean formulation expertise combined with Vietnam-based manufacturing and technical support.",
   heroEyebrow: "KOREAN FORMULATION · VIETNAM MANUFACTURING",
-  heroTitleLines: ["Stability for", "surface treatment"],
-  heroAccent: "chemical solutions",
+  heroTitleLines: ["Chemical solutions", "for stable"],
+  heroAccent: "surface treatment processes",
   heroSummary:
     "Korean formulation expertise combined with Vietnam-based manufacturing and technical support helps improve quality at customer production sites.",
   primaryCtas: [
@@ -220,7 +220,7 @@ const enHome: HomeContent = {
   ],
   valueFlow: [
     "Process analysis",
-    "Suitable chemical supply",
+    "Supply of suitable chemicals",
     "On-site stabilization support",
   ],
   sectionLabels: {
@@ -234,7 +234,7 @@ const enHome: HomeContent = {
     value:
       "Before supplying chemicals, we review product group, process, defect symptoms, and management records to connect supply with process stabilization.",
     solutions:
-      "Core solution areas are organized around the main process axes of surface treatment. The full product groups are available on the Products & Solutions page.",
+      "Core solution areas are organized around the major surface treatment process stages. The full product groups are available on the Products & Solutions page.",
     technology:
       "From plating bath analysis to condition adjustment and follow-up checks, issues are narrowed down step by step.",
     quality:
@@ -319,12 +319,12 @@ const enHome: HomeContent = {
 const viHome: HomeContent = {
   seoTitle: "PLACHEM VINA | Giải pháp hóa chất xử lý bề mặt chính xác",
   description:
-    "PLACHEM VINA cung cấp giải pháp hóa chất xử lý bề mặt dựa trên công nghệ formulation Hàn Quốc, sản xuất tại Việt Nam và hỗ trợ kỹ thuật hiện trường.",
+    "PLACHEM VINA cung cấp giải pháp hóa chất xử lý bề mặt dựa trên năng lực phát triển công thức hóa chất của Hàn Quốc, sản xuất tại Việt Nam và hỗ trợ kỹ thuật hiện trường.",
   heroEyebrow: "KOREAN FORMULATION · VIETNAM MANUFACTURING",
   heroTitleLines: ["Tạo sự ổn định", "cho công đoạn"],
   heroAccent: "xử lý bề mặt",
   heroSummary:
-    "Công nghệ formulation Hàn Quốc kết hợp với sản xuất tại Việt Nam và hỗ trợ kỹ thuật hiện trường giúp nâng cao chất lượng tại dây chuyền sản xuất của khách hàng.",
+    "Năng lực phát triển công thức hóa chất của Hàn Quốc kết hợp với sản xuất tại Việt Nam và hỗ trợ kỹ thuật hiện trường giúp nâng cao chất lượng tại dây chuyền sản xuất của khách hàng.",
   primaryCtas: [
     {
       label: "Xem sản phẩm & giải pháp",

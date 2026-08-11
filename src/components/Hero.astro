@@ -95,6 +95,10 @@ const {
     min-height: 480px;
   }
 
+  :global(html[lang="en"]) .hero-grid {
+    min-height: 440px;
+  }
+
   .eyebrow {
     color: var(--color-blue);
     font-size: 0.78rem;
@@ -109,6 +113,10 @@ const {
     letter-spacing: 0;
     line-height: 1.05;
     margin: 0;
+  }
+
+  :global(html[lang="en"]) h1 {
+    font-size: clamp(38px, 4.4vw, 58px);
   }
 
   h1 span {

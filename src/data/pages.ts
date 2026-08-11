@@ -392,7 +392,7 @@ const enPages: Record<StaticPageKey, StaticPageContent> = {
       {
         title: "Inquiry connection",
         summary:
-          "No unconfirmed individual product detail pages are provided. Product group inquiries connect the process and requested documents.",
+          "Select the product group that matches your process, then review the current conditions, main defect, and required documents for technical consultation.",
         items: [
           "Product group",
           "Current process",
@@ -506,7 +506,7 @@ const enPages: Record<StaticPageKey, StaticPageContent> = {
       {
         title: "TDS/SDS/COA procedure",
         summary:
-          "Documents are guided individually after product name, purpose of use, and requested document type are confirmed.",
+          "Document requests are handled after confirming the product name, intended use, and required document type.",
         items: ["TDS", "SDS", "COA", "Purpose confirmation"],
       },
     ],
@@ -547,7 +547,7 @@ const enPages: Record<StaticPageKey, StaticPageContent> = {
           "Product name",
           "Document type",
           "Purpose of use",
-          "Reply contact",
+          "Contact details",
         ],
       },
     ],
@@ -593,7 +593,7 @@ const viPages: Record<StaticPageKey, StaticPageContent> = {
     description:
       "PLACHEM VINA là doanh nghiệp sản xuất hóa chất xử lý bề mặt và hỗ trợ kỹ thuật tại Bắc Ninh, Việt Nam từ năm 2016.",
     eyebrow: "Giới thiệu",
-    lead: "PLACHEM VINA kết nối công nghệ formulation Hàn Quốc với nền tảng sản xuất tại Việt Nam để hỗ trợ cung ứng hóa chất và ổn định công đoạn xử lý bề mặt.",
+    lead: "PLACHEM VINA kết nối năng lực phát triển công thức hóa chất của Hàn Quốc với nền tảng sản xuất tại Việt Nam để hỗ trợ cung ứng hóa chất và ổn định công đoạn xử lý bề mặt.",
     ctaLabel: "Tư vấn kỹ thuật",
     ctaHref: "/vi/contact/",
     sections: [
@@ -630,9 +630,9 @@ const viPages: Record<StaticPageKey, StaticPageContent> = {
       {
         title: "Công nghệ Hàn Quốc và đáp ứng tại Việt Nam",
         summary:
-          "Dựa trên công nghệ formulation Hàn Quốc, PLACHEM VINA xem xét điều kiện vận hành, triệu chứng lỗi và vấn đề quản lý bổ sung tại hiện trường sản xuất ở Việt Nam.",
+          "Dựa trên năng lực phát triển công thức hóa chất của Hàn Quốc, PLACHEM VINA xem xét điều kiện vận hành, triệu chứng lỗi và vấn đề quản lý bổ sung tại hiện trường sản xuất ở Việt Nam.",
         items: [
-          "Rà soát formulation",
+          "Rà soát công thức hóa chất",
           "Kiểm tra điều kiện hiện trường",
           "Hỗ trợ quản lý bể mạ",
         ],
@@ -659,7 +659,7 @@ const viPages: Record<StaticPageKey, StaticPageContent> = {
       {
         title: "Kết nối tư vấn",
         summary:
-          "Không cung cấp trang chi tiết sản phẩm riêng lẻ khi chưa có tài liệu xác nhận. Tư vấn theo nhóm sản phẩm kết nối công đoạn và tài liệu cần yêu cầu.",
+          "Chọn nhóm sản phẩm phù hợp với công đoạn, sau đó chuẩn bị thông tin về điều kiện hiện tại, lỗi chính và tài liệu cần thiết để được tư vấn kỹ thuật.",
         items: [
           "Nhóm sản phẩm",
           "Công đoạn hiện tại",
@@ -752,9 +752,9 @@ const viPages: Record<StaticPageKey, StaticPageContent> = {
       {
         title: "Quản lý sản xuất",
         summary:
-          "Trong sản xuất, tình trạng sản phẩm được quản lý theo điều kiện formulation và các hạng mục kiểm tra trong công đoạn.",
+          "Trong sản xuất, tình trạng sản phẩm được quản lý theo điều kiện công thức và sản xuất cùng các hạng mục kiểm tra trong công đoạn.",
         items: [
-          "Formulation và sản xuất",
+          "Công thức hóa chất và sản xuất",
           "Kiểm tra trong công đoạn",
           "Hồ sơ công việc",
         ],

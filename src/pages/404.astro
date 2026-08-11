@@ -1,64 +1,153 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
 ---
 
-<BaseLayout
-  locale="ko"
-  title="페이지를 찾을 수 없습니다 | PLACHEM VINA"
-  description="요청한 페이지를 찾을 수 없습니다."
->
-  <section class="not-found">
-    <div class="container not-found__inner">
-      <p>404</p>
-      <h1>페이지를 찾을 수 없습니다</h1>
-      <span
-        >주소를 다시 확인하거나 제품·솔루션 페이지에서 필요한 정보를 찾아보세요.</span
-      >
-      <div class="not-found__actions">
-        <a class="button button--primary" href="/ko/">한국어 홈</a>
-        <a class="button button--secondary" href="/en/">English Home</a>
-        <a class="button button--ghost" href="/vi/">Tiếng Việt</a>
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Page not found | PLACHEM VINA</title>
+    <meta name="description" content="PLACHEM VINA multilingual 404 page." />
+  </head>
+  <body class="not-found-page">
+    <main class="not-found" aria-labelledby="not-found-title">
+      <div class="not-found__brand" aria-label="PLACHEM VINA">
+        <strong>PLACHEM</strong>
+        <span>VINA CO., LTD.</span>
       </div>
-    </div>
-  </section>
-</BaseLayout>
+      <p class="not-found__code">404</p>
+      <div class="not-found__titles" id="not-found-title">
+        <h1>페이지를 찾을 수 없습니다</h1>
+        <p>Page not found</p>
+        <p>Không tìm thấy trang</p>
+      </div>
+      <nav class="not-found__actions" aria-label="Language home links">
+        <a href="/ko/">한국어 홈</a>
+        <a href="/en/">English Home</a>
+        <a href="/vi/">Tiếng Việt</a>
+      </nav>
+    </main>
+  </body>
+</html>
 
 <style>
+  :global(.not-found-page) {
+    background:
+      linear-gradient(rgba(11, 31, 58, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11, 31, 58, 0.035) 1px, transparent 1px),
+      var(--color-bg);
+    background-size: 34px 34px;
+    color: var(--color-text);
+    min-height: 100vh;
+  }
+
   .not-found {
     align-items: center;
     display: flex;
-    min-height: 68vh;
-    padding-block: var(--space-8);
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 48px 20px;
+    text-align: center;
   }
 
-  .not-found__inner {
-    max-width: 720px;
-  }
-
-  p {
-    color: var(--color-blue);
-    font-size: 1rem;
-    font-weight: 900;
-    margin: 0 0 var(--space-3);
-  }
-
-  h1 {
+  .not-found__brand {
+    align-items: center;
     color: var(--color-navy);
-    font-size: clamp(2.4rem, 6vw, 4.5rem);
-    line-height: 1.05;
-    margin: 0;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 44px;
   }
 
-  span {
-    display: block;
-    font-size: 1.12rem;
-    margin-top: var(--space-4);
+  .not-found__brand strong {
+    font-family: var(--font-en);
+    font-size: 1.55rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .not-found__brand span {
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+  }
+
+  .not-found__code {
+    color: var(--color-blue);
+    font-family: var(--font-en);
+    font-size: 0.88rem;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    margin: 0 0 14px;
+  }
+
+  .not-found__titles {
+    display: grid;
+    gap: 12px;
+    max-width: 760px;
+  }
+
+  h1,
+  .not-found__titles p {
+    color: var(--color-navy);
+    font-size: clamp(1.85rem, 5vw, 3.6rem);
+    font-weight: 850;
+    line-height: 1.12;
+    margin: 0;
+    word-break: keep-all;
+  }
+
+  .not-found__titles p {
+    color: var(--color-text);
+    font-size: clamp(1.35rem, 3.6vw, 2.65rem);
   }
 
   .not-found__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-top: var(--space-6);
+    gap: 10px;
+    justify-content: center;
+    margin-top: 38px;
+  }
+
+  .not-found__actions a {
+    align-items: center;
+    background: var(--color-white);
+    border: 1px solid rgba(11, 31, 58, 0.16);
+    color: var(--color-navy);
+    display: inline-flex;
+    font-weight: 850;
+    justify-content: center;
+    min-height: 46px;
+    min-width: 128px;
+    padding: 12px 18px;
+    text-decoration: none;
+  }
+
+  .not-found__actions a:hover,
+  .not-found__actions a:focus-visible {
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+
+  @media (max-width: 520px) {
+    .not-found {
+      align-items: stretch;
+      text-align: left;
+    }
+
+    .not-found__brand {
+      align-items: flex-start;
+      margin-bottom: 36px;
+    }
+
+    .not-found__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
   }
 </style>
