@@ -10,6 +10,8 @@ type Props = {
   strengths: string[];
   visualLabel: string;
   metricsLabel: string;
+  imageSrc: string;
+  imageAlt: string;
 };
 
 const {
@@ -21,13 +23,15 @@ const {
   strengths,
   visualLabel,
   metricsLabel,
+  imageSrc,
+  imageAlt,
 } = Astro.props;
 ---
 
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow">{eyebrow}</p>
+      <p class="eyebrow"><span></span>{eyebrow}</p>
       <h1>
         {titleLines.map((line) => <span>{line}</span>)}
         <span class="accent">{accent}</span>
@@ -41,94 +45,104 @@ const {
               href={cta.href}
             >
               {cta.label}
+              <span aria-hidden="true">→</span>
             </a>
           ))
         }
       </div>
     </div>
-    <div class="metal-visual" aria-label={visualLabel}>
-      <div class="metal-plate">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div class="visual-label">
-        <strong>PRECISION SURFACE</strong>
-        <span>CHEMISTRY</span>
-      </div>
-    </div>
+    <figure class="hero-visual" aria-label={visualLabel}>
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        width="1680"
+        height="945"
+        fetchpriority="high"
+      />
+      <figcaption>
+        <span>PRECISION SURFACE</span>
+        <strong>CHEMISTRY</strong>
+      </figcaption>
+    </figure>
   </div>
   <div class="container hero-metrics" aria-label={metricsLabel}>
-    {strengths.map((item) => <span>{item}</span>)}
+    {
+      strengths.map((item, index) => (
+        <div>
+          <>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{item}</strong>
+          </>
+        </div>
+      ))
+    }
   </div>
 </section>
 
 <style>
   .hero {
     background:
-      linear-gradient(rgba(192, 199, 209, 0.16) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(192, 199, 209, 0.16) 1px, transparent 1px),
-      linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      linear-gradient(rgba(192, 199, 209, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(192, 199, 209, 0.12) 1px, transparent 1px),
+      linear-gradient(125deg, #ffffff 0%, #f2f6fb 70%, #e7eef8 100%);
     background-size:
-      44px 44px,
-      44px 44px,
+      48px 48px,
+      48px 48px,
       auto;
     border-bottom: var(--border);
-    padding-block: clamp(4rem, 8vw, 6.25rem) var(--space-6);
+    overflow: hidden;
+    padding-block: clamp(3.5rem, 7vw, 6.5rem) var(--space-6);
   }
 
   .hero-grid {
     align-items: center;
     display: grid;
-    gap: var(--space-7);
+    gap: clamp(2.5rem, 5vw, 5rem);
     min-height: 560px;
   }
 
-  :global(html[lang="en"]) .hero,
-  :global(html[lang="vi"]) .hero {
-    padding-block: clamp(3rem, 6vw, 4.6rem) var(--space-5);
-  }
-
-  :global(html[lang="en"]) .hero-grid,
-  :global(html[lang="vi"]) .hero-grid {
-    gap: var(--space-6);
-    min-height: 480px;
-  }
-
-  :global(html[lang="en"]) .hero-grid {
-    min-height: 440px;
-  }
-
   .eyebrow {
-    color: var(--color-blue);
-    font-size: 0.78rem;
+    align-items: center;
+    color: #2366b2;
+    display: flex;
+    font-size: 0.76rem;
     font-weight: 900;
-    letter-spacing: 0.08em;
-    margin: 0 0 var(--space-4);
+    gap: 0.75rem;
+    letter-spacing: 0.12em;
+    margin: 0 0 var(--space-5);
+  }
+
+  .eyebrow span {
+    background: var(--color-blue);
+    display: block;
+    height: 2px;
+    width: 2rem;
   }
 
   h1 {
     color: var(--color-navy);
-    font-size: clamp(42px, 5vw, 68px);
-    letter-spacing: 0;
-    line-height: 1.05;
+    font-size: clamp(2.7rem, 5.3vw, 4.7rem);
+    letter-spacing: -0.045em;
+    line-height: 1.02;
     margin: 0;
   }
 
-  :global(html[lang="en"]) h1 {
-    font-size: clamp(38px, 4.4vw, 58px);
+  :global(html[lang="en"]) h1,
+  :global(html[lang="vi"]) h1 {
+    font-size: clamp(2.45rem, 4.6vw, 4.15rem);
   }
 
   h1 span {
     display: block;
   }
-
   .accent {
-    color: var(--color-blue);
+    color: #1c72d6;
   }
 
   .summary {
-    font-size: clamp(1.04rem, 1.6vw, 1.22rem);
+    color: #536173;
+    font-size: clamp(1.04rem, 1.6vw, 1.2rem);
+    line-height: 1.85;
     margin-block: var(--space-5);
     max-width: 42rem;
   }
@@ -138,126 +152,83 @@ const {
     flex-wrap: wrap;
     gap: var(--space-3);
   }
-
+  .hero-actions .button {
+    gap: 1.4rem;
+    padding-inline: 1.35rem;
+  }
   .hero-actions .button--primary {
-    background: var(--color-blue);
-    border-color: var(--color-blue);
+    background: #1c72d6;
+    border-color: #1c72d6;
   }
 
-  .metal-visual {
-    background:
-      linear-gradient(135deg, rgba(11, 31, 58, 0.96), rgba(31, 78, 121, 0.72)),
-      var(--color-navy);
-    border: 1px solid rgba(192, 199, 209, 0.8);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow);
-    min-height: 380px;
+  .hero-visual {
+    background: var(--color-navy);
+    box-shadow: 0 2.2rem 4rem rgba(11, 31, 58, 0.22);
+    margin: 0;
+    min-height: 410px;
     overflow: hidden;
-    padding: var(--space-5);
     position: relative;
   }
 
-  .metal-visual::before {
-    background:
-      linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.24),
-        transparent
-      ),
-      repeating-linear-gradient(
-        0deg,
-        rgba(255, 255, 255, 0.08) 0 1px,
-        transparent 1px 12px
-      );
+  .hero-visual::after {
+    background: linear-gradient(
+      180deg,
+      transparent 45%,
+      rgba(3, 14, 29, 0.86) 100%
+    );
     content: "";
     inset: 0;
-    opacity: 0.68;
     position: absolute;
   }
 
-  .metal-plate {
-    background:
-      radial-gradient(
-        circle at 18% 35%,
-        rgba(255, 255, 255, 0.85),
-        transparent 0.55rem
-      ),
-      radial-gradient(
-        circle at 78% 28%,
-        rgba(255, 255, 255, 0.82),
-        transparent 0.5rem
-      ),
-      linear-gradient(
-        135deg,
-        #f8fafc 0%,
-        #c0c7d1 38%,
-        #ffffff 52%,
-        #7f8fa3 100%
-      );
-    clip-path: polygon(8% 16%, 84% 8%, 96% 62%, 58% 88%, 12% 78%);
-    height: 250px;
-    left: 9%;
+  .hero-visual img {
+    height: 100%;
+    inset: 0;
+    object-fit: cover;
     position: absolute;
-    right: 8%;
-    top: 15%;
+    width: 100%;
   }
 
-  .metal-plate span {
-    background: rgba(11, 31, 58, 0.22);
-    border: 1px solid rgba(11, 31, 58, 0.12);
-    display: block;
-    height: 10px;
-    left: 18%;
-    position: absolute;
-    right: 16%;
-  }
-
-  .metal-plate span:nth-child(1) {
-    top: 32%;
-  }
-
-  .metal-plate span:nth-child(2) {
-    top: 50%;
-  }
-
-  .metal-plate span:nth-child(3) {
-    top: 68%;
-  }
-
-  .visual-label {
-    background: var(--color-navy);
+  figcaption {
     bottom: var(--space-5);
     color: white;
     display: grid;
-    gap: var(--space-1);
     left: var(--space-5);
-    padding: var(--space-4);
     position: absolute;
-    width: min(260px, calc(100% - var(--space-6)));
+    z-index: 1;
   }
 
-  .visual-label strong {
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
+  figcaption span {
+    font-size: 0.67rem;
+    letter-spacing: 0.17em;
+    opacity: 0.72;
   }
-
-  .visual-label span {
-    color: var(--color-steel);
-    font-weight: 900;
+  figcaption strong {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    letter-spacing: 0.03em;
   }
 
   .hero-metrics {
-    border-top: var(--border);
+    border-top: 1px solid rgba(120, 139, 164, 0.35);
     display: grid;
     gap: var(--space-3);
     margin-top: var(--space-6);
     padding-top: var(--space-5);
   }
 
+  .hero-metrics div {
+    align-items: baseline;
+    display: flex;
+    gap: 0.8rem;
+  }
   .hero-metrics span {
-    color: var(--color-navy);
+    color: #1c72d6;
+    font-size: 0.7rem;
     font-weight: 900;
+  }
+  .hero-metrics strong {
+    color: var(--color-navy);
+    font-size: 0.93rem;
   }
 
   @media (min-width: 48rem) {
@@ -270,23 +241,24 @@ const {
     .hero-grid {
       grid-template-columns: minmax(0, 0.46fr) minmax(0, 0.54fr);
     }
+    .hero-visual {
+      min-height: 500px;
+    }
   }
 
   @media (max-width: 47.99rem) {
     .hero {
-      padding-block: var(--space-6) var(--space-5);
+      padding-block: 2.6rem var(--space-5);
     }
-
     .hero-grid {
+      gap: var(--space-6);
       min-height: auto;
     }
-
-    .metal-visual {
-      min-height: 300px;
+    .hero-visual {
+      min-height: 280px;
     }
-
-    .metal-plate {
-      height: 190px;
+    .hero-actions .button {
+      flex: 1 1 150px;
     }
   }
 </style>

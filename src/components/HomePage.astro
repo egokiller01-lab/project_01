@@ -4,56 +4,309 @@ import CTAPanel from "./CTAPanel.astro";
 import Hero from "./Hero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { homeContent } from "../data/home";
+import { products } from "../data/products";
 import type { Locale } from "../types";
 
-type Props = {
-  locale: Locale;
-};
-
+type Props = { locale: Locale };
 const { locale } = Astro.props;
 const content = homeContent[locale];
-const ctaCopy = {
+const productDetails = products[locale];
+
+const ui = {
   ko: {
-    title: "공정 조건을 기준으로 상담하세요",
-    summary:
-      "제품군, 공정, 현재 증상, 요청 자료를 기준으로 기술지원 상담 범위를 확인할 수 있습니다.",
+    heroAlt: "정밀 가공된 금속 부품의 표면 품질을 표현한 이미지",
+    heroVisual: "정밀 금속 표면처리 솔루션",
+    summary: "PLACHEM VINA 핵심 역량",
+    decadeKicker: "10 YEARS IN VIETNAM",
+    decadeTitle: "베트남 제조현장에서 쌓아온 10년의 대응력",
+    decadeLead:
+      "2016년 박닌에서 시작한 PLACHEM VINA는 한국의 처방 기술을 베트남 현장 조건에 맞게 연결해 왔습니다. 약품 공급에서 끝나지 않고 공정 확인, 품질 문제 진단, 관리 조건 검토까지 함께합니다.",
+    decadeFacts: [
+      "2016년 설립",
+      "박닌 현지 제조·공급",
+      "한국 포뮬레이션 기술",
+      "현장 중심 기술지원",
+    ],
+    decadeImageAlt: "표면처리 약품 제조 공정을 설명하는 콘셉트 이미지",
+    conceptNote: "공정 이해를 위한 콘셉트 이미지",
+    solutionKicker: "PRODUCT PORTFOLIO",
+    solutionTitle: "표면처리 전 공정을 연결하는 8개 솔루션",
+    solutionLead:
+      "소재의 세정과 활성화부터 도금, 피막, 후처리, 도금욕 관리 설비까지 공정 흐름을 기준으로 필요한 약품과 기술지원을 검토합니다.",
+    explore: "솔루션 자세히 보기",
+    focusKicker: "CORE PROCESS",
+    focusTitle: "품질 편차가 큰 핵심 공정을 집중 관리합니다",
+    focusLead:
+      "표면처리는 하나의 약품보다 전처리, 욕 조성, 온도, 교반, 여과, 수세와 후처리의 연결이 중요합니다.",
+    focusItems: [
+      {
+        title: "무전해 니켈",
+        body: "pH·온도·금속농도·환원 반응과 욕 안정성을 함께 보고 균일한 피막 형성을 지원합니다.",
+        tags: ["욕 분석", "석출 안정성", "불량 진단"],
+      },
+      {
+        title: "알루미늄 아노다이징",
+        body: "합금별 전처리 반응부터 피막 형성, 염색, 봉공과 색상 편차까지 한 흐름으로 검토합니다.",
+        tags: ["에칭·디스머트", "염색", "봉공"],
+      },
+      {
+        title: "아연·아연니켈",
+        body: "합금 조성, 전류 조건, 피막과 후처리의 영향을 확인해 내식성과 외관 품질을 관리합니다.",
+        tags: ["합금 도금", "크로메이트", "내식성"],
+      },
+    ],
+    processImageAlt:
+      "표면처리 공정 중 금속 부품과 처리액을 표현한 콘셉트 이미지",
+    supportKicker: "DEFECT SOLUTION",
+    supportTitle: "불량 증상에서 원인축을 좁혀가는 기술지원",
+    supportLead:
+      "불량 사진과 발생 시점, 작업조건, 최근 변경 이력을 함께 확인해 전처리·도금욕·설비·후처리 중 우선 점검할 원인을 정리합니다.",
+    defects: [
+      ["밀착불량", "전처리·활성화·수세"],
+      ["피트·핀홀", "오염·가스·여과"],
+      ["거칠음", "입자·양극·교반"],
+      ["색상편차", "합금·온도·시간"],
+      ["변색", "수세·후처리·건조"],
+      ["두께편차", "전류·교반·치구"],
+    ],
+    supportCta: "불량 상담 준비사항 보기",
+    capabilityKicker: "MANUFACTURING · R&D · QUALITY",
+    capabilityTitle: "현지 제조와 분석·품질관리를 한 체계로",
+    capabilityLead:
+      "원료 확인, 배합·제조, 공정검사, 완제품검사와 LOT 관리까지 공급 신뢰를 위한 흐름을 운영합니다.",
+    capabilities: [
+      {
+        title: "현지 제조",
+        body: "박닌 생산 기반에서 고객 일정과 사용 조건에 맞춰 공급 대응력을 높입니다.",
+        image: "/assets/manufacturing-concept.webp",
+        alt: "표면처리 약품 제조 설비 콘셉트 이미지",
+      },
+      {
+        title: "연구·분석",
+        body: "공정 데이터와 분석 항목을 바탕으로 원인을 구분하고 적용 조건을 검토합니다.",
+        image: "/assets/rd-concept.webp",
+        alt: "표면처리 연구와 분석을 설명하는 콘셉트 이미지",
+      },
+      {
+        title: "품질관리",
+        body: "원료부터 출하까지 검사와 기록을 연결해 제품 LOT의 추적성을 관리합니다.",
+        image: "/assets/plachem-quality.webp",
+        alt: "금속 시편을 분석하는 품질관리 콘셉트 이미지",
+      },
+    ],
+    qualityKicker: "QUALITY FLOW",
+    knowledgeKicker: "KNOWLEDGE BASE",
+    knowledgeTitle: "현장에서 바로 쓰는 표면처리 기술지식",
+    knowledgeLead:
+      "축적된 표면처리 자료를 공정관리, 불량 원인, 품질문서 중심의 공개 콘텐츠로 선별해 제공합니다.",
+    knowledgeTopics: [
+      "공정 관리",
+      "불량 원인 분석",
+      "약품·욕 관리",
+      "품질·안전 문서",
+    ],
+    moreKnowledge: "기술자료 더 보기",
+    ctaTitle: "공정 문제를 약품명 하나로 판단하지 않습니다",
+    ctaSummary:
+      "소재, 공정 순서, 작업조건, 불량 증상과 관리 이력을 알려주시면 확인해야 할 항목부터 정리해 드립니다.",
   },
   en: {
-    title: "Consult by process condition",
-    summary:
-      "Product group, current process, symptoms, and requested documents help define the technical support scope.",
+    heroAlt:
+      "Precision-machined metal components representing controlled surface quality",
+    heroVisual: "Precision metal surface treatment solutions",
+    summary: "PLACHEM VINA core capabilities",
+    decadeKicker: "10 YEARS IN VIETNAM",
+    decadeTitle: "Ten years of field response for manufacturing in Vietnam",
+    decadeLead:
+      "Since starting in Bac Ninh in 2016, PLACHEM VINA has connected Korean formulation expertise with operating conditions in Vietnam. Our support extends from chemical supply to process review, defect diagnosis, and control-condition checks.",
+    decadeFacts: [
+      "Established in 2016",
+      "Bac Ninh manufacturing & supply",
+      "Korean formulation expertise",
+      "Field-focused technical support",
+    ],
+    decadeImageAlt:
+      "Concept image explaining surface treatment chemical manufacturing",
+    conceptNote: "Concept image for process illustration",
+    solutionKicker: "PRODUCT PORTFOLIO",
+    solutionTitle: "Eight solution areas across the surface treatment line",
+    solutionLead:
+      "From cleaning and activation to plating, conversion coating, post-treatment, and bath-management equipment, we review chemicals and support around the full process flow.",
+    explore: "Explore all solutions",
+    focusKicker: "CORE PROCESS",
+    focusTitle: "Focused control for processes prone to quality variation",
+    focusLead:
+      "Surface treatment quality depends on the connection between pretreatment, bath composition, temperature, agitation, filtration, rinsing, and post-treatment.",
+    focusItems: [
+      {
+        title: "Electroless nickel",
+        body: "We review pH, temperature, metal concentration, reduction reaction, and bath stability to support uniform deposits.",
+        tags: ["Bath analysis", "Deposit stability", "Defect diagnosis"],
+      },
+      {
+        title: "Aluminum anodizing",
+        body: "Alloy-specific pretreatment, film formation, dyeing, sealing, and color variation are reviewed as one process flow.",
+        tags: ["Etching & desmut", "Dyeing", "Sealing"],
+      },
+      {
+        title: "Zinc & zinc-nickel",
+        body: "Alloy composition, current conditions, conversion coating, and post-treatment are considered for corrosion resistance and appearance.",
+        tags: ["Alloy plating", "Chromate", "Corrosion resistance"],
+      },
+    ],
+    processImageAlt:
+      "Concept image of metal parts and solution in a surface treatment process",
+    supportKicker: "DEFECT SOLUTION",
+    supportTitle: "Technical support that narrows causes from defect symptoms",
+    supportLead:
+      "Defect photos, timing, operating conditions, and recent changes help prioritize whether pretreatment, the plating bath, equipment, or post-treatment should be checked first.",
+    defects: [
+      ["Poor adhesion", "Pretreatment · activation · rinse"],
+      ["Pits & pinholes", "Contamination · gas · filtration"],
+      ["Roughness", "Particles · anodes · agitation"],
+      ["Color variation", "Alloy · temperature · time"],
+      ["Discoloration", "Rinse · post-treatment · drying"],
+      ["Thickness variation", "Current · agitation · fixtures"],
+    ],
+    supportCta: "Prepare for defect consultation",
+    capabilityKicker: "MANUFACTURING · R&D · QUALITY",
+    capabilityTitle: "Local manufacturing, analysis, and quality in one system",
+    capabilityLead:
+      "A connected flow from raw-material checks and production to in-process inspection, final inspection, and LOT management supports reliable supply.",
+    capabilities: [
+      {
+        title: "Local manufacturing",
+        body: "The Bac Ninh production base improves supply response to customer schedules and operating conditions.",
+        image: "/assets/manufacturing-concept.webp",
+        alt: "Concept image of surface treatment chemical manufacturing",
+      },
+      {
+        title: "Research & analysis",
+        body: "Process data and analysis items help separate possible causes and review application conditions.",
+        image: "/assets/rd-concept.webp",
+        alt: "Concept image of surface treatment research and analysis",
+      },
+      {
+        title: "Quality management",
+        body: "Inspection and records from raw materials to shipment support product LOT traceability.",
+        image: "/assets/plachem-quality.webp",
+        alt: "Concept image of quality analysis using metal samples",
+      },
+    ],
+    qualityKicker: "QUALITY FLOW",
+    knowledgeKicker: "KNOWLEDGE BASE",
+    knowledgeTitle: "Practical surface treatment knowledge for the field",
+    knowledgeLead:
+      "Accumulated technical resources are selected for public use around process control, defect causes, and quality documents.",
+    knowledgeTopics: [
+      "Process control",
+      "Defect analysis",
+      "Chemical & bath control",
+      "Quality & safety documents",
+    ],
+    moreKnowledge: "View more knowledge",
+    ctaTitle: "A process issue cannot be judged by a chemical name alone",
+    ctaSummary:
+      "Share the substrate, process sequence, operating conditions, defect symptoms, and control history. We will organize what should be checked first.",
   },
   vi: {
-    title: "Tư vấn theo điều kiện công đoạn",
-    summary:
-      "Nhóm sản phẩm, công đoạn hiện tại, triệu chứng và tài liệu yêu cầu giúp xác định phạm vi hỗ trợ kỹ thuật.",
-  },
-}[locale];
-const heroVisualLabel = {
-  ko: "정밀 금속 표면을 표현한 비주얼",
-  en: "Visual representation of a precision metallic surface",
-  vi: "Hình ảnh mô phỏng bề mặt kim loại chính xác",
-}[locale];
-const heroMetricsLabel = {
-  ko: "PLACHEM VINA 요약",
-  en: "PLACHEM VINA summary",
-  vi: "Tóm tắt PLACHEM VINA",
-}[locale];
-const sectionKickers = {
-  ko: {
-    value: "PROCESS VALUE",
-    support: "FIELD SUPPORT",
-    knowledge: "TECHNICAL NOTE",
-  },
-  en: {
-    value: "PROCESS VALUE",
-    support: "FIELD SUPPORT",
-    knowledge: "TECHNICAL NOTE",
-  },
-  vi: {
-    value: "GIÁ TRỊ CÔNG ĐOẠN",
-    support: "HỖ TRỢ HIỆN TRƯỜNG",
-    knowledge: "GHI CHÚ KỸ THUẬT",
+    heroAlt:
+      "Các chi tiết kim loại gia công chính xác thể hiện chất lượng bề mặt được kiểm soát",
+    heroVisual: "Giải pháp xử lý bề mặt kim loại chính xác",
+    summary: "Năng lực cốt lõi PLACHEM VINA",
+    decadeKicker: "10 NĂM TẠI VIỆT NAM",
+    decadeTitle: "Mười năm đồng hành cùng hiện trường sản xuất tại Việt Nam",
+    decadeLead:
+      "Từ khi bắt đầu tại Bắc Ninh năm 2016, PLACHEM VINA đã kết nối chuyên môn công thức của Hàn Quốc với điều kiện vận hành tại Việt Nam. Chúng tôi hỗ trợ từ cung ứng hóa chất đến xem xét công đoạn, chẩn đoán lỗi và kiểm tra điều kiện quản lý.",
+    decadeFacts: [
+      "Thành lập năm 2016",
+      "Sản xuất & cung ứng tại Bắc Ninh",
+      "Chuyên môn công thức Hàn Quốc",
+      "Hỗ trợ kỹ thuật tại hiện trường",
+    ],
+    decadeImageAlt: "Hình ảnh minh họa sản xuất hóa chất xử lý bề mặt",
+    conceptNote: "Hình ảnh minh họa quy trình",
+    solutionKicker: "DANH MỤC GIẢI PHÁP",
+    solutionTitle: "Tám nhóm giải pháp xuyên suốt dây chuyền xử lý bề mặt",
+    solutionLead:
+      "Từ làm sạch và hoạt hóa đến mạ, lớp phủ chuyển hóa, hậu xử lý và thiết bị quản lý bể, chúng tôi xem xét hóa chất và hỗ trợ theo toàn bộ dòng công đoạn.",
+    explore: "Xem toàn bộ giải pháp",
+    focusKicker: "CÔNG ĐOẠN CỐT LÕI",
+    focusTitle: "Kiểm soát tập trung cho các công đoạn dễ biến động chất lượng",
+    focusLead:
+      "Chất lượng xử lý bề mặt phụ thuộc vào sự liên kết giữa tiền xử lý, thành phần bể, nhiệt độ, khuấy, lọc, rửa và hậu xử lý.",
+    focusItems: [
+      {
+        title: "Niken hóa học",
+        body: "Xem xét pH, nhiệt độ, nồng độ kim loại, phản ứng khử và độ ổn định bể để hỗ trợ lớp mạ đồng đều.",
+        tags: ["Phân tích bể", "Ổn định kết tủa", "Chẩn đoán lỗi"],
+      },
+      {
+        title: "Anod nhôm",
+        body: "Tiền xử lý theo hợp kim, tạo màng, nhuộm màu, bịt lỗ và sai lệch màu được xem xét trong một dòng công đoạn.",
+        tags: ["Etching & desmut", "Nhuộm màu", "Bịt lỗ"],
+      },
+      {
+        title: "Kẽm & kẽm-niken",
+        body: "Thành phần hợp kim, điều kiện dòng điện, lớp phủ chuyển hóa và hậu xử lý được xem xét cho độ bền ăn mòn và ngoại quan.",
+        tags: ["Mạ hợp kim", "Chromate", "Độ bền ăn mòn"],
+      },
+    ],
+    processImageAlt:
+      "Hình ảnh minh họa chi tiết kim loại và dung dịch trong công đoạn xử lý bề mặt",
+    supportKicker: "GIẢI PHÁP LỖI",
+    supportTitle: "Hỗ trợ kỹ thuật thu hẹp nguyên nhân từ triệu chứng lỗi",
+    supportLead:
+      "Hình ảnh lỗi, thời điểm phát sinh, điều kiện vận hành và thay đổi gần đây giúp ưu tiên kiểm tra tiền xử lý, bể mạ, thiết bị hay hậu xử lý.",
+    defects: [
+      ["Bám dính kém", "Tiền xử lý · hoạt hóa · rửa"],
+      ["Rỗ & lỗ kim", "Ô nhiễm · khí · lọc"],
+      ["Bề mặt thô", "Hạt · anot · khuấy"],
+      ["Lệch màu", "Hợp kim · nhiệt độ · thời gian"],
+      ["Đổi màu", "Rửa · hậu xử lý · sấy"],
+      ["Lệch chiều dày", "Dòng điện · khuấy · gá"],
+    ],
+    supportCta: "Chuẩn bị thông tin tư vấn lỗi",
+    capabilityKicker: "SẢN XUẤT · R&D · CHẤT LƯỢNG",
+    capabilityTitle:
+      "Kết nối sản xuất tại chỗ, phân tích và quản lý chất lượng",
+    capabilityLead:
+      "Dòng quản lý từ kiểm tra nguyên liệu, sản xuất, kiểm tra công đoạn, kiểm tra thành phẩm đến quản lý LOT hỗ trợ độ tin cậy cung ứng.",
+    capabilities: [
+      {
+        title: "Sản xuất tại chỗ",
+        body: "Cơ sở Bắc Ninh nâng cao khả năng đáp ứng lịch trình và điều kiện sử dụng của khách hàng.",
+        image: "/assets/manufacturing-concept.webp",
+        alt: "Hình ảnh minh họa sản xuất hóa chất xử lý bề mặt",
+      },
+      {
+        title: "Nghiên cứu & phân tích",
+        body: "Dữ liệu công đoạn và hạng mục phân tích giúp phân tách nguyên nhân và xem xét điều kiện áp dụng.",
+        image: "/assets/rd-concept.webp",
+        alt: "Hình ảnh minh họa nghiên cứu và phân tích xử lý bề mặt",
+      },
+      {
+        title: "Quản lý chất lượng",
+        body: "Kiểm tra và hồ sơ từ nguyên liệu đến xuất hàng hỗ trợ truy xuất LOT sản phẩm.",
+        image: "/assets/plachem-quality.webp",
+        alt: "Hình ảnh minh họa phân tích chất lượng bằng mẫu kim loại",
+      },
+    ],
+    qualityKicker: "DÒNG QUẢN LÝ CHẤT LƯỢNG",
+    knowledgeKicker: "CƠ SỞ TRI THỨC",
+    knowledgeTitle: "Kiến thức xử lý bề mặt thực tế cho hiện trường",
+    knowledgeLead:
+      "Nguồn tài liệu kỹ thuật tích lũy được chọn lọc để công khai theo quản lý công đoạn, nguyên nhân lỗi và tài liệu chất lượng.",
+    knowledgeTopics: [
+      "Quản lý công đoạn",
+      "Phân tích lỗi",
+      "Quản lý hóa chất & bể",
+      "Tài liệu chất lượng & an toàn",
+    ],
+    moreKnowledge: "Xem thêm tài liệu",
+    ctaTitle: "Không thể đánh giá vấn đề công đoạn chỉ bằng tên hóa chất",
+    ctaSummary:
+      "Hãy chia sẻ vật liệu, trình tự công đoạn, điều kiện vận hành, triệu chứng lỗi và lịch sử quản lý. Chúng tôi sẽ sắp xếp các hạng mục cần kiểm tra trước.",
   },
 }[locale];
 ---
@@ -71,119 +324,218 @@ const sectionKickers = {
     summary={content.heroSummary}
     ctas={content.primaryCtas}
     strengths={content.strengths}
-    visualLabel={heroVisualLabel}
-    metricsLabel={heroMetricsLabel}
+    visualLabel={ui.heroVisual}
+    metricsLabel={ui.summary}
+    imageSrc="/assets/plachem-hero.webp"
+    imageAlt={ui.heroAlt}
   />
 
-  <section class="section value-section">
-    <div class="container">
-      <div class="section-kicker">{sectionKickers.value}</div>
-      <div class="split-heading">
-        <h2>{content.sectionLabels.value}</h2>
-        <p>{content.sectionSummaries.value}</p>
+  <section class="section decade-section">
+    <div class="container media-split">
+      <figure class="editorial-image">
+        <img
+          src="/assets/manufacturing-concept.webp"
+          alt={ui.decadeImageAlt}
+          width="1024"
+          height="1024"
+          loading="lazy"
+        />
+        <figcaption>{ui.conceptNote}</figcaption>
+      </figure>
+      <div class="editorial-copy">
+        <p class="kicker">{ui.decadeKicker}</p>
+        <h2>{ui.decadeTitle}</h2>
+        <p class="lead">{ui.decadeLead}</p>
+        <ul class="fact-grid">
+          {
+            ui.decadeFacts.map((item, index) => (
+              <li>
+                <>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{item}</strong>
+                </>
+              </li>
+            ))
+          }
+        </ul>
       </div>
-      <ol class="value-flow">
-        {
-          content.valueFlow.map((step, index) => (
-            <li>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{step}</strong>
-            </li>
-          ))
-        }
-      </ol>
     </div>
   </section>
 
-  <section class="section section--white compact-solutions">
+  <section class="section solutions-section">
     <div class="container">
-      <div class="split-heading">
-        <h2>{content.sectionLabels.solutions}</h2>
-        <p>{content.sectionSummaries.solutions}</p>
-      </div>
-      <div class="solution-lines">
+      <header class="section-head">
+        <div>
+          <p class="kicker">{ui.solutionKicker}</p><h2>{ui.solutionTitle}</h2>
+        </div><p>{ui.solutionLead}</p>
+      </header>
+      <div class="solution-grid">
         {
-          content.featuredProducts.map((product, index) => (
-            <a href={product.href} class="solution-line">
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div>
+          productDetails.map((product, index) => (
+            <a
+              href={`/${locale}/solutions/#${product.slug}`}
+              class="solution-card"
+            >
+              <>
+                <span>{String(index + 1).padStart(2, "0")}</span>
                 <h3>{product.title}</h3>
                 <p>{product.summary}</p>
-              </div>
+                <small>{product.materials.slice(0, 5).join(" · ")}</small>
+                <b aria-hidden="true">↗</b>
+              </>
             </a>
           ))
         }
       </div>
+      <a class="text-link" href={`/${locale}/solutions/`}
+        >{ui.explore}<span aria-hidden="true">→</span></a
+      >
     </div>
   </section>
 
-  <section class="section support-section">
-    <div class="container support-layout">
-      <div>
-        <div class="section-kicker">{sectionKickers.support}</div>
-        <h2>{content.sectionLabels.technology}</h2>
-        <p>{content.sectionSummaries.technology}</p>
-      </div>
-      <ol class="support-process">
-        {
-          content.supportFlow.map((item, index) => (
-            <li>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.summary}</p>
-                <small>{item.checks.join(" · ")}</small>
-              </div>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <section class="section section--white quality-section">
+  <section class="section focus-section">
     <div class="container">
-      <div class="split-heading">
-        <h2>{content.sectionLabels.quality}</h2>
-        <p>{content.sectionSummaries.quality}</p>
+      <header class="section-head section-head--light">
+        <div>
+          <p class="kicker">{ui.focusKicker}</p><h2>{ui.focusTitle}</h2>
+        </div><p>{ui.focusLead}</p>
+      </header>
+      <div class="focus-layout">
+        <figure>
+          <img
+            src="/assets/surface-treatment-concept.webp"
+            alt={ui.processImageAlt}
+            width="1024"
+            height="1024"
+            loading="lazy"
+          /><figcaption>{ui.conceptNote}</figcaption>
+        </figure>
+        <div class="focus-list">
+          {
+            ui.focusItems.map((item, index) => (
+              <article>
+                <>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <>
+                      <h3>{item.title}</h3>
+                      <p>{item.body}</p>
+                      <ul>
+                        {item.tags.map((tag) => (
+                          <li>{tag}</li>
+                        ))}
+                      </ul>
+                    </>
+                  </div>
+                </>
+              </article>
+            ))
+          }
+        </div>
       </div>
-      <ol class="quality-flow">
+    </div>
+  </section>
+
+  <section class="section defect-section">
+    <div class="container defect-layout">
+      <div class="defect-copy">
+        <p class="kicker">{ui.supportKicker}</p><h2>{ui.supportTitle}</h2><p>
+          {ui.supportLead}
+        </p><a class="text-link" href={`/${locale}/technology/`}
+          >{ui.supportCta}<span aria-hidden="true">→</span></a>
+      </div>
+      <div class="defect-grid">
         {
-          content.qualitySteps.map((step, index) => (
-            <li>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{step}</strong>
-            </li>
+          ui.defects.map(([name, causes], index) => (
+            <article>
+              <>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{name}</h3>
+                <p>{causes}</p>
+              </>
+            </article>
           ))
         }
-      </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section capability-section">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="kicker">{ui.capabilityKicker}</p><h2>
+            {ui.capabilityTitle}
+          </h2>
+        </div><p>{ui.capabilityLead}</p>
+      </header>
+      <div class="capability-grid">
+        {
+          ui.capabilities.map((item) => (
+            <article>
+              <>
+                <figure>
+                  <>
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      width="1024"
+                      height="1024"
+                      loading="lazy"
+                    />
+                    <figcaption>{ui.conceptNote}</figcaption>
+                  </>
+                </figure>
+                <div>
+                  <>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </>
+                </div>
+              </>
+            </article>
+          ))
+        }
+      </div>
+      <div class="quality-flow">
+        <p class="kicker">{ui.qualityKicker}</p><ol>
+          {
+            content.qualitySteps.map((step, index) => (
+              <li>
+                <>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{step}</strong>
+                </>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
     </div>
   </section>
 
   <section class="section knowledge-section">
     <div class="container knowledge-layout">
-      <div>
-        <div class="section-kicker">{sectionKickers.knowledge}</div>
-        <h2>{content.sectionLabels.knowledge}</h2>
-        <p>{content.sectionSummaries.knowledge}</p>
+      <div class="knowledge-intro">
+        <p class="kicker">{ui.knowledgeKicker}</p><h2>{ui.knowledgeTitle}</h2><p
+        >
+          {ui.knowledgeLead}
+        </p><ul>{ui.knowledgeTopics.map((topic) => <li>{topic}</li>)}</ul><a
+          class="text-link"
+          href={`/${locale}/knowledge/`}
+          >{ui.moreKnowledge}<span aria-hidden="true">→</span></a>
       </div>
-      {
-        content.blogs.length > 0 && (
-          <div class="blog-list">
-            {content.blogs.map((blog) => (
-              <BlogCard {...blog} />
-            ))}
-          </div>
-        )
-      }
+      <div class="blog-list">
+        {content.blogs.map((blog) => <BlogCard {...blog} />)}
+      </div>
     </div>
   </section>
 
-  <section class="section section--white">
+  <section class="section final-section">
     <div class="container">
       <CTAPanel
-        title={ctaCopy.title}
-        summary={ctaCopy.summary}
+        title={ui.ctaTitle}
+        summary={ui.ctaSummary}
         ctas={content.primaryCtas}
       />
     </div>
@@ -192,223 +544,401 @@ const sectionKickers = {
 
 <style>
   .section {
-    padding-block: clamp(3.4rem, 6vw, 4.9rem);
+    padding-block: clamp(4rem, 7vw, 6.5rem);
   }
-
-  :global(html[lang="en"]) .section,
-  :global(html[lang="vi"]) .section {
-    padding-block: clamp(2.45rem, 4.4vw, 3.55rem);
-  }
-
-  .section-kicker {
-    color: var(--color-blue);
-    font-size: 0.78rem;
+  .kicker {
+    color: #1c72d6;
+    font-size: 0.74rem;
     font-weight: 900;
-    letter-spacing: 0.08em;
-    margin-bottom: var(--space-3);
+    letter-spacing: 0.14em;
+    margin: 0 0 1rem;
   }
-
-  .split-heading {
-    display: grid;
-    gap: var(--space-4);
-    margin-bottom: var(--space-6);
-  }
-
-  :global(html[lang="en"]) .split-heading,
-  :global(html[lang="vi"]) .split-heading {
-    margin-bottom: var(--space-5);
-  }
-
   h2 {
     color: var(--color-navy);
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    line-height: 1.12;
+    font-size: clamp(2.1rem, 4.2vw, 3.6rem);
+    letter-spacing: -0.035em;
+    line-height: 1.1;
     margin: 0;
   }
-
-  :global(html[lang="en"]) h2,
-  :global(html[lang="vi"]) h2 {
-    font-size: clamp(1.85rem, 3.4vw, 2.85rem);
-  }
-
   h3,
   p {
     margin: 0;
   }
-
-  .split-heading p,
-  .support-layout > div > p,
-  .knowledge-layout > div > p {
-    font-size: 1.04rem;
-    max-width: 45rem;
+  .lead {
+    color: #526173;
+    font-size: 1.08rem;
+    line-height: 1.85;
+    margin-top: var(--space-5);
+  }
+  .media-split,
+  .section-head,
+  .focus-layout,
+  .defect-layout,
+  .knowledge-layout {
+    display: grid;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+  .editorial-image,
+  .focus-layout figure,
+  .capability-grid figure {
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .editorial-image img,
+  .focus-layout img,
+  .capability-grid img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+  .editorial-image {
+    min-height: 420px;
+  }
+  figure figcaption {
+    background: rgba(11, 31, 58, 0.86);
+    bottom: 0;
+    color: white;
+    font-size: 0.7rem;
+    left: 0;
+    letter-spacing: 0.04em;
+    padding: 0.45rem 0.7rem;
+    position: absolute;
+  }
+  .editorial-copy {
+    align-self: center;
+  }
+  .fact-grid {
+    display: grid;
+    gap: 0;
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+  }
+  .fact-grid li {
+    align-items: center;
+    border-top: var(--border);
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2.8rem 1fr;
+    min-height: 64px;
+  }
+  .fact-grid li:last-child {
+    border-bottom: var(--border);
+  }
+  .fact-grid span,
+  .solution-card > span,
+  .focus-list article > span,
+  .defect-grid article > span,
+  .quality-flow span {
+    color: #1c72d6;
+    font-size: 0.72rem;
+    font-weight: 900;
   }
 
-  .value-flow,
-  .quality-flow,
-  .support-process {
+  .solutions-section {
+    background: white;
+  }
+  .section-head {
+    margin-bottom: var(--space-7);
+  }
+  .section-head > p {
+    align-self: end;
+    color: #5d6979;
+    font-size: 1.04rem;
+    line-height: 1.8;
+    max-width: 42rem;
+  }
+  .solution-grid {
+    border-left: var(--border);
+    border-top: var(--border);
+    display: grid;
+  }
+  .solution-card {
+    border-bottom: var(--border);
+    border-right: var(--border);
+    display: grid;
+    min-height: 265px;
+    padding: var(--space-5);
+    position: relative;
+    text-decoration: none;
+    transition:
+      background 0.2s,
+      color 0.2s,
+      transform 0.2s;
+  }
+  .solution-card h3 {
+    color: var(--color-navy);
+    font-size: 1.45rem;
+    margin: 1.2rem 0 0.7rem;
+  }
+  .solution-card p {
+    color: #5d6979;
+    line-height: 1.7;
+  }
+  .solution-card small {
+    align-self: end;
+    color: #2366b2;
+    display: block;
+    font-weight: 800;
+    margin-top: 1.4rem;
+  }
+  .solution-card b {
+    font-size: 1.2rem;
+    position: absolute;
+    right: 1.2rem;
+    top: 1rem;
+  }
+  .solution-card:hover {
+    background: var(--color-navy);
+    color: white;
+    transform: translateY(-3px);
+  }
+  .solution-card:hover h3,
+  .solution-card:hover p,
+  .solution-card:hover small {
+    color: white;
+  }
+  .text-link {
+    align-items: center;
+    color: var(--color-navy);
+    display: inline-flex;
+    font-weight: 900;
+    gap: 1.4rem;
+    margin-top: var(--space-5);
+    text-decoration: none;
+  }
+
+  .focus-section {
+    background: var(--color-navy);
+    color: white;
+  }
+  .section-head--light h2 {
+    color: white;
+  }
+  .section-head--light > p {
+    color: #b9c6d5;
+  }
+  .focus-layout figure {
+    min-height: 520px;
+  }
+  .focus-list {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .focus-list article {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: 2.5rem 1fr;
+    padding-block: var(--space-5);
+  }
+  .focus-list h3 {
+    font-size: 1.55rem;
+    margin-bottom: 0.7rem;
+  }
+  .focus-list p {
+    color: #bdc9d7;
+    line-height: 1.75;
+  }
+  .focus-list ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+  .focus-list li {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #dbe6f2;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.35rem 0.6rem;
+  }
+
+  .defect-section {
+    background: #eef3f8;
+  }
+  .defect-copy > p:not(.kicker) {
+    color: #5d6979;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-top: var(--space-5);
+  }
+  .defect-grid {
+    border-left: var(--border);
+    border-top: var(--border);
+    display: grid;
+  }
+  .defect-grid article {
+    background: white;
+    border-bottom: var(--border);
+    border-right: var(--border);
+    min-height: 145px;
+    padding: var(--space-4);
+  }
+  .defect-grid h3 {
+    color: var(--color-navy);
+    font-size: 1.16rem;
+    margin: 0.8rem 0 0.35rem;
+  }
+  .defect-grid p {
+    color: #6b7582;
+    font-size: 0.88rem;
+  }
+
+  .capability-section {
+    background: white;
+  }
+  .capability-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .capability-grid article {
+    background: #f4f7fa;
+  }
+  .capability-grid figure {
+    aspect-ratio: 4 / 3;
+  }
+  .capability-grid article > div {
+    padding: var(--space-5);
+  }
+  .capability-grid h3 {
+    color: var(--color-navy);
+    font-size: 1.35rem;
+    margin-bottom: 0.65rem;
+  }
+  .capability-grid p {
+    color: #5d6979;
+    line-height: 1.7;
+  }
+  .quality-flow {
+    background: #eef3f8;
+    margin-top: var(--space-6);
+    padding: var(--space-5);
+  }
+  .quality-flow ol {
+    display: grid;
     list-style: none;
     margin: 0;
     padding: 0;
   }
-
-  .value-flow {
-    border-block: var(--border);
-    display: grid;
-  }
-
-  .value-flow li {
-    align-items: center;
-    border-bottom: var(--border);
-    display: grid;
-    gap: var(--space-3);
-    grid-template-columns: 4rem 1fr;
-    min-height: 92px;
-  }
-
-  .value-flow li:last-child {
-    border-bottom: 0;
-  }
-
-  .value-flow span,
-  .quality-flow span,
-  .support-process span,
-  .solution-line > span {
-    color: var(--color-blue);
-    font-size: 0.82rem;
-    font-weight: 900;
-  }
-
-  .value-flow strong,
-  .quality-flow strong {
-    color: var(--color-navy);
-    font-size: clamp(1.25rem, 2.4vw, 1.8rem);
-  }
-
-  .solution-lines {
-    border-top: var(--border);
-    display: grid;
-  }
-
-  .solution-line {
-    align-items: start;
-    border-bottom: var(--border);
-    display: grid;
-    gap: var(--space-4);
-    grid-template-columns: 3.5rem 1fr;
-    padding-block: var(--space-5);
-    text-decoration: none;
-  }
-
-  .solution-line h3 {
-    color: var(--color-navy);
-    font-size: clamp(1.25rem, 2.5vw, 1.8rem);
-    margin-bottom: var(--space-2);
-  }
-
-  .support-layout,
-  .knowledge-layout {
-    display: grid;
-    gap: var(--space-6);
-  }
-
-  .support-process {
-    background: white;
-    border: var(--border);
-  }
-
-  .support-process li {
-    display: grid;
-    gap: var(--space-4);
-    grid-template-columns: 3rem 1fr;
-    padding: var(--space-5);
-  }
-
-  .support-process li + li {
-    border-top: var(--border);
-  }
-
-  .support-process h3 {
-    color: var(--color-navy);
-    font-size: 1.18rem;
-    margin-bottom: var(--space-2);
-  }
-
-  .support-process small {
-    color: var(--color-blue);
-    display: block;
-    font-weight: 900;
-    margin-top: var(--space-3);
-  }
-
-  .quality-flow {
-    align-items: stretch;
-    display: grid;
-    gap: 0;
-  }
-
   .quality-flow li {
-    background: white;
-    border: var(--border);
+    border-top: var(--border);
     display: grid;
-    gap: var(--space-2);
-    min-height: 110px;
-    padding: var(--space-4);
+    gap: 0.7rem;
+    min-height: 76px;
+    padding-block: 1rem;
+  }
+  .quality-flow li:last-child {
+    border-bottom: var(--border);
   }
 
-  :global(html[lang="en"]) .quality-flow li,
-  :global(html[lang="vi"]) .quality-flow li {
-    min-height: 96px;
-    padding: var(--space-3);
+  .knowledge-section {
+    background: linear-gradient(135deg, #f7f9fc 0 55%, #edf3f8 55%);
   }
-
+  .knowledge-intro > p:not(.kicker) {
+    color: #5d6979;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-top: var(--space-5);
+  }
+  .knowledge-intro ul {
+    display: grid;
+    gap: 0.55rem;
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+  }
+  .knowledge-intro li {
+    border-left: 3px solid #1c72d6;
+    color: var(--color-navy);
+    font-weight: 900;
+    padding-left: 0.8rem;
+  }
   .blog-list {
     display: grid;
     gap: var(--space-3);
   }
+  .final-section {
+    background: white;
+  }
 
   @media (min-width: 48rem) {
-    .split-heading,
-    .support-layout,
-    .knowledge-layout {
-      grid-template-columns: 0.78fr 1fr;
+    .fact-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
-    .value-flow {
+    .fact-grid li:nth-child(odd) {
+      border-right: var(--border);
+      padding-right: 1rem;
+    }
+    .fact-grid li:nth-child(even) {
+      padding-left: 1rem;
+    }
+    .solution-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .defect-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .capability-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
-
-    .value-flow li {
-      border-bottom: 0;
-      border-right: var(--border);
-      grid-template-columns: 1fr;
-      padding: var(--space-5);
-    }
-
-    .value-flow li:last-child {
-      border-right: 0;
-    }
-
-    .quality-flow {
+    .quality-flow ol {
       grid-template-columns: repeat(5, minmax(0, 1fr));
     }
-
+    .quality-flow li {
+      border-bottom: var(--border);
+      padding: 1rem;
+    }
     .quality-flow li + li {
-      border-left: 0;
+      border-left: var(--border);
     }
   }
 
   @media (min-width: 64rem) {
-    .solution-lines {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .media-split {
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
     }
-
-    .solution-line:nth-child(odd) {
-      border-right: var(--border);
-      padding-right: var(--space-5);
+    .section-head {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
     }
+    .solution-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .focus-layout {
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    }
+    .defect-layout {
+      grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    }
+    .defect-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .knowledge-layout {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    }
+  }
 
-    .solution-line:nth-child(even) {
-      padding-left: var(--space-5);
+  @media (max-width: 47.99rem) {
+    .section {
+      padding-block: 3.5rem;
+    }
+    .editorial-image,
+    .focus-layout figure {
+      min-height: 320px;
+    }
+    .solution-card {
+      min-height: 220px;
+    }
+    .capability-grid article {
+      display: grid;
+      grid-template-columns: 42% 1fr;
+    }
+    .capability-grid figure {
+      aspect-ratio: auto;
+      min-height: 210px;
     }
   }
 </style>

@@ -225,6 +225,58 @@ const contactLabels = {
 }[locale];
 const manufacturingBaseValue =
   locale === "vi" ? companyFacts.regionVi : companyFacts.site;
+const visualAssets = {
+  about: "/assets/manufacturing-concept.webp",
+  solutions: "/assets/plachem-hero.webp",
+  technology: "/assets/surface-treatment-concept.webp",
+  quality: "/assets/plachem-quality.webp",
+  knowledge: "/assets/rd-concept.webp",
+  contact: "",
+} as const;
+const visualCopy = {
+  ko: {
+    label: "공정 이해를 위한 콘셉트 이미지",
+    alt: {
+      about: "표면처리 약품 제조 환경을 설명하는 콘셉트 이미지",
+      solutions: "정밀 금속 부품의 표면 품질을 표현한 이미지",
+      technology: "금속 부품의 표면처리 공정을 표현한 콘셉트 이미지",
+      quality: "금속 시편 분석과 품질관리를 표현한 콘셉트 이미지",
+      knowledge: "표면처리 연구와 분석을 표현한 콘셉트 이미지",
+      contact: "",
+    },
+    detailTitle: "PLACHEM의 지원 범위",
+  },
+  en: {
+    label: "Concept image for process illustration",
+    alt: {
+      about:
+        "Concept image illustrating a surface treatment chemical manufacturing environment",
+      solutions:
+        "Image representing controlled surface quality of precision metal parts",
+      technology:
+        "Concept image illustrating a metal surface treatment process",
+      quality:
+        "Concept image illustrating metal sample analysis and quality control",
+      knowledge:
+        "Concept image illustrating surface treatment research and analysis",
+      contact: "",
+    },
+    detailTitle: "PLACHEM support scope",
+  },
+  vi: {
+    label: "Hình ảnh minh họa quy trình",
+    alt: {
+      about: "Hình ảnh minh họa môi trường sản xuất hóa chất xử lý bề mặt",
+      solutions:
+        "Hình ảnh thể hiện chất lượng bề mặt của chi tiết kim loại chính xác",
+      technology: "Hình ảnh minh họa công đoạn xử lý bề mặt kim loại",
+      quality: "Hình ảnh minh họa phân tích mẫu kim loại và quản lý chất lượng",
+      knowledge: "Hình ảnh minh họa nghiên cứu và phân tích xử lý bề mặt",
+      contact: "",
+    },
+    detailTitle: "Phạm vi hỗ trợ của PLACHEM",
+  },
+}[locale];
 ---
 
 <BaseLayout
@@ -309,6 +361,37 @@ const manufacturingBaseValue =
       }
     </div>
   </section>
+
+  {
+    visualAssets[pageKey] && (
+      <section class="visual-story">
+        <div class="container visual-story__grid">
+          <figure>
+            <img
+              src={visualAssets[pageKey]}
+              alt={visualCopy.alt[pageKey]}
+              width="1200"
+              height="675"
+              loading="eager"
+            />
+            <figcaption>{visualCopy.label}</figcaption>
+          </figure>
+          <div>
+            <p>{page.eyebrow}</p>
+            <h2>{page.title}</h2>
+            <ul>
+              {page.sections.slice(0, 4).map((section, index) => (
+                <li>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{section.title}</strong>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   {
     pageKey === "about" && (
@@ -504,6 +587,32 @@ const manufacturingBaseValue =
     )
   }
 
+  {
+    pageKey !== "about" && pageKey !== "solutions" && (
+      <section class="section detail-section">
+        <div class="container">
+          <p class="detail-kicker">{visualCopy.detailTitle}</p>
+          <div class="detail-grid">
+            {page.sections.map((section, index) => (
+              <article>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h2>{section.title}</h2>
+                <p>{section.summary}</p>
+                {section.items && (
+                  <ul>
+                    {section.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   <section class="section final-cta">
     <div class="container">
       <CTAPanel
@@ -545,6 +654,131 @@ const manufacturingBaseValue =
 </script>
 
 <style>
+  .visual-story {
+    background: var(--color-navy);
+    color: white;
+    padding-block: clamp(2.4rem, 5vw, 4.4rem);
+  }
+
+  .visual-story__grid {
+    align-items: stretch;
+    display: grid;
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  .visual-story figure {
+    margin: 0;
+    min-height: 320px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .visual-story img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .visual-story figcaption {
+    background: rgba(11, 31, 58, 0.88);
+    bottom: 0;
+    font-size: 0.7rem;
+    left: 0;
+    letter-spacing: 0.04em;
+    padding: 0.45rem 0.7rem;
+    position: absolute;
+  }
+
+  .visual-story__grid > div {
+    align-self: center;
+  }
+
+  .visual-story__grid > div > p,
+  .detail-kicker {
+    color: #6db0ff;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    margin: 0 0 1rem;
+  }
+
+  .visual-story h2 {
+    color: white;
+    font-size: clamp(1.8rem, 3.4vw, 3rem);
+  }
+
+  .visual-story ul {
+    display: grid;
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+  }
+
+  .visual-story li {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2.5rem 1fr;
+    padding: 0.8rem 0;
+  }
+
+  .visual-story li:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .visual-story li span {
+    color: #6db0ff;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+
+  .detail-section {
+    background: #eef3f8;
+  }
+
+  .detail-grid {
+    border-left: var(--border);
+    border-top: var(--border);
+    display: grid;
+  }
+
+  .detail-grid article {
+    background: white;
+    border-bottom: var(--border);
+    border-right: var(--border);
+    min-height: 250px;
+    padding: var(--space-5);
+  }
+
+  .detail-grid article > span {
+    color: var(--color-blue);
+    font-size: 0.74rem;
+    font-weight: 900;
+  }
+
+  .detail-grid h2 {
+    font-size: clamp(1.3rem, 2.3vw, 1.8rem);
+    margin: 1rem 0 0.75rem;
+  }
+
+  .detail-grid article > p {
+    color: #5d6979;
+    line-height: 1.75;
+  }
+
+  .detail-grid article ul {
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .detail-grid article li {
+    background: #f5f7fa;
+    font-size: 0.78rem;
+    padding: 0.35rem 0.55rem;
+  }
+
   .sub-hero {
     background:
       linear-gradient(rgba(192, 199, 209, 0.13) 1px, transparent 1px),
@@ -967,6 +1201,14 @@ const manufacturingBaseValue =
   }
 
   @media (min-width: 48rem) {
+    .visual-story__grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    }
+
+    .detail-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .sub-hero__inner,
     .about-grid,
     .diagnostic-grid,
