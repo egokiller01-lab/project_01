@@ -9,7 +9,7 @@ type Props = {
 
 const { locale, currentPath } = Astro.props;
 const contactLabels = {
-  ko: "문의",
+  ko: "기술문의",
   en: "Contact",
   vi: "Liên hệ",
 }[locale];
@@ -53,7 +53,7 @@ function isActive(href: string) {
     padding: var(--space-4);
     position: fixed;
     right: 0;
-    top: 72px;
+    top: 110px;
     transform: translateY(-110%);
     transition: transform var(--transition);
     z-index: var(--z-menu);
@@ -78,6 +78,12 @@ function isActive(href: string) {
   @media (min-width: 64rem) {
     .mobile-nav {
       display: none;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .mobile-nav {
+      top: 100px;
     }
   }
 </style>

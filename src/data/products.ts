@@ -15,16 +15,27 @@ export type ProductSlug = (typeof slugs)[number];
 
 export const productSlugs = [...slugs];
 
+export const processLabels: Record<ProductSlug, string> = {
+  pretreatment: "전처리",
+  electroplating: "전기도금",
+  "electroless-plating": "무전해도금",
+  "aluminum-anodizing": "알루미늄 아노다이징",
+  "conversion-coating": "화성피막",
+  "post-treatment-specialty": "후처리·특수약품",
+  "basic-chemicals": "기초화학약품",
+  "filtration-equipment": "여과장비·관련 설비",
+};
+
 const koProducts: ProductDetail[] = [
   {
     slug: "pretreatment",
     title: "전처리",
     summary:
-      "탈지, 세정, 산세, 활성화 등 후속 도금·피막 공정의 시작 조건을 잡는 제품군입니다.",
+      "탈지, 세정, 산세, 에칭, 디스머트로 후속 도금·피막 공정의 시작 조건을 잡습니다.",
     overview:
       "소재 표면의 유분, 산화막, 가공 잔류물을 정리해 밀착 불량과 얼룩의 원인축을 줄입니다.",
     materials: ["철강", "동 및 동합금", "알루미늄", "스테인리스"],
-    processes: ["탈지", "세정", "산세", "활성화", "디스머트"],
+    processes: ["탈지", "세정", "산세", "에칭", "디스머트"],
     checks: ["농도", "온도", "처리 시간", "수세 상태", "소재 표면 상태"],
     support: ["전처리 순서 검토", "불량 원인 점검", "샘플 평가 조건 제안"],
     cta: "전처리 문의",
@@ -33,37 +44,33 @@ const koProducts: ProductDetail[] = [
     slug: "electroplating",
     title: "전기도금",
     summary:
-      "전류, 도금욕, 여과, 교반 조건을 함께 보며 금속 도금 품질의 반복성을 관리합니다.",
+      "니켈, 구리, 주석, 아연, 크롬, 은, 금 도금 공정의 욕관리와 적용 조건을 검토합니다.",
     overview:
-      "피트, 두께 편차, 밀착 불량, 색상 편차 등 전기도금 현장의 주요 문제를 bath 관리와 연결해 검토합니다.",
+      "피트, 두께 편차, 밀착 불량, 색상 편차 등 전기도금 현장의 주요 문제를 bath 관리와 연결해 봅니다.",
     materials: ["철강", "동합금", "정밀 금속 부품", "전자 부품"],
-    processes: ["니켈 도금", "동 도금", "주석 도금", "아연 도금"],
+    processes: ["니켈", "구리", "주석", "아연", "크롬", "은", "금"],
     checks: ["pH", "금속 농도", "전류밀도", "교반", "여과", "온도"],
-    support: ["도금욕 분석", "Hull Cell 평가", "불량 사진 기반 상담"],
+    support: ["도금욕 분석", "작업조건 검토", "불량 사진 기반 상담"],
     cta: "전기도금 문의",
   },
   {
     slug: "electroless-plating",
     title: "무전해도금",
     summary:
-      "복잡 형상과 특수 소재에 적용되는 화학 도금 공정의 안정성을 검토합니다.",
+      "무전해 니켈과 무전해 구리 공정의 소재 활성화와 bath 안정성을 검토합니다.",
     overview:
       "전류 분포보다 소재 활성화, 환원 반응, bath 안정성이 중요한 공정으로 보고 관리 항목을 정리합니다.",
     materials: ["금속 부품", "PCB 관련 소재", "플라스틱", "복잡 형상 부품"],
-    processes: ["무전해 니켈", "무전해 동", "소재 활성화", "침지형 표면처리"],
+    processes: ["무전해 니켈", "무전해 구리"],
     checks: ["pH", "온도", "금속 농도", "환원제 상태", "bath 안정성"],
-    support: [
-      "소재별 적용성 검토",
-      "bath 관리 체크리스트",
-      "샘플 테스트 조건 제안",
-    ],
+    support: ["소재별 적용성 검토", "bath 관리 항목", "샘플 테스트 조건 제안"],
     cta: "무전해도금 문의",
   },
   {
     slug: "aluminum-anodizing",
     title: "알루미늄 아노다이징",
     summary:
-      "알루미늄 전처리, 산화피막, 염색, 봉공 조건을 연결해 품질 편차를 줄입니다.",
+      "화학연마, 에칭, 디스머트, 아노다이징, 염색, 봉공, 니켈 리치아웃 제거를 검토합니다.",
     overview:
       "합금 종류와 전처리 반응 차이를 먼저 확인하고 피막 형성, 색상, 봉공 조건까지 함께 검토합니다.",
     materials: [
@@ -72,7 +79,15 @@ const koProducts: ProductDetail[] = [
       "주조 알루미늄",
       "알루미늄 합금",
     ],
-    processes: ["탈지", "에칭", "디스머트", "아노다이징", "염색", "봉공"],
+    processes: [
+      "화학연마",
+      "에칭",
+      "디스머트",
+      "아노다이징",
+      "염색",
+      "봉공",
+      "니켈 리치아웃 제거",
+    ],
     checks: ["합금 종류", "전처리 조건", "피막 상태", "염색 조건", "봉공 조건"],
     support: ["합금별 전처리 검토", "색상 편차 상담", "봉공 조건 점검"],
     cta: "아노다이징 문의",
@@ -81,11 +96,11 @@ const koProducts: ProductDetail[] = [
     slug: "conversion-coating",
     title: "화성피막",
     summary:
-      "내식성, 도장 밀착, 변색 억제를 위한 금속 표면 피막 공정을 안내합니다.",
+      "인산염, 징케이트, 크로메이트 등 금속 표면 피막 공정을 안내합니다.",
     overview:
-      "전환피막과 관련 후처리는 소재 표면, 수세, 건조 조건의 영향을 함께 받으므로 공정 전후를 같이 봅니다.",
-    materials: ["철강", "알루미늄", "마그네슘", "스테인리스", "아연계 소재"],
-    processes: ["전환피막", "인산염", "패시베이션", "흑색산화", "방청 처리"],
+      "소재 표면, 수세, 건조 조건에 영향을 받는 공정으로 보고 전후 조건을 함께 확인합니다.",
+    materials: ["철강", "알루미늄", "아연계 소재"],
+    processes: ["인산염", "징케이트", "크로메이트"],
     checks: ["표면 상태", "pH", "온도", "처리 시간", "수세", "건조"],
     support: ["소재별 피막 선택", "도장 밀착 상담", "방청 조건 점검"],
     cta: "화성피막 문의",
@@ -94,11 +109,11 @@ const koProducts: ProductDetail[] = [
     slug: "post-treatment-specialty",
     title: "후처리·특수약품",
     summary:
-      "도금과 피막 이후의 변색, 방청, 세척, 보완 처리를 위한 약품 범주입니다.",
+      "변색방지, 코팅, 특수 세정, 제거제 등 후처리와 특수 목적 약품 범주입니다.",
     overview:
-      "후처리는 앞 공정의 품질을 유지하는 단계이므로 수세, 건조, 포장 전 조건까지 함께 확인합니다.",
-    materials: ["도금품", "피막 처리품", "정밀 금속 부품", "방청 목적 부품"],
-    processes: ["변색 방지", "방청 후처리", "세척", "건조 전 관리"],
+      "앞 공정의 품질을 유지하는 단계로 보고 수세, 건조, 보관 전 조건까지 함께 확인합니다.",
+    materials: ["도금품", "피막 처리품", "정밀 금속 부품"],
+    processes: ["변색방지", "코팅", "특수 세정", "제거제"],
     checks: ["전공정 상태", "잔류 약품", "수세", "건조", "보관 조건"],
     support: ["후처리 조건 검토", "변색·얼룩 원인 점검", "공정 보완 제안"],
     cta: "후처리 문의",
@@ -107,44 +122,25 @@ const koProducts: ProductDetail[] = [
     slug: "basic-chemicals",
     title: "기초화학약품",
     summary:
-      "표면처리 라인 운영에 필요한 산·알칼리류, 금속염, 보충 원료 공급 범주입니다.",
+      "황산, 염산, 질산, 가성소다 등 표면처리 라인 운영에 필요한 기초화학약품입니다.",
     overview:
       "공정 원료의 사양, 보관 조건, LOT 관리를 확인해 표면처리 라인의 공급 안정성을 지원합니다.",
-    materials: [
-      "산·알칼리류",
-      "금속염",
-      "동계 원료",
-      "아연계 원료",
-      "니켈계 원료",
-    ],
-    processes: ["원료 공급", "보충 관리", "사양 확인", "대체 원료 검토"],
-    checks: ["사양서", "LOT", "보관 조건", "유효기간", "입고 확인"],
+    materials: ["황산", "염산", "질산", "가성소다"],
+    processes: ["원료 공급", "보충 관리", "사양 확인"],
+    checks: ["사양서", "LOT", "보관 조건", "입고 확인"],
     support: ["원료 사양 확인", "취급 조건 검토", "주요 공급품 LOT 추적 관리"],
     cta: "기초화학약품 문의",
   },
   {
     slug: "filtration-equipment",
     title: "여과장비·관련 설비",
-    summary:
-      "도금·전처리 라인의 여과, 온도 관리, 시험·점검 기자재를 함께 검토합니다.",
+    summary: "표면처리 및 도금 공정용 여과장비를 공정 조건과 함께 검토합니다.",
     overview:
-      "입자성 불량, 도금욕 오염, 온도 편차를 줄이기 위한 설비와 공정 보조 기자재를 안내합니다.",
-    materials: ["도금 라인", "전처리 라인", "세정 라인", "시험·분석 현장"],
-    processes: [
-      "순환 여과",
-      "활성탄 처리",
-      "온도 관리",
-      "Hull Cell 시험",
-      "bath 점검",
-    ],
-    checks: [
-      "여과량",
-      "필터 교체 주기",
-      "온도 안정성",
-      "센서 상태",
-      "시험 조건",
-    ],
-    support: ["여과 조건 검토", "bath 관리와 장비 요인 분리", "시험 조건 안내"],
+      "입자성 불량과 도금욕 오염을 줄이기 위한 여과 조건과 설비 적용성을 함께 확인합니다.",
+    materials: ["도금 라인", "전처리 라인", "세정 라인"],
+    processes: ["표면처리 및 도금 공정용 여과장비"],
+    checks: ["여과량", "필터 교체 주기", "bath 오염 상태", "장비 점검"],
+    support: ["여과 조건 검토", "bath 관리와 장비 요인 분리", "장비 적용 검토"],
     cta: "여과장비 문의",
   },
 ];
@@ -189,8 +185,8 @@ export function getProductFamilies(locale: Locale): ProductFamily[] {
     title: product.title,
     summary: product.summary,
     href: `/${locale}/contact/?process=${product.slug}`,
-    materials: product.materials.slice(0, 3).join(" · "),
-    process: product.processes.slice(0, 4).join(" · "),
+    materials: product.materials.slice(0, 4).join(" · "),
+    process: product.processes.slice(0, 5).join(" · "),
     cta: product.cta,
   }));
 }

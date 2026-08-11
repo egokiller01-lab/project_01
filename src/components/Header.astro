@@ -13,7 +13,7 @@ type Props = {
 const { locale, currentPath, alternatePaths } = Astro.props;
 const items = navigation[locale];
 const contactLabels = {
-  ko: "문의",
+  ko: "기술문의",
   en: "Contact",
   vi: "Liên hệ",
 }[locale];
@@ -28,39 +28,49 @@ function isActive(href: string) {
 ---
 
 <header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href={`/${locale}/`} aria-label="PLACHEM VINA home"
-      >PLACHEM VINA</a
-    >
-    <nav class="desktop-nav" aria-label="Primary navigation">
-      {
-        items.map((item) => (
-          <a href={item.href} class={isActive(item.href) ? "is-active" : ""}>
-            {item.label}
-          </a>
-        ))
-      }
-    </nav>
-    <div class="header-actions">
-      <LanguageSwitcher locale={locale} alternatePaths={alternatePaths} />
-      <a class="button button--primary header-cta" href={`/${locale}/contact/`}
-        >{contactLabels}</a
-      >
-      <button
-        class="menu-button"
-        type="button"
-        aria-controls="mobile-nav"
-        aria-expanded="false"
-        data-menu-button
-      >
-        <span class="menu-button__line"></span>
-        <span class="menu-button__line"></span>
-        <span class="menu-button__line"></span>
-        <span class="sr-only">Open menu</span>
-      </button>
+  <div class="top-strip">
+    <div class="container top-strip__inner">
+      <span>BAC NINH · VIETNAM</span>
+      <span>PRECISION SURFACE TREATMENT CHEMICAL SOLUTIONS</span>
     </div>
   </div>
-  <MobileNav locale={locale} currentPath={currentPath} />
+  <div class="main-header">
+    <div class="container header-inner">
+      <a class="brand" href={`/${locale}/`} aria-label="PLACHEM VINA home">
+        <span>PLACHEM</span>
+        <small>VINA CO., LTD.</small>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        {
+          items.map((item) => (
+            <a href={item.href} class={isActive(item.href) ? "is-active" : ""}>
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+      <div class="header-actions">
+        <LanguageSwitcher locale={locale} alternatePaths={alternatePaths} />
+        <a class="header-cta" href={`/${locale}/contact/`}>
+          <span>{contactLabels}</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <button
+          class="menu-button"
+          type="button"
+          aria-controls="mobile-nav"
+          aria-expanded="false"
+          data-menu-button
+        >
+          <span class="menu-button__line"></span>
+          <span class="menu-button__line"></span>
+          <span class="menu-button__line"></span>
+          <span class="sr-only">Open menu</span>
+        </button>
+      </div>
+    </div>
+    <MobileNav locale={locale} currentPath={currentPath} />
+  </div>
 </header>
 
 <script>
@@ -97,23 +107,44 @@ function isActive(href: string) {
 
 <style>
   .site-header {
-    background: rgba(248, 250, 252, 0.96);
-    border-bottom: var(--border);
+    background: white;
     position: sticky;
     top: 0;
     z-index: var(--z-header);
+  }
+
+  .top-strip {
+    background: var(--color-navy);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .top-strip__inner {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    min-height: 32px;
+  }
+
+  .main-header {
+    background: white;
+    border-bottom: var(--border);
   }
 
   .header-inner {
     align-items: center;
     display: flex;
     gap: var(--space-4);
-    min-height: 72px;
+    min-height: 82px;
   }
 
   .brand {
     color: var(--color-navy);
-    font-weight: 800;
+    display: grid;
+    font-weight: 900;
+    line-height: 1;
     flex: 0 1 auto;
     min-width: 0;
     overflow: hidden;
@@ -122,14 +153,27 @@ function isActive(href: string) {
     text-decoration: none;
   }
 
+  .brand span {
+    font-size: 1.18rem;
+    letter-spacing: 0.02em;
+  }
+
+  .brand small {
+    color: rgba(17, 24, 39, 0.62);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    margin-top: 0.25rem;
+  }
+
   .desktop-nav {
     display: none;
-    gap: var(--space-5);
+    gap: var(--space-4);
     margin-left: auto;
   }
 
   .desktop-nav a {
-    font-weight: 700;
+    font-size: 0.96rem;
+    font-weight: 800;
     text-decoration: none;
   }
 
@@ -146,6 +190,16 @@ function isActive(href: string) {
 
   .header-cta {
     display: none;
+    align-items: center;
+    background: var(--color-navy);
+    border: 1px solid var(--color-navy);
+    border-radius: var(--radius-sm);
+    color: white;
+    gap: var(--space-2);
+    font-weight: 900;
+    min-height: 44px;
+    padding: 0.7rem 1rem;
+    text-decoration: none;
   }
 
   .menu-button {
@@ -195,6 +249,18 @@ function isActive(href: string) {
   }
 
   @media (max-width: 30rem) {
+    .top-strip__inner {
+      min-height: 28px;
+    }
+
+    .top-strip__inner span:last-child {
+      display: none;
+    }
+
+    .header-inner {
+      min-height: 72px;
+    }
+
     .header-inner {
       gap: var(--space-2);
     }

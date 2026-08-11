@@ -20,8 +20,8 @@ export const companyFacts = {
   regionKo: "베트남 박닌",
   regionEn: "Bac Ninh, Vietnam",
   regionVi: "Bac Ninh, Việt Nam",
-  site: "Bac Ninh, Vietnam",
-  vietnamPhone: "0222-395-2060",
+  site: "Bắc Ninh, Vietnam",
+  vietnamPhone: "+84 222 395 2060",
   koreaAddressKo: "경기도 안산시 단원구 산단로 341",
   koreaAddressEn: "341 Sandan-ro, Danwon-gu, Ansan-si, Gyeonggi-do, Korea",
   koreaPhone: "031-495-6688",
@@ -238,7 +238,7 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
       {
         title: "기술 블로그 연결",
         summary:
-          "기존 WordPress 기술 블로그의 검증된 글만 외부 링크로 연결합니다. 블로그 자체는 이번 작업에서 변경하지 않습니다.",
+          "검증된 기술 블로그 글만 외부 링크로 연결해 공정별 참고 자료를 확인할 수 있게 합니다.",
         items: ["소재·도금", "전기도금", "불량 분석"],
       },
       {
@@ -260,7 +260,7 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
     title: "공정 정보를 정리해 기술문의를 보내주세요",
     seoTitle: "기술문의 | PLACHEM VINA",
     description:
-      "문의 가능한 내용, 접수 전 준비 정보, 연락처와 위치를 안내합니다. 실제 전송 기능은 이번 단계에서 제외합니다.",
+      "문의 가능한 내용, 접수 전 준비 정보, 베트남 법인과 한국 연락처를 안내합니다.",
     eyebrow: "기술문의",
     lead: "문의 전에 소재, 공정, 현재 증상, 요청 자료를 정리하면 제품군 검토와 기술 회신이 빨라집니다.",
     ctaLabel: "제품·솔루션 보기",
@@ -277,17 +277,6 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
         summary:
           "회사명, 담당자 연락처, 대상 소재, 현재 공정, 사용 중인 약품, 불량 사진 또는 증상 설명을 준비해 주세요.",
         items: ["소재", "공정", "증상", "요청 자료"],
-      },
-      {
-        title: "이번 검수 화면의 범위",
-        summary:
-          "현재 검수 화면에서는 전송 폼과 첨부파일 입력창을 노출하지 않습니다. 실제 온라인 접수는 대표 승인 이후 별도 연결합니다.",
-        items: [
-          "전송 기능 제외",
-          "첨부 업로드 제외",
-          "문의 API 유지",
-          "대표 승인 후 연결",
-        ],
       },
     ],
   },

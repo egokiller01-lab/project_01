@@ -3,25 +3,24 @@ import type { CTA } from "../types";
 
 type Props = {
   eyebrow: string;
-  title: string;
+  titleLines: string[];
+  accent: string;
   summary: string;
   ctas: CTA[];
   strengths: string[];
-  image: {
-    src: string;
-    alt: string;
-    caption: string;
-  };
 };
 
-const { eyebrow, title, summary, ctas, strengths, image } = Astro.props;
+const { eyebrow, titleLines, accent, summary, ctas, strengths } = Astro.props;
 ---
 
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-copy">
       <p class="eyebrow">{eyebrow}</p>
-      <h1>{title}</h1>
+      <h1>
+        {titleLines.map((line) => <span>{line}</span>)}
+        <span class="accent">{accent}</span>
+      </h1>
       <p class="summary">{summary}</p>
       <div class="hero-actions">
         {
@@ -36,65 +35,72 @@ const { eyebrow, title, summary, ctas, strengths, image } = Astro.props;
         }
       </div>
     </div>
-    <div class="hero-panel" aria-label="PLACHEM VINA process support strengths">
-      <figure class="hero-media">
-        <img
-          src={image.src}
-          alt={image.alt}
-          width="1024"
-          height="1024"
-          loading="eager"
-          decoding="async"
-        />
-        <figcaption>{image.caption}</figcaption>
-      </figure>
-      <div class="strength-list">
-        {strengths.map((strength) => <span>{strength}</span>)}
+    <div class="metal-visual" aria-label="정밀 금속 표면을 표현한 비주얼">
+      <div class="metal-plate">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="visual-label">
+        <strong>PRECISION SURFACE</strong>
+        <span>CHEMISTRY</span>
       </div>
     </div>
+  </div>
+  <div class="container hero-metrics" aria-label="PLACHEM VINA summary">
+    {strengths.map((item) => <span>{item}</span>)}
   </div>
 </section>
 
 <style>
   .hero {
     background:
-      linear-gradient(90deg, rgba(11, 31, 58, 0.96), rgba(39, 50, 62, 0.88)),
-      var(--color-navy);
+      linear-gradient(rgba(192, 199, 209, 0.16) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(192, 199, 209, 0.16) 1px, transparent 1px),
+      linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    background-size:
+      44px 44px,
+      44px 44px,
+      auto;
     border-bottom: var(--border);
-    color: white;
-    padding-block: var(--space-7);
+    padding-block: clamp(4rem, 8vw, 6.25rem) var(--space-6);
   }
 
   .hero-grid {
+    align-items: center;
     display: grid;
-    gap: var(--space-6);
+    gap: var(--space-7);
+    min-height: 560px;
   }
 
   .eyebrow {
-    color: var(--color-steel);
-    font-size: 0.86rem;
+    color: var(--color-blue);
+    font-size: 0.78rem;
     font-weight: 900;
     letter-spacing: 0.08em;
-    margin: 0 0 var(--space-3);
-    text-transform: uppercase;
+    margin: 0 0 var(--space-4);
   }
 
   h1 {
-    color: white;
-    font-size: clamp(2.35rem, 5vw, 4.35rem);
+    color: var(--color-navy);
+    font-size: clamp(42px, 5vw, 68px);
     letter-spacing: 0;
     line-height: 1.05;
     margin: 0;
-    max-width: 13ch;
-    overflow-wrap: keep-all;
-    word-break: keep-all;
+  }
+
+  h1 span {
+    display: block;
+  }
+
+  .accent {
+    color: var(--color-blue);
   }
 
   .summary {
-    font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+    font-size: clamp(1.04rem, 1.6vw, 1.22rem);
     margin-block: var(--space-5);
-    max-width: 56ch;
-    color: rgba(248, 250, 252, 0.86);
+    max-width: 42rem;
   }
 
   .hero-actions {
@@ -103,81 +109,154 @@ const { eyebrow, title, summary, ctas, strengths, image } = Astro.props;
     gap: var(--space-3);
   }
 
-  .hero-panel {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(228, 233, 239, 0.32);
-    border-radius: var(--radius-md);
-    display: grid;
-    gap: var(--space-4);
-    overflow: hidden;
-    padding: var(--space-3);
+  .hero-actions .button--primary {
+    background: var(--color-blue);
+    border-color: var(--color-blue);
   }
 
-  .hero-media {
-    margin: 0;
+  .metal-visual {
+    background:
+      linear-gradient(135deg, rgba(11, 31, 58, 0.96), rgba(31, 78, 121, 0.72)),
+      var(--color-navy);
+    border: 1px solid rgba(192, 199, 209, 0.8);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+    min-height: 380px;
+    overflow: hidden;
+    padding: var(--space-5);
     position: relative;
   }
 
-  .hero-media img {
-    aspect-ratio: 16 / 11;
-    border-radius: calc(var(--radius-md) - 2px);
-    display: block;
-    height: auto;
-    object-fit: cover;
-    object-position: 50% 50%;
-    width: 100%;
-  }
-
-  .hero-media figcaption {
-    background: rgba(11, 31, 58, 0.88);
-    border-radius: var(--radius-sm);
-    bottom: var(--space-3);
-    color: white;
-    font-size: 0.78rem;
-    font-weight: 700;
-    left: var(--space-3);
-    max-width: calc(100% - var(--space-6));
-    padding: 0.45rem 0.65rem;
+  .metal-visual::before {
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.24),
+        transparent
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.08) 0 1px,
+        transparent 1px 12px
+      );
+    content: "";
+    inset: 0;
+    opacity: 0.68;
     position: absolute;
   }
 
-  .strength-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    padding: 0 var(--space-2) var(--space-2);
+  .metal-plate {
+    background:
+      radial-gradient(
+        circle at 18% 35%,
+        rgba(255, 255, 255, 0.85),
+        transparent 0.55rem
+      ),
+      radial-gradient(
+        circle at 78% 28%,
+        rgba(255, 255, 255, 0.82),
+        transparent 0.5rem
+      ),
+      linear-gradient(
+        135deg,
+        #f8fafc 0%,
+        #c0c7d1 38%,
+        #ffffff 52%,
+        #7f8fa3 100%
+      );
+    clip-path: polygon(8% 16%, 84% 8%, 96% 62%, 58% 88%, 12% 78%);
+    height: 250px;
+    left: 9%;
+    position: absolute;
+    right: 8%;
+    top: 15%;
   }
 
-  .strength-list span {
-    background: rgba(248, 250, 252, 0.08);
-    border: 1px solid rgba(228, 233, 239, 0.28);
-    border-radius: var(--radius-sm);
+  .metal-plate span {
+    background: rgba(11, 31, 58, 0.22);
+    border: 1px solid rgba(11, 31, 58, 0.12);
+    display: block;
+    height: 10px;
+    left: 18%;
+    position: absolute;
+    right: 16%;
+  }
+
+  .metal-plate span:nth-child(1) {
+    top: 32%;
+  }
+
+  .metal-plate span:nth-child(2) {
+    top: 50%;
+  }
+
+  .metal-plate span:nth-child(3) {
+    top: 68%;
+  }
+
+  .visual-label {
+    background: var(--color-navy);
+    bottom: var(--space-5);
     color: white;
-    font-size: 0.86rem;
-    font-weight: 800;
-    padding: 0.55rem 0.7rem;
+    display: grid;
+    gap: var(--space-1);
+    left: var(--space-5);
+    padding: var(--space-4);
+    position: absolute;
+    width: min(260px, calc(100% - var(--space-6)));
+  }
+
+  .visual-label strong {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+  }
+
+  .visual-label span {
+    color: var(--color-steel);
+    font-weight: 900;
+  }
+
+  .hero-metrics {
+    border-top: var(--border);
+    display: grid;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+  }
+
+  .hero-metrics span {
+    color: var(--color-navy);
+    font-weight: 900;
+  }
+
+  @media (min-width: 48rem) {
+    .hero-metrics {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 
   @media (min-width: 64rem) {
     .hero-grid {
-      align-items: center;
-      grid-template-columns: minmax(0, 1.1fr) minmax(24rem, 0.9fr);
+      grid-template-columns: minmax(0, 0.46fr) minmax(0, 0.54fr);
     }
   }
 
   @media (max-width: 47.99rem) {
     .hero {
-      padding-block: var(--space-6);
+      padding-block: var(--space-6) var(--space-5);
     }
 
-    h1 {
-      max-width: 11ch;
+    .hero-grid {
+      min-height: auto;
     }
 
-    .hero-media figcaption {
-      position: static;
-      max-width: none;
-      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    .metal-visual {
+      min-height: 300px;
+    }
+
+    .metal-plate {
+      height: 190px;
     }
   }
 </style>
