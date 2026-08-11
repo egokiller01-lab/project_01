@@ -86,7 +86,11 @@ function isActive(href: string) {
         </button>
       </div>
     </div>
-    <MobileNav locale={locale} currentPath={currentPath} />
+    <MobileNav
+      locale={locale}
+      currentPath={currentPath}
+      alternatePaths={alternatePaths}
+    />
   </div>
 </header>
 
@@ -124,15 +128,15 @@ function isActive(href: string) {
 
 <style>
   .site-header {
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 0.45rem 1.6rem rgba(11, 31, 58, 0.05);
+    background: rgba(5, 20, 42, 0.97);
+    box-shadow: 0 0.45rem 1.6rem rgba(2, 10, 22, 0.22);
     position: sticky;
     top: 0;
     z-index: var(--z-header);
   }
 
   .top-strip {
-    background: linear-gradient(90deg, #07172d, #102f55);
+    background: #041226;
     color: white;
     font-size: 0.72rem;
     font-weight: 800;
@@ -148,8 +152,8 @@ function isActive(href: string) {
 
   .main-header {
     backdrop-filter: blur(14px);
-    background: rgba(255, 255, 255, 0.94);
-    border-bottom: var(--border);
+    background: rgba(7, 25, 50, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
   }
 
   .header-inner {
@@ -160,7 +164,7 @@ function isActive(href: string) {
   }
 
   .brand {
-    color: var(--color-navy);
+    color: white;
     display: grid;
     font-weight: 900;
     line-height: 1;
@@ -191,7 +195,7 @@ function isActive(href: string) {
   }
 
   .brand small {
-    color: rgba(17, 24, 39, 0.62);
+    color: #8fa9c5;
     font-size: 0.65rem;
     letter-spacing: 0.14em;
     margin-top: 0.25rem;
@@ -204,6 +208,7 @@ function isActive(href: string) {
   }
 
   .desktop-nav a {
+    color: #e8eef6;
     font-size: 0.96rem;
     font-weight: 800;
     padding-block: 1.85rem;
@@ -230,7 +235,7 @@ function isActive(href: string) {
   }
 
   .desktop-nav a.is-active {
-    color: var(--color-blue);
+    color: #69adff;
   }
 
   .header-actions {
@@ -243,8 +248,8 @@ function isActive(href: string) {
   .header-cta {
     display: none;
     align-items: center;
-    background: #0b2342;
-    border: 1px solid #0b2342;
+    background: #176ee0;
+    border: 1px solid #176ee0;
     border-radius: var(--radius-sm);
     color: white;
     gap: var(--space-2);
@@ -264,8 +269,8 @@ function isActive(href: string) {
 
   .menu-button {
     align-items: center;
-    background: white;
-    border: var(--border);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.24);
     border-radius: var(--radius-md);
     display: inline-flex;
     flex-direction: column;
@@ -276,7 +281,7 @@ function isActive(href: string) {
   }
 
   .menu-button__line {
-    background: var(--color-navy);
+    background: white;
     display: block;
     height: 2px;
     width: 18px;
@@ -306,6 +311,14 @@ function isActive(href: string) {
     .menu-button {
       display: none;
     }
+  }
+
+  .header-actions :global(.language-switcher a) {
+    color: #b8c8d9;
+  }
+
+  .header-actions :global(.language-switcher a.is-active) {
+    color: #69adff;
   }
 
   @media (max-width: 30rem) {

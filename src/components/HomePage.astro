@@ -484,27 +484,77 @@ const ui = {
   },
 }[locale];
 
-const blogHome = locale === "vi" ? "https://blog.plachem.biz/vi/" : "https://blog.plachem.biz/";
+const blogHome =
+  locale === "vi"
+    ? "https://blog.plachem.biz/vi/"
+    : "https://blog.plachem.biz/";
 const blogTopics = {
   ko: [
-    ["표면처리 전체", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/"],
-    ["전기도금", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%A0%84%EA%B8%B0%EB%8F%84%EA%B8%88/"],
-    ["화학도금", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/chemical-plating-ko/"],
-    ["아노다이징", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%95%84%EB%85%B8%EB%8B%A4%EC%9D%B4%EC%A7%95/"],
+    [
+      "표면처리 전체",
+      "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/",
+    ],
+    [
+      "전기도금",
+      "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%A0%84%EA%B8%B0%EB%8F%84%EA%B8%88/",
+    ],
+    [
+      "화학도금",
+      "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/chemical-plating-ko/",
+    ],
+    [
+      "아노다이징",
+      "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%95%84%EB%85%B8%EB%8B%A4%EC%9D%B4%EC%A7%95/",
+    ],
   ],
   en: [
     ["All resources", "https://blog.plachem.biz/"],
-    ["Electroplating", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%A0%84%EA%B8%B0%EB%8F%84%EA%B8%88/"],
-    ["Chemical plating", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/chemical-plating-ko/"],
-    ["Anodizing", "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%95%84%EB%85%B8%EB%8B%A4%EC%9D%B4%EC%A7%95/"],
+    [
+      "Electroplating",
+      "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%A0%84%EA%B8%B0%EB%8F%84%EA%B8%88/",
+    ],
+    [
+      "Chemical plating",
+      "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/chemical-plating-ko/",
+    ],
+    [
+      "Anodizing",
+      "https://blog.plachem.biz/category/%ED%91%9C%EB%A9%B4%EC%B2%98%EB%A6%AC-%EC%9E%90%EB%A3%8C%EC%8B%A4/%EC%95%84%EB%85%B8%EB%8B%A4%EC%9D%B4%EC%A7%95/",
+    ],
   ],
   vi: [
-    ["Tất cả tài liệu", "https://blog.plachem.biz/vi/category/surface-treatment-vi/"],
-    ["Mạ điện", "https://blog.plachem.biz/vi/category/surface-treatment-vi/electroplating-vi/"],
-    ["Mạ hóa học", "https://blog.plachem.biz/vi/category/surface-treatment-vi/chemical-plating-vi/"],
-    ["Anodizing nhôm", "https://blog.plachem.biz/vi/category/surface-treatment-vi/anodizing-vi/"],
+    [
+      "Tất cả tài liệu",
+      "https://blog.plachem.biz/vi/category/surface-treatment-vi/",
+    ],
+    [
+      "Mạ điện",
+      "https://blog.plachem.biz/vi/category/surface-treatment-vi/electroplating-vi/",
+    ],
+    [
+      "Mạ hóa học",
+      "https://blog.plachem.biz/vi/category/surface-treatment-vi/chemical-plating-vi/",
+    ],
+    [
+      "Anodizing nhôm",
+      "https://blog.plachem.biz/vi/category/surface-treatment-vi/anodizing-vi/",
+    ],
   ],
 }[locale];
+
+const productVisuals = [
+  "/assets/rd-concept.webp",
+  "/assets/surface-treatment-concept.webp",
+  "/assets/plachem-quality.webp",
+  "/assets/manufacturing-concept.webp",
+];
+
+const blogVisuals = [
+  "/assets/surface-treatment-concept.webp",
+  "/assets/plachem-quality.webp",
+  "/assets/manufacturing-concept.webp",
+  "/assets/rd-concept.webp",
+];
 ---
 
 <BaseLayout
@@ -575,13 +625,22 @@ const blogTopics = {
               href={`/${locale}/solutions/#${product.slug}`}
               class="solution-card"
             >
-              <>
+              <figure>
+                <img
+                  src={productVisuals[index % productVisuals.length]}
+                  alt=""
+                  width="1024"
+                  height="1024"
+                  loading="lazy"
+                />
                 <span>{String(index + 1).padStart(2, "0")}</span>
+              </figure>
+              <div class="solution-card__body">
                 <h3>{product.title}</h3>
                 <p>{product.summary}</p>
                 <small>{product.materials.slice(0, 5).join(" · ")}</small>
                 <b aria-hidden="true">↗</b>
-              </>
+              </div>
             </a>
           ))
         }
@@ -788,21 +847,39 @@ const blogTopics = {
       </div>
 
       <nav class="blog-topics" aria-label={ui.blogBrand}>
-        {blogTopics.map(([label, href]) => (
-          <a href={href} target="_blank" rel="noopener noreferrer">
-            {label}<span aria-hidden="true">↗</span>
-          </a>
-        ))}
+        {
+          blogTopics.map(([label, href]) => (
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              {label}
+              <span aria-hidden="true">↗</span>
+            </a>
+          ))
+        }
       </nav>
 
       <div class="blog-editorial-grid">
         <div class="featured-blog">
           <p class="blog-list-label">{ui.featuredArticle}</p>
-          <BlogCard {...content.blogs[0]} featured />
+          <BlogCard
+            {...content.blogs[0]}
+            featured
+            image={blogVisuals[0]}
+            imageAlt=""
+          />
         </div>
         <div class="blog-list">
           <p class="blog-list-label">{ui.latestArticles}</p>
-          {content.blogs.slice(1).map((blog) => <BlogCard {...blog} />)}
+          {
+            content.blogs
+              .slice(1)
+              .map((blog, index) => (
+                <BlogCard
+                  {...blog}
+                  image={blogVisuals[index + 1]}
+                  imageAlt=""
+                />
+              ))
+          }
         </div>
       </div>
 
@@ -828,7 +905,7 @@ const blogTopics = {
 
 <style>
   .section {
-    padding-block: clamp(4rem, 7vw, 6.5rem);
+    padding-block: clamp(4.5rem, 7vw, 7rem);
   }
   .kicker {
     color: #1c72d6;
@@ -880,6 +957,8 @@ const blogTopics = {
   }
   .editorial-image {
     min-height: 420px;
+    border-radius: 1rem;
+    box-shadow: 0 1.5rem 3rem rgba(11, 31, 58, 0.14);
   }
   figure figcaption {
     background: rgba(11, 31, 58, 0.86);
@@ -936,7 +1015,7 @@ const blogTopics = {
   }
 
   .solutions-section {
-    background: white;
+    background: linear-gradient(180deg, #ffffff, #f2f6fb);
   }
   .section-head {
     margin-bottom: var(--space-7);
@@ -949,54 +1028,100 @@ const blogTopics = {
     max-width: 42rem;
   }
   .solution-grid {
-    border-left: var(--border);
-    border-top: var(--border);
     display: grid;
+    gap: 1rem;
   }
   .solution-card {
-    border-bottom: var(--border);
-    border-right: var(--border);
-    display: grid;
-    min-height: 265px;
-    padding: var(--space-5);
+    background: white;
+    border: 1px solid #d9e3ed;
+    border-radius: 0.9rem;
+    box-shadow: 0 0.85rem 2rem rgba(11, 31, 58, 0.08);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    overflow: hidden;
     position: relative;
     text-decoration: none;
     transition:
-      background 0.2s,
-      color 0.2s,
-      transform 0.2s;
+      border-color 0.25s,
+      box-shadow 0.25s,
+      transform 0.25s;
+  }
+  .solution-card figure {
+    aspect-ratio: 16 / 9;
+    background: var(--color-navy);
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .solution-card figure::after {
+    background: linear-gradient(180deg, transparent 42%, rgba(3, 16, 34, 0.7));
+    content: "";
+    inset: 0;
+    position: absolute;
+  }
+  .solution-card figure img {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+    width: 100%;
+  }
+  .solution-card figure span {
+    align-items: center;
+    background: #176ee0;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    font-size: 0.72rem;
+    font-weight: 900;
+    height: 2.3rem;
+    justify-content: center;
+    left: 1rem;
+    position: absolute;
+    top: 1rem;
+    width: 2.3rem;
+    z-index: 1;
+  }
+  .solution-card__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1.25rem;
+    position: relative;
   }
   .solution-card h3 {
     color: var(--color-navy);
-    font-size: 1.45rem;
-    margin: 1.2rem 0 0.7rem;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    margin: 0 0 0.6rem;
   }
   .solution-card p {
     color: #5d6979;
+    font-size: 0.88rem;
     line-height: 1.7;
   }
   .solution-card small {
-    align-self: end;
     color: #2366b2;
     display: block;
+    font-size: 0.72rem;
     font-weight: 800;
-    margin-top: 1.4rem;
+    margin-top: auto;
+    padding-top: 1.2rem;
   }
   .solution-card b {
+    color: #176ee0;
     font-size: 1.2rem;
     position: absolute;
     right: 1.2rem;
-    top: 1rem;
+    top: 1.1rem;
   }
   .solution-card:hover {
-    background: var(--color-navy);
-    color: white;
-    transform: translateY(-3px);
+    border-color: #8eb7e2;
+    box-shadow: 0 1.4rem 3rem rgba(11, 31, 58, 0.16);
+    transform: translateY(-5px);
   }
-  .solution-card:hover h3,
-  .solution-card:hover p,
-  .solution-card:hover small {
-    color: white;
+  .solution-card:hover figure img {
+    transform: scale(1.045);
   }
   .text-link {
     align-items: center;
@@ -1009,7 +1134,13 @@ const blogTopics = {
   }
 
   .focus-section {
-    background: var(--color-navy);
+    background:
+      radial-gradient(
+        circle at 12% 20%,
+        rgba(41, 119, 215, 0.22),
+        transparent 30rem
+      ),
+      #07172d;
     color: white;
   }
   .section-head--light h2 {
@@ -1020,6 +1151,8 @@ const blogTopics = {
   }
   .focus-layout figure {
     min-height: 520px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 1rem;
   }
   .focus-list {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -1029,7 +1162,11 @@ const blogTopics = {
     display: grid;
     gap: 1.1rem;
     grid-template-columns: 2.5rem 1fr;
-    padding-block: var(--space-5);
+    padding: var(--space-5);
+    transition: background 0.2s ease;
+  }
+  .focus-list article:hover {
+    background: rgba(255, 255, 255, 0.055);
   }
   .focus-list h3 {
     font-size: 1.55rem;
@@ -1056,7 +1193,7 @@ const blogTopics = {
   }
 
   .defect-section {
-    background: #eef3f8;
+    background: #f1f5f9;
   }
   .defect-copy > p:not(.kicker) {
     color: #5d6979;
@@ -1075,6 +1212,13 @@ const blogTopics = {
     border-right: var(--border);
     min-height: 145px;
     padding: var(--space-4);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .defect-grid article:hover {
+    box-shadow: 0 0.8rem 1.8rem rgba(11, 31, 58, 0.08);
+    transform: translateY(-2px);
   }
   .defect-grid h3 {
     color: var(--color-navy);
@@ -1117,6 +1261,10 @@ const blogTopics = {
     flex-direction: column;
     min-height: 320px;
     padding: clamp(1.35rem, 2.4vw, 2rem);
+    transition: background 0.2s ease;
+  }
+  .support-model-grid > li:hover {
+    background: rgba(255, 255, 255, 0.05);
   }
   .step-heading {
     align-items: center;
@@ -1159,6 +1307,15 @@ const blogTopics = {
   }
   .capability-grid article {
     background: #f4f7fa;
+    border-radius: 0.9rem;
+    overflow: hidden;
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+  .capability-grid article:hover {
+    box-shadow: 0 1.1rem 2.4rem rgba(11, 31, 58, 0.11);
+    transform: translateY(-3px);
   }
   .capability-grid figure {
     aspect-ratio: 4 / 3;
@@ -1177,6 +1334,7 @@ const blogTopics = {
   }
   .quality-flow {
     background: #eef3f8;
+    border-radius: 0.9rem;
     margin-top: var(--space-6);
     padding: var(--space-5);
   }
@@ -1208,7 +1366,9 @@ const blogTopics = {
     background: white;
     border: 1px solid #d8e1eb;
     box-shadow: 0 0.7rem 1.6rem rgba(11, 31, 58, 0.05);
-    min-height: 290px;
+    border-radius: 0.8rem;
+    min-height: 260px;
+    overflow: hidden;
     padding: var(--space-5);
     position: relative;
   }
@@ -1257,20 +1417,27 @@ const blogTopics = {
 
   .knowledge-section {
     background:
-      radial-gradient(circle at 92% 8%, rgba(28, 114, 214, 0.11), transparent 24rem),
-      linear-gradient(180deg, #f7f9fc, #edf3f8);
+      radial-gradient(
+        circle at 92% 8%,
+        rgba(44, 132, 238, 0.2),
+        transparent 28rem
+      ),
+      linear-gradient(145deg, #07172d, #0c2a4e);
+    color: white;
     overflow: hidden;
   }
   .knowledge-intro > p:not(.kicker) {
-    color: #5d6979;
+    color: #b9c9da;
     font-size: 1.05rem;
     line-height: 1.8;
     margin-top: var(--space-5);
   }
   .blog-brand {
     align-self: stretch;
-    background: #0b1f3a;
+    background: rgba(4, 18, 38, 0.56);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-left: 4px solid #4d9eff;
+    border-radius: 0.8rem;
     color: white;
     display: flex;
     flex-direction: column;
@@ -1317,9 +1484,9 @@ const blogTopics = {
   }
   .blog-topics a {
     align-items: center;
-    background: white;
-    border: 1px solid #cbd9e7;
-    color: var(--color-navy);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
     display: inline-flex;
     flex: 0 0 auto;
     font-size: 0.8rem;
@@ -1333,7 +1500,7 @@ const blogTopics = {
     color: #1c72d6;
   }
   .blog-list-label {
-    color: #59718b;
+    color: #86b9ef;
     font-size: 0.72rem;
     font-weight: 900;
     letter-spacing: 0.12em;
@@ -1350,7 +1517,7 @@ const blogTopics = {
   }
   .knowledge-footer {
     align-items: center;
-    border-top: 1px solid #cad7e5;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
     display: flex;
     flex-wrap: wrap;
     gap: 1rem 2rem;
@@ -1359,12 +1526,17 @@ const blogTopics = {
     padding-top: 1.3rem;
   }
   .knowledge-footer p {
-    color: #65768a;
+    color: #a9bbcf;
     font-size: 0.78rem;
     font-weight: 800;
   }
   .final-section {
-    background: white;
+    background: #f6f8fb;
+  }
+
+  .knowledge-section h2,
+  .knowledge-section .text-link {
+    color: white;
   }
 
   @media (min-width: 48rem) {
