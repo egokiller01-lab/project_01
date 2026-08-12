@@ -73,6 +73,13 @@ const ui = {
       "조건 조정",
       "재확인 및 안정화",
     ],
+    supportStepDetails: [
+      "소재, 공정 순서, 사용 약품, 작업 조건과 최근 변경 사항을 확인합니다.",
+      "pH, 금속 농도, 온도, 교반·여과 상태와 약품 보충 이력을 검토합니다.",
+      "불량의 발생 단계, 위치, 빈도와 외관을 기준으로 가능한 원인축을 분류합니다.",
+      "확인 결과에 따라 약품 보충, 여과·수세 및 작업 조건의 조정 순서를 정합니다.",
+      "조정 후 결과와 재발 여부를 확인해 현장 관리 기준을 정리합니다.",
+    ],
     qualitySteps: [
       "원료 입고 확인",
       "제조관리",
@@ -133,6 +140,13 @@ const ui = {
       "Defect cause classification",
       "Condition adjustment",
       "Follow-up and stabilization",
+    ],
+    supportStepDetails: [
+      "Review the material, process sequence, chemicals, operating conditions, and recent changes.",
+      "Check pH, metal concentration, temperature, agitation, filtration, and replenishment history.",
+      "Classify possible causes by the defect stage, location, frequency, and appearance.",
+      "Set the order for chemical replenishment, filtration, rinsing, and operating-condition adjustments.",
+      "Confirm the result and recurrence status, then organize practical control criteria.",
     ],
     qualitySteps: [
       "Raw material receiving check",
@@ -199,6 +213,13 @@ const ui = {
       "Phân loại nguyên nhân lỗi",
       "Điều chỉnh điều kiện",
       "Kiểm tra lại và ổn định",
+    ],
+    supportStepDetails: [
+      "Kiểm tra vật liệu, trình tự công đoạn, hóa chất, điều kiện vận hành và các thay đổi gần đây.",
+      "Kiểm tra pH, nồng độ kim loại, nhiệt độ, khuấy, lọc và lịch sử bổ sung hóa chất.",
+      "Phân loại nhóm nguyên nhân theo công đoạn, vị trí, tần suất và ngoại quan của lỗi.",
+      "Xác định thứ tự điều chỉnh bổ sung hóa chất, lọc, rửa và điều kiện vận hành.",
+      "Xác nhận kết quả, khả năng tái phát và thiết lập tiêu chí quản lý tại hiện trường.",
     ],
     qualitySteps: [
       "Kiểm tra nhập nguyên liệu",
@@ -550,7 +571,7 @@ const visualCopy = {
               <li>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <strong>{step}</strong>
-                <p>{ui.qualityStepDetails[index]}</p>
+                <p>{ui.supportStepDetails[index]}</p>
               </li>
             ))}
           </ol>
@@ -1272,8 +1293,26 @@ const visualCopy = {
     border: 0;
     display: grid;
     gap: var(--space-3);
-    grid-template-columns: 3rem 1fr;
+    grid-template-areas:
+      "number title"
+      ". detail";
+    grid-template-columns: 3rem minmax(0, 1fr);
     padding: var(--space-4);
+  }
+
+  .diagnostic-flow li > span {
+    grid-area: number;
+  }
+
+  .diagnostic-flow li > strong {
+    grid-area: title;
+    min-width: 0;
+  }
+
+  .diagnostic-flow li > p {
+    grid-area: detail;
+    line-height: 1.65;
+    min-width: 0;
   }
 
   .diagnostic-flow li + li {
@@ -1832,10 +1871,20 @@ const visualCopy = {
   }
 
   .diagnostic-flow li {
-    align-items: center;
+    align-items: start;
     color: white;
-    min-height: 74px;
+    min-height: 96px;
     padding: 1.2rem 1.4rem;
+  }
+
+  .diagnostic-flow li > strong {
+    line-height: 1.45;
+  }
+
+  .diagnostic-flow li > p {
+    color: #bdccdc;
+    font-size: 0.88rem;
+    font-weight: 500;
   }
 
   .diagnostic-flow li + li {
