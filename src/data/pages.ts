@@ -71,12 +71,12 @@ export const pageLabels: Record<
 const koPages: Record<StaticPageKey, StaticPageContent> = {
   about: {
     key: "about",
-    title: "한국 기술과 베트남 현장을 연결하는 표면처리약품 제조사",
+    title: "한국 포뮬레이션, 베트남 현지 제조",
     seoTitle: "회사소개 | PLACHEM VINA",
     description:
       "PLACHEM VINA는 2016년 설립된 베트남 박닌 기반의 표면처리약품 제조·공급 및 현장 기술지원 기업입니다.",
     eyebrow: "회사소개",
-    lead: "PLACHEM VINA는 한국 포뮬레이션 기술과 베트남 현지 제조 기반을 연결해 표면처리 현장의 약품 공급과 공정 안정화를 지원합니다.",
+    lead: "PLACHEM VINA는 한국의 표면처리약품 포뮬레이션 경험과 박닌의 현지 제조 기반을 연결해 약품 공급, 공정 검토, 현장 기술지원을 제공합니다.",
     ctaLabel: "기술문의",
     ctaHref: "/ko/contact/",
     sections: [
@@ -271,13 +271,12 @@ const koPages: Record<StaticPageKey, StaticPageContent> = {
 const enPages: Record<StaticPageKey, StaticPageContent> = {
   about: {
     key: "about",
-    title:
-      "A surface treatment chemical manufacturer connecting Korean technology with Vietnam-based operations",
+    title: "Korean formulation, manufactured in Vietnam",
     seoTitle: "About | PLACHEM VINA",
     description:
       "PLACHEM VINA is a surface treatment chemical manufacturer and technical support company based in Bắc Ninh, Vietnam since 2016.",
     eyebrow: "About",
-    lead: "PLACHEM VINA connects Korean formulation expertise with Vietnam-based manufacturing to support chemical supply and process stabilization for surface treatment operations.",
+    lead: "PLACHEM VINA combines Korean surface-treatment formulation experience with local manufacturing in Bắc Ninh to provide chemical supply, process review, and field technical support.",
     ctaLabel: "Technical inquiry",
     ctaHref: "/en/contact/",
     sections: [
@@ -538,13 +537,12 @@ const enPages: Record<StaticPageKey, StaticPageContent> = {
 const viPages: Record<StaticPageKey, StaticPageContent> = {
   about: {
     key: "about",
-    title:
-      "Nhà sản xuất hóa chất xử lý bề mặt kết nối công nghệ Hàn Quốc với vận hành tại Việt Nam",
+    title: "Công thức Hàn Quốc, sản xuất tại Việt Nam",
     seoTitle: "Giới thiệu | PLACHEM VINA",
     description:
       "PLACHEM VINA là doanh nghiệp sản xuất hóa chất xử lý bề mặt và hỗ trợ kỹ thuật tại Bắc Ninh, Việt Nam từ năm 2016.",
     eyebrow: "Giới thiệu",
-    lead: "PLACHEM VINA kết nối năng lực phát triển công thức hóa chất của Hàn Quốc với nền tảng sản xuất tại Việt Nam để hỗ trợ cung ứng hóa chất và ổn định công đoạn xử lý bề mặt.",
+    lead: "PLACHEM VINA kết hợp kinh nghiệm công thức hóa chất xử lý bề mặt của Hàn Quốc với sản xuất tại Bắc Ninh để cung ứng hóa chất, rà soát công đoạn và hỗ trợ kỹ thuật hiện trường.",
     ctaLabel: "Tư vấn kỹ thuật",
     ctaHref: "/vi/contact/",
     sections: [

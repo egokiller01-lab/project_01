@@ -81,6 +81,15 @@ dd {
   word-break: keep-all;
 }
 
+/* Korean benefits from phrase-based line breaking, while Latin-script copy
+   must wrap naturally inside compact cards and process flows. */
+:where(html[lang="en"], html[lang="vi"])
+  :where(h1, h2, h3, p, a, button, li, dt, dd) {
+  hyphens: auto;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
 a:focus-visible,
 button:focus-visible {
   box-shadow: var(--focus-ring);

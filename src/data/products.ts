@@ -636,7 +636,7 @@ export function getProductFamilies(locale: Locale): ProductFamily[] {
     slug: product.slug,
     title: product.title,
     summary: product.summary,
-    href: `/${locale}/contact/?process=${product.slug}`,
+    href: `/${locale}/products/${product.slug}/`,
     materials: product.materials.slice(0, 4).join(" · "),
     process: product.processes.slice(0, 5).join(" · "),
     cta: product.cta,

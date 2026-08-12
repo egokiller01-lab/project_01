@@ -65,6 +65,7 @@ const ui = {
     processPrefix: "문의 분야: ",
     selectedText:
       "제품군, 현재 공정, 사용 중인 약품, 증상 또는 요청 자료를 기준으로 상담 범위를 확인할 수 있습니다.",
+    detailsLabel: "상세보기",
     supportSteps: [
       "공정 정보 확인",
       "도금욕 분석",
@@ -82,6 +83,15 @@ const ui = {
       "TDS·SDS·COA 제공",
     ],
     heroQualitySteps: ["원료", "제조", "검사", "출하", "LOT"],
+    qualityStepDetails: [
+      "사양·보관·LOT 확인",
+      "배합 조건과 작업 기록",
+      "공정 중 확인 항목",
+      "완제품 기준 확인",
+      "출하 전 상태 확인",
+      "제조·검사 이력 연결",
+      "요청 목적 확인 후 제공",
+    ],
   },
   en: {
     established: "Established",
@@ -116,6 +126,7 @@ const ui = {
     processPrefix: "Inquiry area: ",
     selectedText:
       "Product group, current process, chemical in use, symptoms, or requested documents help define the consultation scope.",
+    detailsLabel: "View details",
     supportSteps: [
       "Process information check",
       "Plating bath analysis",
@@ -133,11 +144,20 @@ const ui = {
       "TDS/SDS/COA provision",
     ],
     heroQualitySteps: [
-      "Raw material",
-      "Manufacturing",
+      "Receiving",
+      "Production",
       "Inspection",
       "Shipment",
-      "LOT",
+      "Traceability",
+    ],
+    qualityStepDetails: [
+      "Specification, storage, and LOT check",
+      "Formulation conditions and work records",
+      "Checks during the manufacturing process",
+      "Final product criteria review",
+      "Condition check before dispatch",
+      "Linked manufacturing and inspection history",
+      "Provided after product and purpose review",
     ],
   },
   vi: {
@@ -172,6 +192,7 @@ const ui = {
     processPrefix: "Lĩnh vực tư vấn: ",
     selectedText:
       "Nhóm sản phẩm, công đoạn hiện tại, hóa chất đang sử dụng, triệu chứng hoặc tài liệu yêu cầu giúp xác định phạm vi tư vấn.",
+    detailsLabel: "Xem chi tiết",
     supportSteps: [
       "Kiểm tra thông tin công đoạn",
       "Phân tích bể mạ",
@@ -194,6 +215,15 @@ const ui = {
       "Kiểm tra",
       "Xuất hàng",
       "LOT",
+    ],
+    qualityStepDetails: [
+      "Kiểm tra thông số, bảo quản và LOT",
+      "Điều kiện công thức và hồ sơ sản xuất",
+      "Hạng mục kiểm tra trong công đoạn",
+      "Xác nhận tiêu chuẩn thành phẩm",
+      "Kiểm tra tình trạng trước khi giao",
+      "Liên kết hồ sơ sản xuất và kiểm tra",
+      "Cung cấp sau khi xác nhận sản phẩm và mục đích",
     ],
   },
 }[locale];
@@ -481,9 +511,20 @@ const visualCopy = {
                   <dd>{product.materials.join(" · ")}</dd>
                 </div>
               </dl>
-              <a href={`/${locale}/contact/?process=${product.slug}`}>
-                {product.cta}
-              </a>
+              <div class="product-row__actions">
+                <a
+                  class="product-row__detail"
+                  href={`/${locale}/products/${product.slug}/`}
+                >
+                  {ui.detailsLabel}
+                </a>
+                <a
+                  class="product-row__inquiry"
+                  href={`/${locale}/contact/?process=${product.slug}`}
+                >
+                  {product.cta}
+                </a>
+              </div>
             </article>
           ))}
         </div>
@@ -504,6 +545,7 @@ const visualCopy = {
               <li>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <strong>{step}</strong>
+                <p>{ui.qualityStepDetails[index]}</p>
               </li>
             ))}
           </ol>
@@ -1187,7 +1229,13 @@ const visualCopy = {
     margin: var(--space-1) 0 0;
   }
 
-  .product-row a {
+  .product-row__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .product-row__actions a {
     background: var(--color-navy);
     color: white;
     font-weight: 900;
@@ -1195,6 +1243,12 @@ const visualCopy = {
     min-height: 44px;
     padding: var(--space-3) var(--space-4);
     text-decoration: none;
+  }
+
+  .product-row__actions .product-row__detail {
+    background: white;
+    border: 1px solid var(--color-navy);
+    color: var(--color-navy);
   }
 
   .diagnostic-flow,
@@ -1249,6 +1303,13 @@ const visualCopy = {
     display: grid;
     gap: var(--space-2);
     min-height: 100px;
+  }
+
+  .quality-map li p {
+    color: #607084;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.55;
   }
 
   .quality-note {
@@ -1465,15 +1526,35 @@ const visualCopy = {
   }
 
   .sub-hero .hero-aside--quality {
-    gap: 0.5rem;
+    display: grid;
+    gap: 0;
+    grid-template-columns: 1fr;
+    padding: 0;
   }
 
   .sub-hero .hero-aside--quality li {
     aspect-ratio: auto;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     color: white;
-    min-height: 88px;
+    justify-content: flex-start;
+    min-height: 52px;
+    padding: 0.8rem 1.2rem;
+    text-align: left;
+  }
+
+  .sub-hero .hero-aside--quality li::before {
+    color: #73b5ff;
+    content: "0" counter(list-item);
+    flex: 0 0 2.2rem;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .sub-hero .hero-aside--quality li:last-child {
+    border-bottom: 0;
   }
 
   .sub-hero .hero-aside--magazine {
@@ -1696,18 +1777,18 @@ const visualCopy = {
     padding-top: 1rem;
   }
 
-  .product-row a {
+  .product-row__actions a {
     align-items: center;
     display: inline-flex;
     gap: 1rem;
     transition: background-color 180ms ease;
   }
 
-  .product-row a::after {
+  .product-row__actions a::after {
     content: "→";
   }
 
-  .product-row a:hover {
+  .product-row__actions a:hover {
     background: #176ee0;
   }
 
@@ -1781,7 +1862,7 @@ const visualCopy = {
     background: #f1f6fb;
     border: 0;
     border-top: 4px solid #176ee0;
-    min-height: 138px;
+    min-height: 180px;
     padding: 1.2rem;
   }
 
@@ -1963,7 +2044,7 @@ const visualCopy = {
     }
 
     .quality-map ol {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .contact-layout {
@@ -1989,7 +2070,7 @@ const visualCopy = {
     }
 
     .quality-map ol {
-      grid-template-columns: repeat(7, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 
@@ -2011,7 +2092,19 @@ const visualCopy = {
     .sub-hero .hero-aside--quality {
       grid-template-columns: repeat(5, minmax(90px, 1fr));
       overflow-x: auto;
-      padding-bottom: 1rem;
+      padding: 0.75rem;
+    }
+
+    .sub-hero .hero-aside--quality li {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      justify-content: center;
+      min-height: 76px;
+      padding: 0.7rem;
+      text-align: center;
+    }
+
+    .sub-hero .hero-aside--quality li::before {
+      display: none;
     }
 
     .visual-story figure {

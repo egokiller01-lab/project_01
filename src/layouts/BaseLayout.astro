@@ -36,6 +36,10 @@ const absoluteUrl = new URL(
   currentPath,
   Astro.site ?? "https://plachem.biz",
 ).toString();
+const socialImageUrl = new URL(
+  "/assets/hero-surface-solutions-v1.webp",
+  Astro.site ?? "https://plachem.biz",
+).toString();
 const organizationJson = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -66,6 +70,13 @@ const skipLabel = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={absoluteUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:site_name" content="PLACHEM VINA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <link rel="canonical" href={absoluteUrl} />
     {
       locales.map((targetLocale) => (
         <link

@@ -1,0 +1,23 @@
+---
+import ProductDetailPage from "../../../components/ProductDetailPage.astro";
+import { productSlugs, type ProductSlug } from "../../../data/products";
+import type { Locale } from "../../../types";
+
+export function getStaticPaths() {
+  const locales: Locale[] = ["ko", "en", "vi"];
+
+  return locales.flatMap((locale) =>
+    productSlugs.map((slug) => ({
+      params: { locale, slug },
+      props: { locale, slug },
+    })),
+  );
+}
+
+const { locale, slug } = Astro.props as {
+  locale: Locale;
+  slug: ProductSlug;
+};
+---
+
+<ProductDetailPage locale={locale} slug={slug} />
