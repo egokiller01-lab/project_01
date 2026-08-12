@@ -960,20 +960,32 @@ const productVisuals = [
         ).format(parsed);
       };
 
+      const requestJson = <T,>(url: string | URL) =>
+        new Promise<T>((resolve, reject) => {
+          const request = new XMLHttpRequest();
+          request.open("GET", url.toString(), true);
+          request.responseType = "json";
+          request.withCredentials = false;
+          request.onload = () => {
+            if (request.status >= 200 && request.status < 300) {
+              resolve(request.response as T);
+            } else {
+              reject(new Error(`Blog API returned ${request.status}`));
+            }
+          };
+          request.onerror = () => reject(new Error("Blog API request failed"));
+          request.send();
+        });
+
       const fetchMedia = async (mediaId?: number) => {
         if (!mediaId) return null;
-        const response = await fetch(
+        return requestJson<WordPressMedia>(
           `https://blog.plachem.biz/wp-json/wp/v2/media/${mediaId}?_fields=source_url,alt_text,media_details`,
-          { credentials: "omit" },
         );
-        if (!response.ok) return null;
-        return (await response.json()) as WordPressMedia;
       };
 
-      fetch(endpoint, { credentials: "omit" })
-        .then(async (response) => {
-          if (!response.ok) throw new Error("Blog API request failed");
-          const allPosts = (await response.json()) as WordPressPost[];
+      requestJson<WordPressPost[]>(endpoint)
+        .then(async (allPosts) => {
           let posts = allPosts.filter((post) =>
             matchesLocale(post.link, blogLocale),
           );
