@@ -384,8 +384,13 @@ const visualCopy = {
       {
         pageKey === "quality" && (
           <ol class="hero-aside hero-aside--quality" aria-label={page.title}>
-            {ui.heroQualitySteps.map((step) => (
-              <li>{step}</li>
+            {ui.heroQualitySteps.map((step, index) => (
+              <li>
+                <b aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </b>
+                {step}
+              </li>
             ))}
           </ol>
         )
@@ -1457,6 +1462,12 @@ const visualCopy = {
     text-shadow: 0 0.4rem 1.6rem rgba(0, 0, 0, 0.28);
   }
 
+  :global(html[lang="en"]) .sub-hero h1,
+  :global(html[lang="en"]) .sub-hero--contact h1 {
+    font-size: clamp(2.55rem, 5vw, 4.45rem);
+    max-width: 16ch;
+  }
+
   .sub-hero .lead {
     border-left: 2px solid rgba(115, 181, 255, 0.72);
     color: #d7e2ef;
@@ -1544,9 +1555,8 @@ const visualCopy = {
     text-align: left;
   }
 
-  .sub-hero .hero-aside--quality li::before {
+  .sub-hero .hero-aside--quality li b {
     color: #73b5ff;
-    content: "0" counter(list-item);
     flex: 0 0 2.2rem;
     font-size: 0.7rem;
     font-weight: 900;
@@ -2101,10 +2111,6 @@ const visualCopy = {
       min-height: 76px;
       padding: 0.7rem;
       text-align: center;
-    }
-
-    .sub-hero .hero-aside--quality li::before {
-      display: none;
     }
 
     .visual-story figure {
