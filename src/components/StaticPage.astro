@@ -226,20 +226,30 @@ const contactLabels = {
 }[locale];
 const manufacturingBaseValue =
   locale === "vi" ? companyFacts.regionVi : companyFacts.site;
+const productVisuals = [
+  "/assets/product-pretreatment-v1.webp",
+  "/assets/product-electroplating-v1.webp",
+  "/assets/product-electroless-v1.webp",
+  "/assets/product-anodizing-v1.webp",
+  "/assets/product-conversion-v1.webp",
+  "/assets/product-post-treatment-v1.webp",
+  "/assets/product-basic-chemicals-v1.webp",
+  "/assets/product-filtration-v1.webp",
+] as const;
 const heroVisualAssets = {
-  about: "/assets/manufacturing-concept.webp",
-  solutions: "/assets/plachem-hero.webp",
-  technology: "/assets/surface-treatment-concept.webp",
-  quality: "/assets/plachem-quality.webp",
-  knowledge: "/assets/rd-concept.webp",
-  contact: "/assets/plachem-hero.webp",
+  about: "/assets/manufacturing-blending-v1.webp",
+  solutions: "/assets/hero-surface-solutions-v1.webp",
+  technology: "/assets/technology-plating-line-v1.webp",
+  quality: "/assets/quality-test-panels-v1.webp",
+  knowledge: "/assets/rd-bath-analysis-v1.webp",
+  contact: "/assets/hero-surface-solutions-v1.webp",
 } as const;
 const storyVisualAssets = {
-  about: "/assets/rd-concept.webp",
-  solutions: "/assets/surface-treatment-concept.webp",
-  technology: "/assets/rd-concept.webp",
-  quality: "/assets/manufacturing-concept.webp",
-  knowledge: "/assets/plachem-quality.webp",
+  about: "/assets/manufacturing-blending-v1.webp",
+  solutions: "/assets/product-electroplating-v1.webp",
+  technology: "/assets/technology-plating-line-v1.webp",
+  quality: "/assets/quality-test-panels-v1.webp",
+  knowledge: "/assets/rd-bath-analysis-v1.webp",
   contact: "",
 } as const;
 const visualCopy = {
@@ -446,6 +456,16 @@ const visualCopy = {
         <div class="container product-process">
           {productDetails.map((product, index) => (
             <article class="product-row" id={product.slug}>
+              <figure class="product-row__image">
+                <img
+                  src={productVisuals[index]}
+                  alt={`${product.title} ${ui.processLabel}`}
+                  width="1200"
+                  height="900"
+                  loading="lazy"
+                />
+                <figcaption>{visualCopy.label}</figcaption>
+              </figure>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <div>
                 <h2>{product.title}</h2>
@@ -1104,6 +1124,37 @@ const visualCopy = {
     padding-block: var(--space-5);
   }
 
+  .product-row__image {
+    aspect-ratio: 16 / 10;
+    margin: calc(0px - var(--product-row-padding))
+      calc(0px - var(--product-row-padding)) 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .product-row__image img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 220ms ease;
+    width: 100%;
+  }
+
+  .product-row__image figcaption {
+    background: rgba(5, 22, 45, 0.86);
+    bottom: 0;
+    color: white;
+    font-size: 0.68rem;
+    left: 0;
+    letter-spacing: 0.04em;
+    padding: 0.45rem 0.7rem;
+    position: absolute;
+  }
+
+  .product-row:hover .product-row__image img {
+    transform: scale(1.035);
+  }
+
   .product-row:last-child {
     border-bottom: var(--border);
   }
@@ -1590,13 +1641,14 @@ const visualCopy = {
   }
 
   .product-row {
+    --product-row-padding: clamp(1.5rem, 3vw, 2.2rem);
     background: white;
     border: 1px solid #d7e0e9;
     box-shadow: 0 1.2rem 2.5rem rgba(7, 31, 61, 0.07);
     gap: 1.25rem;
     min-height: 340px;
     overflow: hidden;
-    padding: clamp(1.5rem, 3vw, 2.2rem);
+    padding: var(--product-row-padding);
     position: relative;
     transition:
       transform 180ms ease,
@@ -1662,7 +1714,7 @@ const visualCopy = {
   .diagnostic-section {
     background:
       linear-gradient(rgba(5, 20, 42, 0.93), rgba(5, 20, 42, 0.97)),
-      url("/assets/surface-treatment-concept.webp") center / cover fixed;
+      url("/assets/technology-plating-line-v1.webp") center / cover fixed;
     color: white;
     padding-block: clamp(4.5rem, 8vw, 7rem);
   }

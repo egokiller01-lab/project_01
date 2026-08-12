@@ -104,19 +104,19 @@ const ui = {
       {
         title: "현지 제조",
         body: "박닌 생산 기반에서 고객 일정과 사용 조건에 맞춰 공급 대응력을 높입니다.",
-        image: "/assets/manufacturing-concept.webp",
+        image: "/assets/manufacturing-blending-v1.webp",
         alt: "표면처리 약품 제조 설비 콘셉트 이미지",
       },
       {
         title: "연구·분석",
         body: "공정 데이터와 분석 항목을 바탕으로 원인을 구분하고 적용 조건을 검토합니다.",
-        image: "/assets/rd-concept.webp",
+        image: "/assets/rd-bath-analysis-v1.webp",
         alt: "표면처리 연구와 분석을 설명하는 콘셉트 이미지",
       },
       {
         title: "품질관리",
         body: "원료부터 출하까지 검사 결과와 제조 LOT별 기록을 연결해 관리합니다.",
-        image: "/assets/plachem-quality.webp",
+        image: "/assets/quality-test-panels-v1.webp",
         alt: "금속 시편을 분석하는 품질관리 콘셉트 이미지",
       },
     ],
@@ -261,19 +261,19 @@ const ui = {
       {
         title: "Local manufacturing",
         body: "The Bac Ninh production base improves supply response to customer schedules and operating conditions.",
-        image: "/assets/manufacturing-concept.webp",
+        image: "/assets/manufacturing-blending-v1.webp",
         alt: "Concept image of surface treatment chemical manufacturing",
       },
       {
         title: "Research & analysis",
         body: "Process data and analysis items help separate possible causes and review application conditions.",
-        image: "/assets/rd-concept.webp",
+        image: "/assets/rd-bath-analysis-v1.webp",
         alt: "Concept image of surface treatment research and analysis",
       },
       {
         title: "Quality management",
         body: "Inspection results and manufacturing records are managed by LOT from raw materials through shipment.",
-        image: "/assets/plachem-quality.webp",
+        image: "/assets/quality-test-panels-v1.webp",
         alt: "Concept image of quality analysis using metal samples",
       },
     ],
@@ -418,19 +418,19 @@ const ui = {
       {
         title: "Sản xuất tại chỗ",
         body: "Cơ sở Bắc Ninh nâng cao khả năng đáp ứng lịch trình và điều kiện sử dụng của khách hàng.",
-        image: "/assets/manufacturing-concept.webp",
+        image: "/assets/manufacturing-blending-v1.webp",
         alt: "Hình ảnh minh họa sản xuất hóa chất xử lý bề mặt",
       },
       {
         title: "Nghiên cứu & phân tích",
         body: "Dữ liệu công đoạn và hạng mục phân tích giúp phân tách nguyên nhân và xem xét điều kiện áp dụng.",
-        image: "/assets/rd-concept.webp",
+        image: "/assets/rd-bath-analysis-v1.webp",
         alt: "Hình ảnh minh họa nghiên cứu và phân tích xử lý bề mặt",
       },
       {
         title: "Quản lý chất lượng",
         body: "Kết quả kiểm tra và hồ sơ sản xuất được quản lý theo từng LOT từ nguyên liệu đến xuất hàng.",
-        image: "/assets/plachem-quality.webp",
+        image: "/assets/quality-test-panels-v1.webp",
         alt: "Hình ảnh minh họa phân tích chất lượng bằng mẫu kim loại",
       },
     ],
@@ -543,10 +543,14 @@ const blogTopics = {
 }[locale];
 
 const productVisuals = [
-  "/assets/rd-concept.webp",
-  "/assets/surface-treatment-concept.webp",
-  "/assets/plachem-quality.webp",
-  "/assets/manufacturing-concept.webp",
+  "/assets/product-pretreatment-v1.webp",
+  "/assets/product-electroplating-v1.webp",
+  "/assets/product-electroless-v1.webp",
+  "/assets/product-anodizing-v1.webp",
+  "/assets/product-conversion-v1.webp",
+  "/assets/product-post-treatment-v1.webp",
+  "/assets/product-basic-chemicals-v1.webp",
+  "/assets/product-filtration-v1.webp",
 ];
 ---
 
@@ -565,7 +569,7 @@ const productVisuals = [
     strengths={content.strengths}
     visualLabel={ui.heroVisual}
     metricsLabel={ui.summary}
-    imageSrc="/assets/plachem-hero.webp"
+    imageSrc="/assets/hero-surface-solutions-v1.webp"
     imageAlt={ui.heroAlt}
   />
 
@@ -573,7 +577,7 @@ const productVisuals = [
     <div class="container media-split">
       <figure class="editorial-image">
         <img
-          src="/assets/manufacturing-concept.webp"
+          src="/assets/manufacturing-blending-v1.webp"
           alt={ui.decadeImageAlt}
           width="1024"
           height="1024"
@@ -620,7 +624,7 @@ const productVisuals = [
             >
               <figure>
                 <img
-                  src={productVisuals[index % productVisuals.length]}
+                  src={productVisuals[index]}
                   alt=""
                   width="1024"
                   height="1024"
@@ -654,7 +658,7 @@ const productVisuals = [
       <div class="focus-layout">
         <figure>
           <img
-            src="/assets/surface-treatment-concept.webp"
+            src="/assets/technology-plating-line-v1.webp"
             alt={ui.processImageAlt}
             width="1024"
             height="1024"
