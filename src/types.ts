@@ -12,6 +12,7 @@ export type PageKey =
 export type NavItem = {
   label: string;
   href: string;
+  external?: boolean;
 };
 
 export type CTA = {
@@ -38,8 +39,15 @@ export type ProductDetail = {
   materials: string[];
   processes: string[];
   checks: string[];
+  issues: ProductIssue[];
   support: string[];
   cta: string;
+};
+
+export type ProductIssue = {
+  symptom: string;
+  causes: string;
+  action: string;
 };
 
 export type SolutionItem = {
@@ -51,7 +59,12 @@ export type SolutionItem = {
 export type BlogLink = {
   title: string;
   href: string;
+  image: string;
+  imageAlt: string;
   meta: string;
+  summary: string;
+  date: string;
+  cta: string;
 };
 
 export type PageSection = {

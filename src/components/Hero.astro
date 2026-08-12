@@ -10,6 +10,8 @@ type Props = {
   strengths: string[];
   visualLabel: string;
   metricsLabel: string;
+  imageSrc: string;
+  imageAlt: string;
 };
 
 const {
@@ -21,13 +23,24 @@ const {
   strengths,
   visualLabel,
   metricsLabel,
+  imageSrc,
+  imageAlt,
 } = Astro.props;
 ---
 
-<section class="hero">
+<section class="hero" aria-label={visualLabel}>
+  <div class="hero-media">
+    <img
+      src={imageSrc}
+      alt={imageAlt}
+      width="1680"
+      height="945"
+      fetchpriority="high"
+    />
+  </div>
   <div class="container hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow">{eyebrow}</p>
+      <p class="eyebrow"><span></span>{eyebrow}</p>
       <h1>
         {titleLines.map((line) => <span>{line}</span>)}
         <span class="accent">{accent}</span>
@@ -41,82 +54,119 @@ const {
               href={cta.href}
             >
               {cta.label}
+              <span aria-hidden="true">→</span>
             </a>
           ))
         }
       </div>
     </div>
-    <div class="metal-visual" aria-label={visualLabel}>
-      <div class="metal-plate">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div class="visual-label">
-        <strong>PRECISION SURFACE</strong>
-        <span>CHEMISTRY</span>
-      </div>
-    </div>
+    <aside class="hero-signal">
+      <span>BAC NINH · VIETNAM</span>
+      <small>LOCAL MANUFACTURING</small>
+      <strong>PROCESS-FOCUSED<br />TECHNICAL SUPPORT</strong>
+    </aside>
   </div>
   <div class="container hero-metrics" aria-label={metricsLabel}>
-    {strengths.map((item) => <span>{item}</span>)}
+    {
+      strengths.map((item, index) => (
+        <div>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <strong>{item}</strong>
+        </div>
+      ))
+    }
   </div>
 </section>
 
 <style>
   .hero {
+    background: #06152a;
+    color: white;
+    overflow: hidden;
+    padding-block: clamp(5.5rem, 10vw, 9rem) 0;
+    position: relative;
+  }
+
+  .hero::before {
     background:
-      linear-gradient(rgba(192, 199, 209, 0.16) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(192, 199, 209, 0.16) 1px, transparent 1px),
-      linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-    background-size:
-      44px 44px,
-      44px 44px,
-      auto;
-    border-bottom: var(--border);
-    padding-block: clamp(4rem, 8vw, 6.25rem) var(--space-6);
+      linear-gradient(
+        90deg,
+        rgba(4, 16, 34, 0.99) 0%,
+        rgba(5, 20, 42, 0.9) 40%,
+        rgba(5, 20, 42, 0.28) 74%,
+        rgba(5, 20, 42, 0.58) 100%
+      ),
+      linear-gradient(180deg, transparent 45%, #06152a 100%);
+    content: "";
+    inset: 0;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .hero::after {
+    background-image:
+      linear-gradient(rgba(105, 173, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(105, 173, 255, 0.1) 1px, transparent 1px);
+    background-size: 72px 72px;
+    content: "";
+    inset: 0;
+    mask-image: linear-gradient(90deg, black, transparent 60%);
+    opacity: 0.35;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .hero-media {
+    inset: 0;
+    position: absolute;
+  }
+
+  .hero-media img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center 45%;
+    width: 100%;
   }
 
   .hero-grid {
-    align-items: center;
+    align-items: end;
     display: grid;
-    gap: var(--space-7);
-    min-height: 560px;
-  }
-
-  :global(html[lang="en"]) .hero,
-  :global(html[lang="vi"]) .hero {
-    padding-block: clamp(3rem, 6vw, 4.6rem) var(--space-5);
-  }
-
-  :global(html[lang="en"]) .hero-grid,
-  :global(html[lang="vi"]) .hero-grid {
-    gap: var(--space-6);
-    min-height: 480px;
-  }
-
-  :global(html[lang="en"]) .hero-grid {
-    min-height: 440px;
+    gap: clamp(2.5rem, 6vw, 6rem);
+    min-height: 500px;
+    position: relative;
+    z-index: 2;
   }
 
   .eyebrow {
-    color: var(--color-blue);
-    font-size: 0.78rem;
+    align-items: center;
+    color: #82bdff;
+    display: flex;
+    font-size: 0.76rem;
     font-weight: 900;
-    letter-spacing: 0.08em;
-    margin: 0 0 var(--space-4);
+    gap: 0.75rem;
+    letter-spacing: 0.12em;
+    margin: 0 0 var(--space-5);
+  }
+
+  .eyebrow span {
+    background: #69adff;
+    display: block;
+    height: 2px;
+    width: 2rem;
   }
 
   h1 {
-    color: var(--color-navy);
-    font-size: clamp(42px, 5vw, 68px);
-    letter-spacing: 0;
-    line-height: 1.05;
+    color: white;
+    font-size: clamp(3rem, 5.7vw, 5.5rem);
+    letter-spacing: -0.05em;
+    line-height: 1.01;
     margin: 0;
+    text-shadow: 0 0.5rem 2rem rgba(2, 10, 22, 0.35);
   }
 
-  :global(html[lang="en"]) h1 {
-    font-size: clamp(38px, 4.4vw, 58px);
+  :global(html[lang="en"]) h1,
+  :global(html[lang="vi"]) h1 {
+    font-size: clamp(2.55rem, 4.8vw, 4.75rem);
   }
 
   h1 span {
@@ -124,13 +174,15 @@ const {
   }
 
   .accent {
-    color: var(--color-blue);
+    color: #69adff;
   }
 
   .summary {
-    font-size: clamp(1.04rem, 1.6vw, 1.22rem);
+    color: #d1ddeb;
+    font-size: clamp(1.04rem, 1.6vw, 1.2rem);
+    line-height: 1.8;
     margin-block: var(--space-5);
-    max-width: 42rem;
+    max-width: 43rem;
   }
 
   .hero-actions {
@@ -139,125 +191,82 @@ const {
     gap: var(--space-3);
   }
 
+  .hero-actions .button {
+    gap: 1.4rem;
+    padding-inline: 1.35rem;
+  }
+
   .hero-actions .button--primary {
-    background: var(--color-blue);
-    border-color: var(--color-blue);
+    background: #176ee0;
+    border-color: #176ee0;
+    box-shadow: 0 0.8rem 2rem rgba(12, 91, 201, 0.32);
   }
 
-  .metal-visual {
-    background:
-      linear-gradient(135deg, rgba(11, 31, 58, 0.96), rgba(31, 78, 121, 0.72)),
-      var(--color-navy);
-    border: 1px solid rgba(192, 199, 209, 0.8);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow);
-    min-height: 380px;
-    overflow: hidden;
-    padding: var(--space-5);
-    position: relative;
-  }
-
-  .metal-visual::before {
-    background:
-      linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.24),
-        transparent
-      ),
-      repeating-linear-gradient(
-        0deg,
-        rgba(255, 255, 255, 0.08) 0 1px,
-        transparent 1px 12px
-      );
-    content: "";
-    inset: 0;
-    opacity: 0.68;
-    position: absolute;
-  }
-
-  .metal-plate {
-    background:
-      radial-gradient(
-        circle at 18% 35%,
-        rgba(255, 255, 255, 0.85),
-        transparent 0.55rem
-      ),
-      radial-gradient(
-        circle at 78% 28%,
-        rgba(255, 255, 255, 0.82),
-        transparent 0.5rem
-      ),
-      linear-gradient(
-        135deg,
-        #f8fafc 0%,
-        #c0c7d1 38%,
-        #ffffff 52%,
-        #7f8fa3 100%
-      );
-    clip-path: polygon(8% 16%, 84% 8%, 96% 62%, 58% 88%, 12% 78%);
-    height: 250px;
-    left: 9%;
-    position: absolute;
-    right: 8%;
-    top: 15%;
-  }
-
-  .metal-plate span {
-    background: rgba(11, 31, 58, 0.22);
-    border: 1px solid rgba(11, 31, 58, 0.12);
-    display: block;
-    height: 10px;
-    left: 18%;
-    position: absolute;
-    right: 16%;
-  }
-
-  .metal-plate span:nth-child(1) {
-    top: 32%;
-  }
-
-  .metal-plate span:nth-child(2) {
-    top: 50%;
-  }
-
-  .metal-plate span:nth-child(3) {
-    top: 68%;
-  }
-
-  .visual-label {
-    background: var(--color-navy);
-    bottom: var(--space-5);
+  .hero-actions .button--secondary {
+    backdrop-filter: blur(10px);
+    background: rgba(5, 20, 42, 0.38);
+    border-color: rgba(255, 255, 255, 0.48);
     color: white;
+  }
+
+  .hero-signal {
+    align-self: center;
+    backdrop-filter: blur(10px);
+    background: rgba(4, 20, 43, 0.62);
+    border: 1px solid rgba(130, 189, 255, 0.35);
+    border-left: 3px solid #69adff;
     display: grid;
-    gap: var(--space-1);
-    left: var(--space-5);
-    padding: var(--space-4);
-    position: absolute;
-    width: min(260px, calc(100% - var(--space-6)));
+    min-height: 190px;
+    padding: 1.5rem;
   }
 
-  .visual-label strong {
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-  }
-
-  .visual-label span {
-    color: var(--color-steel);
+  .hero-signal > span {
+    color: #82bdff;
+    font-size: 0.68rem;
     font-weight: 900;
+    letter-spacing: 0.12em;
+  }
+
+  .hero-signal small {
+    align-self: end;
+    color: #91a9c3;
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+  }
+
+  .hero-signal strong {
+    color: white;
+    font-size: clamp(1rem, 1.7vw, 1.35rem);
+    line-height: 1.25;
+    margin-top: 0.4rem;
   }
 
   .hero-metrics {
-    border-top: var(--border);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     display: grid;
     gap: var(--space-3);
-    margin-top: var(--space-6);
-    padding-top: var(--space-5);
+    margin-top: clamp(3rem, 7vw, 5.5rem);
+    padding-block: 1.4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-metrics div {
+    align-items: baseline;
+    display: flex;
+    gap: 0.8rem;
   }
 
   .hero-metrics span {
-    color: var(--color-navy);
+    color: #69adff;
+    font-size: 0.7rem;
     font-weight: 900;
+  }
+
+  .hero-metrics strong {
+    color: white;
+    font-size: 0.9rem;
   }
 
   @media (min-width: 48rem) {
@@ -268,25 +277,33 @@ const {
 
   @media (min-width: 64rem) {
     .hero-grid {
-      grid-template-columns: minmax(0, 0.46fr) minmax(0, 0.54fr);
+      grid-template-columns: minmax(0, 0.68fr) minmax(14rem, 0.32fr);
+    }
+  }
+
+  @media (max-width: 63.99rem) {
+    .hero-signal {
+      display: none;
     }
   }
 
   @media (max-width: 47.99rem) {
     .hero {
-      padding-block: var(--space-6) var(--space-5);
+      padding-top: 4.5rem;
+    }
+
+    .hero::before {
+      background:
+        linear-gradient(90deg, rgba(4, 16, 34, 0.96), rgba(5, 20, 42, 0.66)),
+        linear-gradient(180deg, transparent 30%, #06152a 100%);
     }
 
     .hero-grid {
-      min-height: auto;
+      min-height: 490px;
     }
 
-    .metal-visual {
-      min-height: 300px;
-    }
-
-    .metal-plate {
-      height: 190px;
+    .hero-actions .button {
+      flex: 1 1 150px;
     }
   }
 </style>

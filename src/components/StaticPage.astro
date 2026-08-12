@@ -1,6 +1,7 @@
 ---
 import BlogCard from "./BlogCard.astro";
 import CTAPanel from "./CTAPanel.astro";
+import InquiryForm from "./InquiryForm.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { localizedPath } from "../data/navigation";
 import {
@@ -64,12 +65,20 @@ const ui = {
     processPrefix: "문의 분야: ",
     selectedText:
       "제품군, 현재 공정, 사용 중인 약품, 증상 또는 요청 자료를 기준으로 상담 범위를 확인할 수 있습니다.",
+    detailsLabel: "상세보기",
     supportSteps: [
       "공정 정보 확인",
       "도금욕 분석",
       "불량 원인 분류",
       "조건 조정",
       "재확인 및 안정화",
+    ],
+    supportStepDetails: [
+      "소재, 공정 순서, 사용 약품, 작업 조건과 최근 변경 사항을 확인합니다.",
+      "pH, 금속 농도, 온도, 교반·여과 상태와 약품 보충 이력을 검토합니다.",
+      "불량의 발생 단계, 위치, 빈도와 외관을 기준으로 가능한 원인축을 분류합니다.",
+      "확인 결과에 따라 약품 보충, 여과·수세 및 작업 조건의 조정 순서를 정합니다.",
+      "조정 후 결과와 재발 여부를 확인해 현장 관리 기준을 정리합니다.",
     ],
     qualitySteps: [
       "원료 입고 확인",
@@ -81,6 +90,15 @@ const ui = {
       "TDS·SDS·COA 제공",
     ],
     heroQualitySteps: ["원료", "제조", "검사", "출하", "LOT"],
+    qualityStepDetails: [
+      "사양·보관·LOT 확인",
+      "배합 조건과 작업 기록",
+      "공정 중 확인 항목",
+      "완제품 기준 확인",
+      "출하 전 상태 확인",
+      "제조·검사 이력 연결",
+      "요청 목적 확인 후 제공",
+    ],
   },
   en: {
     established: "Established",
@@ -115,12 +133,20 @@ const ui = {
     processPrefix: "Inquiry area: ",
     selectedText:
       "Product group, current process, chemical in use, symptoms, or requested documents help define the consultation scope.",
+    detailsLabel: "View details",
     supportSteps: [
       "Process information check",
       "Plating bath analysis",
       "Defect cause classification",
       "Condition adjustment",
       "Follow-up and stabilization",
+    ],
+    supportStepDetails: [
+      "Review the material, process sequence, chemicals, operating conditions, and recent changes.",
+      "Check pH, metal concentration, temperature, agitation, filtration, and replenishment history.",
+      "Classify possible causes by the defect stage, location, frequency, and appearance.",
+      "Set the order for chemical replenishment, filtration, rinsing, and operating-condition adjustments.",
+      "Confirm the result and recurrence status, then organize practical control criteria.",
     ],
     qualitySteps: [
       "Raw material receiving check",
@@ -132,11 +158,20 @@ const ui = {
       "TDS/SDS/COA provision",
     ],
     heroQualitySteps: [
-      "Raw material",
-      "Manufacturing",
+      "Receiving",
+      "Production",
       "Inspection",
       "Shipment",
-      "LOT",
+      "Traceability",
+    ],
+    qualityStepDetails: [
+      "Specification, storage, and LOT check",
+      "Formulation conditions and work records",
+      "Checks during the manufacturing process",
+      "Final product criteria review",
+      "Condition check before dispatch",
+      "Linked manufacturing and inspection history",
+      "Provided after product and purpose review",
     ],
   },
   vi: {
@@ -171,12 +206,20 @@ const ui = {
     processPrefix: "Lĩnh vực tư vấn: ",
     selectedText:
       "Nhóm sản phẩm, công đoạn hiện tại, hóa chất đang sử dụng, triệu chứng hoặc tài liệu yêu cầu giúp xác định phạm vi tư vấn.",
+    detailsLabel: "Xem chi tiết",
     supportSteps: [
       "Kiểm tra thông tin công đoạn",
       "Phân tích bể mạ",
       "Phân loại nguyên nhân lỗi",
       "Điều chỉnh điều kiện",
       "Kiểm tra lại và ổn định",
+    ],
+    supportStepDetails: [
+      "Kiểm tra vật liệu, trình tự công đoạn, hóa chất, điều kiện vận hành và các thay đổi gần đây.",
+      "Kiểm tra pH, nồng độ kim loại, nhiệt độ, khuấy, lọc và lịch sử bổ sung hóa chất.",
+      "Phân loại nhóm nguyên nhân theo công đoạn, vị trí, tần suất và ngoại quan của lỗi.",
+      "Xác định thứ tự điều chỉnh bổ sung hóa chất, lọc, rửa và điều kiện vận hành.",
+      "Xác nhận kết quả, khả năng tái phát và thiết lập tiêu chí quản lý tại hiện trường.",
     ],
     qualitySteps: [
       "Kiểm tra nhập nguyên liệu",
@@ -193,6 +236,15 @@ const ui = {
       "Kiểm tra",
       "Xuất hàng",
       "LOT",
+    ],
+    qualityStepDetails: [
+      "Kiểm tra thông số, bảo quản và LOT",
+      "Điều kiện công thức và hồ sơ sản xuất",
+      "Hạng mục kiểm tra trong công đoạn",
+      "Xác nhận tiêu chuẩn thành phẩm",
+      "Kiểm tra tình trạng trước khi giao",
+      "Liên kết hồ sơ sản xuất và kiểm tra",
+      "Cung cấp sau khi xác nhận sản phẩm và mục đích",
     ],
   },
 }[locale];
@@ -225,6 +277,76 @@ const contactLabels = {
 }[locale];
 const manufacturingBaseValue =
   locale === "vi" ? companyFacts.regionVi : companyFacts.site;
+const productVisuals = [
+  "/assets/product-pretreatment-v1.webp",
+  "/assets/product-electroplating-v1.webp",
+  "/assets/product-electroless-v1.webp",
+  "/assets/product-anodizing-v1.webp",
+  "/assets/product-conversion-v1.webp",
+  "/assets/product-post-treatment-v1.webp",
+  "/assets/product-basic-chemicals-v1.webp",
+  "/assets/product-filtration-v1.webp",
+] as const;
+const heroVisualAssets = {
+  about: "/assets/manufacturing-blending-v1.webp",
+  solutions: "/assets/hero-surface-solutions-v1.webp",
+  technology: "/assets/technology-plating-line-v1.webp",
+  quality: "/assets/quality-test-panels-v1.webp",
+  knowledge: "/assets/rd-bath-analysis-v1.webp",
+  contact: "/assets/hero-surface-solutions-v1.webp",
+} as const;
+const storyVisualAssets = {
+  about: "/assets/manufacturing-blending-v1.webp",
+  solutions: "/assets/product-electroplating-v1.webp",
+  technology: "/assets/technology-plating-line-v1.webp",
+  quality: "/assets/quality-test-panels-v1.webp",
+  knowledge: "/assets/rd-bath-analysis-v1.webp",
+  contact: "",
+} as const;
+const visualCopy = {
+  ko: {
+    label: "공정 이해를 위한 콘셉트 이미지",
+    alt: {
+      about: "표면처리 약품 제조 환경을 설명하는 콘셉트 이미지",
+      solutions: "정밀 금속 부품의 표면 품질을 표현한 이미지",
+      technology: "금속 부품의 표면처리 공정을 표현한 콘셉트 이미지",
+      quality: "금속 시편 분석과 품질관리를 표현한 콘셉트 이미지",
+      knowledge: "표면처리 연구와 분석을 표현한 콘셉트 이미지",
+      contact: "",
+    },
+    detailTitle: "PLACHEM의 지원 범위",
+  },
+  en: {
+    label: "Concept image for process illustration",
+    alt: {
+      about:
+        "Concept image illustrating a surface treatment chemical manufacturing environment",
+      solutions:
+        "Image representing controlled surface quality of precision metal parts",
+      technology:
+        "Concept image illustrating a metal surface treatment process",
+      quality:
+        "Concept image illustrating metal sample analysis and quality control",
+      knowledge:
+        "Concept image illustrating surface treatment research and analysis",
+      contact: "",
+    },
+    detailTitle: "PLACHEM support scope",
+  },
+  vi: {
+    label: "Hình ảnh minh họa quy trình",
+    alt: {
+      about: "Hình ảnh minh họa môi trường sản xuất hóa chất xử lý bề mặt",
+      solutions:
+        "Hình ảnh thể hiện chất lượng bề mặt của chi tiết kim loại chính xác",
+      technology: "Hình ảnh minh họa công đoạn xử lý bề mặt kim loại",
+      quality: "Hình ảnh minh họa phân tích mẫu kim loại và quản lý chất lượng",
+      knowledge: "Hình ảnh minh họa nghiên cứu và phân tích xử lý bề mặt",
+      contact: "",
+    },
+    detailTitle: "Phạm vi hỗ trợ của PLACHEM",
+  },
+}[locale];
 ---
 
 <BaseLayout
@@ -234,9 +356,12 @@ const manufacturingBaseValue =
   pageKey={page.key}
   alternatePaths={alternatePaths}
 >
-  <section class={`sub-hero sub-hero--${pageKey}`}>
+  <section
+    class={`sub-hero sub-hero--${pageKey}`}
+    style={`--sub-hero-image: url('${heroVisualAssets[pageKey]}')`}
+  >
     <div class="container sub-hero__inner">
-      <div>
+      <div class="sub-hero__copy">
         <p class="eyebrow">{page.eyebrow}</p>
         <h1>{page.title}</h1>
         <p class="lead">{page.lead}</p>
@@ -280,8 +405,13 @@ const manufacturingBaseValue =
       {
         pageKey === "quality" && (
           <ol class="hero-aside hero-aside--quality" aria-label={page.title}>
-            {ui.heroQualitySteps.map((step) => (
-              <li>{step}</li>
+            {ui.heroQualitySteps.map((step, index) => (
+              <li>
+                <b aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </b>
+                {step}
+              </li>
             ))}
           </ol>
         )
@@ -309,6 +439,37 @@ const manufacturingBaseValue =
       }
     </div>
   </section>
+
+  {
+    storyVisualAssets[pageKey] && (
+      <section class="visual-story">
+        <div class="container visual-story__grid">
+          <figure>
+            <img
+              src={storyVisualAssets[pageKey]}
+              alt={visualCopy.alt[pageKey]}
+              width="1200"
+              height="675"
+              loading="eager"
+            />
+            <figcaption>{visualCopy.label}</figcaption>
+          </figure>
+          <div>
+            <p>{page.eyebrow}</p>
+            <h2>{page.title}</h2>
+            <ul>
+              {page.sections.slice(0, 4).map((section, index) => (
+                <li>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{section.title}</strong>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   {
     pageKey === "about" && (
@@ -351,6 +512,16 @@ const manufacturingBaseValue =
         <div class="container product-process">
           {productDetails.map((product, index) => (
             <article class="product-row" id={product.slug}>
+              <figure class="product-row__image">
+                <img
+                  src={productVisuals[index]}
+                  alt={`${product.title} ${ui.processLabel}`}
+                  width="1200"
+                  height="900"
+                  loading="lazy"
+                />
+                <figcaption>{visualCopy.label}</figcaption>
+              </figure>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <div>
                 <h2>{product.title}</h2>
@@ -366,9 +537,20 @@ const manufacturingBaseValue =
                   <dd>{product.materials.join(" · ")}</dd>
                 </div>
               </dl>
-              <a href={`/${locale}/contact/?process=${product.slug}`}>
-                {product.cta}
-              </a>
+              <div class="product-row__actions">
+                <a
+                  class="product-row__detail"
+                  href={`/${locale}/products/${product.slug}/`}
+                >
+                  {ui.detailsLabel}
+                </a>
+                <a
+                  class="product-row__inquiry"
+                  href={`/${locale}/contact/?process=${product.slug}`}
+                >
+                  {product.cta}
+                </a>
+              </div>
             </article>
           ))}
         </div>
@@ -389,6 +571,7 @@ const manufacturingBaseValue =
               <li>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <strong>{step}</strong>
+                <p>{ui.supportStepDetails[index]}</p>
               </li>
             ))}
           </ol>
@@ -446,59 +629,90 @@ const manufacturingBaseValue =
 
   {
     pageKey === "contact" && (
-      <section class="section section--white contact-page">
-        <div class="container contact-layout">
-          <article
-            class="selected-process"
-            data-process-map={JSON.stringify(processMap)}
-            data-process-prefix={ui.processPrefix}
-            hidden
-          >
-            <span data-selected-process />
-            <p>{ui.selectedText}</p>
-          </article>
-          <article class="contact-card">
-            <h2>{contactLabels.vietnam}</h2>
-            <dl>
-              <div>
-                <dt>{contactLabels.manufacturingBase}</dt>
-                <dd>{manufacturingBaseValue}</dd>
-              </div>
-              <div>
-                <dt>{contactLabels.phone}</dt>
-                <dd>
-                  <a
-                    href={`tel:${companyFacts.vietnamPhone.replaceAll(" ", "")}`}
-                  >
-                    {companyFacts.vietnamPhone}
-                  </a>
-                </dd>
-              </div>
-            </dl>
-          </article>
-          <article class="contact-card">
-            <h2>{contactLabels.korea}</h2>
-            <dl>
-              <div>
-                <dt>{contactLabels.address}</dt>
-                <dd>
-                  {locale === "ko"
-                    ? companyFacts.koreaAddressKo
-                    : locale === "en"
-                      ? companyFacts.koreaAddressEn
-                      : companyFacts.koreaAddressVi}
-                </dd>
-              </div>
-              <div>
-                <dt>{contactLabels.phone}</dt>
-                <dd>
-                  <a href={`tel:${companyFacts.koreaPhone}`}>
-                    {companyFacts.koreaPhone}
-                  </a>
-                </dd>
-              </div>
-            </dl>
-          </article>
+      <>
+        <section class="section section--white contact-page">
+          <div class="container contact-layout">
+            <article
+              class="selected-process"
+              data-process-map={JSON.stringify(processMap)}
+              data-process-prefix={ui.processPrefix}
+              hidden
+            >
+              <span data-selected-process />
+              <p>{ui.selectedText}</p>
+            </article>
+            <article class="contact-card contact-card--vietnam">
+              <span class="contact-card__index">01</span>
+              <h2>{contactLabels.vietnam}</h2>
+              <dl>
+                <div>
+                  <dt>{contactLabels.manufacturingBase}</dt>
+                  <dd>{manufacturingBaseValue}</dd>
+                </div>
+                <div>
+                  <dt>{contactLabels.phone}</dt>
+                  <dd>
+                    <a
+                      href={`tel:${companyFacts.vietnamPhone.replaceAll(" ", "")}`}
+                    >
+                      {companyFacts.vietnamPhone}
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </article>
+            <article class="contact-card contact-card--korea">
+              <span class="contact-card__index">02</span>
+              <h2>{contactLabels.korea}</h2>
+              <dl>
+                <div>
+                  <dt>{contactLabels.address}</dt>
+                  <dd>
+                    {locale === "ko"
+                      ? companyFacts.koreaAddressKo
+                      : locale === "en"
+                        ? companyFacts.koreaAddressEn
+                        : companyFacts.koreaAddressVi}
+                  </dd>
+                </div>
+                <div>
+                  <dt>{contactLabels.phone}</dt>
+                  <dd>
+                    <a href={`tel:${companyFacts.koreaPhone}`}>
+                      {companyFacts.koreaPhone}
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </article>
+          </div>
+        </section>
+        <InquiryForm locale={locale} />
+      </>
+    )
+  }
+
+  {
+    pageKey !== "about" && pageKey !== "solutions" && (
+      <section class="section detail-section">
+        <div class="container">
+          <p class="detail-kicker">{visualCopy.detailTitle}</p>
+          <div class="detail-grid">
+            {page.sections.map((section, index) => (
+              <article>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h2>{section.title}</h2>
+                <p>{section.summary}</p>
+                {section.items && (
+                  <ul>
+                    {section.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            ))}
+          </div>
         </div>
       </section>
     )
@@ -513,12 +727,21 @@ const manufacturingBaseValue =
           { label: page.ctaLabel, href: page.ctaHref, variant: "primary" },
           {
             label:
-              locale === "ko"
-                ? "제품·솔루션"
-                : locale === "en"
-                  ? "Products & Solutions"
-                  : "Sản phẩm & giải pháp",
-            href: localizedPath(locale, "solutions"),
+              pageKey === "contact"
+                ? locale === "ko"
+                  ? "기술지원 방식"
+                  : locale === "en"
+                    ? "How support works"
+                    : "Quy trình hỗ trợ"
+                : locale === "ko"
+                  ? "제품·솔루션"
+                  : locale === "en"
+                    ? "Products & Solutions"
+                    : "Sản phẩm & giải pháp",
+            href: localizedPath(
+              locale,
+              pageKey === "contact" ? "technology" : "solutions",
+            ),
             variant: "secondary",
           },
         ]}
@@ -545,6 +768,131 @@ const manufacturingBaseValue =
 </script>
 
 <style>
+  .visual-story {
+    background: var(--color-navy);
+    color: white;
+    padding-block: clamp(2.4rem, 5vw, 4.4rem);
+  }
+
+  .visual-story__grid {
+    align-items: stretch;
+    display: grid;
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  .visual-story figure {
+    margin: 0;
+    min-height: 320px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .visual-story img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .visual-story figcaption {
+    background: rgba(11, 31, 58, 0.88);
+    bottom: 0;
+    font-size: 0.7rem;
+    left: 0;
+    letter-spacing: 0.04em;
+    padding: 0.45rem 0.7rem;
+    position: absolute;
+  }
+
+  .visual-story__grid > div {
+    align-self: center;
+  }
+
+  .visual-story__grid > div > p,
+  .detail-kicker {
+    color: #6db0ff;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    margin: 0 0 1rem;
+  }
+
+  .visual-story h2 {
+    color: white;
+    font-size: clamp(1.8rem, 3.4vw, 3rem);
+  }
+
+  .visual-story ul {
+    display: grid;
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+  }
+
+  .visual-story li {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2.5rem 1fr;
+    padding: 0.8rem 0;
+  }
+
+  .visual-story li:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .visual-story li span {
+    color: #6db0ff;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+
+  .detail-section {
+    background: #eef3f8;
+  }
+
+  .detail-grid {
+    border-left: var(--border);
+    border-top: var(--border);
+    display: grid;
+  }
+
+  .detail-grid article {
+    background: white;
+    border-bottom: var(--border);
+    border-right: var(--border);
+    min-height: 250px;
+    padding: var(--space-5);
+  }
+
+  .detail-grid article > span {
+    color: var(--color-blue);
+    font-size: 0.74rem;
+    font-weight: 900;
+  }
+
+  .detail-grid h2 {
+    font-size: clamp(1.3rem, 2.3vw, 1.8rem);
+    margin: 1rem 0 0.75rem;
+  }
+
+  .detail-grid article > p {
+    color: #5d6979;
+    line-height: 1.75;
+  }
+
+  .detail-grid article ul {
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .detail-grid article li {
+    background: #f5f7fa;
+    font-size: 0.78rem;
+    padding: 0.35rem 0.55rem;
+  }
+
   .sub-hero {
     background:
       linear-gradient(rgba(192, 199, 209, 0.13) 1px, transparent 1px),
@@ -844,6 +1192,37 @@ const manufacturingBaseValue =
     padding-block: var(--space-5);
   }
 
+  .product-row__image {
+    aspect-ratio: 16 / 10;
+    margin: calc(0px - var(--product-row-padding))
+      calc(0px - var(--product-row-padding)) 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .product-row__image img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 220ms ease;
+    width: 100%;
+  }
+
+  .product-row__image figcaption {
+    background: rgba(5, 22, 45, 0.86);
+    bottom: 0;
+    color: white;
+    font-size: 0.68rem;
+    left: 0;
+    letter-spacing: 0.04em;
+    padding: 0.45rem 0.7rem;
+    position: absolute;
+  }
+
+  .product-row:hover .product-row__image img {
+    transform: scale(1.035);
+  }
+
   .product-row:last-child {
     border-bottom: var(--border);
   }
@@ -876,7 +1255,13 @@ const manufacturingBaseValue =
     margin: var(--space-1) 0 0;
   }
 
-  .product-row a {
+  .product-row__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .product-row__actions a {
     background: var(--color-navy);
     color: white;
     font-weight: 900;
@@ -884,6 +1269,12 @@ const manufacturingBaseValue =
     min-height: 44px;
     padding: var(--space-3) var(--space-4);
     text-decoration: none;
+  }
+
+  .product-row__actions .product-row__detail {
+    background: white;
+    border: 1px solid var(--color-navy);
+    color: var(--color-navy);
   }
 
   .diagnostic-flow,
@@ -902,8 +1293,26 @@ const manufacturingBaseValue =
     border: 0;
     display: grid;
     gap: var(--space-3);
-    grid-template-columns: 3rem 1fr;
+    grid-template-areas:
+      "number title"
+      ". detail";
+    grid-template-columns: 3rem minmax(0, 1fr);
     padding: var(--space-4);
+  }
+
+  .diagnostic-flow li > span {
+    grid-area: number;
+  }
+
+  .diagnostic-flow li > strong {
+    grid-area: title;
+    min-width: 0;
+  }
+
+  .diagnostic-flow li > p {
+    grid-area: detail;
+    line-height: 1.65;
+    min-width: 0;
   }
 
   .diagnostic-flow li + li {
@@ -940,6 +1349,13 @@ const manufacturingBaseValue =
     min-height: 100px;
   }
 
+  .quality-map li p {
+    color: #607084;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.55;
+  }
+
   .quality-note {
     margin-top: var(--space-5);
   }
@@ -967,6 +1383,14 @@ const manufacturingBaseValue =
   }
 
   @media (min-width: 48rem) {
+    .visual-story__grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    }
+
+    .detail-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .sub-hero__inner,
     .about-grid,
     .diagnostic-grid,
@@ -992,6 +1416,758 @@ const manufacturingBaseValue =
 
     .selected-process {
       grid-column: 1 / -1;
+    }
+  }
+</style>
+
+<style>
+  /* Shared subpage visual system aligned with the redesigned homepage. */
+  .sub-hero {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(3, 15, 33, 0.97) 0%,
+        rgba(5, 25, 52, 0.9) 46%,
+        rgba(5, 22, 45, 0.52) 100%
+      ),
+      var(--sub-hero-image) center / cover no-repeat;
+    border: 0;
+    color: white;
+    isolation: isolate;
+    min-height: clamp(470px, 54vw, 650px);
+    overflow: hidden;
+    padding-block: 0;
+    position: relative;
+  }
+
+  .sub-hero::before {
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 72px 72px;
+    content: "";
+    inset: 0;
+    mask-image: linear-gradient(90deg, black, transparent 82%);
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .sub-hero::after {
+    background: #2d83ea;
+    bottom: 0;
+    content: "";
+    height: 5px;
+    left: 0;
+    position: absolute;
+    width: min(24vw, 360px);
+  }
+
+  .sub-hero__inner {
+    align-items: end;
+    min-height: inherit;
+    padding-block: clamp(5rem, 10vw, 8rem) clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .sub-hero__copy {
+    max-width: 760px;
+  }
+
+  .sub-hero .eyebrow {
+    align-items: center;
+    color: #73b5ff;
+    display: flex;
+    font-size: 0.73rem;
+    gap: 0.8rem;
+    letter-spacing: 0.18em;
+    margin-bottom: 1.4rem;
+    text-transform: uppercase;
+  }
+
+  .sub-hero .eyebrow::before {
+    background: #2d83ea;
+    content: "";
+    height: 2px;
+    width: 2.5rem;
+  }
+
+  .sub-hero h1,
+  .sub-hero--contact h1 {
+    color: white;
+    font-size: clamp(2.65rem, 5.8vw, 5.2rem);
+    letter-spacing: -0.045em;
+    line-height: 0.99;
+    max-width: 15ch;
+    text-shadow: 0 0.4rem 1.6rem rgba(0, 0, 0, 0.28);
+  }
+
+  :global(html[lang="en"]) .sub-hero h1,
+  :global(html[lang="en"]) .sub-hero--contact h1 {
+    font-size: clamp(2.55rem, 5vw, 4.45rem);
+    max-width: 16ch;
+  }
+
+  .sub-hero .lead {
+    border-left: 2px solid rgba(115, 181, 255, 0.72);
+    color: #d7e2ef;
+    font-size: clamp(1rem, 1.55vw, 1.2rem);
+    line-height: 1.8;
+    margin-top: 1.8rem;
+    max-width: 60ch;
+    padding-left: 1.25rem;
+  }
+
+  .sub-hero .hero-aside {
+    backdrop-filter: blur(16px);
+    background: rgba(6, 24, 48, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: clamp(1.2rem, 2.5vw, 2rem);
+  }
+
+  .sub-hero .hero-aside--year,
+  .sub-hero .hero-aside--contact {
+    border-left: 4px solid #2d83ea;
+  }
+
+  .sub-hero .hero-aside--year span {
+    color: white;
+    font-size: clamp(3.8rem, 7vw, 6.2rem);
+    letter-spacing: -0.06em;
+  }
+
+  .sub-hero .hero-aside--year p,
+  .sub-hero .hero-aside--magazine p,
+  .sub-hero .hero-aside--contact p {
+    color: #b8c8da;
+  }
+
+  .sub-hero .hero-aside--index {
+    background: rgba(6, 24, 48, 0.76);
+    gap: 0;
+    padding: 0;
+  }
+
+  .sub-hero .hero-aside--index span {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    color: #eef5fc;
+    min-height: 57px;
+    padding-inline: 1rem;
+  }
+
+  .sub-hero .hero-aside b,
+  .sub-hero .hero-aside--contact span {
+    color: #73b5ff;
+  }
+
+  .sub-hero .hero-aside--steps,
+  .sub-hero .hero-aside--quality {
+    background: rgba(6, 24, 48, 0.76);
+  }
+
+  .sub-hero .hero-aside--steps li {
+    color: white;
+  }
+
+  .sub-hero .hero-aside--steps li + li {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .sub-hero .hero-aside--quality {
+    display: grid;
+    gap: 0;
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  .sub-hero .hero-aside--quality li {
+    aspect-ratio: auto;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    justify-content: flex-start;
+    min-height: 52px;
+    padding: 0.8rem 1.2rem;
+    text-align: left;
+  }
+
+  .sub-hero .hero-aside--quality li b {
+    color: #73b5ff;
+    flex: 0 0 2.2rem;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .sub-hero .hero-aside--quality li:last-child {
+    border-bottom: 0;
+  }
+
+  .sub-hero .hero-aside--magazine {
+    background: rgba(6, 24, 48, 0.82);
+  }
+
+  .sub-hero .hero-aside--magazine span {
+    color: #73b5ff;
+  }
+
+  .visual-story {
+    background: #f4f7fa;
+    color: var(--color-text);
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+
+  .visual-story__grid {
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 6rem);
+  }
+
+  .visual-story figure {
+    box-shadow: 1.6rem 1.6rem 0 #dfe8f1;
+    min-height: clamp(330px, 42vw, 520px);
+  }
+
+  .visual-story figure::after {
+    background: linear-gradient(180deg, transparent 65%, rgba(4, 18, 38, 0.62));
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .visual-story figcaption {
+    background: transparent;
+    color: white;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 1.2rem;
+    z-index: 1;
+  }
+
+  .visual-story__grid > div > p,
+  .detail-kicker {
+    color: #176ee0;
+    letter-spacing: 0.16em;
+  }
+
+  .visual-story h2 {
+    color: var(--color-navy);
+    font-size: clamp(2.2rem, 4.6vw, 4.1rem);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    max-width: 14ch;
+  }
+
+  .visual-story ul {
+    counter-reset: visual-item;
+    margin-top: 2rem;
+  }
+
+  .visual-story li {
+    border-color: #ccd8e4;
+    color: var(--color-navy);
+    padding-block: 1rem;
+  }
+
+  .visual-story li:last-child {
+    border-color: #ccd8e4;
+  }
+
+  .about-layout {
+    background: white;
+    padding-block: clamp(4.5rem, 8vw, 7rem);
+  }
+
+  .about-grid {
+    align-items: start;
+    gap: clamp(2rem, 6vw, 6rem);
+  }
+
+  .timeline {
+    background:
+      linear-gradient(145deg, rgba(18, 83, 158, 0.35), transparent 55%), #07182f;
+    box-shadow: 1rem 1rem 0 #dbe7f2;
+    min-height: 360px;
+    overflow: hidden;
+    padding: clamp(2rem, 4vw, 3.5rem);
+    position: relative;
+  }
+
+  .timeline::after {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    content: "";
+    height: 13rem;
+    position: absolute;
+    right: -4rem;
+    top: -3rem;
+    transform: rotate(45deg);
+    width: 13rem;
+  }
+
+  .timeline span {
+    color: white;
+    font-size: clamp(4.8rem, 10vw, 8rem);
+    letter-spacing: -0.08em;
+  }
+
+  .timeline strong {
+    color: #70b1fb;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .timeline p {
+    color: #b9c9da;
+    margin-top: 0.7rem;
+  }
+
+  .about-copy {
+    counter-reset: about-section;
+    gap: 0;
+  }
+
+  .about-copy article {
+    background: transparent;
+    border: 0;
+    border-top: 1px solid #d8e1ea;
+    counter-increment: about-section;
+    padding: 2rem 0;
+    position: relative;
+  }
+
+  .about-copy article::before {
+    color: #176ee0;
+    content: "0" counter(about-section);
+    font-size: 0.75rem;
+    font-weight: 900;
+    left: 0;
+    letter-spacing: 0.1em;
+    position: absolute;
+    top: 2.2rem;
+  }
+
+  .about-copy article > * {
+    margin-left: 3.3rem;
+  }
+
+  .about-copy article > p {
+    color: #5d6b7b;
+    line-height: 1.8;
+  }
+
+  .about-copy li,
+  .detail-grid article li {
+    background: #eef4fa;
+    border: 0;
+    color: #294866;
+  }
+
+  .product-process {
+    gap: 1.25rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .product-row {
+    --product-row-padding: clamp(1.5rem, 3vw, 2.2rem);
+    background: white;
+    border: 1px solid #d7e0e9;
+    box-shadow: 0 1.2rem 2.5rem rgba(7, 31, 61, 0.07);
+    gap: 1.25rem;
+    min-height: 340px;
+    overflow: hidden;
+    padding: var(--product-row-padding);
+    position: relative;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .product-row::before {
+    background: linear-gradient(90deg, #176ee0, #73b5ff);
+    content: "";
+    height: 4px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 32%;
+  }
+
+  .product-row:hover {
+    box-shadow: 0 1.6rem 3.2rem rgba(7, 31, 61, 0.12);
+    transform: translateY(-4px);
+  }
+
+  .product-row:last-child {
+    border-bottom: 1px solid #d7e0e9;
+  }
+
+  .product-row > span {
+    font-size: clamp(2.8rem, 5vw, 4.6rem);
+    letter-spacing: -0.08em;
+    line-height: 0.9;
+    opacity: 0.18;
+  }
+
+  .product-row h2 {
+    font-size: clamp(1.45rem, 2.4vw, 2rem);
+  }
+
+  .product-row p,
+  .product-row dd {
+    color: #5b6877;
+    line-height: 1.7;
+  }
+
+  .product-row dl {
+    border-top: 1px solid #dbe3eb;
+    padding-top: 1rem;
+  }
+
+  .product-row__actions a {
+    align-items: center;
+    display: inline-flex;
+    gap: 1rem;
+    transition: background-color 180ms ease;
+  }
+
+  .product-row__actions a::after {
+    content: "→";
+  }
+
+  .product-row__actions a:hover {
+    background: #176ee0;
+  }
+
+  .diagnostic-section {
+    background:
+      linear-gradient(rgba(5, 20, 42, 0.93), rgba(5, 20, 42, 0.97)),
+      url("/assets/technology-plating-line-v1.webp") center / cover fixed;
+    color: white;
+    padding-block: clamp(4.5rem, 8vw, 7rem);
+  }
+
+  .diagnostic-grid {
+    align-items: start;
+    gap: clamp(2.5rem, 6vw, 6rem);
+  }
+
+  .diagnostic-grid h2,
+  .analysis-band h2 {
+    color: white;
+  }
+
+  .diagnostic-grid > div > p {
+    color: #bdccdc;
+    line-height: 1.8;
+    margin-top: 1rem;
+  }
+
+  .diagnostic-flow {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .diagnostic-flow li {
+    align-items: start;
+    color: white;
+    min-height: 96px;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .diagnostic-flow li > strong {
+    line-height: 1.45;
+  }
+
+  .diagnostic-flow li > p {
+    color: #bdccdc;
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+
+  .diagnostic-flow li + li {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .diagnostic-flow span {
+    color: #70b1fb;
+  }
+
+  .analysis-band {
+    background: rgba(32, 120, 222, 0.16);
+    border: 1px solid rgba(112, 177, 251, 0.28);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding: clamp(1.5rem, 3vw, 2.2rem);
+  }
+
+  .analysis-band p {
+    color: #cfe5ff;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    letter-spacing: 0.02em;
+  }
+
+  .quality-map {
+    padding-block: 1rem;
+  }
+
+  .quality-map ol {
+    gap: 0.75rem;
+  }
+
+  .quality-map li {
+    align-content: space-between;
+    background: #f1f6fb;
+    border: 0;
+    border-top: 4px solid #176ee0;
+    min-height: 180px;
+    padding: 1.2rem;
+  }
+
+  .quality-map li + li {
+    border-left: 0;
+  }
+
+  .quality-note {
+    background: #07182f;
+    border: 0;
+    color: #c4d2e1;
+    margin-top: 1.5rem;
+    padding: clamp(1.7rem, 4vw, 3rem);
+  }
+
+  .quality-note h2 {
+    color: white;
+  }
+
+  .quality-note p {
+    line-height: 1.8;
+  }
+
+  .knowledge-page {
+    background: #07182f;
+    color: white;
+    padding-block: clamp(4.5rem, 8vw, 7rem);
+  }
+
+  .knowledge-grid {
+    align-items: start;
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+
+  .doc-index {
+    background: transparent;
+    border: 0;
+    border-top: 4px solid #2d83ea;
+    padding: 2rem 0 0;
+  }
+
+  .doc-index h2 {
+    color: white;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+  }
+
+  .doc-index ul {
+    display: grid;
+    gap: 0;
+  }
+
+  .doc-index li {
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    color: #b9c9da;
+    padding: 0.85rem 0;
+  }
+
+  .magazine-list {
+    gap: 1rem;
+  }
+
+  .contact-page {
+    background: #eef3f8;
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .contact-layout {
+    gap: 1.25rem;
+  }
+
+  .selected-process,
+  .contact-card {
+    border: 0;
+    box-shadow: 0 1rem 2.4rem rgba(7, 31, 61, 0.08);
+  }
+
+  .selected-process {
+    border-left: 4px solid #176ee0;
+  }
+
+  .contact-card {
+    min-height: 280px;
+    overflow: hidden;
+    padding: clamp(1.7rem, 4vw, 3rem);
+    position: relative;
+  }
+
+  .contact-card--vietnam {
+    background: #07182f;
+    color: white;
+  }
+
+  .contact-card--vietnam h2 {
+    color: white;
+  }
+
+  .contact-card--vietnam dt {
+    color: #70b1fb;
+  }
+
+  .contact-card--vietnam a {
+    color: #8dc3ff;
+  }
+
+  .contact-card__index {
+    color: #176ee0;
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    margin-bottom: 3.2rem;
+  }
+
+  .contact-card dl {
+    border-top: 1px solid rgba(130, 153, 177, 0.28);
+    margin-top: 1.4rem;
+    padding-top: 1.4rem;
+  }
+
+  .detail-section {
+    background: white;
+    padding-block: clamp(4.5rem, 8vw, 7rem);
+  }
+
+  .detail-grid {
+    border: 0;
+    gap: 1rem;
+  }
+
+  .detail-grid article {
+    background: #f4f7fa;
+    border: 0;
+    border-top: 4px solid #d0dbe6;
+    min-height: 310px;
+    padding: clamp(1.5rem, 3vw, 2.4rem);
+    transition:
+      border-color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .detail-grid article:hover {
+    border-color: #176ee0;
+    transform: translateY(-3px);
+  }
+
+  .detail-grid article > span {
+    color: #176ee0;
+    letter-spacing: 0.08em;
+  }
+
+  .detail-grid h2 {
+    font-size: clamp(1.45rem, 2.6vw, 2.05rem);
+    margin-top: 2.2rem;
+  }
+
+  .final-cta {
+    background: #e8eef5;
+    padding-block: clamp(3.5rem, 7vw, 5.5rem);
+  }
+
+  @media (min-width: 48rem) {
+    .sub-hero__inner {
+      align-items: center;
+      grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+    }
+
+    .visual-story__grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    }
+
+    .product-process,
+    .detail-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product-row {
+      grid-template-columns: 1fr;
+    }
+
+    .quality-map ol {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .contact-layout {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .sub-hero__inner {
+      gap: clamp(4rem, 8vw, 8rem);
+    }
+
+    .about-grid,
+    .diagnostic-grid,
+    .knowledge-grid {
+      grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+    }
+
+    .timeline,
+    .doc-index {
+      position: sticky;
+      top: 140px;
+    }
+
+    .quality-map ol {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    .sub-hero {
+      background-position: 62% center;
+    }
+
+    .sub-hero::before {
+      background-size: 42px 42px;
+    }
+
+    .sub-hero .hero-aside--index {
+      grid-template-columns: 1fr;
+      max-height: 176px;
+      overflow: auto;
+    }
+
+    .sub-hero .hero-aside--quality {
+      grid-template-columns: repeat(5, minmax(90px, 1fr));
+      overflow-x: auto;
+      padding: 0.75rem;
+    }
+
+    .sub-hero .hero-aside--quality li {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      justify-content: center;
+      min-height: 76px;
+      padding: 0.7rem;
+      text-align: center;
+    }
+
+    .visual-story figure {
+      box-shadow: 0.75rem 0.75rem 0 #dfe8f1;
+    }
+
+    .about-copy article > * {
+      margin-left: 2.8rem;
     }
   }
 </style>

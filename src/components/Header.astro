@@ -60,8 +60,14 @@ function isActive(href: string) {
       <nav class="desktop-nav" aria-label={a11yLabels.nav}>
         {
           items.map((item) => (
-            <a href={item.href} class={isActive(item.href) ? "is-active" : ""}>
+            <a
+              href={item.href}
+              class={isActive(item.href) ? "is-active" : ""}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
+            >
               {item.label}
+              {item.external && <span class="external-mark" aria-hidden="true">↗</span>}
             </a>
           ))
         }
@@ -86,7 +92,11 @@ function isActive(href: string) {
         </button>
       </div>
     </div>
-    <MobileNav locale={locale} currentPath={currentPath} />
+    <MobileNav
+      locale={locale}
+      currentPath={currentPath}
+      alternatePaths={alternatePaths}
+    />
   </div>
 </header>
 
@@ -124,14 +134,15 @@ function isActive(href: string) {
 
 <style>
   .site-header {
-    background: white;
+    background: rgba(5, 20, 42, 0.97);
+    box-shadow: 0 0.45rem 1.6rem rgba(2, 10, 22, 0.22);
     position: sticky;
     top: 0;
     z-index: var(--z-header);
   }
 
   .top-strip {
-    background: var(--color-navy);
+    background: #041226;
     color: white;
     font-size: 0.72rem;
     font-weight: 800;
@@ -146,8 +157,9 @@ function isActive(href: string) {
   }
 
   .main-header {
-    background: white;
-    border-bottom: var(--border);
+    backdrop-filter: blur(14px);
+    background: rgba(7, 25, 50, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
   }
 
   .header-inner {
@@ -158,7 +170,7 @@ function isActive(href: string) {
   }
 
   .brand {
-    color: var(--color-navy);
+    color: white;
     display: grid;
     font-weight: 900;
     line-height: 1;
@@ -170,13 +182,26 @@ function isActive(href: string) {
     text-decoration: none;
   }
 
+  .brand::before {
+    background: linear-gradient(
+      90deg,
+      #1c72d6 0 42%,
+      #91bce8 42% 64%,
+      #d9e4ef 64%
+    );
+    content: "";
+    height: 3px;
+    margin-bottom: 0.48rem;
+    width: 2.8rem;
+  }
+
   .brand span {
     font-size: 1.18rem;
     letter-spacing: 0.02em;
   }
 
   .brand small {
-    color: rgba(17, 24, 39, 0.62);
+    color: #8fa9c5;
     font-size: 0.65rem;
     letter-spacing: 0.14em;
     margin-top: 0.25rem;
@@ -189,13 +214,40 @@ function isActive(href: string) {
   }
 
   .desktop-nav a {
+    color: #e8eef6;
     font-size: 0.96rem;
     font-weight: 800;
+    padding-block: 1.85rem;
+    position: relative;
     text-decoration: none;
   }
 
+  .external-mark {
+    color: #69adff;
+    font-size: 0.76em;
+    margin-left: 0.3rem;
+  }
+
+  .desktop-nav a::after {
+    background: #1c72d6;
+    bottom: 0;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+    width: 100%;
+  }
+
+  .desktop-nav a:hover::after,
+  .desktop-nav a.is-active::after {
+    transform: scaleX(1);
+  }
+
   .desktop-nav a.is-active {
-    color: var(--color-blue);
+    color: #69adff;
   }
 
   .header-actions {
@@ -208,8 +260,8 @@ function isActive(href: string) {
   .header-cta {
     display: none;
     align-items: center;
-    background: var(--color-navy);
-    border: 1px solid var(--color-navy);
+    background: #176ee0;
+    border: 1px solid #176ee0;
     border-radius: var(--radius-sm);
     color: white;
     gap: var(--space-2);
@@ -217,12 +269,20 @@ function isActive(href: string) {
     min-height: 44px;
     padding: 0.7rem 1rem;
     text-decoration: none;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .header-cta:hover {
+    background: #1c72d6;
+    transform: translateY(-1px);
   }
 
   .menu-button {
     align-items: center;
-    background: white;
-    border: var(--border);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.24);
     border-radius: var(--radius-md);
     display: inline-flex;
     flex-direction: column;
@@ -233,7 +293,7 @@ function isActive(href: string) {
   }
 
   .menu-button__line {
-    background: var(--color-navy);
+    background: white;
     display: block;
     height: 2px;
     width: 18px;
@@ -263,6 +323,14 @@ function isActive(href: string) {
     .menu-button {
       display: none;
     }
+  }
+
+  .header-actions :global(.language-switcher a) {
+    color: #b8c8d9;
+  }
+
+  .header-actions :global(.language-switcher a.is-active) {
+    color: #69adff;
   }
 
   @media (max-width: 30rem) {
