@@ -38,8 +38,15 @@ export type ProductDetail = {
   materials: string[];
   processes: string[];
   checks: string[];
+  issues: ProductIssue[];
   support: string[];
   cta: string;
+};
+
+export type ProductIssue = {
+  symptom: string;
+  causes: string;
+  action: string;
 };
 
 export type SolutionItem = {
