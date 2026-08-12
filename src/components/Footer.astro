@@ -78,7 +78,18 @@ const copy = {
     </div>
     <nav aria-label={footerNavLabel}>
       <h2>{copy.links}</h2>
-      {navigation[locale].map((item) => <a href={item.href}>{item.label}</a>)}
+      {
+        navigation[locale].map((item) => (
+          <a
+            href={item.href}
+            target={item.external ? "_blank" : undefined}
+            rel={item.external ? "noopener noreferrer" : undefined}
+          >
+            {item.label}
+            {item.external && <span class="external-mark" aria-hidden="true">↗</span>}
+          </a>
+        ))
+      }
     </nav>
     <div class="footer-inquiry">
       <h2>{copy.inquiry}</h2>
@@ -161,6 +172,10 @@ const copy = {
   }
   nav a:hover {
     color: white;
+  }
+  .external-mark {
+    color: #6db0ff;
+    margin-left: 0.35rem;
   }
   .footer-inquiry > a {
     align-items: center;

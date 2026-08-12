@@ -5,6 +5,7 @@ type Props = BlogLink & {
   featured?: boolean;
   image?: string;
   imageAlt?: string;
+  liveIndex?: number;
 };
 
 const {
@@ -17,14 +18,19 @@ const {
   featured = false,
   image,
   imageAlt = "",
+  liveIndex,
 } = Astro.props;
 ---
 
-<article class:list={["blog-card", { "blog-card--featured": featured }]}>
+<article
+  class:list={["blog-card", { "blog-card--featured": featured }]}
+  data-blog-card={liveIndex}
+>
   {
     image && (
       <a
         class="blog-card__image"
+        data-blog-link
         href={href}
         target="_blank"
         rel="noopener noreferrer"
@@ -36,24 +42,32 @@ const {
           width="1024"
           height="1024"
           loading="lazy"
+          data-blog-image
         />
       </a>
     )
   }
   <div class="blog-card__body">
     <div class="blog-card__meta">
-      <span>{meta}</span>
-      <time>{date}</time>
+      <span data-blog-meta>{meta}</span>
+      <time data-blog-date>{date}</time>
     </div>
     <h3>
-      <a href={href} target="_blank" rel="noopener noreferrer">{title}</a>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-blog-link
+        data-blog-title
+      >{title}</a>
     </h3>
-    <p>{summary}</p>
+    <p data-blog-summary>{summary}</p>
     <a
       class="blog-card__cta"
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      data-blog-link
     >
       {cta}<span aria-hidden="true">↗</span>
     </a>

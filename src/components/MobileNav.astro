@@ -40,8 +40,14 @@ function isActive(href: string) {
 >
   {
     navigation[locale].map((item) => (
-      <a href={item.href} class={isActive(item.href) ? "is-active" : ""}>
+      <a
+        href={item.href}
+        class={isActive(item.href) ? "is-active" : ""}
+        target={item.external ? "_blank" : undefined}
+        rel={item.external ? "noopener noreferrer" : undefined}
+      >
         {item.label}
+        {item.external && <span aria-hidden="true">↗</span>}
       </a>
     ))
   }
@@ -76,6 +82,11 @@ function isActive(href: string) {
     min-height: 44px;
     padding: var(--space-3);
     text-decoration: none;
+  }
+
+  .mobile-nav a > span[aria-hidden="true"] {
+    color: var(--color-blue);
+    margin-left: 0.4rem;
   }
 
   .mobile-nav a.is-active {

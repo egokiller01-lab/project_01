@@ -60,8 +60,14 @@ function isActive(href: string) {
       <nav class="desktop-nav" aria-label={a11yLabels.nav}>
         {
           items.map((item) => (
-            <a href={item.href} class={isActive(item.href) ? "is-active" : ""}>
+            <a
+              href={item.href}
+              class={isActive(item.href) ? "is-active" : ""}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
+            >
               {item.label}
+              {item.external && <span class="external-mark" aria-hidden="true">↗</span>}
             </a>
           ))
         }
@@ -214,6 +220,12 @@ function isActive(href: string) {
     padding-block: 1.85rem;
     position: relative;
     text-decoration: none;
+  }
+
+  .external-mark {
+    color: #69adff;
+    font-size: 0.76em;
+    margin-left: 0.3rem;
   }
 
   .desktop-nav a::after {
