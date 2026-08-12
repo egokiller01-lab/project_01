@@ -125,19 +125,21 @@
 
 ## 이미지와 비주얼
 
-- 실제 이미지 파일을 고객 화면에 로딩하지 않는다.
-- Home Hero는 CSS 메탈릭 비주얼을 사용한다.
-- 실제 PLACHEM 공장·설비·연구실처럼 보이는 AI 이미지는 사용하지 않는다.
+- 회사 건물·생산시설·연구실은 PLACHEM과 유사한 일반 중소 제조시설 규모의 고화질 연출 이미지를 사용한다.
+- 실제 촬영본의 화질이나 구도가 홈페이지 디자인과 맞지 않으면 무리하게 사용하지 않는다.
+- 초대형 사옥, 대형 석유화학단지 등 실제 회사 규모를 과장하는 이미지는 사용하지 않는다.
+- 연출 이미지를 실제 PLACHEM 시설이나 설비라고 표현하지 않는다.
+- 블로그 카드에는 별도 연출 이미지를 사용하지 않고, 연결된 글에 실제 첨부된 대표 이미지를 사용한다.
 - 빈 이미지 박스를 만들지 않는다.
-- 실제 시설 사진이 확보되면 현재 비주얼 구조 안에서 교체할 수 있게 유지한다.
 
 ## 기술 블로그 연결
 
 - `https://blog.plachem.biz/material-plating-difficulty-guide/`
 - `https://blog.plachem.biz/plating-agitation-defects-quality/`
 - `https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/`
+- `https://blog.plachem.biz/plating-rack-design-defects/`
 
-위 3개 URL만 연결한다. WordPress 글 자체는 변경하지 않는다.
+위 글과 베트남어 번역 글을 연결한다. WordPress 글 자체는 변경하지 않는다.
 
 ## 보류 항목
 

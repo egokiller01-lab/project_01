@@ -548,13 +548,6 @@ const productVisuals = [
   "/assets/plachem-quality.webp",
   "/assets/manufacturing-concept.webp",
 ];
-
-const blogVisuals = [
-  "/assets/surface-treatment-concept.webp",
-  "/assets/plachem-quality.webp",
-  "/assets/manufacturing-concept.webp",
-  "/assets/rd-concept.webp",
-];
 ---
 
 <BaseLayout
@@ -860,26 +853,11 @@ const blogVisuals = [
       <div class="blog-editorial-grid">
         <div class="featured-blog">
           <p class="blog-list-label">{ui.featuredArticle}</p>
-          <BlogCard
-            {...content.blogs[0]}
-            featured
-            image={blogVisuals[0]}
-            imageAlt=""
-          />
+          <BlogCard {...content.blogs[0]} featured />
         </div>
         <div class="blog-list">
           <p class="blog-list-label">{ui.latestArticles}</p>
-          {
-            content.blogs
-              .slice(1)
-              .map((blog, index) => (
-                <BlogCard
-                  {...blog}
-                  image={blogVisuals[index + 1]}
-                  imageAlt=""
-                />
-              ))
-          }
+          {content.blogs.slice(1).map((blog) => <BlogCard {...blog} />)}
         </div>
       </div>
 

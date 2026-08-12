@@ -51,6 +51,8 @@ export type SolutionItem = {
 export type BlogLink = {
   title: string;
   href: string;
+  image: string;
+  imageAlt: string;
   meta: string;
   summary: string;
   date: string;
