@@ -1,0 +1,10 @@
+# Cloudflare Pages server-side redirects.
+# Keep these before any future dynamic rules because rule order matters.
+
+/ /ko/ 301
+/index /ko/ 301
+/index.html /ko/ 301
+
+# Retire legacy English homepage URLs in favor of the renewed site.
+/index_en /en/ 301
+/index_en.html /en/ 301
