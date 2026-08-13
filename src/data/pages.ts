@@ -15,6 +15,8 @@ export type StaticPageKey = (typeof staticPageKeys)[number];
 
 export const companyFacts = {
   legalName: "PLACHEM VINA CO., LTD",
+  vietnamContactName: "PLACHEM VINA",
+  koreaContactName: "(주)플라켐",
   establishedKo: "2016년",
   establishedEn: "2016",
   establishedVi: "2016",

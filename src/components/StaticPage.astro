@@ -643,8 +643,10 @@ const visualCopy = {
               <p>{ui.selectedText}</p>
             </article>
             <article class="contact-card contact-card--vietnam">
-              <span class="contact-card__index">01</span>
-              <h2>{contactLabels.vietnam}</h2>
+              <header class="contact-card__heading">
+                <span>{contactLabels.vietnam}</span>
+                <h2>{companyFacts.vietnamContactName}</h2>
+              </header>
               <dl>
                 <div>
                   <dt>{contactLabels.manufacturingBase}</dt>
@@ -677,8 +679,10 @@ const visualCopy = {
               </dl>
             </article>
             <article class="contact-card contact-card--korea">
-              <span class="contact-card__index">02</span>
-              <h2>{contactLabels.korea}</h2>
+              <header class="contact-card__heading">
+                <span>{contactLabels.korea}</span>
+                <h2>{companyFacts.koreaContactName}</h2>
+              </header>
               <dl>
                 <div>
                   <dt>{contactLabels.address}</dt>
@@ -2065,13 +2069,22 @@ const visualCopy = {
     color: #8dc3ff;
   }
 
-  .contact-card__index {
+  .contact-card__heading > span {
     color: #176ee0;
     display: block;
     font-size: 0.74rem;
     font-weight: 900;
     letter-spacing: 0.12em;
-    margin-bottom: 3.2rem;
+    margin-bottom: 0.65rem;
+    text-transform: uppercase;
+  }
+
+  .contact-card--vietnam .contact-card__heading > span {
+    color: #70b1fb;
+  }
+
+  .contact-card__heading h2 {
+    margin: 0;
   }
 
   .contact-card dl {

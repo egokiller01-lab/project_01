@@ -46,6 +46,7 @@ const payload = {
         <div class="direct-contact__offices">
           <article>
             <span>{copy.vietnamContact}</span>
+            <strong>{companyFacts.vietnamContactName}</strong>
             <a
               href={`tel:${companyFacts.vietnamPhone.replaceAll(" ", "")}`}
               data-contact-method="phone"
@@ -63,6 +64,7 @@ const payload = {
           </article>
           <article>
             <span>{copy.koreaContact}</span>
+            <strong>{companyFacts.koreaContactName}</strong>
             <a
               href={`tel:${companyFacts.koreaPhone}`}
               data-contact-method="phone"
@@ -555,6 +557,17 @@ const payload = {
   .direct-contact__offices article > span {
     color: var(--color-navy);
     font-weight: 900;
+  }
+
+  .direct-contact__offices article > span {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .direct-contact__offices article > strong {
+    color: var(--color-navy);
+    font-size: 1.05rem;
   }
 
   .direct-contact__offices {
