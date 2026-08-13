@@ -21,7 +21,7 @@ const {
   description,
   pageKey = "home",
   alternatePaths,
-  noindex = true,
+  noindex = false,
 } = Astro.props;
 const locales: Locale[] = ["ko", "en", "vi"];
 const currentPath = Astro.url.pathname;
