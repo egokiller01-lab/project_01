@@ -1,0 +1,79 @@
+<script>
+  // Keep conversion signals first-party and free of form values or personal data.
+  type ConversionDetails = Record<string, string>;
+  type ConversionEvent = ConversionDetails & { event: string };
+  type AnalyticsWindow = Window & { dataLayer?: ConversionEvent[] };
+
+  const analyticsWindow = window as AnalyticsWindow;
+  const dataLayer = (analyticsWindow.dataLayer =
+    analyticsWindow.dataLayer ?? []);
+
+  function track(name: string, details: ConversionDetails = {}) {
+    const event = {
+      event: name,
+      page_path: window.location.pathname,
+      page_locale: document.documentElement.lang,
+      ...details,
+    };
+
+    dataLayer.push(event);
+    window.dispatchEvent(
+      new CustomEvent("plachem:conversion", { detail: event }),
+    );
+  }
+
+  const productMatch = window.location.pathname.match(
+    /^\/(ko|en|vi)\/products\/([^/]+)\/?$/,
+  );
+  if (productMatch) {
+    track("product_view", { product_slug: productMatch[2] });
+  }
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const link = event.target.closest<HTMLAnchorElement>("a");
+    if (!link) return;
+
+    const method = link.dataset.contactMethod;
+    if (method === "phone" || link.href.startsWith("tel:")) {
+      track("phone_click", {
+        contact_office: link.dataset.contactOffice ?? "unspecified",
+      });
+      return;
+    }
+
+    if (method === "email" || link.href.startsWith("mailto:")) {
+      track("email_click", {
+        contact_office: link.dataset.contactOffice ?? "unspecified",
+      });
+      return;
+    }
+
+    if (link.href.includes("blog.plachem.biz")) {
+      track("technical_article_click");
+      return;
+    }
+
+    if (/\/(ko|en|vi)\/contact\//.test(link.pathname)) {
+      track("contact_cta_click", {
+        selected_process: new URL(link.href).searchParams.get("process") ?? "",
+      });
+    }
+  });
+
+  const inquiryForm = document.querySelector("[data-inquiry-form]");
+  if (inquiryForm) {
+    let formStarted = false;
+    inquiryForm.addEventListener("input", () => {
+      if (formStarted) return;
+      formStarted = true;
+      track("inquiry_form_start");
+    });
+  }
+
+  window.addEventListener("plachem:inquiry-result", (event) => {
+    const result = (event as CustomEvent<{ result?: string }>).detail?.result;
+    if (result === "success") track("inquiry_submit_success");
+    if (result === "unavailable") track("inquiry_submit_unavailable");
+  });
+</script>

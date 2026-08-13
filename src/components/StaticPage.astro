@@ -257,6 +257,7 @@ const contactLabels = {
     vietnam: "베트남 법인",
     korea: "한국 연락처",
     phone: "전화",
+    email: "이메일",
     manufacturingBase: "제조 기반",
     address: "주소",
   },
@@ -264,6 +265,7 @@ const contactLabels = {
     vietnam: "Vietnam office",
     korea: "Korea contact",
     phone: "Phone",
+    email: "Email",
     manufacturingBase: "Manufacturing base",
     address: "Address",
   },
@@ -271,6 +273,7 @@ const contactLabels = {
     vietnam: "Văn phòng Việt Nam",
     korea: "Liên hệ Hàn Quốc",
     phone: "Điện thoại",
+    email: "Email",
     manufacturingBase: "Cơ sở sản xuất",
     address: "Địa chỉ",
   },
@@ -407,9 +410,7 @@ const visualCopy = {
           <ol class="hero-aside hero-aside--quality" aria-label={page.title}>
             {ui.heroQualitySteps.map((step, index) => (
               <li>
-                <b aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </b>
+                <b aria-hidden="true">{String(index + 1).padStart(2, "0")}</b>
                 {step}
               </li>
             ))}
@@ -654,8 +655,22 @@ const visualCopy = {
                   <dd>
                     <a
                       href={`tel:${companyFacts.vietnamPhone.replaceAll(" ", "")}`}
+                      data-contact-method="phone"
+                      data-contact-office="vietnam"
                     >
                       {companyFacts.vietnamPhone}
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>{contactLabels.email}</dt>
+                  <dd>
+                    <a
+                      href={`mailto:${companyFacts.vietnamEmail}`}
+                      data-contact-method="email"
+                      data-contact-office="vietnam"
+                    >
+                      {companyFacts.vietnamEmail}
                     </a>
                   </dd>
                 </div>
@@ -678,8 +693,24 @@ const visualCopy = {
                 <div>
                   <dt>{contactLabels.phone}</dt>
                   <dd>
-                    <a href={`tel:${companyFacts.koreaPhone}`}>
+                    <a
+                      href={`tel:${companyFacts.koreaPhone}`}
+                      data-contact-method="phone"
+                      data-contact-office="korea"
+                    >
                       {companyFacts.koreaPhone}
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>{contactLabels.email}</dt>
+                  <dd>
+                    <a
+                      href={`mailto:${companyFacts.koreaEmail}`}
+                      data-contact-method="email"
+                      data-contact-office="korea"
+                    >
+                      {companyFacts.koreaEmail}
                     </a>
                   </dd>
                 </div>
