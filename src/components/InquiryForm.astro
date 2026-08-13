@@ -9,6 +9,7 @@ import {
   productProcessOptions,
 } from "../data/inquiry";
 import type { Locale } from "../types";
+import { companyFacts } from "../data/pages";
 
 type Props = {
   locale: Locale;
@@ -38,6 +39,48 @@ const payload = {
       <div class="inquiry-notice" role="note">
         <strong>{copy.statusTitle}</strong>
         <span>{copy.infrastructureNotice}</span>
+      </div>
+      <div class="direct-contact" aria-labelledby="direct-contact-title">
+        <strong id="direct-contact-title">{copy.directContactTitle}</strong>
+        <p>{copy.directContactSummary}</p>
+        <div class="direct-contact__offices">
+          <article>
+            <span>{copy.vietnamContact}</span>
+            <strong>{companyFacts.vietnamContactName}</strong>
+            <a
+              href={`tel:${companyFacts.vietnamPhone.replaceAll(" ", "")}`}
+              data-contact-method="phone"
+              data-contact-office="vietnam"
+            >
+              {companyFacts.vietnamPhone}
+            </a>
+            <a
+              href={`mailto:${companyFacts.vietnamEmail}`}
+              data-contact-method="email"
+              data-contact-office="vietnam"
+            >
+              {companyFacts.vietnamEmail}
+            </a>
+          </article>
+          <article>
+            <span>{copy.koreaContact}</span>
+            <strong>{companyFacts.koreaContactName}</strong>
+            <a
+              href={`tel:${companyFacts.koreaPhone}`}
+              data-contact-method="phone"
+              data-contact-office="korea"
+            >
+              {companyFacts.koreaPhone}
+            </a>
+            <a
+              href={`mailto:${companyFacts.koreaEmail}`}
+              data-contact-method="email"
+              data-contact-office="korea"
+            >
+              {companyFacts.koreaEmail}
+            </a>
+          </article>
+        </div>
       </div>
     </div>
 
@@ -401,6 +444,11 @@ const payload = {
 
         if (data?.code === "not_configured" || response.status === 503) {
           if (status) status.textContent = config.copy.states.notConfigured;
+          window.dispatchEvent(
+            new CustomEvent("plachem:inquiry-result", {
+              detail: { result: "unavailable" },
+            }),
+          );
           return;
         }
 
@@ -419,6 +467,11 @@ const payload = {
           if (status) {
             status.textContent = `${config.copy.states.success} ${data.referenceNo}`;
           }
+          window.dispatchEvent(
+            new CustomEvent("plachem:inquiry-result", {
+              detail: { result: "success" },
+            }),
+          );
           return;
         }
 
@@ -490,6 +543,56 @@ const payload = {
   .inquiry-notice {
     display: grid;
     gap: var(--space-1);
+  }
+
+  .direct-contact {
+    border-top: var(--border);
+    display: grid;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+    padding-top: var(--space-5);
+  }
+
+  .direct-contact > strong,
+  .direct-contact__offices article > span {
+    color: var(--color-navy);
+    font-weight: 900;
+  }
+
+  .direct-contact__offices article > span {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .direct-contact__offices article > strong {
+    color: var(--color-navy);
+    font-size: 1.05rem;
+  }
+
+  .direct-contact__offices {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .direct-contact__offices article {
+    background: var(--color-light);
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-4);
+  }
+
+  .direct-contact__offices a {
+    color: var(--color-blue);
+    font-weight: 800;
+    overflow-wrap: anywhere;
+    text-decoration: none;
+  }
+
+  .direct-contact__offices a:hover {
+    text-decoration: underline;
   }
 
   .form-required-note {
@@ -596,6 +699,10 @@ const payload = {
 
   @media (min-width: 48rem) {
     .form-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .direct-contact__offices {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }

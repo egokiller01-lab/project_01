@@ -15,6 +15,8 @@ export type StaticPageKey = (typeof staticPageKeys)[number];
 
 export const companyFacts = {
   legalName: "PLACHEM VINA CO., LTD",
+  vietnamContactName: "PLACHEM VINA",
+  koreaContactName: "(주)플라켐",
   establishedKo: "2016년",
   establishedEn: "2016",
   establishedVi: "2016",
@@ -23,10 +25,12 @@ export const companyFacts = {
   regionVi: "Bac Ninh, Việt Nam",
   site: "Bắc Ninh, Vietnam",
   vietnamPhone: "+84 222 395 2060",
+  vietnamEmail: "plachem01@gmail.com",
   koreaAddressKo: "경기도 안산시 단원구 산단로 341",
   koreaAddressEn: "341 Sandan-ro, Danwon-gu, Ansan-si, Gyeonggi-do, Korea",
   koreaAddressVi: "341 Sandan-ro, Danwon-gu, Ansan-si, Gyeonggi-do, Hàn Quốc",
   koreaPhone: "031-495-6688",
+  koreaEmail: "plachem2020@naver.com",
 };
 
 export const verifiedBlogLinks: Record<Locale, BlogLink[]> = {

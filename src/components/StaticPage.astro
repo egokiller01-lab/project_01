@@ -257,6 +257,7 @@ const contactLabels = {
     vietnam: "베트남 법인",
     korea: "한국 연락처",
     phone: "전화",
+    email: "이메일",
     manufacturingBase: "제조 기반",
     address: "주소",
   },
@@ -264,6 +265,7 @@ const contactLabels = {
     vietnam: "Vietnam office",
     korea: "Korea contact",
     phone: "Phone",
+    email: "Email",
     manufacturingBase: "Manufacturing base",
     address: "Address",
   },
@@ -271,6 +273,7 @@ const contactLabels = {
     vietnam: "Văn phòng Việt Nam",
     korea: "Liên hệ Hàn Quốc",
     phone: "Điện thoại",
+    email: "Email",
     manufacturingBase: "Cơ sở sản xuất",
     address: "Địa chỉ",
   },
@@ -407,9 +410,7 @@ const visualCopy = {
           <ol class="hero-aside hero-aside--quality" aria-label={page.title}>
             {ui.heroQualitySteps.map((step, index) => (
               <li>
-                <b aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </b>
+                <b aria-hidden="true">{String(index + 1).padStart(2, "0")}</b>
                 {step}
               </li>
             ))}
@@ -642,8 +643,10 @@ const visualCopy = {
               <p>{ui.selectedText}</p>
             </article>
             <article class="contact-card contact-card--vietnam">
-              <span class="contact-card__index">01</span>
-              <h2>{contactLabels.vietnam}</h2>
+              <header class="contact-card__heading">
+                <span>{contactLabels.vietnam}</span>
+                <h2>{companyFacts.vietnamContactName}</h2>
+              </header>
               <dl>
                 <div>
                   <dt>{contactLabels.manufacturingBase}</dt>
@@ -654,16 +657,32 @@ const visualCopy = {
                   <dd>
                     <a
                       href={`tel:${companyFacts.vietnamPhone.replaceAll(" ", "")}`}
+                      data-contact-method="phone"
+                      data-contact-office="vietnam"
                     >
                       {companyFacts.vietnamPhone}
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>{contactLabels.email}</dt>
+                  <dd>
+                    <a
+                      href={`mailto:${companyFacts.vietnamEmail}`}
+                      data-contact-method="email"
+                      data-contact-office="vietnam"
+                    >
+                      {companyFacts.vietnamEmail}
                     </a>
                   </dd>
                 </div>
               </dl>
             </article>
             <article class="contact-card contact-card--korea">
-              <span class="contact-card__index">02</span>
-              <h2>{contactLabels.korea}</h2>
+              <header class="contact-card__heading">
+                <span>{contactLabels.korea}</span>
+                <h2>{companyFacts.koreaContactName}</h2>
+              </header>
               <dl>
                 <div>
                   <dt>{contactLabels.address}</dt>
@@ -678,8 +697,24 @@ const visualCopy = {
                 <div>
                   <dt>{contactLabels.phone}</dt>
                   <dd>
-                    <a href={`tel:${companyFacts.koreaPhone}`}>
+                    <a
+                      href={`tel:${companyFacts.koreaPhone}`}
+                      data-contact-method="phone"
+                      data-contact-office="korea"
+                    >
                       {companyFacts.koreaPhone}
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>{contactLabels.email}</dt>
+                  <dd>
+                    <a
+                      href={`mailto:${companyFacts.koreaEmail}`}
+                      data-contact-method="email"
+                      data-contact-office="korea"
+                    >
+                      {companyFacts.koreaEmail}
                     </a>
                   </dd>
                 </div>
@@ -2034,13 +2069,22 @@ const visualCopy = {
     color: #8dc3ff;
   }
 
-  .contact-card__index {
+  .contact-card__heading > span {
     color: #176ee0;
     display: block;
     font-size: 0.74rem;
     font-weight: 900;
     letter-spacing: 0.12em;
-    margin-bottom: 3.2rem;
+    margin-bottom: 0.65rem;
+    text-transform: uppercase;
+  }
+
+  .contact-card--vietnam .contact-card__heading > span {
+    color: #70b1fb;
+  }
+
+  .contact-card__heading h2 {
+    margin: 0;
   }
 
   .contact-card dl {

@@ -58,6 +58,10 @@ export const inquiryCopy: Record<
     reset: string;
     uploadNote: string;
     infrastructureNotice: string;
+    directContactTitle: string;
+    directContactSummary: string;
+    vietnamContact: string;
+    koreaContact: string;
     fields: Record<string, string>;
     types: Record<InquiryType, string>;
     errors: Record<string, string>;
@@ -80,6 +84,11 @@ export const inquiryCopy: Record<
       "첨부는 PDF, JPG/JPEG, PNG, XLSX, DOCX만 선택할 수 있습니다. 파일당 최대 10MB, 최대 3개입니다.",
     infrastructureNotice:
       "현재 화면에서는 입력 내용을 확인할 수 있으며, 실제 접수는 회사 확인 후 활성화됩니다.",
+    directContactTitle: "바로 연락하기",
+    directContactSummary:
+      "온라인 접수가 활성화되기 전까지 전화 또는 이메일로 문의해 주세요.",
+    vietnamContact: "베트남 법인",
+    koreaContact: "한국 연락처",
     fields: {
       companyName: "회사명",
       contactName: "담당자명",
@@ -142,6 +151,11 @@ export const inquiryCopy: Record<
       "Attachments can be PDF, JPG/JPEG, PNG, XLSX, or DOCX. Maximum 10MB per file and 3 files.",
     infrastructureNotice:
       "This page can check the entered information. Actual online intake will be activated after company confirmation.",
+    directContactTitle: "Contact us directly",
+    directContactSummary:
+      "Until online intake is activated, please contact our Vietnam or Korea office by phone or email.",
+    vietnamContact: "Vietnam office",
+    koreaContact: "Korea contact",
     fields: {
       companyName: "Company name",
       contactName: "Contact person",
@@ -206,6 +220,11 @@ export const inquiryCopy: Record<
       "Tệp đính kèm có thể là PDF, JPG/JPEG, PNG, XLSX hoặc DOCX. Tối đa 10MB mỗi tệp và 3 tệp.",
     infrastructureNotice:
       "Trang này có thể kiểm tra thông tin đã nhập. Tiếp nhận trực tuyến thực tế sẽ được kích hoạt sau khi công ty xác nhận.",
+    directContactTitle: "Liên hệ trực tiếp",
+    directContactSummary:
+      "Trong thời gian chờ kích hoạt tiếp nhận trực tuyến, vui lòng liên hệ văn phòng Việt Nam hoặc Hàn Quốc qua điện thoại hoặc email.",
+    vietnamContact: "Văn phòng Việt Nam",
+    koreaContact: "Liên hệ Hàn Quốc",
     fields: {
       companyName: "Tên công ty",
       contactName: "Người phụ trách",
