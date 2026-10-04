@@ -46,6 +46,7 @@ export const productProcessOptions = (locale: Locale) =>
 export const inquiryCopy: Record<
   Locale,
   {
+    eyebrow: string;
     title: string;
     summary: string;
     statusTitle: string;
@@ -69,7 +70,8 @@ export const inquiryCopy: Record<
   }
 > = {
   ko: {
-    title: "Technical Inquiry",
+    eyebrow: "Technical Inquiry",
+    title: "기술 문의",
     summary:
       "공정 조건, 제품군, 요청 자료를 정리해 기술 검토에 필요한 정보를 준비할 수 있습니다.",
     statusTitle: "접수 상태",
@@ -135,6 +137,7 @@ export const inquiryCopy: Record<
     },
   },
   en: {
+    eyebrow: "Get in touch",
     title: "Technical Inquiry",
     summary:
       "Share process conditions, product family, and document needs to prepare information for technical review.",
@@ -204,6 +207,7 @@ export const inquiryCopy: Record<
     },
   },
   vi: {
+    eyebrow: "Liên hệ",
     title: "Liên hệ kỹ thuật",
     summary:
       "Gửi điều kiện quy trình, nhóm sản phẩm và nhu cầu tài liệu để chuẩn bị thông tin xem xét kỹ thuật.",
