@@ -1,6 +1,7 @@
 import {
   INQUIRY_CONSENT_VERSION,
   INQUIRY_LIMITS as limits,
+  INQUIRY_PRODUCT_PROCESS_VALUES,
   INQUIRY_RATE_LIMIT_POLICY,
 } from "../../src/lib/inquiryConstants";
 
@@ -13,16 +14,8 @@ const inquiryTypes = [
   "distribution-partnership",
   "other",
 ] as const;
-const productProcessValues = [
-  "degreasing-cleaning-pretreatment",
-  "electroplating",
-  "electroless-plating",
-  "aluminum-anodizing",
-  "zinc-zinc-nickel-chromate",
-  "conversion-corrosion-coating",
-  "general-chemicals-non-ferrous-metals",
-  "filtration-equipment-supplies",
-] as const;
+// 제품군 slug(사이트 선택값)와 레거시 공정값을 함께 허용한다.
+const productProcessValues = INQUIRY_PRODUCT_PROCESS_VALUES;
 
 const allowedFiles = {
   pdf: ["application/pdf"],
@@ -387,12 +380,7 @@ async function validateForm(form: FormData): Promise<ValidationResult> {
   if (!inquiryTypes.includes(inquiryType as (typeof inquiryTypes)[number])) {
     errors.inquiryType = "invalid";
   }
-  if (
-    productProcess &&
-    !productProcessValues.includes(
-      productProcess as (typeof productProcessValues)[number],
-    )
-  ) {
+  if (productProcess && !productProcessValues.includes(productProcess)) {
     errors.productProcess = "invalid";
   }
 
