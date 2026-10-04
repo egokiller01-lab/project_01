@@ -60,6 +60,7 @@ export type BlogLink = {
   title: string;
   href: string;
   image: string;
+  imageSrcset?: string;
   imageAlt: string;
   meta: string;
   summary: string;

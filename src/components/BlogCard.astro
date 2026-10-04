@@ -17,9 +17,15 @@ const {
   cta,
   featured = false,
   image,
+  imageSrcset,
   imageAlt = "",
   liveIndex,
 } = Astro.props;
+
+// featured는 편집 그리드 좌측(약 55%), 그 외는 우측 목록(약 40%) 폭으로 렌더링된다.
+const sizes = featured
+  ? "(min-width: 48rem) 36rem, 92vw"
+  : "(min-width: 48rem) 27rem, 92vw";
 ---
 
 <article
@@ -38,9 +44,12 @@ const {
       >
         <img
           src={image}
+          srcset={imageSrcset || undefined}
+          sizes={imageSrcset ? sizes : undefined}
           alt={imageAlt}
-          width="1024"
-          height="1024"
+          width="768"
+          height="432"
+          decoding="async"
           loading="lazy"
           data-blog-image
         />
