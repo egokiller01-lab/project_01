@@ -50,12 +50,12 @@ const ui = {
       "원료 입고와 제조, 검사, 출하 확인 정보를 LOT 흐름으로 연결하고 요청 문서 제공 절차를 분리해 관리합니다.",
     docIndexTitle: "공정별 자료 분류",
     docItems: [
-      "전처리",
-      "도금",
-      "무전해도금",
-      "아노다이징",
-      "화성피막",
-      "품질문서",
+      { label: "전처리", slug: "pretreatment" },
+      { label: "도금", slug: "electroplating" },
+      { label: "무전해도금", slug: "electroless-plating" },
+      { label: "아노다이징", slug: "aluminum-anodizing" },
+      { label: "화성피막", slug: "conversion-coating" },
+      { label: "품질문서", page: "quality" as const },
     ],
     magazineTop: "TECHNICAL",
     magazineTitle: "DOCUMENTS",
@@ -117,12 +117,12 @@ const ui = {
       "Raw material receiving, manufacturing, inspection, and shipment check records are connected with LOT flow, while document procedures are managed separately.",
     docIndexTitle: "Resources by process",
     docItems: [
-      "Pretreatment",
-      "Plating",
-      "Electroless plating",
-      "Anodizing",
-      "Conversion coating",
-      "Quality documents",
+      { label: "Pretreatment", slug: "pretreatment" },
+      { label: "Plating", slug: "electroplating" },
+      { label: "Electroless plating", slug: "electroless-plating" },
+      { label: "Anodizing", slug: "aluminum-anodizing" },
+      { label: "Conversion coating", slug: "conversion-coating" },
+      { label: "Quality documents", page: "quality" as const },
     ],
     magazineTop: "TECHNICAL",
     magazineTitle: "DOCUMENTS",
@@ -190,12 +190,12 @@ const ui = {
       "Thông tin tiếp nhận nguyên liệu, sản xuất, kiểm tra và xuất hàng được kết nối theo dòng LOT, còn quy trình tài liệu được quản lý riêng.",
     docIndexTitle: "Tài liệu theo công đoạn",
     docItems: [
-      "Tiền xử lý",
-      "Mạ",
-      "Mạ không điện",
-      "Anod nhôm",
-      "Lớp phủ chuyển hóa",
-      "Tài liệu chất lượng",
+      { label: "Tiền xử lý", slug: "pretreatment" },
+      { label: "Mạ", slug: "electroplating" },
+      { label: "Mạ không điện", slug: "electroless-plating" },
+      { label: "Anod nhôm", slug: "aluminum-anodizing" },
+      { label: "Lớp phủ chuyển hóa", slug: "conversion-coating" },
+      { label: "Tài liệu chất lượng", page: "quality" as const },
     ],
     magazineTop: "TÀI LIỆU",
     magazineTitle: "KỸ THUẬT",
@@ -614,7 +614,18 @@ const visualCopy = {
             <h2>{ui.docIndexTitle}</h2>
             <ul>
               {ui.docItems.map((item) => (
-                <li>{item}</li>
+                <li>
+                  <a
+                    href={
+                      "slug" in item
+                        ? `/${locale}/products/${item.slug}/`
+                        : localizedPath(locale, item.page)
+                    }
+                  >
+                    {item.label}
+                    <span aria-hidden="true"> →</span>
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
@@ -2035,7 +2046,21 @@ const visualCopy = {
     border-bottom: 1px solid rgba(255, 255, 255, 0.16);
     color: var(--color-body-copy-on-dark);
     font-weight: 600;
+    padding: 0;
+  }
+
+  .doc-index li a {
+    color: inherit;
+    display: block;
     padding: 0.85rem 0;
+    text-decoration: none;
+  }
+
+  .doc-index li a:hover,
+  .doc-index li a:focus-visible {
+    color: #7fb8ff;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
   }
 
   .magazine-list {
