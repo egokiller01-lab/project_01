@@ -46,6 +46,7 @@ export const productProcessOptions = (locale: Locale) =>
 export const inquiryCopy: Record<
   Locale,
   {
+    eyebrow: string;
     title: string;
     summary: string;
     statusTitle: string;
@@ -69,7 +70,8 @@ export const inquiryCopy: Record<
   }
 > = {
   ko: {
-    title: "Technical Inquiry",
+    eyebrow: "Technical Inquiry",
+    title: "기술 문의",
     summary:
       "공정 조건, 제품군, 요청 자료를 정리해 기술 검토에 필요한 정보를 준비할 수 있습니다.",
     statusTitle: "접수 상태",
@@ -132,9 +134,12 @@ export const inquiryCopy: Record<
         "현재 온라인 접수 준비 상태라 실제 접수는 진행되지 않았습니다.",
       failed: "문의 내용을 접수하지 못했습니다.",
       success: "문의가 접수되었습니다. 참조번호를 확인해 주세요.",
+      draftRestored:
+        "작성 중인 내용을 이 브라우저에서 불러왔습니다. 첨부파일과 동의 항목은 다시 확인해 주세요.",
     },
   },
   en: {
+    eyebrow: "Get in touch",
     title: "Technical Inquiry",
     summary:
       "Share process conditions, product family, and document needs to prepare information for technical review.",
@@ -201,9 +206,12 @@ export const inquiryCopy: Record<
       failed: "The inquiry could not be submitted.",
       success:
         "The inquiry has been received. Please keep the reference number.",
+      draftRestored:
+        "Your draft was restored in this browser. Please re-check attachments and the consent box.",
     },
   },
   vi: {
+    eyebrow: "Liên hệ",
     title: "Liên hệ kỹ thuật",
     summary:
       "Gửi điều kiện quy trình, nhóm sản phẩm và nhu cầu tài liệu để chuẩn bị thông tin xem xét kỹ thuật.",
@@ -269,6 +277,8 @@ export const inquiryCopy: Record<
       failed: "Không thể tiếp nhận nội dung liên hệ.",
       success:
         "Nội dung liên hệ đã được tiếp nhận. Vui lòng lưu mã tham chiếu.",
+      draftRestored:
+        "Nội dung đang soạn đã được khôi phục trong trình duyệt này. Vui lòng kiểm lại tệp đính kèm và mục đồng ý.",
     },
   },
 };

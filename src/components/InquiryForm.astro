@@ -33,7 +33,7 @@ const payload = {
 <section class="inquiry-section" aria-labelledby="inquiry-form-title">
   <div class="container inquiry-layout">
     <div class="inquiry-intro">
-      <p class="panel-eyebrow">Technical Inquiry</p>
+      <p class="panel-eyebrow">{copy.eyebrow}</p>
       <h2 id="inquiry-form-title">{copy.title}</h2>
       <p>{copy.summary}</p>
       <div class="inquiry-notice" role="note">
@@ -278,6 +278,93 @@ const payload = {
       productSelect.value = requestedProduct;
     }
 
+    // 언어 전환 시 작성 중인 내용을 잃지 않도록 초안을 이 브라우저(sessionStorage)에만
+    // 보관한다. URL이나 서버 전송에는 사용되지 않고, 동의 항목과 첨부파일은 복원하지 않는다.
+    const draftKey = "plachem:inquiry-draft-v1";
+    const draftFields = [
+      "companyName",
+      "contactName",
+      "email",
+      "phone",
+      "country",
+      "website",
+      "inquiryType",
+      "message",
+    ];
+    const fieldByName = (name) => form.elements.namedItem(name);
+    const readDraft = () => {
+      try {
+        return JSON.parse(sessionStorage.getItem(draftKey) || "null");
+      } catch {
+        return null;
+      }
+    };
+    const writeDraft = () => {
+      try {
+        const draft = {};
+        draftFields.forEach((name) => {
+          const field = fieldByName(name);
+          if (field && typeof field.value === "string" && field.value) {
+            draft[name] = field.value.slice(0, 3000);
+          }
+        });
+        if (productSelect && productSelect.value) {
+          draft.productProcess = productSelect.value;
+        }
+        if (Object.keys(draft).length > 0) {
+          sessionStorage.setItem(draftKey, JSON.stringify(draft));
+        } else {
+          sessionStorage.removeItem(draftKey);
+        }
+      } catch {
+        /* storage unavailable: draft is optional */
+      }
+    };
+    const clearDraft = () => {
+      try {
+        sessionStorage.removeItem(draftKey);
+      } catch {
+        /* ignore */
+      }
+    };
+
+    const draft = readDraft();
+    let draftRestored = false;
+    if (draft && typeof draft === "object") {
+      draftFields.forEach((name) => {
+        const field = fieldByName(name);
+        if (
+          field &&
+          typeof field.value === "string" &&
+          field.value === "" &&
+          typeof draft[name] === "string"
+        ) {
+          if (
+            name === "inquiryType" &&
+            !(config.inquiryTypes ?? []).includes(draft[name])
+          ) {
+            return;
+          }
+          field.value = draft[name];
+          draftRestored = true;
+        }
+      });
+      if (
+        productSelect &&
+        !productSelect.value &&
+        allowedProductValues.has(draft.productProcess)
+      ) {
+        productSelect.value = draft.productProcess;
+        draftRestored = true;
+      }
+      if (draftRestored && status && config.copy?.states?.draftRestored) {
+        status.textContent = config.copy.states.draftRestored;
+      }
+    }
+
+    form.addEventListener("input", writeDraft);
+    form.addEventListener("change", writeDraft);
+
     function setError(name, message) {
       const target = form.querySelector(`[data-error-for="${name}"]`);
       const field = form.elements.namedItem(name);
@@ -410,6 +497,7 @@ const payload = {
     }
 
     form.addEventListener("reset", () => {
+      clearDraft();
       window.setTimeout(() => {
         clearErrors();
         if (status) status.textContent = config.copy.states.ready;
@@ -464,6 +552,7 @@ const payload = {
           referencePattern.test(data.referenceNo)
         ) {
           completedReference = data.referenceNo;
+          clearDraft();
           if (status) {
             status.textContent = `${config.copy.states.success} ${data.referenceNo}`;
           }

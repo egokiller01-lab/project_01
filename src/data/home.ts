@@ -37,23 +37,38 @@ type HomeContent = {
   footerNote: string;
 };
 
+// 카드 썸네일은 WordPress가 생성한 16:9 변형(768x432)을 사용한다.
+// 원본은 blog 본문에서 그대로 제공되며, 초기 HTML 전송량만 줄인다.
+// (4장 기준 원본 9,461,841 bytes -> 768 변형 1,968,349 bytes)
 const blogImages = {
   material:
-    "https://blog.plachem.biz/wp-content/uploads/2026/07/material-plating-difficulty-featured.png",
+    "https://blog.plachem.biz/wp-content/uploads/2026/07/material-plating-difficulty-featured-768x432.png",
   agitation:
-    "https://blog.plachem.biz/wp-content/uploads/2026/07/plating-agitation-defects-quality-featured.png",
+    "https://blog.plachem.biz/wp-content/uploads/2026/07/plating-agitation-defects-quality-featured-768x432.png",
   pitting:
-    "https://blog.plachem.biz/wp-content/uploads/2026/07/plating-pitting-filtration-carbon-treatment-featured.png",
+    "https://blog.plachem.biz/wp-content/uploads/2026/07/plating-pitting-filtration-carbon-treatment-featured-768x432.png",
   pittingVi:
-    "https://blog.plachem.biz/wp-content/uploads/2026/07/plating-pitting-filtration-carbon-treatment-featured-vi.png",
-  rack: "https://blog.plachem.biz/wp-content/uploads/2026/07/rack-design-plating-defects.png",
+    "https://blog.plachem.biz/wp-content/uploads/2026/07/plating-pitting-filtration-carbon-treatment-featured-vi-768x432.png",
+  rack: "https://blog.plachem.biz/wp-content/uploads/2026/07/rack-design-plating-defects-768x432.png",
 } as const;
+
+// 카드용 16:9 반응형 srcset을 WordPress 변형 URL 규칙으로 생성한다.
+// image 값은 기본(768x432) 변형이고, 300/1024 변형은 같은 파일명 규칙을 따른다.
+const cardSrcset = (url: string) =>
+  [
+    url.replace("-768x432.", "-300x169."),
+    url,
+    url.replace("-768x432.", "-1024x576."),
+  ]
+    .map((u, i) => `${u} ${[300, 768, 1024][i]}w`)
+    .join(", ");
 
 const koBlogs: BlogLink[] = [
   {
     title: "철·동·알루미늄·스테인리스의 도금 난이도가 다른 이유",
     href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
     image: blogImages.material,
+    imageSrcset: cardSrcset(blogImages.material),
     imageAlt: "도금 공정 비교를 위해 준비한 철, 동, 알루미늄, 스테인리스 시편",
     meta: "소재·도금",
     summary:
@@ -65,6 +80,7 @@ const koBlogs: BlogLink[] = [
     title: "도금액 교반 방식 하나 바꿨는데 결함이 달라지는 이유",
     href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
     image: blogImages.agitation,
+    imageSrcset: cardSrcset(blogImages.agitation),
     imageAlt: "도금 탱크에서 교반 방식에 따른 표면 결함을 점검하는 엔지니어",
     meta: "전기도금",
     summary:
@@ -76,6 +92,7 @@ const koBlogs: BlogLink[] = [
     title: "피트가 났다고 바로 활성탄부터 돌리면 안 됩니다",
     href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
     image: blogImages.pitting,
+    imageSrcset: cardSrcset(blogImages.pitting),
     imageAlt: "도금 피트 시험판과 여과 카트리지 및 활성탄 처리 장치 비교",
     meta: "불량 분석",
     summary:
@@ -87,6 +104,7 @@ const koBlogs: BlogLink[] = [
     title: "도금 불량은 랙에서 먼저 시작됩니다",
     href: "https://blog.plachem.biz/plating-rack-design-defects/",
     image: blogImages.rack,
+    imageSrcset: cardSrcset(blogImages.rack),
     imageAlt: "도금 랙의 접점과 전류 분포에 따른 표면 상태 비교",
     meta: "공정 설계",
     summary:
@@ -102,6 +120,7 @@ const enBlogs: BlogLink[] = [
       "Why plating difficulty differs for iron, copper, aluminum, and stainless steel",
     href: "https://blog.plachem.biz/material-plating-difficulty-guide/",
     image: blogImages.material,
+    imageSrcset: cardSrcset(blogImages.material),
     imageAlt:
       "Steel, copper, aluminum, and stainless samples prepared for plating comparison",
     meta: "Materials & plating",
@@ -114,6 +133,7 @@ const enBlogs: BlogLink[] = [
     title: "Why a change in plating bath agitation can change defect behavior",
     href: "https://blog.plachem.biz/plating-agitation-defects-quality/",
     image: blogImages.agitation,
+    imageSrcset: cardSrcset(blogImages.agitation),
     imageAlt:
       "Engineer checking plating defects caused by bath agitation patterns",
     meta: "Electroplating",
@@ -126,6 +146,7 @@ const enBlogs: BlogLink[] = [
     title: "Why activated carbon is not always the first answer to pitting",
     href: "https://blog.plachem.biz/plating-pitting-filtration-carbon-treatment/",
     image: blogImages.pitting,
+    imageSrcset: cardSrcset(blogImages.pitting),
     imageAlt:
       "Plating test panels, filter cartridges, and activated-carbon treatment equipment",
     meta: "Defect analysis",
@@ -138,6 +159,7 @@ const enBlogs: BlogLink[] = [
     title: "Why plating defects often begin at the rack",
     href: "https://blog.plachem.biz/plating-rack-design-defects/",
     image: blogImages.rack,
+    imageSrcset: cardSrcset(blogImages.rack),
     imageAlt: "Plating rack contact points and coating thickness distribution",
     meta: "Process design",
     summary:
@@ -152,6 +174,7 @@ const viBlogs: BlogLink[] = [
     title: "Vì sao độ khó khi mạ khác nhau giữa sắt, đồng, nhôm và inox",
     href: "https://blog.plachem.biz/vi/do-kho-ma-thep-dong-nhom-inox/",
     image: blogImages.material,
+    imageSrcset: cardSrcset(blogImages.material),
     imageAlt:
       "Mẫu thép, đồng, nhôm và inox được chuẩn bị để so sánh công đoạn mạ",
     meta: "Vật liệu & mạ",
@@ -164,6 +187,7 @@ const viBlogs: BlogLink[] = [
     title: "Vì sao thay đổi khuấy bể mạ có thể làm thay đổi lỗi chất lượng",
     href: "https://blog.plachem.biz/vi/khuay-dung-dich-ma-loi-be-mat/",
     image: blogImages.agitation,
+    imageSrcset: cardSrcset(blogImages.agitation),
     imageAlt: "Kỹ sư kiểm tra lỗi bề mặt do phương pháp khuấy dung dịch mạ",
     meta: "Mạ điện",
     summary:
@@ -175,6 +199,7 @@ const viBlogs: BlogLink[] = [
     title: "Vì sao không nên xử lý rỗ mạ bằng than hoạt tính ngay từ đầu",
     href: "https://blog.plachem.biz/vi/dung-voi-chay-than-hoat-tinh-khi-thay-ro-ma/",
     image: blogImages.pittingVi,
+    imageSrcset: cardSrcset(blogImages.pittingVi),
     imageAlt:
       "Mẫu rỗ mạ, lõi lọc và thiết bị xử lý than hoạt tính trên dây chuyền mạ",
     meta: "Phân tích lỗi",
@@ -187,6 +212,7 @@ const viBlogs: BlogLink[] = [
     title: "Lỗi mạ thường bắt đầu từ rack",
     href: "https://blog.plachem.biz/vi/loi-ma-bat-dau-tu-rack-vet-tiep-xuc-lech-do-day/",
     image: blogImages.rack,
+    imageSrcset: cardSrcset(blogImages.rack),
     imageAlt: "Điểm tiếp xúc rack và sự phân bố chiều dày lớp mạ",
     meta: "Thiết kế công đoạn",
     summary:

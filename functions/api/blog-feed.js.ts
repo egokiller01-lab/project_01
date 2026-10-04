@@ -117,6 +117,14 @@ function updater(posts: LivePost[], locale: string) {
       en: { meta: 'Latest technical article', success: 'Latest articles loaded.' },
       vi: { meta: 'Bài kỹ thuật mới', success: 'Đã tải các bài kỹ thuật mới nhất.' }
     };
+    const cardSrcset = (url) => {
+      if (typeof url !== 'string' || !/-768x432\./.test(url)) return '';
+      return (
+        url.replace('-768x432.', '-300x169.') + ' 300w, ' +
+        url + ' 768w, ' +
+        url.replace('-768x432.', '-1024x576.') + ' 1024w'
+      );
+    };
     const htmlToText = (html) => {
       const parsed = new DOMParser().parseFromString(html, 'text/html');
       return (parsed.body.textContent || '').replace(/\\s+/g, ' ').trim();
@@ -141,7 +149,13 @@ function updater(posts: LivePost[], locale: string) {
         }).format(parsedDate);
       }
       if (meta) meta.textContent = (labels[locale] || labels.ko).meta;
-      if (image && post.image) { image.src = post.image; image.alt = post.imageAlt || ''; }
+      if (image && post.image) {
+        image.src = post.image;
+        image.alt = post.imageAlt || '';
+        const srcset = cardSrcset(post.image);
+        if (srcset) { image.setAttribute('srcset', srcset); }
+        else { image.removeAttribute('srcset'); }
+      }
     });
     const status = section.querySelector('[data-blog-status]');
     if (status) status.textContent = (labels[locale] || labels.ko).success;

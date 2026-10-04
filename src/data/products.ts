@@ -242,7 +242,6 @@ const koProducts: ProductDetail[] = [
     materials: [
       "알루미늄 및 알루미늄합금",
       "알루미늄 판재·정밀 가공품",
-      "정밀 가공품",
       "외관·장식 부품",
       "기능성 산화피막 부품",
     ],
@@ -741,7 +740,6 @@ const enProducts: ProductDetail[] = [
     materials: [
       "Aluminum and aluminum alloys",
       "Aluminum sheet and machined parts",
-      "Precision-machined parts",
       "Decorative components",
       "Functional oxide-film parts",
     ],
@@ -1248,7 +1246,6 @@ const viProducts: ProductDetail[] = [
     materials: [
       "Nhôm và hợp kim nhôm",
       "Tấm nhôm và chi tiết gia công",
-      "Chi tiết gia công chính xác",
       "Chi tiết trang trí",
       "Chi tiết màng oxit chức năng",
     ],
