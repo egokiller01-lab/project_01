@@ -134,6 +134,8 @@ export const inquiryCopy: Record<
         "현재 온라인 접수 준비 상태라 실제 접수는 진행되지 않았습니다.",
       failed: "문의 내용을 접수하지 못했습니다.",
       success: "문의가 접수되었습니다. 참조번호를 확인해 주세요.",
+      draftRestored:
+        "작성 중인 내용을 이 브라우저에서 불러왔습니다. 첨부파일과 동의 항목은 다시 확인해 주세요.",
     },
   },
   en: {
@@ -204,6 +206,8 @@ export const inquiryCopy: Record<
       failed: "The inquiry could not be submitted.",
       success:
         "The inquiry has been received. Please keep the reference number.",
+      draftRestored:
+        "Your draft was restored in this browser. Please re-check attachments and the consent box.",
     },
   },
   vi: {
@@ -273,6 +277,8 @@ export const inquiryCopy: Record<
       failed: "Không thể tiếp nhận nội dung liên hệ.",
       success:
         "Nội dung liên hệ đã được tiếp nhận. Vui lòng lưu mã tham chiếu.",
+      draftRestored:
+        "Nội dung đang soạn đã được khôi phục trong trình duyệt này. Vui lòng kiểm lại tệp đính kèm và mục đồng ý.",
     },
   },
 };

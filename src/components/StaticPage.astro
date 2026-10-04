@@ -798,6 +798,22 @@ const visualCopy = {
     if (map[process]) {
       selected.textContent = prefix + map[process];
       source.removeAttribute("hidden");
+
+      // 언어를 바꿔도 선택한 제품군 문의가 유지되도록, 유효한 process 값만
+      // 언어전환 링크에 그대로 붙인다. 이름·이메일 등 개인정보는 URL에 넣지 않는다.
+      document
+        .querySelectorAll(".language-switcher a")
+        .forEach((link) => {
+          try {
+            const url = new URL(link.href, window.location.origin);
+            if (url.pathname.endsWith("/contact/")) {
+              url.searchParams.set("process", process);
+              link.href = url.pathname + url.search;
+            }
+          } catch {
+            /* leave the static href untouched */
+          }
+        });
     }
   }
 </script>
