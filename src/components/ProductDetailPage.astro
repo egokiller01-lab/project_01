@@ -1,4 +1,5 @@
 ---
+import FieldGuides from "./FieldGuides.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CTAPanel from "./CTAPanel.astro";
 import { products, type ProductSlug } from "../data/products";
@@ -286,6 +287,8 @@ const copy = {
       </ol>
     </div>
   </section>
+
+  <div class="container"><FieldGuides locale={locale} family={slug} /></div>
 
   <section class="section related-section">
     <div class="container">
