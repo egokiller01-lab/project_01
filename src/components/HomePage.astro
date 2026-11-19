@@ -2,6 +2,7 @@
 import BlogCard from "./BlogCard.astro";
 import CTAPanel from "./CTAPanel.astro";
 import Hero from "./Hero.astro";
+import FieldGuides from "./FieldGuides.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { homeContent } from "../data/home";
 import { products } from "../data/products";
@@ -858,6 +859,8 @@ const productVisuals = [
           ))
         }
       </nav>
+
+      <FieldGuides locale={locale} />
 
       <div class="blog-editorial-grid" aria-live="polite">
         <div class="featured-blog">

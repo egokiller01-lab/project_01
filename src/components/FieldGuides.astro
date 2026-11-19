@@ -1,0 +1,64 @@
+---
+import type { Locale } from "../types";
+import type { ProductSlug } from "../data/products";
+import { fieldGuides } from "../data/fieldGuides";
+
+type Props = { locale: Locale; family?: ProductSlug };
+const { locale, family } = Astro.props;
+const guides =
+  locale === "en"
+    ? []
+    : fieldGuides
+        .filter((guide) => !family || guide.family === family)
+        .map((guide) => guide[locale]);
+const heading =
+  locale === "ko"
+    ? "현장 불량별 점검 가이드"
+    : "Hướng dẫn kiểm tra theo lỗi tại xưởng";
+---
+
+{
+  guides.length > 0 && (
+    <section class="field-guides" aria-label={heading}>
+      <h2>{heading}</h2>
+      <ul>
+        {guides.map((guide) => (
+          <li>
+            <a href={new URL(guide.path, "https://blog.plachem.biz").href}>
+              {guide.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .field-guides {
+    margin-block: 2rem;
+  }
+  h2 {
+    color: var(--color-navy);
+    font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+  }
+  ul {
+    display: grid;
+    gap: 0.65rem 2rem;
+    padding-inline-start: 1.25rem;
+  }
+  a {
+    color: #154c86;
+    text-underline-offset: 0.2em;
+    line-height: 1.55;
+  }
+  a:hover,
+  a:focus-visible {
+    color: #07439a;
+  }
+  @media (min-width: 48rem) {
+    ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

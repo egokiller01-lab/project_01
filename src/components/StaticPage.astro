@@ -2,6 +2,7 @@
 import BlogCard from "./BlogCard.astro";
 import CTAPanel from "./CTAPanel.astro";
 import InquiryForm from "./InquiryForm.astro";
+import FieldGuides from "./FieldGuides.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { localizedPath } from "../data/navigation";
 import {
@@ -630,6 +631,7 @@ const visualCopy = {
             </ul>
           </div>
           <div class="magazine-list">
+            <FieldGuides locale={locale} />
             {blogs.map((blog) => (
               <BlogCard {...blog} />
             ))}
